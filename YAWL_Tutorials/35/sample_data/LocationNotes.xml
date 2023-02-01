@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:Input_Location_Notes xmlns:ns2="http://www.yawlfoundation.org/sb/locationInfo">
+    <production>MAGIC MOVIE</production>
+    <locationInfo>
+        <singleLocationInfo>
+            <locationID>1</locationID>
+            <locationName>Tea Tree Studio 1</locationName>
+            <address>Cnr Cudmore and Balanch Roads, Tea Tree Valley</address>
+            <UBDMapRef>374 D12</UBDMapRef>
+            <parking>Parking available in studio carpark. Please be sure to sign in at reception upon arrival.</parking>
+            <unit>Unit Station will be located outside Studio 1 main door. Main unit to be set up in kitchen adjacent to reception.</unit>
+            <police>Tea Tree Valley Police Station ph 1234 5678</police>
+            <hospital>Royal Hospital 1 Stone Road Tea Tree Valley ph 8765 4321</hospital>
+            <contact>Production Coor - Jane</contact>
+            <contactNo>0410123456</contactNo>
+            <locationNotes>Be sure to wear your security pass at all times.</locationNotes>
+        </singleLocationInfo>
+        <singleLocationInfo>
+            <locationID>2</locationID>
+            <locationName>Tea Tree Studio 2</locationName>
+            <address>Cnr Cudmore and Balanch Roads, Tea Tree Valley</address>
+            <UBDMapRef>374 D12</UBDMapRef>
+            <parking>Parking available in studio carpark. Please be sure to sign in at reception upon arrival.</parking>
+            <unit>Unit Station will be located outside Studio 2 main door. Main unit to be set up in kitchen adjacent to reception.</unit>
+            <police>Tea Tree Valley Police Station ph 1234 5678</police>
+            <hospital>Royal Hospital 1 Stone Road Tea Tree Valley ph 8765 4321</hospital>
+            <contact>Production Asst - Grace</contact>
+            <contactNo>0411123456</contactNo>
+            <locationNotes>Be sure to wear your security pass at all times.</locationNotes>
+        </singleLocationInfo>
+    </locationInfo>
+</ns2:Input_Location_Notes>

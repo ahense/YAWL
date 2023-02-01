@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<orgdata>
+  <participants>
+    <participant id="PA-3807dd6b-9297-4d3e-9fa0-6aa2ff6cbe20">
+      <userid>fm</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Ferdinand</firstname>
+      <lastname>Magellan</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-ec976795-e6f1-4833-bc03-a9e34525fae0</role>
+      </roles>
+      <positions/>
+      <capabilities>
+        <capability>CA-4cf70177-9211-49a7-a9ad-a9b23a870481</capability>
+      </capabilities>
+      <privileges>00000000</privileges>
+    </participant>
+    <participant id="PA-3af713d0-25c0-4e8a-b9bb-754d79f3a8bd">
+      <userid>jc</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Jeanne</firstname>
+      <lastname>Calment</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-ec976795-e6f1-4833-bc03-a9e34525fae0</role>
+      </roles>
+      <positions/>
+      <capabilities>
+        <capability>CA-51b72d0c-074c-47bf-9396-e32038b3ea74</capability>
+      </capabilities>
+      <privileges>00000000</privileges>
+    </participant>
+    <participant id="PA-ed6697cc-084a-4b47-b0fb-9597682ce5ce">
+      <userid>lom</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Lorenzo</firstname>
+      <lastname>Monaco</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>true</isAdministrator>
+      <roles/>
+      <positions/>
+      <capabilities/>
+      <privileges>00000000</privileges>
+    </participant>
+    <participant id="PA-f6a922f9-ccfd-41bd-8f7e-a6fa10b915ec">
+      <userid>as</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Albert</firstname>
+      <lastname>Schweitzer</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-ec976795-e6f1-4833-bc03-a9e34525fae0</role>
+      </roles>
+      <positions/>
+      <capabilities>
+        <capability>CA-079ac094-e5c7-49cb-9c20-6b60dd0e30f3</capability>
+        <capability>CA-4cf70177-9211-49a7-a9ad-a9b23a870481</capability>
+      </capabilities>
+      <privileges>00000000</privileges>
+    </participant>
+  </participants>
+  <roles>
+    <role id="RO-ec976795-e6f1-4833-bc03-a9e34525fae0">
+      <name>Claims</name>
+      <description/>
+      <notes/>
+    </role>
+  </roles>
+  <positions/>
+  <capabilities>
+    <capability id="CA-079ac094-e5c7-49cb-9c20-6b60dd0e30f3">
+      <name>HealthInsurance</name>
+      <description/>
+      <notes/>
+    </capability>
+    <capability id="CA-51b72d0c-074c-47bf-9396-e32038b3ea74">
+      <name>LifeInsurance</name>
+      <description/>
+      <notes/>
+    </capability>
+    <capability id="CA-4cf70177-9211-49a7-a9ad-a9b23a870481">
+      <name>TravelInsurance</name>
+      <description/>
+      <notes/>
+    </capability>
+  </capabilities>
+  <orggroups/>
+  <nonhumanresources/>
+  <nonhumancategories/>
+</orgdata>
+

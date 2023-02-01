@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<costmodel id="add_terminal_cost_model_00001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="costmodel.xsd">
+	
+	<processid>
+		<identifier>UID_aff4b554-a043-492f-859c-87cce7e200dc</identifier>
+		<version>0.1</version>
+		<uri>Add_Terminal</uri>
+	</processid>
+	
+	<mappings>
+		<mapping aspect="resource">
+			<cost term="Engineer1"/>
+			<workflow term="Engineer1"/>
+		</mapping>
+		<mapping aspect="resource">
+			<cost term="Engineer2"/>
+			<workflow term="Engineer2"/>
+		</mapping>
+		<mapping aspect="resource">
+			<cost term="SeniorEngineer1"/>
+			<workflow term="SeniorEngineer1"/>
+		</mapping>
+		<mapping aspect="resource">
+			<cost term="SeniorEngineer2"/>
+			<workflow term="SeniorEngineer2"/>
+		</mapping>
+		<mapping aspect="resource">
+			<cost term="NetworkEngineer1"/>
+			<workflow term="NetworkEngineer1"/>
+		</mapping>
+	</mappings>
+	
+	<drivers>
+	<driver>
+			<metadata>
+				<name>Engineer</name>
+				<description/>
+				<type/>
+			</metadata>
+			<facets>
+				<facet aspect="resource">
+				<name>Engineer1</name>
+				</facet>
+			</facets>
+			<costtypes>
+				<costtype>Wages Engineer</costtype>
+			</costtypes>
+			<unitcost>
+				<amount>50</amount>
+				<currency>AUD</currency>
+				<unit>hour</unit>
+				<status>busy</status>
+			</unitcost>
+	</driver>
+	
+	<driver>
+			<metadata>
+				<name>Engineer</name>
+				<description/>
+				<type/>
+			</metadata>
+			<facets>
+				<facet aspect="resource">
+				<name>Engineer2</name>
+				</facet>
+			</facets>
+			<costtypes>
+				<costtype>Wages Engineer</costtype>
+			</costtypes>
+			<unitcost>
+				<amount>45</amount>
+				<currency>AUD</currency>
+				<unit>hour</unit>
+				<status>busy</status>
+			</unitcost>
+	</driver>
+
+	<driver>
+			<metadata>
+				<name>Network Engineer</name>
+				<description/>
+				<type/>
+			</metadata>
+			<facets>
+				<facet aspect="resource">
+				<name>NetworkEngineer1</name>
+				</facet>
+			</facets>
+			<costtypes>
+				<costtype>Wages Network Engineer</costtype>
+			</costtypes>
+			<unitcost>
+				<amount>60</amount>
+				<currency>AUD</currency>
+				<unit>hour</unit>
+				<status>busy</status>
+			</unitcost>
+	</driver>
+
+		<driver>
+				<metadata>
+				<name>Senior Engineer</name>
+				<description/>
+				<type/>
+			</metadata>
+			<facets>
+				<facet aspect="task">
+				<name>Load_Keys</name>
+				</facet>
+				<facet aspect="resource">
+				<name>SeniorEngineer1</name>
+				</facet>
+			</facets>
+				<costtypes>
+				<costtype>Wages Senior Engineer</costtype>
+			</costtypes>
+			<unitcost>
+				<amount>70</amount>
+				<currency>AUD</currency>
+				<unit>hour</unit>
+				<status>busy</status>
+			</unitcost>
+	
+		</driver>
+		
+			<driver>
+				<metadata>
+				<name>Senior Engineer</name>
+				<description/>
+				<type/>
+			</metadata>
+			<facets>
+				<facet aspect="task">
+				<name>Load_Keys</name>
+				</facet>
+				<facet aspect="resource">
+				<name>SeniorEngineer2</name>
+				</facet>
+			</facets>
+				<costtypes>
+				<costtype>Wages Senior Engineer</costtype>
+			</costtypes>
+			<unitcost>
+				<amount>75</amount>
+				<currency>AUD</currency>
+				<unit>hour</unit>
+				<status>busy</status>
+			</unitcost>
+	
+		</driver>
+
+		</drivers>
+	
+	<functions/>
+</costmodel>

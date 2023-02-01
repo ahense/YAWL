@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<specificationSet xmlns="http://www.yawlfoundation.org/yawlschema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4.0" xsi:schemaLocation="http://www.yawlfoundation.org/yawlschema http://www.yawlfoundation.org/yawlschema/YAWL_Schema4.0.xsd">
+  <specification uri="ExtendedAttributes">
+    <documentation>No description provided</documentation>
+    <metaData>
+      <creator>User</creator>
+      <description>No description provided</description>
+      <coverage>4.5.1.794</coverage>
+      <version>0.1</version>
+      <persistent>false</persistent>
+      <identifier>UID_55b17886-aeb3-4696-898e-4996f42f3ae4</identifier>
+    </metaData>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+    <decomposition id="Net" isRootNet="true" xsi:type="NetFactsType">
+      <localVariable>
+        <index>0</index>
+        <name>answer</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>42</initialValue>
+      </localVariable>
+      <processControlElements>
+        <inputCondition id="InputCondition">
+          <flowsInto>
+            <nextElementRef id="Answer" />
+          </flowsInto>
+        </inputCondition>
+        <task id="Answer">
+          <name>Answer</name>
+          <flowsInto>
+            <nextElementRef id="OutputCondition" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;answer&gt;{/Net/answer/text()}&lt;/answer&gt;" />
+              <mapsTo>answer</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;answer&gt;{/Answer/answer/text()}&lt;/answer&gt;" />
+              <mapsTo>answer</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="user" />
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Answer" />
+        </task>
+        <outputCondition id="OutputCondition" />
+      </processControlElements>
+    </decomposition>
+    <decomposition id="Answer" xsi:type="WebServiceGatewayFactsType" background-color="#FFFFFF" hideBanner="true" label=" " page-background-image="http://wonderworlds.org/images/raindrops/large-raindrops-background.jpg" title=" ">
+      <inputParam font-color="#CC00CC" font-family="SansSerif" font-size="24" hide="true" image-above="https://media1.faz.net/ppmedia/aktuell/feuilleton/1754543016/1.27221/format_top1_breit/kult-autor-douglas-adams-hier.jpg" text-below="The answer to the meaning of life, the universe, and everything is ${/Answer/answer/text()}.">
+        <index>0</index>
+        <name>answer</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam font-color="#CC00CC" font-family="SansSerif" font-size="24" hide="true" image-above="https://media1.faz.net/ppmedia/aktuell/feuilleton/1754543016/1.27221/format_top1_breit/kult-autor-douglas-adams-hier.jpg" text-below="The answer to the meaning of life, the universe, and everything is ${/Answer/answer/text()}.">
+        <index>0</index>
+        <name>answer</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+  </specification>
+  <layout>
+    <locale language="en" country="GB"/>
+    <specification id="ExtendedAttributes" defaultBgColor="-526351">
+      <size w="63" h="33"/>
+      <net id="Net">
+        <bounds x="0" y="0" w="979" h="308"/>
+        <frame x="0" y="0" w="982" h="311"/>
+        <viewport x="0" y="0" w="982" h="311"/>
+        <vertex id="OutputCondition">
+          <attributes>
+            <bounds x="908" y="188" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <vertex id="InputCondition">
+          <attributes>
+            <bounds x="36" y="188" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <container id="Answer">
+          <vertex>
+            <attributes>
+              <bounds x="392" y="188" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="360" y="220" w="96" h="14"/>
+            </attributes>
+          </label>
+        </container>
+        <flow source="Answer" target="OutputCondition">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="InputCondition" target="Answer">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+      </net>
+      <labelFontSize>12</labelFontSize>
+    </specification>
+  </layout>
+</specificationSet>

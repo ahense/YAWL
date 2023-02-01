@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<specificationSet xmlns="http://www.yawlfoundation.org/yawlschema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4.0" xsi:schemaLocation="http://www.yawlfoundation.org/yawlschema http://www.yawlfoundation.org/yawlschema/YAWL_Schema4.0.xsd">
+  <specification uri="Tutorial10">
+    <documentation>Tutorial 10: Composite Tasks</documentation>
+    <metaData>
+      <title>Tutorial10</title>
+      <creator>Andreas V. Hense</creator>
+      <description>Tutorial 10: Composite Tasks</description>
+      <coverage>4.3.1.772</coverage>
+      <version>0.2</version>
+      <persistent>false</persistent>
+      <identifier>UID_57a1ec3a-27da-41f7-9ace-7c9421aaddf8</identifier>
+    </metaData>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" elementFormDefault="qualified">
+      <xs:complexType name="PurchaseRequisitionType">
+        <xs:sequence>
+          <xs:element name="Item" type="xs:string" />
+          <xs:element name="Cost" type="xs:positiveInteger" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PurchaseOrderType">
+        <xs:sequence>
+          <xs:element name="PurchaseRequisition" type="PurchaseRequisitionType" />
+          <xs:element name="PO_Number" type="xs:string" />
+          <xs:element name="Supplier" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="InvoiceType">
+        <xs:sequence>
+          <xs:element name="PurchaseRequisition" type="PurchaseRequisitionType" />
+          <xs:element name="PO_Number" type="xs:string" />
+          <xs:element name="Total" type="xs:positiveInteger" />
+          <xs:element name="Destination_IBAN" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="BankTransferType">
+        <xs:sequence>
+          <xs:element name="PO_Number" type="xs:string" />
+          <xs:element name="Total" type="xs:positiveInteger" />
+          <xs:element name="Origin_IBAN" type="xs:string" />
+          <xs:element name="Destination_IBAN" type="xs:string" />
+          <xs:element name="PO_Number" type="xs:string" />
+          <xs:element name="Total" type="xs:positiveInteger" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <decomposition id="Net" isRootNet="true" xsi:type="NetFactsType">
+      <localVariable>
+        <index>0</index>
+        <name>Purchase_request</name>
+        <type>PurchaseRequisitionType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>&lt;Item&gt;Truck&lt;/Item&gt;
+ &lt;Cost&gt;100000&lt;/Cost&gt;</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>1</index>
+        <name>Purchase_order</name>
+        <type>PurchaseOrderType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>&lt;PurchaseRequisition&gt;
+    &lt;Item&gt;Truck&lt;/Item&gt;
+    &lt;Cost&gt;100000&lt;/Cost&gt;
+ &lt;/PurchaseRequisition&gt;
+ &lt;PO_Number&gt;272368&lt;/PO_Number&gt;
+ &lt;Supplier&gt;Volvo&lt;/Supplier&gt;</initialValue>
+      </localVariable>
+      <processControlElements>
+        <inputCondition id="InputCondition">
+          <flowsInto>
+            <nextElementRef id="Prepare_purchase_request" />
+          </flowsInto>
+        </inputCondition>
+        <task id="Prepare_purchase_request">
+          <name>Prepare purchase request</name>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Purchase_request&gt;{/Net/Purchase_request/*}&lt;/Purchase_request&gt;" />
+              <mapsTo>Purchase_request</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;Purchase_request&gt;{/Prepare_purchase_request/Purchase_request/*}&lt;/Purchase_request&gt;" />
+              <mapsTo>Purchase_request</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="user" />
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Prepare_purchase_request" />
+        </task>
+        <outputCondition id="OutputCondition" />
+      </processControlElements>
+    </decomposition>
+    <decomposition id="Prepare_purchase_request" xsi:type="WebServiceGatewayFactsType">
+      <name>Prepare purchase request</name>
+      <inputParam>
+        <index>0</index>
+        <name>Purchase_request</name>
+        <type>PurchaseRequisitionType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>0</index>
+        <name>Purchase_request</name>
+        <type>PurchaseRequisitionType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+  </specification>
+  <layout>
+    <locale language="en" country="GB"/>
+    <specification id="Tutorial10">
+      <size w="58" h="28"/>
+      <net id="Net">
+        <bounds x="0" y="0" w="1211" h="513"/>
+        <frame x="0" y="0" w="1214" h="516"/>
+        <viewport x="0" y="0" w="1214" h="516"/>
+        <vertex id="OutputCondition">
+          <attributes>
+            <bounds x="1,140" y="316" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <vertex id="InputCondition">
+          <attributes>
+            <bounds x="36" y="316" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <container id="Prepare_purchase_request">
+          <vertex>
+            <attributes>
+              <bounds x="152" y="316" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="120" y="348" w="96" h="60"/>
+            </attributes>
+          </label>
+        </container>
+        <flow source="InputCondition" target="Prepare_purchase_request">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+      </net>
+    </specification>
+  </layout>
+</specificationSet>

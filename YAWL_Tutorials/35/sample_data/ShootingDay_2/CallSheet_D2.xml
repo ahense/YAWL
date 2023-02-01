@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:Update_Call_Sheet xmlns:ns2="http://www.yawlfoundation.org/sb/callSheet">
+    <generalInfo>
+        <production>MAGIC MOVIE</production>
+        <date>2009-12-09</date>
+        <weekday>WEDS</weekday>
+        <shootDayNo>2</shootDayNo>
+    </generalInfo>
+    <callSheet>
+        <productionOffice>
+            <address>Cnr Cudmore and Balanch Roads, Tea Tree Valley</address>
+            <phone>12345678</phone>
+            <fax>87654321</fax>
+            <email>production@magicmovie.com</email>
+        </productionOffice>
+        <emergencyInfo>
+            <fireAmbulance>000</fireAmbulance>
+            <hospital>Royal Hospital 1 Stone Road Tea Tree Valley ph 8765 4321</hospital>
+            <police>Tea Tree Valley Police Station ph 1234 5678</police>
+        </emergencyInfo>
+        <director>John Jason</director>
+        <producer>Michael West</producer>
+        <productionManager>Alice White 0400123456  </productionManager>
+        <firstAD>Cheryl Smith 0401123456</firstAD>
+        <sunrise>0512</sunrise>
+        <sunset>1804</sunset>
+        <weather>Mostly Fine Min 7 Max 22</weather>
+        <callTimes>
+            <crewCall>
+                <callTime>07:00:00</callTime>
+                <callLoc>@Tea Tree Studio 2</callLoc>
+            </crewCall>
+            <locationCall>
+                <callTime>07:00:00</callTime>
+                <callLoc>@Tea Tree Studio 2</callLoc>
+            </locationCall>
+            <makeupHair>
+                <callTime>06:45:00</callTime>
+                <callLoc>@Tea Tree Studio 2</callLoc>
+            </makeupHair>
+            <wardrobe>
+                <callTime>07:00:00</callTime>
+                <callLoc>@Tea Tree Studio 2</callLoc>
+            </wardrobe>
+            <unit>
+                <callTime>06:30:00</callTime>
+                <callLoc>@Tea Tree Studio 2</callLoc>
+            </unit>
+            <breakfast>
+                <from>07:00:00</from>
+                <to>07:30:00</to>
+                <callLoc>@Tea Tree Studio 2</callLoc>
+            </breakfast>
+        </callTimes>
+        <wrapTimes>
+            <estWrap>15:30</estWrap>
+        </wrapTimes>
+        <location>
+            <singleLocation>
+                <locationName>Tea Tree Studio 2</locationName>
+                <address>Cnr Cudmore and Balanch Roads, Tea Tree Valley</address>
+                <contact>Production Asst - Grace</contact>
+                <contactNo>0411123456</contactNo>
+                <UBDMapRef>374 D12</UBDMapRef>
+                <locationNotes>Be sure to wear your security pass at all times.</locationNotes>
+            </singleLocation>
+        </location>
+        <dailySchedule>
+            <startDayNotes>Breakfast 07:00-07:30</startDayNotes>
+            <sceneSchedule>
+                <scene>3</scene>
+                <pageTime>
+                    <number>0</number>
+                    <numerator>6</numerator>
+                </pageTime>
+                <estScriptTiming>00:00:39</estScriptTiming>
+                <D_N>Night</D_N>
+                <IN_EX>INT</IN_EX>
+                <setLocation>BACKSTAGE CORRIDOR @ Tea Tree Studio 2</setLocation>
+                <synopsis>The secret is out</synopsis>
+                <artistTimeInfo>
+                    <character>CHARLIE</character>
+                    <artist>Chris Johnson</artist>
+                    <pickup>0645</pickup>
+                    <makeup>0730</makeup>
+                    <wardrobe>0745</wardrobe>
+                    <onSet>0800</onSet>
+                </artistTimeInfo>
+                <artistTimeInfo>
+                    <character>SIMONE</character>
+                    <artist>Kylie Yates</artist>
+                    <pickup>0645</pickup>
+                    <makeup>0730</makeup>
+                    <wardrobe>0745</wardrobe>
+                    <onSet>0800</onSet>
+                </artistTimeInfo>
+                <artistTimeInfo>
+                    <character>BELLA</character>
+                    <artist>Michelle Reis</artist>
+                    <pickup>0645</pickup>
+                    <makeup>0730</makeup>
+                    <wardrobe>0745</wardrobe>
+                    <onSet>0800</onSet>
+                </artistTimeInfo>
+                <artistTimeInfo>
+                    <character>TARLA</character>
+                    <artist>Valerie Lee</artist>
+                    <pickup>-</pickup>
+                    <makeup>0730</makeup>
+                    <wardrobe>0745</wardrobe>
+                    <onSet>0800</onSet>
+                </artistTimeInfo>
+                <estShootTimes>08:30-11:00</estShootTimes>
+                <sceneNotes>Block through 0815-0830 Then light/rig/complete </sceneNotes>
+            </sceneSchedule>
+            <sceneSchedule>
+                <scene>5</scene>
+                <pageTime>
+                    <number>1</number>
+                    <numerator>0</numerator>
+                </pageTime>
+                <estScriptTiming>00:00:38</estScriptTiming>
+                <D_N>Night</D_N>
+                <IN_EX>INT</IN_EX>
+                <setLocation>THEATRE STAGE AND WINGS @ Tea Tree Studio 2</setLocation>
+                <synopsis>Charlie tries to stop the show, telling Bella it was a mistake</synopsis>
+                <artistTimeInfo>
+                    <character>CHARLIE</character>
+                    <artist>Chris Johnson</artist>
+                    <pickup>CLD</pickup>
+                    <makeup>CLD</makeup>
+                    <wardrobe>CLD</wardrobe>
+                    <onSet>CLD</onSet>
+                </artistTimeInfo>
+                <artistTimeInfo>
+                    <character>SIMONE</character>
+                    <artist>Kylie Yates</artist>
+                    <pickup>CLD</pickup>
+                    <makeup>CLD</makeup>
+                    <wardrobe>CLD</wardrobe>
+                    <onSet>CLD</onSet>
+                </artistTimeInfo>
+                <artistTimeInfo>
+                    <character>BELLA</character>
+                    <artist>Michelle Reis</artist>
+                    <pickup>CLD</pickup>
+                    <makeup>CLD</makeup>
+                    <wardrobe>CLD</wardrobe>
+                    <onSet>CLD</onSet>
+                </artistTimeInfo>
+                <artistTimeInfo>
+                    <character>TARLA</character>
+                    <artist>Valerie Lee</artist>
+                    <pickup>CLD</pickup>
+                    <makeup>CLD</makeup>
+                    <wardrobe>CLD</wardrobe>
+                    <onSet>CLD</onSet>
+                </artistTimeInfo>
+                <estShootTimes>11:00-</estShootTimes>
+                <sceneNotes>nil</sceneNotes>
+            </sceneSchedule>
+            <sceneSchedule>
+                <scene>6</scene>
+                <pageTime>
+                    <number>0</number>
+                    <numerator>5</numerator>
+                </pageTime>
+                <estScriptTiming>00:00:36</estScriptTiming>
+                <D_N>Night</D_N>
+                <IN_EX>INT</IN_EX>
+                <setLocation>THEATRE STAGE AND WINGS @ Tea Tree Studio 2</setLocation>
+                <synopsis>Charlie is still trying to make it up to Simone</synopsis>
+                <artistTimeInfo>
+                    <character>CHARLIE</character>
+                    <artist>Chris Johnson</artist>
+                    <pickup>CLD</pickup>
+                    <makeup>CLD</makeup>
+                    <wardrobe>CLD</wardrobe>
+                    <onSet>CLD</onSet>
+                </artistTimeInfo>
+                <artistTimeInfo>
+                    <character>SIMONE</character>
+                    <artist>Kylie Yates</artist>
+                    <pickup>CLD</pickup>
+                    <makeup>CLD</makeup>
+                    <wardrobe>CLD</wardrobe>
+                    <onSet>CLD</onSet>
+                </artistTimeInfo>
+                <artistTimeInfo>
+                    <character>BELLA</character>
+                    <artist>Michelle Reis</artist>
+                    <pickup>CLD</pickup>
+                    <makeup>CLD</makeup>
+                    <wardrobe>CLD</wardrobe>
+                    <onSet>CLD</onSet>
+                </artistTimeInfo>
+                <estShootTimes>-16:45</estShootTimes>
+                <sceneNotes>nil</sceneNotes>
+            </sceneSchedule>
+            <sceneSchedule>
+                <scene>8</scene>
+                <pageTime>
+                    <number>0</number>
+                    <numerator>2</numerator>
+                </pageTime>
+                <estScriptTiming>00:00:24</estScriptTiming>
+                <D_N>Night</D_N>
+                <IN_EX>INT</IN_EX>
+                <setLocation>THEATRE STAGE AND WINGS @ Tea Tree Studio 2</setLocation>
+                <synopsis>Simone storms off stage</synopsis>
+                <artistTimeInfo>
+                    <character>CHARLIE</character>
+                    <artist>Chris Johnson</artist>
+                    <pickup>CLD</pickup>
+                    <makeup>CLD</makeup>
+                    <wardrobe>CLD</wardrobe>
+                    <onSet>CLD</onSet>
+                </artistTimeInfo>
+                <artistTimeInfo>
+                    <character>SIMONE</character>
+                    <artist>Kylie Yates</artist>
+                    <pickup>CLD</pickup>
+                    <makeup>CLD</makeup>
+                    <wardrobe>CLD</wardrobe>
+                    <onSet>CLD</onSet>
+                </artistTimeInfo>
+                <artistTimeInfo>
+                    <character>BELLA</character>
+                    <artist>Michelle Reis</artist>
+                    <pickup>CLD</pickup>
+                    <makeup>CLD</makeup>
+                    <wardrobe>CLD</wardrobe>
+                    <onSet>CLD</onSet>
+                </artistTimeInfo>
+                <estShootTimes>16:45-17:45</estShootTimes>
+                <sceneNotes>nil</sceneNotes>
+            </sceneSchedule>
+            <sceneSchedule>
+                <scene>7A</scene>
+                <pageTime>
+                    <number>0</number>
+                    <numerator>7</numerator>
+                </pageTime>
+                <estScriptTiming>00:01:19</estScriptTiming>
+                <D_N>Night</D_N>
+                <IN_EX>INT</IN_EX>
+                <setLocation>THEATRE STAGE AND WINGS @ Tea Tree Studio 2</setLocation>
+                <synopsis>Charlie takes the rope, then it burns her fingers.</synopsis>
+                <artistTimeInfo>
+                    <character>CHARLIE</character>
+                    <artist>Chris Johnson</artist>
+                    <pickup>CLD</pickup>
+                    <makeup>CLD</makeup>
+                    <wardrobe>CLD</wardrobe>
+                    <onSet>CLD</onSet>
+                </artistTimeInfo>
+                <estShootTimes>17:45-</estShootTimes>
+                <sceneNotes>nil</sceneNotes>
+            </sceneSchedule>
+            <sceneSchedule>
+                <scene>8A</scene>
+                <pageTime>
+                    <number>0</number>
+                    <numerator>2</numerator>
+                </pageTime>
+                <estScriptTiming>00:00:24</estScriptTiming>
+                <D_N>Night</D_N>
+                <IN_EX>INT</IN_EX>
+                <setLocation>THEATRE STAGE AND WINGS @ Tea Tree Studio 2</setLocation>
+                <synopsis>Charlie's gloved hands let go, they are cut open by rope burn.</synopsis>
+                <artistTimeInfo>
+                    <character>CHARLIE</character>
+                    <artist>Chris Johnson</artist>
+                    <pickup>CLD</pickup>
+                    <makeup>CLD</makeup>
+                    <wardrobe>CLD</wardrobe>
+                    <onSet>CLD</onSet>
+                </artistTimeInfo>
+                <estShootTimes>-18:45</estShootTimes>
+                <sceneNotes>nil</sceneNotes>
+            </sceneSchedule>
+            <endDayNotes>Production completed. See Alice for wrap up party details.</endDayNotes>
+            <totalScriptPages>
+                <number>3</number>
+                <numerator>6</numerator>
+            </totalScriptPages>
+        </dailySchedule>
+        <dailySetRequirements>
+            <singleEntry>
+                <item>Background Actors</item>
+                <description>
+                    <scene>3</scene>
+                    <requirements>extras x 2 or 3</requirements>
+                </description>
+                <description>
+                    <scene>5</scene>
+                    <requirements>Stage crew 2 or 3</requirements>
+                </description>
+            </singleEntry>
+            <singleEntry>
+                <item>Props</item>
+                <description>
+                    <scene>3</scene>
+                    <requirements>Coil of thick white rope, Charlies new fingerless gloves.</requirements>
+                </description>
+                <description>
+                    <scene>5</scene>
+                    <requirements>Charlies new fingerless gloves.</requirements>
+                </description>
+                <description>
+                    <scene>6</scene>
+                    <requirements>Charlies new fingerless gloves, Safety belts, Trapeze bar and black ropes, Rope to ascend trapze.</requirements>
+                </description>
+                <description>
+                    <scene>8</scene>
+                    <requirements>Black rope, Charlie's new fingerless gloves, Safety belts.</requirements>
+                </description>
+                <description>
+                    <scene>7A</scene>
+                    <requirements>Black rope, Charlie's new fingerless gloves.</requirements>
+                </description>
+                <description>
+                    <scene>8A</scene>
+                    <requirements>Black rope, Charlie's new fingerless gloves.</requirements>
+                </description>
+            </singleEntry>
+            <singleEntry>
+                <item>Makeup/Hair</item>
+                <description>
+                    <scene>8</scene>
+                    <requirements>Charlie's bloodied fingers.</requirements>
+                </description>
+                <description>
+                    <scene>8A</scene>
+                    <requirements>Charlie's bloodied fingers.</requirements>
+                </description>
+            </singleEntry>
+            <singleEntry>
+                <item>Art Department</item>
+                <description>
+                    <scene>5</scene>
+                    <requirements>Closed audience curtains</requirements>
+                </description>
+                <description>
+                    <scene>6</scene>
+                    <requirements>Closed curtains.</requirements>
+                </description>
+                <description>
+                    <scene>7A</scene>
+                    <requirements>may need to get wel/wet rope etc for safety</requirements>
+                </description>
+            </singleEntry>
+            <singleEntry>
+                <item>Notes</item>
+                <description>
+                    <scene>3</scene>
+                    <requirements>Bloch Sc 5 and 6 then Simone and Bella to MUP/WR</requirements>
+                </description>
+                <description>
+                    <scene>6</scene>
+                    <requirements>Mats and safety ropes etc as required.</requirements>
+                </description>
+                <description>
+                    <scene>6</scene>
+                    <requirements>Tarla may be required for Sc 8 - TBC</requirements>
+                </description>
+                <description>
+                    <scene>8</scene>
+                    <requirements>Care RE throwing belt at Charlie.</requirements>
+                </description>
+                <description>
+                    <scene>7A</scene>
+                    <requirements>Care running rope through fingers.</requirements>
+                </description>
+                <description>
+                    <scene>8A</scene>
+                    <requirements>Pre-rig scaff tower for Day 3 if possible.</requirements>
+                </description>
+            </singleEntry>
+        </dailySetRequirements>
+        <unit>2: Unit Station will be located outside Studio 2 main door. Main unit to be set up in kitchen adjacent to reception..</unit>
+        <additionalEquipment>nil&#xD;
+                    &#xD;
+                    </additionalEquipment>
+        <additionalCrew>nil</additionalCrew>
+        <directions>nil&#xD;
+                    &#xD;
+                    </directions>
+        <parking>2: Parking available in studio carpark. Please be sure to sign in at reception upon arrival..</parking>
+        <catering>
+            <singleMeal>
+                <meal>Breakfast</meal>
+                <break>0070-0730</break>
+                <serveNo>35</serveNo>
+                <location>Kitchen at entrance to Tea Tree Studios</location>
+            </singleMeal>
+        </catering>
+        <productionNotes>nil&#xD;
+                    &#xD;
+                    </productionNotes>
+        <castTransport>                    &#xD;
+                    </castTransport>
+        <locationCrewNotes>nil</locationCrewNotes>
+        <lunchPickup>nil&#xD;
+                    &#xD;
+                    </lunchPickup>
+        <exposedRushes>nil</exposedRushes>
+        <rushesScreening>nil&#xD;
+                    &#xD;
+                    </rushesScreening>
+        <crewAgreements>All volunteers to ensure they have signed a volunteer crew agreement</crewAgreements>
+        <additionalNotes>nil</additionalNotes>
+    </callSheet>
+    <scheduledShootingDays>2</scheduledShootingDays>
+    <finalSubmission>true</finalSubmission>
+</ns2:Update_Call_Sheet>

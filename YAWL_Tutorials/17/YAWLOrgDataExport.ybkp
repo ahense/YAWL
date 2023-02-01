@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<orgdata>
+  <participants>
+    <participant id="PA-e07588a7-9176-4a2d-b0b5-1de389cf789c">
+      <userid>mam</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Matt</firstname>
+      <lastname>Murdock</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-f04eeeef-c035-4335-80e7-cb9a3821ccf7</role>
+      </roles>
+      <positions/>
+      <capabilities/>
+      <privileges>00000000</privileges>
+    </participant>
+    <participant id="PA-6e3c8523-757c-4453-9359-f4f4a190579a">
+      <userid>flf</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Fleur</firstname>
+      <lastname>Forsyte</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-c69fe075-55d2-4c90-b2bd-e533550be96f</role>
+      </roles>
+      <positions/>
+      <capabilities/>
+      <privileges>00000000</privileges>
+    </participant>
+    <participant id="PA-102c2fe4-b3ac-48e2-9e08-411f2766df8b">
+      <userid>pep</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Peter</firstname>
+      <lastname>Parker</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-ed80bebc-d0e7-45c6-b88e-71fadcba9c65</role>
+      </roles>
+      <positions/>
+      <capabilities/>
+      <privileges>00000000</privileges>
+    </participant>
+    <participant id="PA-fa0a9f82-9d20-4bf3-b075-d89b055760a6">
+      <userid>ror</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Robbie</firstname>
+      <lastname>Reyes</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-8da14f7a-236d-402c-85b2-ac660f4bf6a6</role>
+      </roles>
+      <positions/>
+      <capabilities/>
+      <privileges>00000000</privileges>
+    </participant>
+    <participant id="PA-9e0a7bc1-9690-4444-bbf7-84b43b418d56">
+      <userid>frf</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Fred</firstname>
+      <lastname>Flintstone</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-c69fe075-55d2-4c90-b2bd-e533550be96f</role>
+      </roles>
+      <positions/>
+      <capabilities/>
+      <privileges>00000000</privileges>
+    </participant>
+    <participant id="PA-8315110c-ec48-4671-9509-646867586229">
+      <userid>rir</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Ricky</firstname>
+      <lastname>Ricardo</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-8da14f7a-236d-402c-85b2-ac660f4bf6a6</role>
+      </roles>
+      <positions/>
+      <capabilities/>
+      <privileges>00000000</privileges>
+    </participant>
+  </participants>
+  <roles>
+    <role id="RO-c69fe075-55d2-4c90-b2bd-e533550be96f">
+      <name>Finance</name>
+      <description/>
+      <notes/>
+    </role>
+    <role id="RO-f04eeeef-c035-4335-80e7-cb9a3821ccf7">
+      <name>Manager</name>
+      <description/>
+      <notes/>
+    </role>
+    <role id="RO-ed80bebc-d0e7-45c6-b88e-71fadcba9c65">
+      <name>Purchasing</name>
+      <description/>
+      <notes/>
+    </role>
+    <role id="RO-8da14f7a-236d-402c-85b2-ac660f4bf6a6">
+      <name>Requester</name>
+      <description/>
+      <notes/>
+    </role>
+  </roles>
+  <positions/>
+  <capabilities/>
+  <orggroups/>
+  <nonhumanresources/>
+  <nonhumancategories/>
+</orgdata>
+

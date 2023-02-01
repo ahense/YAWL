@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<orgdata>
+  <participants>
+    <participant id="PA-b82c079c-80e6-486b-b2d9-0aeb79392672">
+      <userid>SeniorEngineer2</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Senior Engineer</firstname>
+      <lastname>2</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-d247d0c1-7012-4cba-aeea-d1244bacbcbd</role>
+        <role>RO-7a4ac8cd-53ac-4f20-9d2c-f2f702909b24</role>
+      </roles>
+      <positions/>
+      <capabilities/>
+      <privileges>10000000</privileges>
+    </participant>
+    <participant id="PA-0014274e-e3fe-48f1-8258-35ca411e5d4b">
+      <userid>NetworkEngineer1</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Network Engineer</firstname>
+      <lastname>1</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-761268aa-e47e-40eb-a68a-869e01bd13df</role>
+      </roles>
+      <positions/>
+      <capabilities/>
+      <privileges>10000000</privileges>
+    </participant>
+    <participant id="PA-8fd88a40-4bac-44ee-aaf1-8ab34e8b0c6d">
+      <userid>Engineer2</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Engineer</firstname>
+      <lastname>2</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-d247d0c1-7012-4cba-aeea-d1244bacbcbd</role>
+      </roles>
+      <positions/>
+      <capabilities/>
+      <privileges>10000000</privileges>
+    </participant>
+    <participant id="PA-a1f40b6c-43dc-461f-b7ad-874e5b638a49">
+      <userid>SeniorEngineer1</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Senior Engineer</firstname>
+      <lastname>1</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-d247d0c1-7012-4cba-aeea-d1244bacbcbd</role>
+        <role>RO-7a4ac8cd-53ac-4f20-9d2c-f2f702909b24</role>
+      </roles>
+      <positions/>
+      <capabilities/>
+      <privileges>10000000</privileges>
+    </participant>
+    <participant id="PA-6c5072a0-8afa-4a8b-bc3b-28ccdfac7f30">
+      <userid>Engineer1</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Engineer</firstname>
+      <lastname>1</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-d247d0c1-7012-4cba-aeea-d1244bacbcbd</role>
+      </roles>
+      <positions/>
+      <capabilities/>
+      <privileges>10000000</privileges>
+    </participant>
+  </participants>
+  <roles>
+    <role id="RO-d247d0c1-7012-4cba-aeea-d1244bacbcbd">
+      <name>Engineer</name>
+      <description/>
+      <notes/>
+    </role>
+    <role id="RO-761268aa-e47e-40eb-a68a-869e01bd13df">
+      <name>Network Engineer</name>
+      <description/>
+      <notes/>
+    </role>
+    <role id="RO-7a4ac8cd-53ac-4f20-9d2c-f2f702909b24">
+      <name>Senior Engineer</name>
+      <description/>
+      <notes/>
+    </role>
+  </roles>
+  <positions/>
+  <capabilities/>
+  <orggroups/>
+  <nonhumanresources>
+    <nonhumanresource id="NH-be4e8a5c-ada5-4d24-8eea-55110a58ae82">
+      <name>res22</name>
+      <category id="NC-eb3d1027-4da2-43a9-b1b6-f7a6e190f807"/>
+      <subcategory>None</subcategory>
+    </nonhumanresource>
+    <nonhumanresource id="NH-b2e0a0b8-0f5c-40b7-8409-3463b914b40d">
+      <name>re2</name>
+      <category id="NC-eb3d1027-4da2-43a9-b1b6-f7a6e190f807"/>
+      <subcategory>None</subcategory>
+    </nonhumanresource>
+    <nonhumanresource id="NH-d69f92b4-3e40-461a-a621-2f39c08612bf">
+      <name>res11</name>
+      <category id="NC-2953879f-8720-41a3-94c7-7c37fec1afff"/>
+      <subcategory>None</subcategory>
+    </nonhumanresource>
+    <nonhumanresource id="NH-16caac28-4dba-4f26-b759-aee45db4e2d6">
+      <name>res1</name>
+      <description/>
+      <notes/>
+      <category id="NC-2953879f-8720-41a3-94c7-7c37fec1afff"/>
+      <subcategory>None</subcategory>
+    </nonhumanresource>
+  </nonhumanresources>
+  <nonhumancategories>
+    <nonhumancategory id="NC-2953879f-8720-41a3-94c7-7c37fec1afff">
+      <name>cat1</name>
+      <description/>
+      <notes/>
+      <subcategories>
+        <name>None</name>
+      </subcategories>
+    </nonhumancategory>
+    <nonhumancategory id="NC-eb3d1027-4da2-43a9-b1b6-f7a6e190f807">
+      <name>cat2</name>
+      <description/>
+      <notes/>
+      <subcategories>
+        <name>None</name>
+      </subcategories>
+    </nonhumancategory>
+  </nonhumancategories>
+</orgdata>
+

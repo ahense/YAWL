@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<specificationSet xmlns="http://www.yawlfoundation.org/yawlschema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4.0" xsi:schemaLocation="http://www.yawlfoundation.org/yawlschema http://www.yawlfoundation.org/yawlschema/YAWL_Schema4.0.xsd">
+  <specification uri="InformWorklet">
+    <documentation>No description provided</documentation>
+    <metaData>
+      <creator>User</creator>
+      <description>No description provided</description>
+      <coverage>4.3.1.772</coverage>
+      <version>0.1</version>
+      <persistent>false</persistent>
+      <identifier>UID_1c8db9c4-5ef4-4990-974f-4ff2effa4366</identifier>
+    </metaData>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" elementFormDefault="qualified">
+      <xs:complexType name="PurchaseRequisitionType">
+        <xs:sequence>
+          <xs:element name="Item" type="xs:string" />
+          <xs:element name="Cost" type="xs:positiveInteger" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PurchaseOrderType">
+        <xs:sequence>
+          <xs:element name="PurchaseRequisition" type="PurchaseRequisitionType" />
+          <xs:element name="PO_Number" type="xs:string" />
+          <xs:element name="Supplier" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="InvoiceType">
+        <xs:sequence>
+          <xs:element name="PurchaseRequisition" type="PurchaseRequisitionType" />
+          <xs:element name="PO_Number" type="xs:string" />
+          <xs:element name="Total" type="xs:positiveInteger" />
+          <xs:element name="Destination_IBAN" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="BankTransferType">
+        <xs:sequence>
+          <xs:element name="PO_Number" type="xs:string" />
+          <xs:element name="Total" type="xs:positiveInteger" />
+          <xs:element name="Origin_IBAN" type="xs:string" />
+          <xs:element name="Destination_IBAN" type="xs:string" />
+          <xs:element name="PO_Number" type="xs:string" />
+          <xs:element name="Total" type="xs:positiveInteger" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <decomposition id="Net" isRootNet="true" xsi:type="NetFactsType">
+      <inputParam>
+        <index>0</index>
+        <name>Purchase_request</name>
+        <type>PurchaseRequisitionType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>1</index>
+        <name>Approved</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>0</index>
+        <name>Purchase_request</name>
+        <type>PurchaseRequisitionType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <outputParam>
+        <index>1</index>
+        <name>Approved</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <processControlElements>
+        <inputCondition id="InputCondition">
+          <flowsInto>
+            <nextElementRef id="Inform_about_rejection" />
+          </flowsInto>
+        </inputCondition>
+        <task id="Inform_about_rejection">
+          <name>Inform about rejection</name>
+          <flowsInto>
+            <nextElementRef id="OutputCondition" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Approved&gt;{/Net/Approved/text()}&lt;/Approved&gt;" />
+              <mapsTo>Approved</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Purchase_request&gt;{/Net/Purchase_request/*}&lt;/Purchase_request&gt;" />
+              <mapsTo>Purchase_request</mapsTo>
+            </mapping>
+          </startingMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-8da14f7a-236d-402c-85b2-ac660f4bf6a6</role>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Inform_about_rejection" />
+        </task>
+        <outputCondition id="OutputCondition" />
+      </processControlElements>
+    </decomposition>
+    <decomposition id="Inform_about_rejection" xsi:type="WebServiceGatewayFactsType">
+      <name>Inform about rejection</name>
+      <inputParam>
+        <index>0</index>
+        <name>Purchase_request</name>
+        <type>PurchaseRequisitionType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>1</index>
+        <name>Approved</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+  </specification>
+  <layout>
+    <locale language="en" country="GB"/>
+    <specification id="InformWorklet" defaultBgColor="-526351">
+      <size w="58" h="28"/>
+      <net id="Net" bgColor="-526351">
+        <bounds x="0" y="0" w="1257" h="384"/>
+        <frame x="0" y="0" w="1260" h="387"/>
+        <viewport x="0" y="0" w="1260" h="387"/>
+        <vertex id="OutputCondition">
+          <attributes>
+            <bounds x="1,184" y="236" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <vertex id="InputCondition">
+          <attributes>
+            <bounds x="36" y="236" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <container id="Inform_about_rejection">
+          <vertex>
+            <attributes>
+              <bounds x="472" y="208" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="440" y="240" w="96" h="40"/>
+            </attributes>
+          </label>
+        </container>
+        <flow source="Inform_about_rejection" target="OutputCondition">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="InputCondition" target="Inform_about_rejection">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+      </net>
+    </specification>
+  </layout>
+</specificationSet>

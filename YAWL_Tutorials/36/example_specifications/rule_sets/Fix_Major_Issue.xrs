@@ -1,0 +1,156 @@
+<spec uri="Fix_Major_Issue" version="0.1" identifier="UID_e4830662-c1b6-4adc-bc50-21aa7591a733">
+  <constraints>
+    <case>
+      <pre>
+        <task name="__case_level_tree__">
+          <ruleNode>
+            <id>200</id>
+            <parent>-1</parent>
+            <trueChild>201</trueChild>
+            <falseChild>-1</falseChild>
+            <condition>true</condition>
+            <description>root node</description>
+          </ruleNode>
+          <ruleNode>
+            <id>201</id>
+            <parent>200</parent>
+            <trueChild>-1</trueChild>
+            <falseChild>-1</falseChild>
+            <condition>Urgency = Urgent</condition>
+            <conclusion>
+              <step index="1">
+                <action>suspend</action>
+                <target>case</target>
+              </step>
+              <step index="2">
+                <action>compensate</action>
+                <target>UID_cfcc5ee2-34b1-400a-8782-4c04ad7df683</target>
+              </step>
+              <step index="3">
+                <action>continue</action>
+                <target>case</target>
+              </step>
+            </conclusion>
+            <cornerstone>
+              <Report type="string"/>
+              <rootCauseIdentified type="boolean">true</rootCauseIdentified>
+              <Urgency type="Urgency">Urgent</Urgency>
+              <Quality type="Quality"/>
+              <fixed type="Choice">No</fixed>
+            </cornerstone>
+          </ruleNode>
+        </task>
+      </pre>
+    </case>
+    <item>
+      <post>
+        <task name="Test_Solution">
+          <ruleNode>
+            <id>202</id>
+            <parent>-1</parent>
+            <trueChild>203</trueChild>
+            <falseChild>-1</falseChild>
+            <condition>true</condition>
+            <description>root node</description>
+          </ruleNode>
+          <ruleNode>
+            <id>203</id>
+            <parent>202</parent>
+            <trueChild>-1</trueChild>
+            <falseChild>-1</falseChild>
+            <condition>fixed = No</condition>
+            <conclusion>
+              <step index="1">
+                <action>suspend</action>
+                <target>case</target>
+              </step>
+              <step index="2">
+                <action>compensate</action>
+                <target>UID_7600cd35-72f5-45dd-a34e-9f722a65ab42</target>
+              </step>
+              <step index="3">
+                <action>continue</action>
+                <target>case</target>
+              </step>
+            </conclusion>
+            <cornerstone>
+              <Report type="string"/>
+              <fixed type="Choice">No</fixed>
+            </cornerstone>
+          </ruleNode>
+        </task>
+        <task name="Solution_Received">
+          <ruleNode>
+            <id>217</id>
+            <parent>-1</parent>
+            <trueChild>218</trueChild>
+            <falseChild>-1</falseChild>
+            <condition>true</condition>
+            <description>root node</description>
+          </ruleNode>
+          <ruleNode>
+            <id>218</id>
+            <parent>217</parent>
+            <trueChild>-1</trueChild>
+            <falseChild>-1</falseChild>
+            <condition>Recall = Yes</condition>
+            <conclusion>
+              <step index="1">
+                <action>suspend</action>
+                <target>allcases</target>
+              </step>
+              <step index="2">
+                <action>suspend</action>
+                <target>ancestorCases</target>
+              </step>
+              <step index="3">
+                <action>compensate</action>
+                <target>UID_2621d58e-742a-47ff-91ee-1da86b984a72</target>
+              </step>
+              <step index="4">
+                <action>remove</action>
+                <target>allcases</target>
+              </step>
+              <step index="5">
+                <action>remove</action>
+                <target>ancestorCases</target>
+              </step>
+            </conclusion>
+            <cornerstone>
+              <Recall type="Choice">Yes</Recall>
+            </cornerstone>
+          </ruleNode>
+        </task>
+      </post>
+    </item>
+  </constraints>
+  <selection>
+    <task name="Fix_Locally">
+      <ruleNode>
+        <id>229</id>
+        <parent>-1</parent>
+        <trueChild>230</trueChild>
+        <falseChild>-1</falseChild>
+        <condition>true</condition>
+        <description>root node</description>
+      </ruleNode>
+      <ruleNode>
+        <id>230</id>
+        <parent>229</parent>
+        <trueChild>-1</trueChild>
+        <falseChild>-1</falseChild>
+        <condition>true()</condition>
+        <conclusion>
+          <step index="1">
+            <action>select</action>
+            <target>UID_a05bf1fd-2310-44d3-8418-f4cbbdddc15f</target>
+          </step>
+        </conclusion>
+        <cornerstone>
+          <Report type="string"/>
+        </cornerstone>
+      </ruleNode>
+    </task>
+  </selection>
+</spec>
+

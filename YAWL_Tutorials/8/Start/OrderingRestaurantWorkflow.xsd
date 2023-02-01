@@ -1,0 +1,25 @@
+<xs:schema version="1.0"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified">
+    <xs:simpleType name="EntreeType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Minestrone in Brodo" />
+            <xs:enumeration value="Gnocchi al Sugo" />
+            <xs:enumeration value="Pasta e Fagioli" />
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="MainType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Trippa alla Romana" />
+            <xs:enumeration value="Ossobuco con Piselli" />
+            <xs:enumeration value="Bistecca di Manzo" />
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="DessertType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Tiramisu con Biscotto Pasta Frolla" />
+            <xs:enumeration value="Forestera Nera" />
+            <xs:enumeration value="Dolci della Casa" />
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

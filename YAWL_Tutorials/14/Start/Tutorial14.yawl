@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<specificationSet xmlns="http://www.yawlfoundation.org/yawlschema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4.0" xsi:schemaLocation="http://www.yawlfoundation.org/yawlschema http://www.yawlfoundation.org/yawlschema/YAWL_Schema4.0.xsd">
+  <specification uri="Tutorial14">
+    <documentation>No description provided</documentation>
+    <metaData>
+      <creator>User</creator>
+      <description>No description provided</description>
+      <coverage>4.3.1.772</coverage>
+      <version>0.1</version>
+      <persistent>false</persistent>
+      <identifier>UID_b9dd7bf5-6ab6-4bcd-ac0f-9624ee8eac29</identifier>
+    </metaData>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:complexType name="CustomerListType">
+        <xs:sequence>
+          <xs:element name="Customer" type="CustomerType" maxOccurs="unbounded" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="CustomerType">
+        <xs:sequence>
+          <xs:element name="Customer_ID" type="xs:positiveInteger" />
+          <xs:element name="Customer_Category" type="CategoryType" />
+          <xs:element name="Name" type="xs:string" />
+          <xs:element name="E-Mail" type="EmailAddressType" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:simpleType name="CategoryType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="A" />
+          <xs:enumeration value="B" />
+          <xs:enumeration value="C" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:complexType name="EmailAddressListType">
+        <xs:sequence>
+          <xs:element name="E-mail" type="EmailAddressType" maxOccurs="unbounded" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:simpleType name="EmailAddressType">
+        <xs:restriction base="xs:token">
+          <xs:pattern value="\s*|([\.a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(([a-zA-Z0-9_-])*\.([a-zA-Z0-9_-])+)+" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:schema>
+    <decomposition id="Net" isRootNet="true" xsi:type="NetFactsType">
+      <localVariable>
+        <index>0</index>
+        <name>Customer_list</name>
+        <type>CustomerListType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>&lt;Customer&gt;
+    &lt;Customer_ID&gt;1&lt;/Customer_ID&gt;
+    &lt;Customer_Category&gt;A&lt;/Customer_Category&gt;
+    &lt;Name&gt;John Doe&lt;/Name&gt;
+    &lt;E-Mail&gt;john@doe.org&lt;/E-Mail&gt;
+ &lt;/Customer&gt;
+ &lt;Customer&gt;
+    &lt;Customer_ID&gt;1&lt;/Customer_ID&gt;
+    &lt;Customer_Category&gt;B&lt;/Customer_Category&gt;
+    &lt;Name&gt;Jane Doe&lt;/Name&gt;
+    &lt;E-Mail&gt;jane@doe.org&lt;/E-Mail&gt;
+ &lt;/Customer&gt;</initialValue>
+      </localVariable>
+      <processControlElements>
+        <inputCondition id="InputCondition">
+          <flowsInto>
+            <nextElementRef id="Edit_customer_list" />
+          </flowsInto>
+        </inputCondition>
+        <task id="Edit_customer_list">
+          <name>Edit customer list</name>
+          <flowsInto>
+            <nextElementRef id="Check_e-mail_addresses" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Customer_list&gt;{/Net/Customer_list/*}&lt;/Customer_list&gt;" />
+              <mapsTo>Customer_list</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;Customer_list&gt;{/Edit_customer_list/Customer_list/*}&lt;/Customer_list&gt;" />
+              <mapsTo>Customer_list</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="user" />
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Edit_customer_list" />
+        </task>
+        <task id="Check_e-mail_addresses">
+          <name>Check e-mail addresses</name>
+          <flowsInto>
+            <nextElementRef id="OutputCondition" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;E-Mail_addresses&gt;{for $e in /Net/Customer_list/* return   &#xA;&lt;E-mail&gt;   &#xA;  {$e/E-Mail/text()} &#xA;&lt;/E-mail&gt;}&lt;/E-Mail_addresses&gt;" />
+              <mapsTo>E-Mail_addresses</mapsTo>
+            </mapping>
+          </startingMappings>
+          <resourcing>
+            <offer initiator="user" />
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Check_e-mail_addresses" />
+        </task>
+        <outputCondition id="OutputCondition" />
+      </processControlElements>
+    </decomposition>
+    <decomposition id="Check_e-mail_addresses" xsi:type="WebServiceGatewayFactsType">
+      <name>Check e-mail addresses</name>
+      <inputParam>
+        <index>0</index>
+        <name>E-Mail_addresses</name>
+        <type>EmailAddressListType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Edit_customer_list" xsi:type="WebServiceGatewayFactsType">
+      <name>Edit customer list</name>
+      <inputParam>
+        <index>0</index>
+        <name>Customer_list</name>
+        <type>CustomerListType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>0</index>
+        <name>Customer_list</name>
+        <type>CustomerListType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+  </specification>
+  <layout>
+    <locale language="en" country="GB"/>
+    <specification id="Tutorial14" defaultBgColor="-526351">
+      <size w="58" h="28"/>
+      <net id="Net" bgColor="-526351">
+        <bounds x="0" y="0" w="1006" h="663"/>
+        <frame x="0" y="0" w="1009" h="666"/>
+        <viewport x="0" y="0" w="1009" h="666"/>
+        <vertex id="OutputCondition">
+          <attributes>
+            <bounds x="932" y="324" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <vertex id="InputCondition">
+          <attributes>
+            <bounds x="36" y="324" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <container id="Check_e-mail_addresses">
+          <vertex>
+            <attributes>
+              <bounds x="560" y="324" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="528" y="356" w="96" h="40"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="Edit_customer_list">
+          <vertex>
+            <attributes>
+              <bounds x="256" y="308" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="224" y="340" w="96" h="40"/>
+            </attributes>
+          </label>
+        </container>
+        <flow source="InputCondition" target="Edit_customer_list">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="Edit_customer_list" target="Check_e-mail_addresses">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="Check_e-mail_addresses" target="OutputCondition">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+      </net>
+    </specification>
+  </layout>
+</specificationSet>

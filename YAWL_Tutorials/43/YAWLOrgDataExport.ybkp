@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<orgdata>
+  <participants>
+    <participant id="PA-8f0c0e53-4097-4862-b8c3-724bb8497b58">
+      <userid>all</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>All</firstname>
+      <lastname>All</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-8128fa1c-ffb0-4631-ad93-f41da72f2f81</role>
+        <role>RO-6d2ea491-eb16-4ad5-8fed-6a07a5555506</role>
+        <role>RO-16acabe4-a5fd-4daa-b178-0d4f1954f79e</role>
+      </roles>
+      <positions/>
+      <capabilities/>
+      <privileges>00000000</privileges>
+    </participant>
+    <participant id="PA-a0f4eb9a-a0cb-43ed-a1e7-d1989d3d994f">
+      <userid>atm2</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>A</firstname>
+      <lastname>Tm2</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-16acabe4-a5fd-4daa-b178-0d4f1954f79e</role>
+      </roles>
+      <positions/>
+      <capabilities/>
+      <privileges>00000000</privileges>
+    </participant>
+    <participant id="PA-5513599e-7784-4982-b7a4-96ca5fc53d51">
+      <userid>codelet</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Code</firstname>
+      <lastname>let</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-6d2ea491-eb16-4ad5-8fed-6a07a5555506</role>
+      </roles>
+      <positions/>
+      <capabilities/>
+      <privileges>01000000</privileges>
+    </participant>
+    <participant id="PA-b9353460-e94a-4c7b-b502-eea63ea2da23">
+      <userid>cdb</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>C</firstname>
+      <lastname>Db</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-8128fa1c-ffb0-4631-ad93-f41da72f2f81</role>
+      </roles>
+      <positions/>
+      <capabilities/>
+      <privileges>00000000</privileges>
+    </participant>
+    <participant id="PA-2878e532-fad6-4c5e-a6e8-137c05cbe0d3">
+      <userid>atm1</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>A</firstname>
+      <lastname>Tm1</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-16acabe4-a5fd-4daa-b178-0d4f1954f79e</role>
+      </roles>
+      <positions/>
+      <capabilities/>
+      <privileges>00000000</privileges>
+    </participant>
+  </participants>
+  <roles>
+    <role id="RO-16acabe4-a5fd-4daa-b178-0d4f1954f79e">
+      <name>atm</name>
+      <description/>
+      <notes/>
+    </role>
+    <role id="RO-8128fa1c-ffb0-4631-ad93-f41da72f2f81">
+      <name>centralDB</name>
+      <description/>
+      <notes/>
+    </role>
+    <role id="RO-6d2ea491-eb16-4ad5-8fed-6a07a5555506">
+      <name>codelet</name>
+      <description/>
+      <notes/>
+    </role>
+  </roles>
+  <positions/>
+  <capabilities/>
+  <orggroups/>
+  <nonhumanresources/>
+  <nonhumancategories/>
+</orgdata>
+

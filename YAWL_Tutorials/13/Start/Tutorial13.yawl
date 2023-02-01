@@ -1,0 +1,817 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<specificationSet xmlns="http://www.yawlfoundation.org/yawlschema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4.0" xsi:schemaLocation="http://www.yawlfoundation.org/yawlschema http://www.yawlfoundation.org/yawlschema/YAWL_Schema4.0.xsd">
+  <specification uri="Tutorial13">
+    <documentation>Tutorial 13: Timer Tasks: Silence Procedure</documentation>
+    <metaData>
+      <title>Tutorial13</title>
+      <creator>Andreas V. Hense</creator>
+      <description>Tutorial 13: Timer Tasks: Silence Procedure</description>
+      <coverage>4.3.1.772</coverage>
+      <version>0.4</version>
+      <persistent>false</persistent>
+      <identifier>UID_dda7c4f3-ff4e-45b3-83ce-c07828f3ce47</identifier>
+    </metaData>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+    <decomposition id="Net" isRootNet="true" xsi:type="NetFactsType">
+      <localVariable>
+        <index>0</index>
+        <name>Proposal_title</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>Smart Working</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>1</index>
+        <name>Proposal_description</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>Let all employees work in their home office and sell two office buildings.</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>2</index>
+        <name>Accept_A</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>true</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>3</index>
+        <name>Accept_B</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>true</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>4</index>
+        <name>Accept_C</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>true</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>5</index>
+        <name>Comment_A</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>none</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>6</index>
+        <name>Comment_B</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>none</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>7</index>
+        <name>Comment_C</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>none</initialValue>
+      </localVariable>
+      <processControlElements>
+        <inputCondition id="InputCondition">
+          <flowsInto>
+            <nextElementRef id="Write_proposal" />
+          </flowsInto>
+        </inputCondition>
+        <task id="Write_proposal">
+          <name>Write proposal</name>
+          <flowsInto>
+            <nextElementRef id="Evaluate_proposal_A" />
+          </flowsInto>
+          <flowsInto>
+            <nextElementRef id="Evaluate_proposal_C" />
+          </flowsInto>
+          <flowsInto>
+            <nextElementRef id="Evaluate_proposal_B" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Proposal_description&gt;{/Net/Proposal_description/text()}&lt;/Proposal_description&gt;" />
+              <mapsTo>Proposal_description</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Proposal_title&gt;{/Net/Proposal_title/text()}&lt;/Proposal_title&gt;" />
+              <mapsTo>Proposal_title</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;Proposal_title&gt;{/Write_proposal/Proposal_title/text()}&lt;/Proposal_title&gt;" />
+              <mapsTo>Proposal_title</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Proposal_description&gt;{/Write_proposal/Proposal_description/text()}&lt;/Proposal_description&gt;" />
+              <mapsTo>Proposal_description</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="user" />
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Write_proposal" />
+        </task>
+        <task id="Evaluate_proposal_A">
+          <name>Evaluate proposal A</name>
+          <flowsInto>
+            <nextElementRef id="T_3" />
+            <predicate ordering="0">/Net/Accept_A/text() = 'false'</predicate>
+          </flowsInto>
+          <flowsInto>
+            <nextElementRef id="Note_acceptance" />
+            <isDefaultFlow />
+          </flowsInto>
+          <join code="xor" />
+          <split code="xor" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Comment&gt;{/Net/Comment_A/text()}&lt;/Comment&gt;" />
+              <mapsTo>Comment</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Accept&gt;{/Net/Accept_A/text()}&lt;/Accept&gt;" />
+              <mapsTo>Accept</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Proposal_description&gt;{/Net/Proposal_description/text()}&lt;/Proposal_description&gt;" />
+              <mapsTo>Proposal_description</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Proposal_title&gt;{/Net/Proposal_title/text()}&lt;/Proposal_title&gt;" />
+              <mapsTo>Proposal_title</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;Comment_A&gt;{/Evaluate_proposal/Comment/text()}&lt;/Comment_A&gt;" />
+              <mapsTo>Comment_A</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Accept_A&gt;{/Evaluate_proposal/Accept/text()}&lt;/Accept_A&gt;" />
+              <mapsTo>Accept_A</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="user" />
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Evaluate_proposal" />
+        </task>
+        <task id="Evaluate_proposal_B">
+          <name>Evaluate proposal B</name>
+          <flowsInto>
+            <nextElementRef id="T_3" />
+            <predicate ordering="0">/Net/Accept_B/text() = 'false'</predicate>
+          </flowsInto>
+          <flowsInto>
+            <nextElementRef id="Note_acceptance" />
+            <isDefaultFlow />
+          </flowsInto>
+          <join code="xor" />
+          <split code="xor" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Comment&gt;{/Net/Comment_B/text()}&lt;/Comment&gt;" />
+              <mapsTo>Comment</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Accept&gt;{/Net/Accept_B/text()}&lt;/Accept&gt;" />
+              <mapsTo>Accept</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Proposal_description&gt;{/Net/Proposal_description/text()}&lt;/Proposal_description&gt;" />
+              <mapsTo>Proposal_description</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Proposal_title&gt;{/Net/Proposal_title/text()}&lt;/Proposal_title&gt;" />
+              <mapsTo>Proposal_title</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;Accept_B&gt;{/Evaluate_proposal/Accept/text()}&lt;/Accept_B&gt;" />
+              <mapsTo>Accept_B</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Comment_B&gt;{/Evaluate_proposal/Comment/text()}&lt;/Comment_B&gt;" />
+              <mapsTo>Comment_B</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="user" />
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Evaluate_proposal" />
+        </task>
+        <task id="Evaluate_proposal_C">
+          <name>Evaluate proposal C</name>
+          <flowsInto>
+            <nextElementRef id="T_3" />
+            <predicate ordering="0">/Net/Accept_C/text() = 'false'</predicate>
+          </flowsInto>
+          <flowsInto>
+            <nextElementRef id="Note_acceptance" />
+            <isDefaultFlow />
+          </flowsInto>
+          <join code="xor" />
+          <split code="xor" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Comment&gt;{/Net/Comment_C/text()}&lt;/Comment&gt;" />
+              <mapsTo>Comment</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Accept&gt;{/Net/Accept_C/text()}&lt;/Accept&gt;" />
+              <mapsTo>Accept</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Proposal_description&gt;{/Net/Proposal_description/text()}&lt;/Proposal_description&gt;" />
+              <mapsTo>Proposal_description</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Proposal_title&gt;{/Net/Proposal_title/text()}&lt;/Proposal_title&gt;" />
+              <mapsTo>Proposal_title</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;Comment_C&gt;{/Evaluate_proposal/Comment/text()}&lt;/Comment_C&gt;" />
+              <mapsTo>Comment_C</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Accept_C&gt;{/Evaluate_proposal/Accept/text()}&lt;/Accept_C&gt;" />
+              <mapsTo>Accept_C</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="user" />
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Evaluate_proposal" />
+        </task>
+        <task id="Note_acceptance">
+          <name>Note acceptance</name>
+          <flowsInto>
+            <nextElementRef id="OutputCondition" />
+          </flowsInto>
+          <join code="and" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Comment_A&gt;{/Net/Comment_A/text()}&lt;/Comment_A&gt;" />
+              <mapsTo>Comment_A</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Comment_C&gt;{/Net/Comment_C/text()}&lt;/Comment_C&gt;" />
+              <mapsTo>Comment_C</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Comment_B&gt;{/Net/Comment_B/text()}&lt;/Comment_B&gt;" />
+              <mapsTo>Comment_B</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Proposal_description&gt;{/Net/Proposal_description/text()}&lt;/Proposal_description&gt;" />
+              <mapsTo>Proposal_description</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Proposal_title&gt;{/Net/Proposal_title/text()}&lt;/Proposal_title&gt;" />
+              <mapsTo>Proposal_title</mapsTo>
+            </mapping>
+          </startingMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet />
+              </distributionSet>
+              <familiarParticipant taskID="Write_proposal" />
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Note_acceptance" />
+        </task>
+        <task id="T_3">
+          <flowsInto>
+            <nextElementRef id="Note_rejection" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <removesTokens id="Evaluate_proposal_A" />
+          <removesTokens id="Evaluate_proposal_B" />
+          <removesTokens id="Evaluate_proposal_C" />
+          <removesTokensFromFlow>
+            <flowSource id="Evaluate_proposal_A" />
+            <flowDestination id="Note_acceptance" />
+          </removesTokensFromFlow>
+          <removesTokensFromFlow>
+            <flowSource id="Evaluate_proposal_B" />
+            <flowDestination id="Note_acceptance" />
+          </removesTokensFromFlow>
+          <removesTokensFromFlow>
+            <flowSource id="Evaluate_proposal_C" />
+            <flowDestination id="Note_acceptance" />
+          </removesTokensFromFlow>
+          <removesTokensFromFlow>
+            <flowSource id="Write_proposal" />
+            <flowDestination id="Evaluate_proposal_A" />
+          </removesTokensFromFlow>
+          <removesTokensFromFlow>
+            <flowSource id="Write_proposal" />
+            <flowDestination id="Evaluate_proposal_B" />
+          </removesTokensFromFlow>
+          <removesTokensFromFlow>
+            <flowSource id="Write_proposal" />
+            <flowDestination id="Evaluate_proposal_C" />
+          </removesTokensFromFlow>
+          <resourcing>
+            <offer initiator="user" />
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+        </task>
+        <task id="Note_rejection">
+          <name>Note rejection</name>
+          <flowsInto>
+            <nextElementRef id="OutputCondition" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Accept_B&gt;{/Net/Accept_B/text()}&lt;/Accept_B&gt;" />
+              <mapsTo>Accept_B</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Accept_A&gt;{/Net/Accept_A/text()}&lt;/Accept_A&gt;" />
+              <mapsTo>Accept_A</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Comment_A&gt;{/Net/Comment_A/text()}&lt;/Comment_A&gt;" />
+              <mapsTo>Comment_A</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Accept_C&gt;{/Net/Accept_C/text()}&lt;/Accept_C&gt;" />
+              <mapsTo>Accept_C</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Comment_C&gt;{/Net/Comment_C/text()}&lt;/Comment_C&gt;" />
+              <mapsTo>Comment_C</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Comment_B&gt;{/Net/Comment_B/text()}&lt;/Comment_B&gt;" />
+              <mapsTo>Comment_B</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Proposal_description&gt;{/Net/Proposal_description/text()}&lt;/Proposal_description&gt;" />
+              <mapsTo>Proposal_description</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Proposal_title&gt;{/Net/Proposal_title/text()}&lt;/Proposal_title&gt;" />
+              <mapsTo>Proposal_title</mapsTo>
+            </mapping>
+          </startingMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet />
+              </distributionSet>
+              <familiarParticipant taskID="Write_proposal" />
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Note_rejection" />
+        </task>
+        <outputCondition id="OutputCondition" />
+      </processControlElements>
+    </decomposition>
+    <decomposition id="Evaluate_proposal" xsi:type="WebServiceGatewayFactsType">
+      <name>Evaluate proposal</name>
+      <inputParam>
+        <index>0</index>
+        <name>Proposal_title</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>1</index>
+        <name>Proposal_description</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>2</index>
+        <name>Accept</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>3</index>
+        <name>Comment</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>2</index>
+        <name>Accept</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <outputParam>
+        <index>3</index>
+        <name>Comment</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Note_acceptance" xsi:type="WebServiceGatewayFactsType">
+      <name>Note acceptance</name>
+      <inputParam>
+        <index>0</index>
+        <name>Proposal_title</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>1</index>
+        <name>Proposal_description</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>2</index>
+        <name>Comment_A</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>3</index>
+        <name>Comment_B</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>4</index>
+        <name>Comment_C</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Note_rejection" xsi:type="WebServiceGatewayFactsType">
+      <name>Note rejection</name>
+      <inputParam>
+        <index>0</index>
+        <name>Proposal_title</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>1</index>
+        <name>Proposal_description</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>2</index>
+        <name>Accept_A</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>3</index>
+        <name>Comment_A</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>4</index>
+        <name>Accept_B</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>5</index>
+        <name>Comment_B</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>6</index>
+        <name>Accept_C</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>7</index>
+        <name>Comment_C</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Write_proposal" xsi:type="WebServiceGatewayFactsType">
+      <name>Write proposal</name>
+      <inputParam>
+        <index>0</index>
+        <name>Proposal_title</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam textarea="true">
+        <index>1</index>
+        <name>Proposal_description</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>0</index>
+        <name>Proposal_title</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <outputParam textarea="true">
+        <index>1</index>
+        <name>Proposal_description</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+  </specification>
+  <layout>
+    <locale language="en" country="GB"/>
+    <specification id="Tutorial13" defaultBgColor="-526351">
+      <size w="58" h="28"/>
+      <net id="Net">
+        <bounds x="0" y="0" w="1694" h="683"/>
+        <frame x="0" y="0" w="1712" h="654"/>
+        <viewport x="0" y="0" w="1712" h="654"/>
+        <scale>1.5</scale>
+        <vertex id="OutputCondition">
+          <attributes>
+            <bounds x="1,020" y="208" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <vertex id="InputCondition">
+          <attributes>
+            <bounds x="36" y="208" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <container id="Evaluate_proposal_B">
+          <vertex>
+            <attributes>
+              <bounds x="460" y="208" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="432" y="240" w="96" h="40"/>
+            </attributes>
+          </label>
+          <decorator type="XOR_split">
+            <position>13</position>
+            <attributes>
+              <bounds x="491" y="208" w="11" h="32"/>
+            </attributes>
+          </decorator>
+        </container>
+        <container id="Evaluate_proposal_A">
+          <vertex>
+            <attributes>
+              <bounds x="460" y="52" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="432" y="84" w="96" h="40"/>
+            </attributes>
+          </label>
+          <decorator type="XOR_split">
+            <position>13</position>
+            <attributes>
+              <bounds x="491" y="52" w="11" h="32"/>
+            </attributes>
+          </decorator>
+        </container>
+        <container id="Write_proposal">
+          <vertex>
+            <attributes>
+              <bounds x="204" y="208" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="180" y="240" w="96" h="20"/>
+            </attributes>
+          </label>
+          <decorator type="AND_split">
+            <position>13</position>
+            <attributes>
+              <bounds x="235" y="208" w="11" h="32"/>
+            </attributes>
+          </decorator>
+        </container>
+        <container id="Evaluate_proposal_C">
+          <vertex>
+            <attributes>
+              <bounds x="460" y="368" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="432" y="402" w="96" h="40"/>
+            </attributes>
+          </label>
+          <decorator type="XOR_split">
+            <position>13</position>
+            <attributes>
+              <bounds x="491" y="368" w="11" h="32"/>
+            </attributes>
+          </decorator>
+        </container>
+        <container id="Note_acceptance">
+          <vertex>
+            <attributes>
+              <bounds x="824" y="204" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="786" y="234" w="96" h="40"/>
+            </attributes>
+          </label>
+          <decorator type="AND_join">
+            <position>12</position>
+            <attributes>
+              <bounds x="814" y="204" w="11" h="32"/>
+            </attributes>
+          </decorator>
+        </container>
+        <container id="T_3">
+          <vertex>
+            <attributes>
+              <bounds x="672" y="52" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <decorator type="XOR_join">
+            <position>12</position>
+            <attributes>
+              <bounds x="662" y="52" w="11" h="32"/>
+            </attributes>
+          </decorator>
+        </container>
+        <container id="Note_rejection">
+          <vertex>
+            <attributes>
+              <bounds x="824" y="52" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="792" y="84" w="96" h="20"/>
+            </attributes>
+          </label>
+        </container>
+        <flow source="Evaluate_proposal_A" target="T_3">
+          <ports in="2" out="2"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="501" y="63.5"/>
+              <value x="662" y="63.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Evaluate_proposal_A" target="Note_acceptance">
+          <ports in="2" out="2"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="501" y="63.5"/>
+              <value x="814" y="215.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="InputCondition" target="Write_proposal">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="67" y="219.5"/>
+              <value x="204" y="223.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Evaluate_proposal_C" target="Note_acceptance">
+          <ports in="2" out="2"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="501" y="379.5"/>
+              <value x="814" y="215.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Note_acceptance" target="OutputCondition">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="855" y="215.5"/>
+              <value x="1,020" y="219.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="T_3" target="Note_rejection">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="703" y="63.5"/>
+              <value x="824" y="67.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Evaluate_proposal_B" target="T_3">
+          <ports in="2" out="2"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="501" y="219.5"/>
+              <value x="662" y="63.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Write_proposal" target="Evaluate_proposal_C">
+          <ports in="2" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="245" y="219.5"/>
+              <value x="460" y="383.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Write_proposal" target="Evaluate_proposal_B">
+          <ports in="2" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="245" y="219.5"/>
+              <value x="460" y="223.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Write_proposal" target="Evaluate_proposal_A">
+          <ports in="2" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="245" y="219.5"/>
+              <value x="460" y="67.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Note_rejection" target="OutputCondition">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="855" y="67.5"/>
+              <value x="1,020" y="219.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Evaluate_proposal_B" target="Note_acceptance">
+          <ports in="2" out="2"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="501" y="219.5"/>
+              <value x="814" y="215.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Evaluate_proposal_C" target="T_3">
+          <ports in="2" out="2"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="501" y="379.5"/>
+              <value x="662" y="63.5"/>
+            </points>
+          </attributes>
+        </flow>
+      </net>
+    </specification>
+  </layout>
+</specificationSet>

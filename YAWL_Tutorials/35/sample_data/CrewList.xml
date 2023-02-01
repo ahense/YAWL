@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:Input_Crew_List xmlns:ns2="http://www.yawlfoundation.org/sb/crewInfo">
+    <production>MAGIC MOVIE</production>
+    <crewInfo>
+        <singleCrewInfo>
+            <role>Production Manager</role>
+            <firstName>Alice</firstName>
+            <lastName>White</lastName>
+            <contactNo>0400123456</contactNo>
+            <email>alice.white@magicmovie.com</email>
+        </singleCrewInfo>
+        <singleCrewInfo>
+            <role>1st AD</role>
+            <firstName>Cheryl</firstName>
+            <lastName>Smith</lastName>
+            <contactNo>0401123456</contactNo>
+            <email>cheryl.smith@magicmovie.com</email>
+        </singleCrewInfo>
+        <singleCrewInfo>
+            <role>2nd AD</role>
+            <firstName>Ben</firstName>
+            <lastName>Laumen</lastName>
+            <contactNo>0402123456</contactNo>
+            <email>ben.laumen@magicmovie.com</email>
+        </singleCrewInfo>
+        <singleCrewInfo>
+            <role>Camera Assistant</role>
+            <firstName>Thomas</firstName>
+            <lastName>Raymond</lastName>
+            <contactNo>0403123456</contactNo>
+            <email>thomas.raymond@magicmovie.com</email>
+        </singleCrewInfo>
+        <singleCrewInfo>
+            <role>Sound Recordist</role>
+            <firstName>Harry</firstName>
+            <lastName>Newman</lastName>
+            <contactNo>0404123456</contactNo>
+            <email>harry.newman@magicmovie.com</email>
+        </singleCrewInfo>
+        <singleCrewInfo>
+            <role>Continuity</role>
+            <firstName>Jay</firstName>
+            <lastName>Green</lastName>
+            <contactNo>0405123456</contactNo>
+            <email>jay.green@magicmovie.com</email>
+        </singleCrewInfo>
+        <singleCrewInfo>
+            <role>Director</role>
+            <firstName>John</firstName>
+            <lastName>Jason</lastName>
+            <contactNo>0406123456</contactNo>
+            <email>john.jason@magicmovie.com</email>
+        </singleCrewInfo>
+        <singleCrewInfo>
+            <role>D.O.P.</role>
+            <firstName>Vicent</firstName>
+            <lastName>Rain</lastName>
+            <contactNo>0407123456</contactNo>
+            <email>vicent.rain@magicmovie.com</email>
+        </singleCrewInfo>
+        <singleCrewInfo>
+            <role>Editor</role>
+            <firstName>Claire</firstName>
+            <lastName>Douglus</lastName>
+            <contactNo>0408123456</contactNo>
+            <email>claire.douglus@magicmovie.com</email>
+        </singleCrewInfo>
+        <singleCrewInfo>
+            <role>Producer</role>
+            <firstName>Michael</firstName>
+            <lastName>West</lastName>
+            <contactNo>0409123456</contactNo>
+            <email>michael.west@magicmovie.com</email>
+        </singleCrewInfo>
+        <singleCrewInfo>
+            <role>Prod Coordinator</role>
+            <firstName>Jane</firstName>
+            <lastName>Lee</lastName>
+            <contactNo>0410123456</contactNo>
+            <email>jane.lee@magicmovie.com</email>
+        </singleCrewInfo>
+        <singleCrewInfo>
+            <role>Prod Assistant</role>
+            <firstName>Grace</firstName>
+            <lastName>Wilson</lastName>
+            <contactNo>0411123456</contactNo>
+            <email>grace.wilson@magicmovie.com</email>
+        </singleCrewInfo>
+        <singleCrewInfo>
+            <role>Executive Producer</role>
+            <firstName>Florian</firstName>
+            <lastName>Lang</lastName>
+            <contactNo>0412123456</contactNo>
+            <email>florian.lang@magicmovie.com</email>
+        </singleCrewInfo>
+        <singleCrewInfo>
+            <role>Electrics</role>
+            <firstName>Steven</firstName>
+            <lastName>Hinggis</lastName>
+            <contactNo>0413123456</contactNo>
+            <email>steven.hinggis@magicmovie.com</email>
+        </singleCrewInfo>
+        <singleCrewInfo>
+            <role>Grips</role>
+            <firstName>Mathew</firstName>
+            <lastName>Landson</lastName>
+            <contactNo>0414123456</contactNo>
+            <email>mathew.landson@magicmovie.com</email>
+        </singleCrewInfo>
+        <singleCrewInfo>
+            <role>Standby Props</role>
+            <firstName>Martin</firstName>
+            <lastName>Glitter</lastName>
+            <contactNo>0415123456</contactNo>
+            <email>martin.glitter@magicmovie.com</email>
+        </singleCrewInfo>
+        <singleCrewInfo>
+            <role>Best Boy</role>
+            <firstName>Ryan</firstName>
+            <lastName>McCraken</lastName>
+            <contactNo>0416123456</contactNo>
+            <email>ryan.mccracken@magicmovie.com</email>
+        </singleCrewInfo>
+    </crewInfo>
+</ns2:Input_Crew_List>

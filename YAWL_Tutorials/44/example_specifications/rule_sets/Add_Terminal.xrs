@@ -1,0 +1,51 @@
+<spec uri="Add_Terminal" version="0.1" identifier="UID_aff4b554-a043-492f-859c-87cce7e200dc">
+  <selection>
+    <task name="Fix_Issues">
+      <ruleNode>
+        <id>94</id>
+        <parent>-1</parent>
+        <trueChild>95</trueChild>
+        <falseChild>-1</falseChild>
+        <condition>true</condition>
+        <description>root node</description>
+      </ruleNode>
+      <ruleNode>
+        <id>95</id>
+        <parent>94</parent>
+        <trueChild>-1</trueChild>
+        <falseChild>133</falseChild>
+        <condition>Quality = Minor_Issue</condition>
+        <conclusion>
+          <step index="1">
+            <action>select</action>
+            <target>UID_171f1dbb-98a6-4a62-a3ff-eda8d0618103</target>
+          </step>
+        </conclusion>
+        <cornerstone>
+          <Quality type="Quality">Minor_Issue</Quality>
+          <Report type="string"/>
+          <Urgency type="Urgency"/>
+        </cornerstone>
+      </ruleNode>
+      <ruleNode>
+        <id>133</id>
+        <parent>95</parent>
+        <trueChild>-1</trueChild>
+        <falseChild>-1</falseChild>
+        <condition>Quality = Major_Issue</condition>
+        <conclusion>
+          <step index="1">
+            <action>select</action>
+            <target>UID_e4830662-c1b6-4adc-bc50-21aa7591a733</target>
+          </step>
+        </conclusion>
+        <cornerstone>
+          <Quality type="Quality">Major_Issue</Quality>
+          <Report type="string"/>
+          <Urgency type="Urgency"/>
+        </cornerstone>
+      </ruleNode>
+    </task>
+  </selection>
+</spec>
+

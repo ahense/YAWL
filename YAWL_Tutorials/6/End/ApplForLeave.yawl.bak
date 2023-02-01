@@ -1,0 +1,631 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<specificationSet xmlns="http://www.yawlfoundation.org/yawlschema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4.0" xsi:schemaLocation="http://www.yawlfoundation.org/yawlschema http://www.yawlfoundation.org/yawlschema/YAWL_Schema4.0.xsd">
+  <specification uri="ApplForLeave">
+    <name>Application for leave</name>
+    <documentation>Example application for leave</documentation>
+    <metaData>
+      <title>Application for leave</title>
+      <creator>ahens</creator>
+      <description>Example application for leave</description>
+      <coverage>5.0.801</coverage>
+      <version>0.4</version>
+      <persistent>false</persistent>
+      <identifier>UID_12135543-85dc-4a60-a5b4-b1aec185f609</identifier>
+    </metaData>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+    <decomposition id="Net" isRootNet="true" xsi:type="NetFactsType">
+      <localVariable>
+        <index>0</index>
+        <name>First_name</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue />
+      </localVariable>
+      <localVariable>
+        <index>1</index>
+        <name>Last_name</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue />
+      </localVariable>
+      <localVariable>
+        <index>2</index>
+        <name>Start_date</name>
+        <type>date</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue />
+      </localVariable>
+      <localVariable>
+        <index>3</index>
+        <name>End_date</name>
+        <type>date</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue />
+      </localVariable>
+      <localVariable>
+        <index>4</index>
+        <name>Destination</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue />
+      </localVariable>
+      <localVariable>
+        <index>5</index>
+        <name>Reason</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>false</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>6</index>
+        <name>Approve_leave</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>false</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>7</index>
+        <name>Rejection_reason</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue />
+      </localVariable>
+      <processControlElements>
+        <inputCondition id="InputCondition">
+          <flowsInto>
+            <nextElementRef id="Submit_leave_request" />
+          </flowsInto>
+        </inputCondition>
+        <task id="Submit_leave_request">
+          <name>Submit leave request</name>
+          <flowsInto>
+            <nextElementRef id="Approve_leave_request" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;Destination&gt;{/Submit_leave_request/Destination/text()}&lt;/Destination&gt;" />
+              <mapsTo>Destination</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;End_date&gt;{/Submit_leave_request/End_date/text()}&lt;/End_date&gt;" />
+              <mapsTo>End_date</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Start_date&gt;{/Submit_leave_request/Start_date/text()}&lt;/Start_date&gt;" />
+              <mapsTo>Start_date</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;First_name&gt;{/Submit_leave_request/First_name/text()}&lt;/First_name&gt;" />
+              <mapsTo>First_name</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Reason&gt;{/Submit_leave_request/Reason/text()}&lt;/Reason&gt;" />
+              <mapsTo>Reason</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Last_name&gt;{/Submit_leave_request/Last_name/text()}&lt;/Last_name&gt;" />
+              <mapsTo>Last_name</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-51c17586-b1c2-45f2-80a2-6809a3fa5d78</role>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Submit_leave_request" />
+        </task>
+        <task id="Approve_leave_request">
+          <name>Approve leave request</name>
+          <flowsInto>
+            <nextElementRef id="Note_rejection" />
+            <isDefaultFlow />
+          </flowsInto>
+          <flowsInto>
+            <nextElementRef id="Note_approval" />
+            <predicate ordering="0">/Net/Approve_leave/text() = 'true'</predicate>
+          </flowsInto>
+          <join code="xor" />
+          <split code="xor" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Destination&gt;{/Net/Destination/text()}&lt;/Destination&gt;" />
+              <mapsTo>Destination</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;First_name&gt;{/Net/First_name/text()}&lt;/First_name&gt;" />
+              <mapsTo>First_name</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Last_name&gt;{/Net/Last_name/text()}&lt;/Last_name&gt;" />
+              <mapsTo>Last_name</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Start_date&gt;{/Net/Start_date/text()}&lt;/Start_date&gt;" />
+              <mapsTo>Start_date</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;End_date&gt;{/Net/End_date/text()}&lt;/End_date&gt;" />
+              <mapsTo>End_date</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Reason&gt;{/Net/Reason/text()}&lt;/Reason&gt;" />
+              <mapsTo>Reason</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;Approve_leave&gt;{/Approve_leave_request/Approve_leave/text()}&lt;/Approve_leave&gt;" />
+              <mapsTo>Approve_leave</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Rejection_reason&gt;{/Approve_leave_request/Rejection_reason/text()}&lt;/Rejection_reason&gt;" />
+              <mapsTo>Rejection_reason</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-1006e301-571e-4b22-b7cb-56a32d67e910</role>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Approve_leave_request" />
+        </task>
+        <task id="Note_approval">
+          <name>Note approval</name>
+          <flowsInto>
+            <nextElementRef id="OutputCondition" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Destination&gt;{/Net/Destination/text()}&lt;/Destination&gt;" />
+              <mapsTo>Destination</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;First_name&gt;{/Net/First_name/text()}&lt;/First_name&gt;" />
+              <mapsTo>First_name</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Last_name&gt;{/Net/Last_name/text()}&lt;/Last_name&gt;" />
+              <mapsTo>Last_name</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Approve_leave&gt;{/Net/Approve_leave/text()}&lt;/Approve_leave&gt;" />
+              <mapsTo>Approve_leave</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Start_date&gt;{/Net/Start_date/text()}&lt;/Start_date&gt;" />
+              <mapsTo>Start_date</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;End_date&gt;{/Net/End_date/text()}&lt;/End_date&gt;" />
+              <mapsTo>End_date</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Reason&gt;{/Net/Reason/text()}&lt;/Reason&gt;" />
+              <mapsTo>Reason</mapsTo>
+            </mapping>
+          </startingMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-51c17586-b1c2-45f2-80a2-6809a3fa5d78</role>
+                </initialSet>
+              </distributionSet>
+              <familiarParticipant taskID="Submit_leave_request" />
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Note_approval" />
+        </task>
+        <task id="Note_rejection">
+          <name>Note rejection</name>
+          <flowsInto>
+            <nextElementRef id="OutputCondition" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Destination&gt;{/Net/Destination/text()}&lt;/Destination&gt;" />
+              <mapsTo>Destination</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;First_name&gt;{/Net/First_name/text()}&lt;/First_name&gt;" />
+              <mapsTo>First_name</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Last_name&gt;{/Net/Last_name/text()}&lt;/Last_name&gt;" />
+              <mapsTo>Last_name</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Approve_leave&gt;{/Net/Approve_leave/text()}&lt;/Approve_leave&gt;" />
+              <mapsTo>Approve_leave</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Rejection_reason&gt;{/Net/Rejection_reason/text()}&lt;/Rejection_reason&gt;" />
+              <mapsTo>Rejection_reason</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Start_date&gt;{/Net/Start_date/text()}&lt;/Start_date&gt;" />
+              <mapsTo>Start_date</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;End_date&gt;{/Net/End_date/text()}&lt;/End_date&gt;" />
+              <mapsTo>End_date</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Reason&gt;{/Net/Reason/text()}&lt;/Reason&gt;" />
+              <mapsTo>Reason</mapsTo>
+            </mapping>
+          </startingMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-51c17586-b1c2-45f2-80a2-6809a3fa5d78</role>
+                </initialSet>
+              </distributionSet>
+              <familiarParticipant taskID="Submit_leave_request" />
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Note_rejection" />
+        </task>
+        <outputCondition id="OutputCondition" />
+      </processControlElements>
+    </decomposition>
+    <decomposition id="Approve_leave_request" xsi:type="WebServiceGatewayFactsType">
+      <name>Approve leave request</name>
+      <inputParam>
+        <index>0</index>
+        <name>First_name</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>1</index>
+        <name>Last_name</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>2</index>
+        <name>Start_date</name>
+        <type>date</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>3</index>
+        <name>End_date</name>
+        <type>date</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>4</index>
+        <name>Destination</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>5</index>
+        <name>Reason</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>6</index>
+        <name>Approve_leave</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <outputParam>
+        <index>7</index>
+        <name>Rejection_reason</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Note_approval" xsi:type="WebServiceGatewayFactsType">
+      <name>Note approval</name>
+      <inputParam>
+        <index>0</index>
+        <name>First_name</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>1</index>
+        <name>Last_name</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>2</index>
+        <name>Start_date</name>
+        <type>date</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>3</index>
+        <name>End_date</name>
+        <type>date</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>4</index>
+        <name>Destination</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>5</index>
+        <name>Reason</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>6</index>
+        <name>Approve_leave</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Note_rejection" xsi:type="WebServiceGatewayFactsType">
+      <name>Note rejection</name>
+      <inputParam>
+        <index>0</index>
+        <name>First_name</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>1</index>
+        <name>Last_name</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>2</index>
+        <name>Start_date</name>
+        <type>date</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>3</index>
+        <name>End_date</name>
+        <type>date</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>4</index>
+        <name>Destination</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>5</index>
+        <name>Reason</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>6</index>
+        <name>Approve_leave</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>7</index>
+        <name>Rejection_reason</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Submit_leave_request" xsi:type="WebServiceGatewayFactsType">
+      <name>Submit leave request</name>
+      <outputParam>
+        <index>0</index>
+        <name>First_name</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <outputParam>
+        <index>1</index>
+        <name>Last_name</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <outputParam>
+        <index>2</index>
+        <name>Start_date</name>
+        <type>date</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <outputParam>
+        <index>3</index>
+        <name>End_date</name>
+        <type>date</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <outputParam>
+        <index>4</index>
+        <name>Destination</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <outputParam>
+        <index>5</index>
+        <name>Reason</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+  </specification>
+  <layout>
+    <locale language="en" country="GB"/>
+    <specification id="ApplForLeave" defaultBgColor="-526351">
+      <size w="58" h="28"/>
+      <net id="Net">
+        <bounds x="0" y="0" w="1682" h="814"/>
+        <frame x="0" y="0" w="1685" h="817"/>
+        <viewport x="0" y="0" w="1685" h="817"/>
+        <scale>1.5</scale>
+        <vertex id="OutputCondition">
+          <attributes>
+            <bounds x="716" y="232" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <vertex id="InputCondition">
+          <attributes>
+            <bounds x="20" y="232" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <container id="Approve_leave_request">
+          <vertex>
+            <attributes>
+              <bounds x="296" y="232" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="270" y="262" w="96" h="40"/>
+            </attributes>
+          </label>
+          <decorator type="XOR_split">
+            <position>13</position>
+            <attributes>
+              <bounds x="327" y="232" w="11" h="32"/>
+            </attributes>
+          </decorator>
+        </container>
+        <container id="Note_approval">
+          <vertex>
+            <attributes>
+              <bounds x="524" y="108" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="492" y="138" w="97" h="19"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="Note_rejection">
+          <vertex>
+            <attributes>
+              <bounds x="524" y="324" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="492" y="354" w="96" h="20"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="Submit_leave_request">
+          <vertex>
+            <attributes>
+              <bounds x="148" y="232" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="114" y="264" w="97" h="43"/>
+            </attributes>
+          </label>
+        </container>
+        <flow source="InputCondition" target="Submit_leave_request">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="51" y="238.5"/>
+              <value x="212" y="238.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Approve_leave_request" target="Note_approval">
+          <ports in="2" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="333" y="247.5"/>
+              <value x="520" y="127.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Submit_leave_request" target="Approve_leave_request">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="171" y="247.5"/>
+              <value x="336" y="247.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Note_rejection" target="OutputCondition">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="551" y="339.5"/>
+              <value x="712" y="247.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Approve_leave_request" target="Note_rejection">
+          <ports in="2" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="333" y="247.5"/>
+              <value x="520" y="339.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Note_approval" target="OutputCondition">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="551" y="127.5"/>
+              <value x="712" y="247.5"/>
+            </points>
+          </attributes>
+        </flow>
+      </net>
+      <labelFontSize>12</labelFontSize>
+    </specification>
+  </layout>
+</specificationSet>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:Fill_Out_Camera_Sheets xmlns:ns2="http://www.yawlfoundation.org/sb/cameraInfo">
+    <generalInfo>
+        <production>MAGIC MOVIE</production>
+        <date>2009-12-09</date>
+        <weekday>WEDS</weekday>
+        <shootDayNo>2</shootDayNo>
+    </generalInfo>
+    <producer>Michael West</producer>
+    <director>John Jason</director>
+    <directorOfPhotography>Vicent Rain</directorOfPhotography>
+    <cameraOperator></cameraOperator>
+    <cameraAssistant>Thomas Raymond</cameraAssistant>
+    <cameraInfo>
+        <sheetNumber>10751</sheetNumber>
+        <camRoll>A3</camRoll>
+        <studios_location>Tea Tree Studio 2 @ Cnr Cudmore and Balanch Roads, Tea Tree Valley.</studios_location>
+        <techInfo>
+            <cameraType_and_Number>SR3 16MM</cameraType_and_Number>
+            <stockNumber>500T 7218</stockNumber>
+            <emulsion>177071.03</emulsion>
+            <totalCansNumber>1</totalCansNumber>
+        </techInfo>
+        <slateInfo>
+            <magNumber>3</magNumber>
+            <slate>10</slate>
+            <takeInfo>
+                <take>1</take>
+                <counter>0</counter>
+                <length>42</length>
+                <print>true</print>
+                <printSetting>Colour</printSetting>
+                <essentialInfo>16MM T 2 2/3RDS 6' H/HELD</essentialInfo>
+            </takeInfo>
+        </slateInfo>
+        <slateInfo>
+            <magNumber>3</magNumber>
+            <slate>13</slate>
+            <takeInfo>
+                <take>1</take>
+                <counter>87</counter>
+                <length>21</length>
+                <print>true</print>
+                <printSetting>Colour</printSetting>
+                <essentialInfo>50MM T2.8 14'-25'</essentialInfo>
+            </takeInfo>
+            <takeInfo>
+                <take>2</take>
+                <counter>108</counter>
+                <length>17</length>
+                <print>true</print>
+                <printSetting>Colour</printSetting>
+                <essentialInfo>50MM T2.8 14'-25'</essentialInfo>
+            </takeInfo>
+            <takeInfo>
+                <take>3</take>
+                <counter>125</counter>
+                <length>12</length>
+                <print>true</print>
+                <printSetting>Colour</printSetting>
+                <essentialInfo>P/UP 50MM T2.8 14'-25'</essentialInfo>
+            </takeInfo>
+        </slateInfo>
+        <slateInfo>
+            <magNumber>3</magNumber>
+            <slate>14</slate>
+            <takeInfo>
+                <take>1</take>
+                <counter>137</counter>
+                <length>13</length>
+                <print>true</print>
+                <printSetting>Colour</printSetting>
+                <essentialInfo>50MM T2.8 4'-8'</essentialInfo>
+            </takeInfo>
+            <takeInfo>
+                <take>2</take>
+                <counter>150</counter>
+                <length>1</length>
+                <print>true</print>
+                <printSetting>Colour</printSetting>
+                <essentialInfo>50MM T2.8 4'-8'</essentialInfo>
+            </takeInfo>
+        </slateInfo>
+        <slateInfo>
+            <magNumber>3</magNumber>
+            <slate>11</slate>
+            <takeInfo>
+                <take>1</take>
+                <counter>42</counter>
+                <length>22</length>
+                <print>true</print>
+                <printSetting>Colour</printSetting>
+                <essentialInfo>50MM T 2 2/3RDS 6' H/HELD</essentialInfo>
+            </takeInfo>
+        </slateInfo>
+        <slateInfo>
+            <magNumber>3</magNumber>
+            <slate>12</slate>
+            <takeInfo>
+                <take>1</take>
+                <counter>64</counter>
+                <length>23</length>
+                <print>true</print>
+                <printSetting>Colour</printSetting>
+                <essentialInfo>25MM T 2.8 5'-15'</essentialInfo>
+            </takeInfo>
+        </slateInfo>
+        <shortEndMin>10</shortEndMin>
+        <camInfoSum>
+            <footageLoaded>400</footageLoaded>
+            <totalExposed>151</totalExposed>
+            <shortEnds>249</shortEnds>
+            <waste>0</waste>
+        </camInfoSum>
+        <instructionsToLab>PROCESS NORMAL     PREP FOR TELECINE</instructionsToLab>
+        <signatureOfCameraAssistant>THOMAS RAYMOND</signatureOfCameraAssistant>
+    </cameraInfo>
+    <anotherRoll>false</anotherRoll>
+    <stockInfo>
+        <loaded>800</loaded>
+        <gross>768</gross>
+        <exposed>768</exposed>
+        <print>768</print>
+        <N_G>0</N_G>
+        <waste>0</waste>
+        <shortEnds>32</shortEnds>
+    </stockInfo>
+    <camRolls>A1 A2</camRolls>
+</ns2:Fill_Out_Camera_Sheets>

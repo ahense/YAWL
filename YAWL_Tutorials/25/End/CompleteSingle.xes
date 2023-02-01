@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- This file has been generated with the OpenXES library. It conforms -->
+<!-- to the XML serialization of the XES standard for log storage and -->
+<!-- management. -->
+<!-- XES standard version: 1.0 -->
+<!-- OpenXES library version: 1.0RC7 -->
+<!-- OpenXES is available from http://www.openxes.org/ -->
+<log xes.version="1.0" xes.features="nested-attributes" openxes.version="1.0RC7">
+	<global scope="trace">
+		<string key="concept:name" value="UNKNOWN"/>
+	</global>
+	<global scope="event">
+		<date key="time:timestamp" value="1970-01-01T00:00:00.000+01:00"/>
+		<string key="concept:name" value="UNKNOWN"/>
+		<string key="lifecycle:transition" value="UNKNOWN"/>
+		<string key="concept:instance" value="UNKNOWN"/>
+	</global>
+	<classifier name="Activity classifier" keys="concept:name concept:instance lifecycle:transition"/>
+	<string key="concept:name" value="Tutorial12 - version 0.3 (filtered on simple heuristics) (filtered on event attributes)"/>
+	<trace>
+		<string key="concept:name" value="1"/>
+		<event>
+			<string key="concept:instance" value="1.1"/>
+			<string key="org:resource" value="PA-ed6697cc-084a-4b47-b0fb-9597682ce5ce"/>
+			<string key="concept:name" value="Formulate_requirement"/>
+			<string key="Requirement_description" value="Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam auctor dictum ligula. Donec mattis at justo."/>
+			<string key="Title" value="VIS"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<date key="time:timestamp" value="2020-10-18T11:34:00.986+02:00"/>
+			<int key="Estimated_cost" value="80000"/>
+		</event>
+		<event>
+			<string key="concept:instance" value="1.2"/>
+			<string key="org:resource" value="PA-ed6697cc-084a-4b47-b0fb-9597682ce5ce"/>
+			<string key="concept:name" value="Define_SW_development_project"/>
+			<string key="Technology" value="Java"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<boolean key="make" value="true"/>
+			<date key="time:timestamp" value="2020-10-18T11:42:07.766+02:00"/>
+			<int key="Estimated_cost" value="80000"/>
+		</event>
+		<event>
+			<string key="concept:instance" value="1.3"/>
+			<string key="Project_manager" value="Ernie"/>
+			<string key="org:resource" value="PA-ed6697cc-084a-4b47-b0fb-9597682ce5ce"/>
+			<string key="concept:name" value="Start_project"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<date key="time:timestamp" value="2020-10-18T11:44:03.772+02:00"/>
+		</event>
+	</trace>
+	<trace>
+		<string key="concept:name" value="2"/>
+		<event>
+			<string key="concept:instance" value="2.1"/>
+			<string key="org:resource" value="PA-ed6697cc-084a-4b47-b0fb-9597682ce5ce"/>
+			<string key="concept:name" value="Formulate_requirement"/>
+			<string key="Requirement_description" value="In hac habitasse platea dictumst. In nec rhoncus mi. Nullam molestie metus ac tortor dignissim porttitor. Etiam rutrum sapien est."/>
+			<string key="Title" value="CRM"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<date key="time:timestamp" value="2020-10-18T11:34:43.147+02:00"/>
+			<int key="Estimated_cost" value="75000"/>
+		</event>
+		<event>
+			<string key="concept:instance" value="2.2"/>
+			<string key="org:resource" value="PA-ed6697cc-084a-4b47-b0fb-9597682ce5ce"/>
+			<string key="concept:name" value="Define_SW_development_project"/>
+			<string key="Technology" value="Java"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<boolean key="make" value="true"/>
+			<date key="time:timestamp" value="2020-10-18T11:42:21.071+02:00"/>
+			<int key="Estimated_cost" value="75000"/>
+		</event>
+		<event>
+			<string key="concept:instance" value="2.3"/>
+			<string key="Project_manager" value="Bert"/>
+			<string key="org:resource" value="PA-ed6697cc-084a-4b47-b0fb-9597682ce5ce"/>
+			<string key="concept:name" value="Start_project"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<date key="time:timestamp" value="2020-10-18T11:44:13.988+02:00"/>
+		</event>
+	</trace>
+	<trace>
+		<string key="concept:name" value="3"/>
+		<event>
+			<string key="concept:instance" value="3.1"/>
+			<string key="org:resource" value="PA-ed6697cc-084a-4b47-b0fb-9597682ce5ce"/>
+			<string key="concept:name" value="Formulate_requirement"/>
+			<string key="Requirement_description" value="Praesent at urna urna. Sed facilisis non ligula in placerat. Interdum et malesuada fames ac ante ipsum primis in faucibus."/>
+			<string key="Title" value="ERP"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<date key="time:timestamp" value="2020-10-18T11:35:17.243+02:00"/>
+			<int key="Estimated_cost" value="250000"/>
+		</event>
+		<event>
+			<string key="concept:instance" value="3.2"/>
+			<string key="org:resource" value="PA-ed6697cc-084a-4b47-b0fb-9597682ce5ce"/>
+			<string key="concept:name" value="Define_SW_development_project"/>
+			<string key="Technology" value="Java"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<boolean key="make" value="true"/>
+			<date key="time:timestamp" value="2020-10-18T11:42:35.126+02:00"/>
+			<int key="Estimated_cost" value="250000"/>
+		</event>
+		<event>
+			<string key="concept:instance" value="3.4"/>
+			<string key="org:resource" value="PA-ed6697cc-084a-4b47-b0fb-9597682ce5ce"/>
+			<string key="concept:name" value="Cancel_requirement"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<date key="time:timestamp" value="2020-10-18T11:44:43.496+02:00"/>
+		</event>
+	</trace>
+	<trace>
+		<string key="concept:name" value="4"/>
+		<event>
+			<string key="concept:instance" value="4.1"/>
+			<string key="org:resource" value="PA-ed6697cc-084a-4b47-b0fb-9597682ce5ce"/>
+			<string key="concept:name" value="Formulate_requirement"/>
+			<string key="Requirement_description" value="Donec id ultricies ipsum, id bibendum magna. Praesent ex odio, congue vitae nisl eu, sodales malesuada elit. Morbi hendrerit cursus."/>
+			<string key="Title" value="DMS"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<date key="time:timestamp" value="2020-10-18T11:35:53.921+02:00"/>
+			<int key="Estimated_cost" value="430000"/>
+		</event>
+		<event>
+			<string key="concept:instance" value="4.2"/>
+			<string key="org:resource" value="PA-ed6697cc-084a-4b47-b0fb-9597682ce5ce"/>
+			<string key="concept:name" value="Define_SW_development_project"/>
+			<string key="Technology" value="Java"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<boolean key="make" value="true"/>
+			<date key="time:timestamp" value="2020-10-18T11:42:40.615+02:00"/>
+			<int key="Estimated_cost" value="430000"/>
+		</event>
+		<event>
+			<string key="concept:instance" value="4.4"/>
+			<string key="org:resource" value="PA-ed6697cc-084a-4b47-b0fb-9597682ce5ce"/>
+			<string key="concept:name" value="Cancel_requirement"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<date key="time:timestamp" value="2020-10-18T11:44:56.665+02:00"/>
+		</event>
+	</trace>
+	<trace>
+		<string key="concept:name" value="5"/>
+		<event>
+			<string key="concept:instance" value="5.1"/>
+			<string key="org:resource" value="PA-ed6697cc-084a-4b47-b0fb-9597682ce5ce"/>
+			<string key="concept:name" value="Formulate_requirement"/>
+			<string key="Requirement_description" value="Mauris nibh ante, vestibulum vel pretium eu, convallis nec augue. Donec metus nisl, venenatis sed pulvinar sed, hendrerit ac nibh."/>
+			<string key="Title" value="SCM"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<date key="time:timestamp" value="2020-10-18T11:36:25.608+02:00"/>
+			<int key="Estimated_cost" value="95000"/>
+		</event>
+		<event>
+			<string key="concept:instance" value="5.2"/>
+			<string key="org:resource" value="PA-ed6697cc-084a-4b47-b0fb-9597682ce5ce"/>
+			<string key="concept:name" value="Prepare_SW_procurement"/>
+			<string key="Supplier" value="C Corp"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<boolean key="make" value="true"/>
+			<date key="time:timestamp" value="2020-10-18T11:42:44.927+02:00"/>
+			<int key="Estimated_cost" value="95000"/>
+		</event>
+		<event>
+			<string key="concept:instance" value="5.4"/>
+			<string key="org:resource" value="PA-ed6697cc-084a-4b47-b0fb-9597682ce5ce"/>
+			<string key="concept:name" value="Cancel_requirement"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<date key="time:timestamp" value="2020-10-18T11:45:11.137+02:00"/>
+		</event>
+	</trace>
+	<trace>
+		<string key="concept:name" value="6"/>
+		<event>
+			<string key="concept:instance" value="6.1"/>
+			<string key="org:resource" value="PA-ed6697cc-084a-4b47-b0fb-9597682ce5ce"/>
+			<string key="concept:name" value="Formulate_requirement"/>
+			<string key="Requirement_description" value="Suspendisse quis nulla eu libero mollis placerat viverra vel risus. Fusce porttitor hendrerit elit sit amet tincidunt. Fusce eget quam."/>
+			<string key="Title" value="Portal"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<date key="time:timestamp" value="2020-10-18T11:36:59.704+02:00"/>
+			<int key="Estimated_cost" value="60000"/>
+		</event>
+		<event>
+			<string key="concept:instance" value="6.2"/>
+			<string key="org:resource" value="PA-ed6697cc-084a-4b47-b0fb-9597682ce5ce"/>
+			<string key="concept:name" value="Prepare_SW_procurement"/>
+			<string key="Supplier" value="C Corp"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<boolean key="make" value="true"/>
+			<date key="time:timestamp" value="2020-10-18T11:42:48.030+02:00"/>
+			<int key="Estimated_cost" value="60000"/>
+		</event>
+		<event>
+			<string key="concept:instance" value="6.4"/>
+			<string key="org:resource" value="PA-ed6697cc-084a-4b47-b0fb-9597682ce5ce"/>
+			<string key="concept:name" value="Cancel_requirement"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<date key="time:timestamp" value="2020-10-18T11:45:21.794+02:00"/>
+		</event>
+	</trace>
+	<trace>
+		<string key="concept:name" value="7"/>
+		<event>
+			<string key="concept:instance" value="7.1"/>
+			<string key="org:resource" value="PA-ed6697cc-084a-4b47-b0fb-9597682ce5ce"/>
+			<string key="concept:name" value="Formulate_requirement"/>
+			<string key="Requirement_description" value="In gravida, velit eu tincidunt luctus, risus leo gravida quam, pellentesque pharetra nulla lorem a urna. Ut sed ligula vel."/>
+			<string key="Title" value="HR"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<date key="time:timestamp" value="2020-10-18T11:37:29.873+02:00"/>
+			<int key="Estimated_cost" value="120000"/>
+		</event>
+		<event>
+			<string key="concept:instance" value="7.2"/>
+			<string key="org:resource" value="PA-ed6697cc-084a-4b47-b0fb-9597682ce5ce"/>
+			<string key="concept:name" value="Prepare_SW_procurement"/>
+			<string key="Supplier" value="C Corp"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<boolean key="make" value="true"/>
+			<date key="time:timestamp" value="2020-10-18T11:43:02.512+02:00"/>
+			<int key="Estimated_cost" value="120000"/>
+		</event>
+		<event>
+			<string key="concept:instance" value="7.3"/>
+			<boolean key="approved" value="true"/>
+			<string key="org:resource" value="PA-ed6697cc-084a-4b47-b0fb-9597682ce5ce"/>
+			<string key="concept:name" value="Approve_proposition"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<date key="time:timestamp" value="2020-10-18T11:45:42.236+02:00"/>
+		</event>
+		<event>
+			<string key="concept:instance" value="7.4"/>
+			<string key="Purchase_order_number" value="34567"/>
+			<string key="org:resource" value="PA-ed6697cc-084a-4b47-b0fb-9597682ce5ce"/>
+			<string key="concept:name" value="Prepare_purchase_order"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<date key="time:timestamp" value="2020-10-18T11:46:19.613+02:00"/>
+		</event>
+	</trace>
+	<trace>
+		<string key="concept:name" value="8"/>
+		<event>
+			<string key="concept:instance" value="8.1"/>
+			<string key="org:resource" value="PA-ed6697cc-084a-4b47-b0fb-9597682ce5ce"/>
+			<string key="concept:name" value="Formulate_requirement"/>
+			<string key="Requirement_description" value="Curabitur eu massa in nibh lacinia ornare pharetra in sem. Integer non ultrices nisi, eu gravida magna. Nulla suscipit velit."/>
+			<string key="Title" value="ECM"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<date key="time:timestamp" value="2020-10-18T11:37:54.338+02:00"/>
+			<int key="Estimated_cost" value="450000"/>
+		</event>
+		<event>
+			<string key="concept:instance" value="8.2"/>
+			<string key="org:resource" value="PA-ed6697cc-084a-4b47-b0fb-9597682ce5ce"/>
+			<string key="concept:name" value="Prepare_SW_procurement"/>
+			<string key="Supplier" value="C Corp"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<boolean key="make" value="true"/>
+			<date key="time:timestamp" value="2020-10-18T11:43:05.639+02:00"/>
+			<int key="Estimated_cost" value="450000"/>
+		</event>
+		<event>
+			<string key="concept:instance" value="8.3"/>
+			<boolean key="approved" value="false"/>
+			<string key="org:resource" value="PA-ed6697cc-084a-4b47-b0fb-9597682ce5ce"/>
+			<string key="concept:name" value="Approve_proposition"/>
+			<string key="lifecycle:transition" value="complete"/>
+			<date key="time:timestamp" value="2020-10-18T11:45:50.578+02:00"/>
+		</event>
+	</trace>
+</log>

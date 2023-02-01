@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:Input_Cast_List xmlns:ns2="http://www.yawlfoundation.org/sb/castInfo">
+    <production>MAGIC MOVIE</production>
+    <castInfo>
+        <singleCastInfo>
+            <character>CHARLIE</character>
+            <artist>Chris Johnson</artist>
+            <agent>Cedric Lars</agent>
+            <agentContactNo>0409876543</agentContactNo>
+        </singleCastInfo>
+        <singleCastInfo>
+            <character>SIMONE</character>
+            <artist>Kylie Yates</artist>
+            <agent>John Hars</agent>
+            <agentContactNo>0408765432</agentContactNo>
+        </singleCastInfo>
+        <singleCastInfo>
+            <character>BELLA</character>
+            <artist>Michelle Reis</artist>
+            <agent>Joan Kingston</agent>
+            <agentContactNo>0407654321</agentContactNo>
+        </singleCastInfo>
+        <singleCastInfo>
+            <character>TARLA</character>
+            <artist>Valerie Lee</artist>
+            <agent>Rachel Chan</agent>
+            <agentContactNo>0406543219</agentContactNo>
+        </singleCastInfo>
+        <singleCastInfo>
+            <character>DOUBLE SIMONE</character>
+            <artist>Judie Yeo</artist>
+            <agent>self</agent>
+            <agentContactNo>0405432198</agentContactNo>
+        </singleCastInfo>
+        <singleCastInfo>
+            <character>DOUBLE BELLA</character>
+            <artist>Annabella Hills</artist>
+            <agent>self</agent>
+            <agentContactNo>0404321987</agentContactNo>
+        </singleCastInfo>
+    </castInfo>
+</ns2:Input_Cast_List>

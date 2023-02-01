@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<specificationSet xmlns="http://www.yawlfoundation.org/yawlschema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="3.0" xsi:schemaLocation="http://www.yawlfoundation.org/yawlschema http://www.yawlfoundation.org/yawlschema/YAWL_Schema3.0.xsd">
+  <specification uri="Fix_Locally">
+    <documentation>No description provided</documentation>
+    <metaData>
+      <creator>apika</creator>
+      <description>No description provided</description>
+      <coverage>4.1.720</coverage>
+      <version>0.1</version>
+      <persistent>false</persistent>
+      <identifier>UID_a05bf1fd-2310-44d3-8418-f4cbbdddc15f</identifier>
+    </metaData>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+    <decomposition id="Net" isRootNet="true" xsi:type="NetFactsType">
+      <inputParam>
+        <index>0</index>
+        <name>Report</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <processControlElements>
+        <inputCondition id="InputCondition">
+          <flowsInto>
+            <nextElementRef id="Fix_Locally" />
+          </flowsInto>
+        </inputCondition>
+        <task id="Fix_Locally">
+          <name>Fix_Locally</name>
+          <flowsInto>
+            <nextElementRef id="OutputCondition" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Report&gt;{/Net/Report/text()}&lt;/Report&gt;" />
+              <mapsTo>Report</mapsTo>
+            </mapping>
+          </startingMappings>
+          <timer>
+            <trigger>OnExecuting</trigger>
+            <duration>PT5S</duration>
+          </timer>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-7a4ac8cd-53ac-4f20-9d2c-f2f702909b24</role>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Fix_Locally" />
+        </task>
+        <outputCondition id="OutputCondition" />
+      </processControlElements>
+    </decomposition>
+    <decomposition id="Fix_Locally" xsi:type="WebServiceGatewayFactsType">
+      <inputParam>
+        <index>0</index>
+        <name>Report</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+  </specification>
+  <layout>
+    <locale language="en" country="AU"/>
+    <specification id="Fix_Locally" defaultBgColor="-526351">
+      <size w="63" h="33"/>
+      <net id="Net" bgColor="-526351">
+        <bounds x="0" y="0" w="1227" h="473"/>
+        <frame x="0" y="0" w="1230" h="476"/>
+        <viewport x="0" y="0" w="1230" h="476"/>
+        <vertex id="OutputCondition">
+          <attributes>
+            <bounds x="300" y="80" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <vertex id="InputCondition">
+          <attributes>
+            <bounds x="28" y="80" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <container id="Fix_Locally">
+          <vertex>
+            <attributes>
+              <bounds x="156" y="80" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="124" y="112" w="96" h="20"/>
+            </attributes>
+          </label>
+        </container>
+        <flow source="InputCondition" target="Fix_Locally">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="59" y="91.5"/>
+              <value x="156" y="95.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Fix_Locally" target="OutputCondition">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="187" y="95.5"/>
+              <value x="300" y="91.5"/>
+            </points>
+          </attributes>
+        </flow>
+      </net>
+    </specification>
+  </layout>
+</specificationSet>

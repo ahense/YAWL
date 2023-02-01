@@ -1,0 +1,19 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ClaimType">
+    <xs:sequence>
+      <xs:element name="Customer_Name" type="xs:string" />
+      <xs:element name="Phone_number" type="xs:string" />
+      <xs:element name="Description" type="xs:string" />
+      <xs:element name="Category" type="CategoryType" />
+      <xs:element name="Payment_Amount" type="xs:positiveInteger" />
+    </xs:sequence>
+  </xs:complexType>
+<xs:simpleType name="CategoryType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="" />
+      <xs:enumeration value="Health" />
+      <xs:enumeration value="Life" />
+      <xs:enumeration value="Travel" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

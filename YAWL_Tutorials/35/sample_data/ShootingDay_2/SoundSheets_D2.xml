@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:Fill_Out_Sound_Sheets xmlns:ns2="http://www.yawlfoundation.org/sb/soundInfo">
+    <generalInfo>
+        <production>MAGIC MOVIE</production>
+        <date>2009-12-09</date>
+        <weekday>WEDS</weekday>
+        <shootDayNo>2</shootDayNo>
+    </generalInfo>
+    <producer>Michael West</producer>
+    <director>John Jason</director>
+    <editor>Claire Douglus</editor>
+    <soundRecordist>Harry Newman</soundRecordist>
+    <soundInfo>
+        <soundRoll>502 - FLASH A</soundRoll>
+        <techInfo>
+            <sampleRate>48 KHz</sampleRate>
+            <bitRate>16</bitRate>
+            <timeCode_DF>25 fps</timeCode_DF>
+            <timeCodeSource>00</timeCodeSource>
+            <refTone>-20</refTone>
+            <userBits>true</userBits>
+            <soundMixer>Multi Track</soundMixer>
+            <cameraFrameRate>25</cameraFrameRate>
+            <mediaFormat>BWF</mediaFormat>
+            <recorder>744t</recorder>
+            <transferTo>nil</transferTo>
+        </techInfo>
+        <sceneInfo>
+            <scene>5</scene>
+            <slateInfo>
+                <slate>6</slate>
+                <takeInfo>
+                    <take>1</take>
+                    <timecode>00:02:00</timecode>
+                    <print>true</print>
+                    <remarks>indent and tone</remarks>
+                    <camRoll>A2</camRoll>
+                </takeInfo>
+                <takeInfo>
+                    <take>2</take>
+                    <timecode>00:02:05</timecode>
+                    <print>false</print>
+                    <remarks>tone and plain</remarks>
+                    <camRoll>A2</camRoll>
+                </takeInfo>
+            </slateInfo>
+        </sceneInfo>
+    </soundInfo>
+    <anotherRoll>false</anotherRoll>
+    <soundRolls>nil</soundRolls>
+</ns2:Fill_Out_Sound_Sheets>

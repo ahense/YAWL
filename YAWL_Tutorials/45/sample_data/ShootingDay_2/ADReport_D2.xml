@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:Fill_Out_AD_Report xmlns:ns2="http://www.yawlfoundation.org/sb/timeSheetInfo">
+    <generalInfo>
+        <production>MAGIC MOVIE</production>
+        <date>2009-12-09</date>
+        <weekday>WEDS</weekday>
+        <shootDayNo>2</shootDayNo>
+    </generalInfo>
+    <producer>Michael West</producer>
+    <director>John Jason</director>
+    <assistantDirector>Ben Laumen</assistantDirector>
+    <timeSheetInfo>
+        <artistTimeSheet>
+            <singleArtist>
+                <artist>Chris Johnson</artist>
+                <P_U>0630</P_U>
+                <MU_WD_Call_scheduled>07:15:00</MU_WD_Call_scheduled>
+                <MU_WD_Call_actualArrival>07:15:00</MU_WD_Call_actualArrival>
+                <mealBreak>00:30:00</mealBreak>
+                <timeWrap>17:00:00</timeWrap>
+                <travel>00:00:00</travel>
+                <signature_url>c:/ADReport_Chris Johnson_08-12-2009_06-48-54.bmp</signature_url>
+            </singleArtist>
+            <singleArtist>
+                <artist>Kylie Yates</artist>
+                <P_U>0645</P_U>
+                <MU_WD_Call_scheduled>07:15:00</MU_WD_Call_scheduled>
+                <MU_WD_Call_actualArrival>07:30:00</MU_WD_Call_actualArrival>
+                <mealBreak>00:30:00</mealBreak>
+                <timeWrap>17:00:00</timeWrap>
+                <travel>00:00:00</travel>
+                <signature_url>c:/ADReport_Kylie Yates_08-12-2009_06-49-02.bmp</signature_url>
+            </singleArtist>
+            <singleArtist>
+                <artist>Michelle Reis</artist>
+                <P_U>MOW</P_U>
+                <MU_WD_Call_scheduled>10:15:00</MU_WD_Call_scheduled>
+                <MU_WD_Call_actualArrival>10:15:00</MU_WD_Call_actualArrival>
+                <mealBreak>00:30:00</mealBreak>
+                <timeWrap>17:00:00</timeWrap>
+                <travel>00:00:00</travel>
+                <signature_url>c:/ADReport_Michelle Reis_08-12-2009_06-49-06.bmp</signature_url>
+            </singleArtist>
+            <singleArtist>
+                <artist>Valerie Lee</artist>
+                <P_U>MOW</P_U>
+                <MU_WD_Call_scheduled>11:15:00</MU_WD_Call_scheduled>
+                <MU_WD_Call_actualArrival>17:15:00</MU_WD_Call_actualArrival>
+                <mealBreak>00:30:00</mealBreak>
+                <timeWrap>17:30:00</timeWrap>
+                <travel>00:00:00</travel>
+                <signature_url>c:/ADReport_Valerie Lee_08-12-2009_06-49-10.bmp</signature_url>
+            </singleArtist>
+            <singleArtist>
+                <artist>Judie Yeo</artist>
+                <P_U>MOW</P_U>
+                <MU_WD_Call_scheduled>11:15:00</MU_WD_Call_scheduled>
+                <MU_WD_Call_actualArrival>17:15:00</MU_WD_Call_actualArrival>
+                <mealBreak>00:30:00</mealBreak>
+                <timeWrap>17:30:00</timeWrap>
+                <travel>00:00:00</travel>
+                <signature_url>c:/ADReport_Garry Yeo_08-12-2009_06-49-31.bmp</signature_url>
+            </singleArtist>
+        </artistTimeSheet>
+        <extrasTimeSheet/>
+        <childrenTimeSheet/>
+        <crewTimeSheet>
+            <singleCrew>
+                <crew>Electrics</crew>
+                <crewCall>08:00:00</crewCall>
+                <travelIn>08:00:00</travelIn>
+                <locationCall>08:00:00</locationCall>
+                <mealBreak>00:45:00</mealBreak>
+                <wrap>17:00:00</wrap>
+                <wrapLoc>17:00:00</wrapLoc>
+                <departLoc>00:00:00</departLoc>
+                <travelOut>00:00:00</travelOut>
+                <remarks></remarks>
+            </singleCrew>
+        </crewTimeSheet>
+        <mealInfo>
+            <singleMeal>
+                <meal>Breakfast</meal>
+                <mealTimes>
+                    <from>08:00:00</from>
+                    <to>08:15:00</to>
+                </mealTimes>
+                <duration>00:15:00</duration>
+                <numbers>30</numbers>
+                <location>Studio 1 Foyer</location>
+                <remarks></remarks>
+            </singleMeal>
+            <singleMeal>
+                <meal>Lunch</meal>
+                <mealTimes>
+                    <from>13:00:00</from>
+                    <to>13:45:00</to>
+                </mealTimes>
+                <duration>00:45:00</duration>
+                <numbers>34</numbers>
+                <location>Studio 1 Foyer</location>
+                <remarks></remarks>
+            </singleMeal>
+        </mealInfo>
+        <livestock></livestock>
+        <accidents_delays></accidents_delays>
+        <majorProps_actionVehicles_extraEquipment></majorProps_actionVehicles_extraEquipment>
+        <additionalPersonnel></additionalPersonnel>
+        <generalComments>nil</generalComments>
+    </timeSheetInfo>
+    <finalSubmission>true</finalSubmission>
+</ns2:Fill_Out_AD_Report>

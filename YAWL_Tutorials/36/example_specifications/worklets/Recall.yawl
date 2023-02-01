@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<specificationSet xmlns="http://www.yawlfoundation.org/yawlschema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="3.0" xsi:schemaLocation="http://www.yawlfoundation.org/yawlschema http://www.yawlfoundation.org/yawlschema/YAWL_Schema3.0.xsd">
+  <specification uri="Recall">
+    <documentation>No description provided</documentation>
+    <metaData>
+      <creator>apika</creator>
+      <description>No description provided</description>
+      <coverage>4.1.720</coverage>
+      <version>0.1</version>
+      <persistent>false</persistent>
+      <identifier>UID_2621d58e-742a-47ff-91ee-1da86b984a72</identifier>
+    </metaData>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+    <decomposition id="Net" isRootNet="true" xsi:type="NetFactsType">
+      <processControlElements>
+        <inputCondition id="InputCondition">
+          <flowsInto>
+            <nextElementRef id="Recall_Notification" />
+          </flowsInto>
+        </inputCondition>
+        <task id="Recall_Notification">
+          <name>Recall_Notification</name>
+          <flowsInto>
+            <nextElementRef id="OutputCondition" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <resourcing>
+            <offer initiator="user" />
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Recall_Notification" />
+        </task>
+        <outputCondition id="OutputCondition" />
+      </processControlElements>
+    </decomposition>
+    <decomposition id="Recall_Notification" xsi:type="WebServiceGatewayFactsType">
+      <externalInteraction>automated</externalInteraction>
+    </decomposition>
+  </specification>
+  <layout>
+    <locale language="en" country="AU"/>
+    <specification id="Recall" defaultBgColor="-526351">
+      <size w="63" h="33"/>
+      <net id="Net" bgColor="-526351">
+        <bounds x="0" y="0" w="1227" h="473"/>
+        <frame x="0" y="0" w="1230" h="476"/>
+        <viewport x="0" y="0" w="1230" h="476"/>
+        <vertex id="OutputCondition">
+          <attributes>
+            <bounds x="340" y="48" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <vertex id="InputCondition">
+          <attributes>
+            <bounds x="32" y="48" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <container id="Recall_Notification">
+          <vertex>
+            <attributes>
+              <bounds x="184" y="48" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="144" y="80" w="113" h="20"/>
+            </attributes>
+          </label>
+        </container>
+        <flow source="InputCondition" target="Recall_Notification">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="63" y="59.5"/>
+              <value x="184" y="63.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Recall_Notification" target="OutputCondition">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="215" y="63.5"/>
+              <value x="340" y="59.5"/>
+            </points>
+          </attributes>
+        </flow>
+      </net>
+    </specification>
+  </layout>
+</specificationSet>

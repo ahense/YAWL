@@ -1,0 +1,1767 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<specificationSet xmlns="http://www.yawlfoundation.org/yawlschema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="3.0" xsi:schemaLocation="http://www.yawlfoundation.org/yawlschema http://www.yawlfoundation.org/yawlschema/YAWL_Schema3.0.xsd">
+  <specification uri="Add_Terminal">
+    <documentation>No description provided</documentation>
+    <metaData>
+      <creator>apika</creator>
+      <description>No description provided</description>
+      <coverage>4.1.720</coverage>
+      <version>0.1</version>
+      <persistent>false</persistent>
+      <identifier>UID_aff4b554-a043-492f-859c-87cce7e200dc</identifier>
+    </metaData>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:simpleType name="Terminal">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="POS" />
+          <xs:enumeration value="ATM" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="Urgency">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Urgent" />
+          <xs:enumeration value="Normal" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="Quality">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="No_Issues" />
+          <xs:enumeration value="Minor_Issue" />
+          <xs:enumeration value="Major_Issue" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="Currency">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="AUD" />
+          <xs:enumeration value="USD" />
+          <xs:enumeration value="EURO" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:complexType name="Hopper">
+        <xs:sequence>
+          <xs:element name="Currency" type="Currency" />
+          <xs:element name="Amount" type="xs:integer" default="0" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="Hoppers">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="4" name="Hopper" type="Hopper" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <decomposition id="Net" isRootNet="true" xsi:type="NetFactsType">
+      <localVariable>
+        <index>0</index>
+        <name>location</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue />
+      </localVariable>
+      <localVariable>
+        <index>1</index>
+        <name>terminalModel</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue />
+      </localVariable>
+      <localVariable>
+        <index>2</index>
+        <name>terminal</name>
+        <type>Terminal</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue />
+      </localVariable>
+      <localVariable>
+        <index>3</index>
+        <name>urgency</name>
+        <type>Urgency</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue />
+      </localVariable>
+      <localVariable>
+        <index>4</index>
+        <name>formCorrect</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>false</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>5</index>
+        <name>informationRequest</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue />
+      </localVariable>
+      <localVariable>
+        <index>6</index>
+        <name>configurationCorrect</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>false</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>7</index>
+        <name>hoppers</name>
+        <type>Hoppers</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>&lt;Hopper&gt;
+    &lt;Currency&gt;AUD&lt;/Currency&gt;
+    &lt;Amount&gt;100&lt;/Amount&gt;
+ &lt;/Hopper&gt;</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>8</index>
+        <name>quality</name>
+        <type>Quality</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>No_Issues</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>9</index>
+        <name>configurationInformation</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue />
+      </localVariable>
+      <localVariable>
+        <index>10</index>
+        <name>report</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue />
+      </localVariable>
+      <localVariable>
+        <index>11</index>
+        <name>budget</name>
+        <type>double</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>0</initialValue>
+      </localVariable>
+      <processControlElements>
+        <inputCondition id="InputCondition">
+          <flowsInto>
+            <nextElementRef id="Receive_Request" />
+          </flowsInto>
+        </inputCondition>
+        <task id="Receive_Request">
+          <name>Receive_Request</name>
+          <flowsInto>
+            <nextElementRef id="Check_Form" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;hoppers&gt;{/Receive_Request/Hoppers/*}&lt;/hoppers&gt;" />
+              <mapsTo>hoppers</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;location&gt;{/Receive_Request/Location/text()}&lt;/location&gt;" />
+              <mapsTo>location</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;terminal&gt;{/Receive_Request/Terminal/text()}&lt;/terminal&gt;" />
+              <mapsTo>terminal</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;urgency&gt;{/Receive_Request/Urgency/text()}&lt;/urgency&gt;" />
+              <mapsTo>urgency</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;terminalModel&gt;{/Receive_Request/Terminal_Model/text()}&lt;/terminalModel&gt;" />
+              <mapsTo>terminalModel</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-d247d0c1-7012-4cba-aeea-d1244bacbcbd</role>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Receive_Request" />
+        </task>
+        <task id="Check_Form">
+          <name>Check_Form</name>
+          <flowsInto>
+            <nextElementRef id="Network_Access" />
+            <predicate>/Net/terminal = 'ATM' and /Net/formCorrect = true()</predicate>
+          </flowsInto>
+          <flowsInto>
+            <nextElementRef id="Request_Additional_Information" />
+            <predicate>/Net/formCorrect = false()</predicate>
+            <isDefaultFlow />
+          </flowsInto>
+          <flowsInto>
+            <nextElementRef id="Configure_Hoppers" />
+            <predicate>/Net/terminal = 'ATM' and /Net/formCorrect = true()</predicate>
+          </flowsInto>
+          <flowsInto>
+            <nextElementRef id="Configure_Info" />
+            <predicate>/Net/formCorrect = true()</predicate>
+          </flowsInto>
+          <join code="xor" />
+          <split code="or" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Terminal_Model&gt;{/Net/terminalModel/text()}&lt;/Terminal_Model&gt;" />
+              <mapsTo>Terminal_Model</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Urgency&gt;{/Net/urgency/text()}&lt;/Urgency&gt;" />
+              <mapsTo>Urgency</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Terminal&gt;{/Net/terminal/text()}&lt;/Terminal&gt;" />
+              <mapsTo>Terminal</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Hoppers&gt;{/Net/hoppers/*}&lt;/Hoppers&gt;" />
+              <mapsTo>Hoppers</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Location&gt;{/Net/location/text()}&lt;/Location&gt;" />
+              <mapsTo>Location</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;formCorrect&gt;{/Check_Form/Form_Is_Correct/text()}&lt;/formCorrect&gt;" />
+              <mapsTo>formCorrect</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-d247d0c1-7012-4cba-aeea-d1244bacbcbd</role>
+                </initialSet>
+              </distributionSet>
+              <familiarParticipant taskID="Receive_Request" />
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Check_Form" />
+        </task>
+        <task id="Configure_Hoppers" xsi:type="MultipleInstanceExternalTaskFactsType">
+          <name>Configure_Hoppers</name>
+          <flowsInto>
+            <nextElementRef id="T_2" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <configuration>
+            <join>
+              <port value="blocked">
+                <flowSource id="Check_Form" />
+              </port>
+            </join>
+            <split>
+              <port value="activated">
+                <flowDestination id="T_2" />
+              </port>
+            </split>
+          </configuration>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-d247d0c1-7012-4cba-aeea-d1244bacbcbd</role>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Configure_Hoppers" />
+          <minimum>1</minimum>
+          <maximum>4</maximum>
+          <threshold>4</threshold>
+          <creationMode code="static" />
+          <miDataInput>
+            <expression query="/Net/hoppers" />
+            <splittingExpression query="for $s in /hoppers/* return &lt;hoppers_Item&gt;{$s/*}&lt;/hoppers_Item&gt;" />
+            <formalInputParam>hoppers_Item</formalInputParam>
+          </miDataInput>
+          <miDataOutput>
+            <formalOutputExpression query="&lt;Hopper&gt;{/Configure_Hoppers/hoppers_Item/*}&lt;/Hopper&gt;" />
+            <outputJoiningExpression query="&lt;hoppers&gt;{for $j in /Configure_Hoppers/Hopper return $j}&lt;/hoppers&gt;" />
+            <resultAppliedToLocalVariable>hoppers</resultAppliedToLocalVariable>
+          </miDataOutput>
+        </task>
+        <task id="Configure_Info">
+          <name>Configure_Info</name>
+          <flowsInto>
+            <nextElementRef id="Load_Keys" />
+            <isDefaultFlow />
+          </flowsInto>
+          <join code="and" />
+          <split code="xor" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;terminalModel&gt;{/Net/terminalModel/text()}&lt;/terminalModel&gt;" />
+              <mapsTo>terminalModel</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;location&gt;{/Net/location/text()}&lt;/location&gt;" />
+              <mapsTo>location</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;terminalModel&gt;{/Configure_Info/terminalModel/text()}&lt;/terminalModel&gt;" />
+              <mapsTo>terminalModel</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;location&gt;{/Configure_Info/location/text()}&lt;/location&gt;" />
+              <mapsTo>location</mapsTo>
+            </mapping>
+          </completedMappings>
+          <decomposesTo id="Configure_Info" />
+        </task>
+        <task id="Network_Access">
+          <name>Network_Access</name>
+          <flowsInto>
+            <nextElementRef id="Load_Keys" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <configuration>
+            <join>
+              <port value="blocked">
+                <flowSource id="Check_Form" />
+              </port>
+            </join>
+            <split>
+              <port value="activated">
+                <flowDestination id="Load_Keys" />
+              </port>
+            </split>
+          </configuration>
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Terminal_Model&gt;{/Net/terminalModel/text()}&lt;/Terminal_Model&gt;" />
+              <mapsTo>Terminal_Model</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Location&gt;{/Net/location/text()}&lt;/Location&gt;" />
+              <mapsTo>Location</mapsTo>
+            </mapping>
+          </startingMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-761268aa-e47e-40eb-a68a-869e01bd13df</role>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Network_Access" />
+        </task>
+        <task id="Request_Additional_Information">
+          <name>Request_Additional_Information</name>
+          <flowsInto>
+            <nextElementRef id="Receive_Information" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Terminal_Model&gt;{/Net/terminalModel/text()}&lt;/Terminal_Model&gt;" />
+              <mapsTo>Terminal_Model</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Urgency&gt;{/Net/urgency/text()}&lt;/Urgency&gt;" />
+              <mapsTo>Urgency</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Terminal&gt;{/Net/terminal/text()}&lt;/Terminal&gt;" />
+              <mapsTo>Terminal</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Hoppers&gt;{/Net/hoppers/*}&lt;/Hoppers&gt;" />
+              <mapsTo>Hoppers</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Location&gt;{/Net/location/text()}&lt;/Location&gt;" />
+              <mapsTo>Location</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;informationRequest&gt;{/Request_Additional_Information/Additional_Information/text()}&lt;/informationRequest&gt;" />
+              <mapsTo>informationRequest</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-d247d0c1-7012-4cba-aeea-d1244bacbcbd</role>
+                </initialSet>
+              </distributionSet>
+              <familiarParticipant taskID="Check_Form" />
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Request_Additional_Information" />
+        </task>
+        <task id="Load_Keys">
+          <name>Load_Keys</name>
+          <flowsInto>
+            <nextElementRef id="Quality_Check" />
+            <isDefaultFlow />
+          </flowsInto>
+          <flowsInto>
+            <nextElementRef id="Load_ATM" />
+            <predicate ordering="0">/Net/terminal = 'ATM'</predicate>
+          </flowsInto>
+          <join code="or" />
+          <split code="xor" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Terminal_Model&gt;{/Net/terminalModel/text()}&lt;/Terminal_Model&gt;" />
+              <mapsTo>Terminal_Model</mapsTo>
+            </mapping>
+          </startingMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-7a4ac8cd-53ac-4f20-9d2c-f2f702909b24</role>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="system">
+              <allocator>
+                <name>CheapestResource</name>
+              </allocator>
+            </allocate>
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Load_Keys" />
+        </task>
+        <task id="Receive_Information">
+          <name>Receive_Information</name>
+          <flowsInto>
+            <nextElementRef id="Check_Form" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet />
+              </distributionSet>
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Receive_Information" />
+        </task>
+        <task id="T_2">
+          <flowsInto>
+            <nextElementRef id="Load_Keys" />
+            <isDefaultFlow />
+          </flowsInto>
+          <flowsInto>
+            <nextElementRef id="Check_Hopper_Configuration" />
+            <predicate ordering="0">/Net/urgency = 'Normal'</predicate>
+          </flowsInto>
+          <join code="xor" />
+          <split code="xor" />
+          <resourcing>
+            <offer initiator="user" />
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+        </task>
+        <task id="Check_Hopper_Configuration">
+          <name>Check_Hopper_Configuration</name>
+          <flowsInto>
+            <nextElementRef id="Fix_Hopper_Configuration" />
+            <predicate ordering="0">/Net/configurationCorrect = false()</predicate>
+          </flowsInto>
+          <flowsInto>
+            <nextElementRef id="Load_Keys" />
+            <isDefaultFlow />
+          </flowsInto>
+          <join code="xor" />
+          <split code="xor" />
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;configurationCorrect&gt;{/Check_HopperConfiguration/Configuration_Is_Correct/text()}&lt;/configurationCorrect&gt;" />
+              <mapsTo>configurationCorrect</mapsTo>
+            </mapping>
+          </completedMappings>
+          <timer>
+            <trigger>OnExecuting</trigger>
+            <duration>PT5S</duration>
+          </timer>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-d247d0c1-7012-4cba-aeea-d1244bacbcbd</role>
+                </initialSet>
+                <constraints>
+                  <constraint>
+                    <name>SeparationOfDuties</name>
+                    <params>
+                      <param>
+                        <key>familiarTask</key>
+                        <value>Configure_Hoppers</value>
+                      </param>
+                    </params>
+                  </constraint>
+                </constraints>
+              </distributionSet>
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Check_HopperConfiguration" />
+        </task>
+        <task id="Load_ATM">
+          <name>Load_ATM</name>
+          <flowsInto>
+            <nextElementRef id="Quality_Check" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <configuration>
+            <join>
+              <port value="blocked">
+                <flowSource id="Load_Keys" />
+              </port>
+            </join>
+            <split>
+              <port value="activated">
+                <flowDestination id="Quality_Check" />
+              </port>
+            </split>
+          </configuration>
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Terminal_Model&gt;{/Net/terminalModel/text()}&lt;/Terminal_Model&gt;" />
+              <mapsTo>Terminal_Model</mapsTo>
+            </mapping>
+          </startingMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-d247d0c1-7012-4cba-aeea-d1244bacbcbd</role>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Load_ATM" />
+        </task>
+        <task id="Quality_Check">
+          <name>Quality_Check</name>
+          <flowsInto>
+            <nextElementRef id="Fix_Issues" />
+            <predicate>/Net/quality/text()='Major_Issue' or /Net/quality/text()='Minor_Issue'</predicate>
+          </flowsInto>
+          <flowsInto>
+            <nextElementRef id="Update_Budget" />
+            <predicate>cost() &gt; 50</predicate>
+          </flowsInto>
+          <flowsInto>
+            <nextElementRef id="Complete_Request" />
+            <predicate>/Net/quality/text()='No_Issues'</predicate>
+            <isDefaultFlow />
+          </flowsInto>
+          <join code="xor" />
+          <split code="or" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Terminal_Model&gt;{/Net/terminalModel/text()}&lt;/Terminal_Model&gt;" />
+              <mapsTo>Terminal_Model</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Urgency&gt;{/Net/urgency/text()}&lt;/Urgency&gt;" />
+              <mapsTo>Urgency</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Terminal&gt;{/Net/terminal/text()}&lt;/Terminal&gt;" />
+              <mapsTo>Terminal</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Hoppers&gt;{/Net/hoppers/*}&lt;/Hoppers&gt;" />
+              <mapsTo>Hoppers</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Location&gt;{/Net/location/text()}&lt;/Location&gt;" />
+              <mapsTo>Location</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;quality&gt;{/Quality_Check/Quality/text()}&lt;/quality&gt;" />
+              <mapsTo>quality</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;report&gt;{/Quality_Check/Report/text()}&lt;/report&gt;" />
+              <mapsTo>report</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-d247d0c1-7012-4cba-aeea-d1244bacbcbd</role>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Quality_Check" />
+        </task>
+        <task id="Complete_Request">
+          <name>Complete_Request</name>
+          <flowsInto>
+            <nextElementRef id="OutputCondition" />
+            <isDefaultFlow />
+          </flowsInto>
+          <join code="or" />
+          <split code="xor" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Terminal_Model&gt;{/Net/terminalModel/text()}&lt;/Terminal_Model&gt;" />
+              <mapsTo>Terminal_Model</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Terminal&gt;{/Net/terminal/text()}&lt;/Terminal&gt;" />
+              <mapsTo>Terminal</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Location&gt;{/Net/location/text()}&lt;/Location&gt;" />
+              <mapsTo>Location</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;configurationInformation&gt;{/Complete_Request/Configuration_Information/text()}&lt;/configurationInformation&gt;" />
+              <mapsTo>configurationInformation</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-d247d0c1-7012-4cba-aeea-d1244bacbcbd</role>
+                </initialSet>
+              </distributionSet>
+              <familiarParticipant taskID="Receive_Request" />
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Complete_Request" />
+        </task>
+        <task id="Fix_Hopper_Configuration">
+          <name>Fix_Hopper_Configuration</name>
+          <flowsInto>
+            <nextElementRef id="Load_Keys" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Hoppers&gt;{/Net/hoppers/*}&lt;/Hoppers&gt;" />
+              <mapsTo>Hoppers</mapsTo>
+            </mapping>
+          </startingMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-d247d0c1-7012-4cba-aeea-d1244bacbcbd</role>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Fix_HopperConfiguration" />
+        </task>
+        <task id="Fix_Issues">
+          <name>Fix_Issues</name>
+          <flowsInto>
+            <nextElementRef id="Complete_Request" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Urgency&gt;{/Net/urgency/text()}&lt;/Urgency&gt;" />
+              <mapsTo>Urgency</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Report&gt;{/Net/report/text()}&lt;/Report&gt;" />
+              <mapsTo>Report</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Quality&gt;{/Net/quality/text()}&lt;/Quality&gt;" />
+              <mapsTo>Quality</mapsTo>
+            </mapping>
+          </startingMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet />
+              </distributionSet>
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Fix_Issues" />
+        </task>
+        <task id="Update_Budget">
+          <name>Update_Budget</name>
+          <flowsInto>
+            <nextElementRef id="Complete_Request" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;budget&gt;{/HighCostNotification/Budget/text()}&lt;/budget&gt;" />
+              <mapsTo>budget</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-d247d0c1-7012-4cba-aeea-d1244bacbcbd</role>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="HighCostNotification" />
+        </task>
+        <outputCondition id="OutputCondition" />
+      </processControlElements>
+    </decomposition>
+    <decomposition id="Configure_Info" xsi:type="NetFactsType">
+      <inputParam>
+        <index>0</index>
+        <name>location</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>1</index>
+        <name>terminalModel</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>0</index>
+        <name>location</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <outputParam>
+        <index>1</index>
+        <name>terminalModel</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <processControlElements>
+        <inputCondition id="InputCondition_1">
+          <flowsInto>
+            <nextElementRef id="T" />
+          </flowsInto>
+        </inputCondition>
+        <task id="T">
+          <flowsInto>
+            <nextElementRef id="Configure_Location" />
+          </flowsInto>
+          <flowsInto>
+            <nextElementRef id="Configure_Model" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <resourcing>
+            <offer initiator="user" />
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+        </task>
+        <task id="Configure_Location">
+          <name>Configure_Location</name>
+          <flowsInto>
+            <nextElementRef id="T_1" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Location&gt;{/Configure_Info/location/text()}&lt;/Location&gt;" />
+              <mapsTo>Location</mapsTo>
+            </mapping>
+          </startingMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-d247d0c1-7012-4cba-aeea-d1244bacbcbd</role>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Configure_Location" />
+        </task>
+        <task id="Configure_Model">
+          <name>Configure_Model</name>
+          <flowsInto>
+            <nextElementRef id="T_1" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Terminal_Model&gt;{/Configure_Info/terminalModel/text()}&lt;/Terminal_Model&gt;" />
+              <mapsTo>Terminal_Model</mapsTo>
+            </mapping>
+          </startingMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-d247d0c1-7012-4cba-aeea-d1244bacbcbd</role>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Configure_Model" />
+        </task>
+        <task id="T_1">
+          <flowsInto>
+            <nextElementRef id="OutputCondition_1" />
+          </flowsInto>
+          <join code="and" />
+          <split code="and" />
+          <resourcing>
+            <offer initiator="user" />
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+        </task>
+        <outputCondition id="OutputCondition_1" />
+      </processControlElements>
+    </decomposition>
+    <decomposition id="Check_Form" xsi:type="WebServiceGatewayFactsType">
+      <inputParam>
+        <index>0</index>
+        <name>Urgency</name>
+        <type>Urgency</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>1</index>
+        <name>Terminal</name>
+        <type>Terminal</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam label="Terminal Model">
+        <index>2</index>
+        <name>Terminal_Model</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>3</index>
+        <name>Location</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>4</index>
+        <name>Hoppers</name>
+        <type>Hoppers</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam label="The form is correct">
+        <index>5</index>
+        <name>Form_Is_Correct</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Check_HopperConfiguration" xsi:type="WebServiceGatewayFactsType">
+      <outputParam label="Hopper configuration is correct">
+        <index>0</index>
+        <name>Configuration_Is_Correct</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue>true</defaultValue>
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Complete_Request" xsi:type="WebServiceGatewayFactsType">
+      <inputParam>
+        <index>0</index>
+        <name>Terminal</name>
+        <type>Terminal</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam label="Terminal Model">
+        <index>1</index>
+        <name>Terminal_Model</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>2</index>
+        <name>Location</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam label="Configuration parameters">
+        <index>3</index>
+        <name>Configuration_Information</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Configure_Hoppers" xsi:type="WebServiceGatewayFactsType">
+      <inputParam>
+        <index>0</index>
+        <name>hoppers_Item</name>
+        <type>Hopper</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>0</index>
+        <name>hoppers_Item</name>
+        <type>Hopper</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Configure_Location" xsi:type="WebServiceGatewayFactsType">
+      <inputParam>
+        <index>0</index>
+        <name>Location</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Configure_Model" xsi:type="WebServiceGatewayFactsType">
+      <inputParam label="Terminal Model">
+        <index>0</index>
+        <name>Terminal_Model</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Fix_HopperConfiguration" xsi:type="WebServiceGatewayFactsType">
+      <inputParam>
+        <index>0</index>
+        <name>Hoppers</name>
+        <type>Hoppers</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Fix_Issues" xsi:type="WebServiceGatewayFactsType">
+      <inputParam>
+        <index>0</index>
+        <name>Quality</name>
+        <type>Quality</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>1</index>
+        <name>Report</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>2</index>
+        <name>Urgency</name>
+        <type>Urgency</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <yawlService id="http://localhost:8080/workletService/ib">
+        <documentation>the worklet service</documentation>
+      </yawlService>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="HighCostNotification" xsi:type="WebServiceGatewayFactsType">
+      <outputParam>
+        <index>0</index>
+        <name>Budget</name>
+        <type>double</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Load_ATM" xsi:type="WebServiceGatewayFactsType">
+      <inputParam label="Terminal Model">
+        <index>0</index>
+        <name>Terminal_Model</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Load_Keys" xsi:type="WebServiceGatewayFactsType">
+      <inputParam label="Terminal Model">
+        <index>0</index>
+        <name>Terminal_Model</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Network_Access" xsi:type="WebServiceGatewayFactsType">
+      <inputParam>
+        <index>0</index>
+        <name>Location</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam label="Terminal Model">
+        <index>1</index>
+        <name>Terminal_Model</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Quality_Check" xsi:type="WebServiceGatewayFactsType">
+      <inputParam>
+        <index>0</index>
+        <name>Urgency</name>
+        <type>Urgency</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>1</index>
+        <name>Terminal</name>
+        <type>Terminal</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam label="Terminal Model">
+        <index>2</index>
+        <name>Terminal_Model</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>3</index>
+        <name>Location</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>4</index>
+        <name>Hoppers</name>
+        <type>Hoppers</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>5</index>
+        <name>Report</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <outputParam>
+        <index>6</index>
+        <name>Quality</name>
+        <type>Quality</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Receive_Information" xsi:type="WebServiceGatewayFactsType">
+      <externalInteraction>automated</externalInteraction>
+    </decomposition>
+    <decomposition id="Receive_Request" xsi:type="WebServiceGatewayFactsType">
+      <outputParam>
+        <index>0</index>
+        <name>Urgency</name>
+        <type>Urgency</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <outputParam>
+        <index>1</index>
+        <name>Terminal</name>
+        <type>Terminal</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <outputParam>
+        <index>2</index>
+        <name>Location</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <outputParam label="Terminal Model">
+        <index>3</index>
+        <name>Terminal_Model</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <outputParam>
+        <index>4</index>
+        <name>Hoppers</name>
+        <type>Hoppers</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Request_Additional_Information" xsi:type="WebServiceGatewayFactsType">
+      <inputParam>
+        <index>0</index>
+        <name>Urgency</name>
+        <type>Urgency</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>1</index>
+        <name>Terminal</name>
+        <type>Terminal</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam label="Terminal Model">
+        <index>2</index>
+        <name>Terminal_Model</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>3</index>
+        <name>Location</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>4</index>
+        <name>Hoppers</name>
+        <type>Hoppers</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam label="Additional Information Needed">
+        <index>5</index>
+        <name>Additional_Information</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+  </specification>
+  <layout>
+    <locale language="en" country="AU"/>
+    <specification id="Add_Terminal" defaultBgColor="-526351">
+      <size w="63" h="33"/>
+      <net id="Configure_Info">
+        <bounds x="0" y="0" w="1227" h="601"/>
+        <frame x="0" y="0" w="1230" h="604"/>
+        <viewport x="0" y="0" w="1230" h="604"/>
+        <vertex id="InputCondition_1">
+          <attributes>
+            <bounds x="20" y="108" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <vertex id="OutputCondition_1">
+          <attributes>
+            <bounds x="420" y="108" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <container id="Configure_Location">
+          <vertex>
+            <attributes>
+              <bounds x="204" y="48" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="162" y="80" w="117" h="20"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="T">
+          <vertex>
+            <attributes>
+              <bounds x="92" y="108" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <decorator type="AND_split">
+            <position>13</position>
+            <attributes>
+              <bounds x="123" y="108" w="11" h="32"/>
+            </attributes>
+          </decorator>
+        </container>
+        <container id="Configure_Model">
+          <vertex>
+            <attributes>
+              <bounds x="208" y="156" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="173" y="188" w="103" h="20"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="T_1">
+          <vertex>
+            <attributes>
+              <bounds x="344" y="108" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <decorator type="AND_join">
+            <position>12</position>
+            <attributes>
+              <bounds x="334" y="108" w="11" h="32"/>
+            </attributes>
+          </decorator>
+        </container>
+        <flow source="T" target="Configure_Model">
+          <ports in="2" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="Configure_Location" target="T_1">
+          <ports in="13" out="2"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="Configure_Model" target="T_1">
+          <ports in="13" out="2"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="T" target="Configure_Location">
+          <ports in="2" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="InputCondition_1" target="T">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="T_1" target="OutputCondition_1">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+      </net>
+      <net id="Net">
+        <bounds x="0" y="0" w="1227" h="601"/>
+        <frame x="0" y="0" w="1230" h="604"/>
+        <viewport x="0" y="0" w="1230" h="604"/>
+        <vertex id="OutputCondition">
+          <attributes>
+            <bounds x="1,136" y="212" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <vertex id="InputCondition">
+          <attributes>
+            <bounds x="28" y="212" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <container id="Load_ATM">
+          <vertex>
+            <attributes>
+              <bounds x="760" y="120" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="728" y="152" w="96" h="20"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="Configure_Hoppers">
+          <vertex>
+            <attributes>
+              <bounds x="356" y="112" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="316" y="144" w="116" h="20"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="Check_Form">
+          <vertex>
+            <attributes>
+              <bounds x="224" y="212" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="192" y="244" w="96" h="20"/>
+            </attributes>
+          </label>
+          <decorator type="OR_split">
+            <position>13</position>
+            <attributes>
+              <bounds x="255" y="212" w="11" h="32"/>
+            </attributes>
+          </decorator>
+          <decorator type="XOR_join">
+            <position>12</position>
+            <attributes>
+              <bounds x="214" y="212" w="11" h="32"/>
+            </attributes>
+          </decorator>
+        </container>
+        <container id="T_2">
+          <vertex>
+            <attributes>
+              <bounds x="424" y="80" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <decorator type="XOR_split">
+            <position>13</position>
+            <attributes>
+              <bounds x="455" y="80" w="11" h="32"/>
+            </attributes>
+          </decorator>
+        </container>
+        <container id="Receive_Information">
+          <vertex>
+            <attributes>
+              <bounds x="104" y="100" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="60" y="132" w="124" h="20"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="Network_Access">
+          <vertex>
+            <attributes>
+              <bounds x="424" y="304" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="388" y="336" w="104" h="20"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="Request_Additional_Information">
+          <vertex>
+            <attributes>
+              <bounds x="248" y="48" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="168" y="80" w="191" h="20"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="Update_Budget">
+          <vertex>
+            <attributes>
+              <bounds x="972" y="316" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="940" y="348" w="96" h="20"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="Complete_Request">
+          <vertex>
+            <attributes>
+              <bounds x="1,056" y="212" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="1,012" y="244" w="112" h="20"/>
+            </attributes>
+          </label>
+          <decorator type="OR_join">
+            <position>12</position>
+            <attributes>
+              <bounds x="1,046" y="212" w="11" h="32"/>
+            </attributes>
+          </decorator>
+        </container>
+        <container id="Fix_Hopper_Configuration">
+          <vertex>
+            <attributes>
+              <bounds x="640" y="72" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="578" y="104" w="157" h="20"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="Configure_Info">
+          <vertex>
+            <attributes>
+              <bounds x="416" y="212" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="384" y="244" w="96" h="20"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="Quality_Check">
+          <vertex>
+            <attributes>
+              <bounds x="872" y="212" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="840" y="244" w="96" h="20"/>
+            </attributes>
+          </label>
+          <decorator type="OR_split">
+            <position>13</position>
+            <attributes>
+              <bounds x="903" y="212" w="11" h="32"/>
+            </attributes>
+          </decorator>
+          <decorator type="XOR_join">
+            <position>12</position>
+            <attributes>
+              <bounds x="862" y="212" w="11" h="32"/>
+            </attributes>
+          </decorator>
+        </container>
+        <container id="Fix_Issues">
+          <vertex>
+            <attributes>
+              <bounds x="968" y="116" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="936" y="148" w="96" h="20"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="Receive_Request">
+          <vertex>
+            <attributes>
+              <bounds x="112" y="212" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="76" y="244" w="104" h="20"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="Check_Hopper_Configuration">
+          <vertex>
+            <attributes>
+              <bounds x="532" y="24" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="464" y="56" w="177" h="20"/>
+            </attributes>
+          </label>
+          <decorator type="XOR_split">
+            <position>13</position>
+            <attributes>
+              <bounds x="563" y="24" w="11" h="32"/>
+            </attributes>
+          </decorator>
+        </container>
+        <container id="Load_Keys">
+          <vertex>
+            <attributes>
+              <bounds x="668" y="212" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="636" y="244" w="96" h="20"/>
+            </attributes>
+          </label>
+          <decorator type="XOR_split">
+            <position>13</position>
+            <attributes>
+              <bounds x="699" y="212" w="11" h="32"/>
+            </attributes>
+          </decorator>
+          <decorator type="OR_join">
+            <position>12</position>
+            <attributes>
+              <bounds x="658" y="212" w="11" h="32"/>
+            </attributes>
+          </decorator>
+        </container>
+        <flow source="T_2" target="Check_Hopper_Configuration">
+          <ports in="2" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="Check_Form" target="Configure_Info">
+          <ports in="2" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="Load_ATM" target="Quality_Check">
+          <ports in="13" out="2"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="827" y="123.5"/>
+              <value x="894" y="227.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Receive_Information" target="Check_Form">
+          <ports in="11" out="3"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="119.5" y="131"/>
+              <value x="214" y="235.25"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Check_Form" target="Network_Access">
+          <ports in="2" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="281" y="223.5"/>
+              <value x="416" y="159.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Load_Keys" target="Load_ATM">
+          <ports in="2" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="673" y="227.5"/>
+              <value x="796" y="123.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Check_Form" target="Configure_Hoppers">
+          <ports in="2" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="InputCondition" target="Receive_Request">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="59" y="227.5"/>
+              <value x="128" y="223.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Network_Access" target="Load_Keys">
+          <ports in="13" out="2"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="447" y="159.5"/>
+              <value x="618" y="203.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Quality_Check" target="Complete_Request">
+          <ports in="2" out="2"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="945" y="227.5"/>
+              <value x="1,050" y="227.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Check_Hopper_Configuration" target="Fix_Hopper_Configuration">
+          <ports in="2" out="10"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="573" y="39.5"/>
+              <value x="656" y="40"/>
+              <value x="655.5" y="72"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Load_Keys" target="Quality_Check">
+          <ports in="2" out="2"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="673" y="227.5"/>
+              <value x="894" y="227.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Configure_Info" target="Load_Keys">
+          <ports in="13" out="2"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="Quality_Check" target="Update_Budget">
+          <ports in="2" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="Fix_Issues" target="Complete_Request">
+          <ports in="13" out="2"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="1,019" y="115.5"/>
+              <value x="1,050" y="227.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Fix_Hopper_Configuration" target="Load_Keys">
+          <ports in="11" out="3"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="Check_Hopper_Configuration" target="Load_Keys">
+          <ports in="2" out="3"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="Complete_Request" target="OutputCondition">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="1,091" y="227.5"/>
+              <value x="1,156" y="227.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Configure_Hoppers" target="T_2">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="Receive_Request" target="Check_Form">
+          <ports in="13" out="2"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="159" y="227.5"/>
+              <value x="230" y="223.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Update_Budget" target="Complete_Request">
+          <ports in="13" out="2"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="Check_Form" target="Request_Additional_Information">
+          <ports in="2" out="11"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="281" y="223.5"/>
+              <value x="343.5" y="75"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="T_2" target="Load_Keys">
+          <ports in="2" out="3"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="Request_Additional_Information" target="Receive_Information">
+          <ports in="12" out="10"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="248" y="63.5"/>
+              <value x="120" y="64"/>
+              <value x="119.5" y="100"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Quality_Check" target="Fix_Issues">
+          <ports in="2" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="945" y="227.5"/>
+              <value x="988" y="115.5"/>
+            </points>
+          </attributes>
+        </flow>
+      </net>
+    </specification>
+  </layout>
+</specificationSet>

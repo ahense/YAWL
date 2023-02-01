@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<specificationSet xmlns="http://www.yawlfoundation.org/yawlschema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4.0" xsi:schemaLocation="http://www.yawlfoundation.org/yawlschema http://www.yawlfoundation.org/yawlschema/YAWL_Schema4.0.xsd">
+  <specification uri="Marriage">
+    <documentation>Demo of XPATH in complex elements</documentation>
+    <metaData>
+      <title>Marriage</title>
+      <creator>A. Hense</creator>
+      <description>Demo of XPATH in complex elements</description>
+      <coverage>4.3.1.771</coverage>
+      <version>0.1</version>
+      <persistent>false</persistent>
+      <identifier>UID_5dba4274-1752-418b-9612-69e202c21879</identifier>
+    </metaData>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:complexType name="PersonType">
+        <xs:sequence>
+          <xs:element name="First_name" type="xs:string" />
+          <xs:element name="Last_name" type="xs:string" />
+          <xs:element name="Address" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <decomposition id="Net" isRootNet="true" xsi:type="NetFactsType">
+      <localVariable>
+        <index>0</index>
+        <name>Husband</name>
+        <type>PersonType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>&lt;First_name&gt;John&lt;/First_name&gt;
+ &lt;Last_name&gt;Doe&lt;/Last_name&gt;
+ &lt;Address&gt;Paris&lt;/Address&gt;</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>1</index>
+        <name>Bride</name>
+        <type>PersonType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>&lt;First_name&gt;Jane&lt;/First_name&gt;
+ &lt;Last_name&gt;Joplin&lt;/Last_name&gt;
+ &lt;Address&gt;Port Arthur&lt;/Address&gt;</initialValue>
+      </localVariable>
+      <processControlElements>
+        <inputCondition id="InputCondition">
+          <flowsInto>
+            <nextElementRef id="Enter_names" />
+          </flowsInto>
+        </inputCondition>
+        <task id="Enter_names">
+          <name>Enter names</name>
+          <flowsInto>
+            <nextElementRef id="Do_marriage" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Husband&gt;{/Net/Husband/*}&lt;/Husband&gt;" />
+              <mapsTo>Husband</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Bride&gt;{/Net/Bride/*}&lt;/Bride&gt;" />
+              <mapsTo>Bride</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;Bride&gt;{/Enter_names/Bride/*}&lt;/Bride&gt;" />
+              <mapsTo>Bride</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Husband&gt;{/Enter_names/Husband/*}&lt;/Husband&gt;" />
+              <mapsTo>Husband</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="user" />
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Enter_names" />
+        </task>
+        <task id="Do_marriage">
+          <name>Do marriage</name>
+          <flowsInto>
+            <nextElementRef id="Check_names" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <resourcing>
+            <offer initiator="user" />
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Do_marriage" />
+        </task>
+        <task id="Check_names">
+          <name>Check names</name>
+          <flowsInto>
+            <nextElementRef id="OutputCondition" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Husband&gt;{/Net/Husband/*}&lt;/Husband&gt;" />
+              <mapsTo>Husband</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Bride&gt;{/Net/Bride/*}&lt;/Bride&gt;" />
+              <mapsTo>Bride</mapsTo>
+            </mapping>
+          </startingMappings>
+          <resourcing>
+            <offer initiator="user" />
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Check_names" />
+        </task>
+        <outputCondition id="OutputCondition" />
+      </processControlElements>
+    </decomposition>
+    <decomposition id="Check_names" xsi:type="WebServiceGatewayFactsType">
+      <name>Check names</name>
+      <inputParam>
+        <index>0</index>
+        <name>Husband</name>
+        <type>PersonType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>1</index>
+        <name>Bride</name>
+        <type>PersonType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Do_marriage" xsi:type="WebServiceGatewayFactsType">
+      <name>Do marriage</name>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Enter_names" xsi:type="WebServiceGatewayFactsType">
+      <name>Enter names</name>
+      <inputParam>
+        <index>0</index>
+        <name>Husband</name>
+        <type>PersonType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>1</index>
+        <name>Bride</name>
+        <type>PersonType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>0</index>
+        <name>Husband</name>
+        <type>PersonType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <outputParam>
+        <index>1</index>
+        <name>Bride</name>
+        <type>PersonType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+  </specification>
+  <layout>
+    <locale language="en" country="GB"/>
+    <specification id="Marriage" defaultBgColor="-526351">
+      <size w="62" h="26"/>
+      <net id="Net">
+        <bounds x="0" y="0" w="886" h="488"/>
+        <frame x="0" y="0" w="889" h="491"/>
+        <viewport x="0" y="0" w="889" h="491"/>
+        <vertex id="OutputCondition">
+          <attributes>
+            <bounds x="536" y="236" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <vertex id="InputCondition">
+          <attributes>
+            <bounds x="36" y="236" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <container id="Check_names">
+          <vertex>
+            <attributes>
+              <bounds x="412" y="236" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="380" y="268" w="96" h="14"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="Do_marriage">
+          <vertex>
+            <attributes>
+              <bounds x="276" y="236" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="244" y="268" w="96" h="14"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="Enter_names">
+          <vertex>
+            <attributes>
+              <bounds x="148" y="236" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="116" y="268" w="96" h="14"/>
+            </attributes>
+          </label>
+        </container>
+        <flow source="Check_names" target="OutputCondition">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="567" y="242.5"/>
+              <value x="812" y="242.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="InputCondition" target="Enter_names">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="67" y="242.5"/>
+              <value x="148" y="242.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Enter_names" target="Do_marriage">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="179" y="242.5"/>
+              <value x="312" y="242.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Do_marriage" target="Check_names">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="343" y="242.5"/>
+              <value x="536" y="242.5"/>
+            </points>
+          </attributes>
+        </flow>
+      </net>
+      <labelFontSize>12</labelFontSize>
+    </specification>
+  </layout>
+</specificationSet>

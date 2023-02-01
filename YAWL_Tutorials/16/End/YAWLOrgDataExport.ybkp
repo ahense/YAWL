@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<orgdata>
+  <participants>
+    <participant id="PA-696c4c66-48f1-4a74-909f-ca79170f1585">
+      <userid>al</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Ada</firstname>
+      <lastname>Lovelace</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-7c3b26ab-e6a3-4be0-9072-94d916d5d413</role>
+      </roles>
+      <positions/>
+      <capabilities/>
+      <privileges>00000000</privileges>
+    </participant>
+  </participants>
+  <roles>
+    <role id="RO-7c3b26ab-e6a3-4be0-9072-94d916d5d413">
+      <name>Programmer</name>
+      <description/>
+      <notes/>
+    </role>
+  </roles>
+  <positions>
+    <position id="PO-1d9460ee-6a48-42d4-ad16-117132aefbe7">
+      <title>Manager</title>
+      <positionid/>
+      <description/>
+      <notes/>
+      <orggroupid>OG-d0034b16-ae0d-425f-a4c5-21d941b6f0ac</orggroupid>
+      <reportstoid>PO-e3e6f09e-0410-477f-b2ff-f979481abd5a</reportstoid>
+    </position>
+    <position id="PO-3cdfb4b5-24d8-4227-a3e5-ffb3621257fb">
+      <title>Prgrammer A1</title>
+      <positionid/>
+      <description/>
+      <notes/>
+      <orggroupid>OG-73d86ab7-ca32-4c3b-bb8b-a92168f4fa85</orggroupid>
+      <reportstoid>PO-1d9460ee-6a48-42d4-ad16-117132aefbe7</reportstoid>
+    </position>
+    <position id="PO-e1a39755-f74a-4796-9eff-0c8af8313330">
+      <title>Prgrammer A2</title>
+      <positionid/>
+      <description/>
+      <notes/>
+      <orggroupid>OG-73d86ab7-ca32-4c3b-bb8b-a92168f4fa85</orggroupid>
+      <reportstoid>PO-1d9460ee-6a48-42d4-ad16-117132aefbe7</reportstoid>
+    </position>
+    <position id="PO-c24df7f8-a190-4202-9181-1c8151d1703a">
+      <title>Prgrammer B1</title>
+      <positionid/>
+      <description/>
+      <notes/>
+      <orggroupid>OG-26fd0bbf-9e9e-44d2-b5cc-a7ff4e752911</orggroupid>
+      <reportstoid>PO-1d9460ee-6a48-42d4-ad16-117132aefbe7</reportstoid>
+    </position>
+    <position id="PO-8fa33954-8c00-46db-a7b6-757108d76d09">
+      <title>Prgrammer B2</title>
+      <positionid/>
+      <description/>
+      <notes/>
+      <orggroupid>OG-26fd0bbf-9e9e-44d2-b5cc-a7ff4e752911</orggroupid>
+      <reportstoid>PO-1d9460ee-6a48-42d4-ad16-117132aefbe7</reportstoid>
+    </position>
+    <position id="PO-e3e6f09e-0410-477f-b2ff-f979481abd5a">
+      <title>Vice President</title>
+      <positionid/>
+      <description/>
+      <notes/>
+      <orggroupid>OG-4f184a5e-1325-4172-bdef-80cb38879512</orggroupid>
+    </position>
+  </positions>
+  <capabilities/>
+  <orggroups>
+    <orggroup id="OG-d0034b16-ae0d-425f-a4c5-21d941b6f0ac">
+      <groupName>Programming Department</groupName>
+      <groupType>DEPARTMENT</groupType>
+      <description/>
+      <notes/>
+      <belongsToID>OG-4f184a5e-1325-4172-bdef-80cb38879512</belongsToID>
+    </orggroup>
+    <orggroup id="OG-4f184a5e-1325-4172-bdef-80cb38879512">
+      <groupName>Software Division</groupName>
+      <groupType>DIVISION</groupType>
+      <description/>
+      <notes/>
+    </orggroup>
+    <orggroup id="OG-73d86ab7-ca32-4c3b-bb8b-a92168f4fa85">
+      <groupName>Team A</groupName>
+      <groupType>TEAM</groupType>
+      <description/>
+      <notes/>
+      <belongsToID>OG-d0034b16-ae0d-425f-a4c5-21d941b6f0ac</belongsToID>
+    </orggroup>
+    <orggroup id="OG-26fd0bbf-9e9e-44d2-b5cc-a7ff4e752911">
+      <groupName>Team B</groupName>
+      <groupType>TEAM</groupType>
+      <description/>
+      <notes/>
+      <belongsToID>OG-d0034b16-ae0d-425f-a4c5-21d941b6f0ac</belongsToID>
+    </orggroup>
+  </orggroups>
+  <nonhumanresources/>
+  <nonhumancategories/>
+</orgdata>
+

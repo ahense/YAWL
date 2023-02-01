@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<specificationSet xmlns="http://www.yawlfoundation.org/yawlschema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4.0" xsi:schemaLocation="http://www.yawlfoundation.org/yawlschema http://www.yawlfoundation.org/yawlschema/YAWL_Schema4.0.xsd">
+  <specification uri="TimerLogging">
+    <documentation>A simple example demonstrating configurable logging in YAWL Version 4.5.</documentation>
+    <metaData>
+      <creator>Andreas Hense</creator>
+      <description>A simple example demonstrating configurable logging in YAWL Version 4.5.</description>
+      <coverage>4.5.787</coverage>
+      <version>0.14</version>
+      <persistent>false</persistent>
+      <identifier>UID_9b8be865-d6a5-463d-86e9-e22b7d7757dd</identifier>
+    </metaData>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+    <decomposition id="Net" isRootNet="true" xsi:type="NetFactsType">
+      <localVariable>
+        <index>0</index>
+        <name>x</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>hello</initialValue>
+      </localVariable>
+      <processControlElements>
+        <inputCondition id="InputCondition">
+          <flowsInto>
+            <nextElementRef id="A" />
+          </flowsInto>
+        </inputCondition>
+        <task id="A">
+          <name>A</name>
+          <documentation>This task is about the variable x with content ${/Net/x/text()}</documentation>
+          <flowsInto>
+            <nextElementRef id="B" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <timer>
+            <trigger>OnExecuting</trigger>
+            <duration>PT10S</duration>
+          </timer>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <participant>PA-6c5072a0-8afa-4a8b-bc3b-28ccdfac7f30</participant>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="system">
+              <allocator>
+                <name>RandomChoice</name>
+              </allocator>
+            </allocate>
+            <start initiator="system" />
+          </resourcing>
+          <decomposesTo id="A" />
+        </task>
+        <task id="B">
+          <name>B</name>
+          <flowsInto>
+            <nextElementRef id="OutputCondition" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <timer>
+            <trigger>OnExecuting</trigger>
+            <duration>PT1M</duration>
+          </timer>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <participant>PA-6c5072a0-8afa-4a8b-bc3b-28ccdfac7f30</participant>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="system">
+              <allocator>
+                <name>RandomChoice</name>
+              </allocator>
+            </allocate>
+            <start initiator="system" />
+          </resourcing>
+          <decomposesTo id="B" />
+        </task>
+        <outputCondition id="OutputCondition" />
+      </processControlElements>
+    </decomposition>
+    <decomposition id="A" xsi:type="WebServiceGatewayFactsType">
+      <logPredicate>
+        <completion>Current status of the timer:
+${item:timer:status} 
+Current dateTime: 
+${now} 
+Expiration dateTime:  
+${item:timer:expiry}</completion>
+      </logPredicate>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="B" xsi:type="WebServiceGatewayFactsType">
+      <logPredicate>
+        <completion>Current status of the timer:
+${item:timer:status} 
+Current dateTime: 
+${now} 
+Expiration dateTime:  
+${item:timer:expiry}</completion>
+      </logPredicate>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+  </specification>
+  <layout>
+    <locale language="en" country="GB"/>
+    <specification id="TimerLogging" defaultBgColor="-526351">
+      <size w="615" h="323"/>
+      <net id="Net">
+        <bounds x="0" y="0" w="603" h="289"/>
+        <frame x="0" y="0" w="606" h="292"/>
+        <viewport x="0" y="0" w="606" h="292"/>
+        <vertex id="OutputCondition">
+          <attributes>
+            <bounds x="508" y="104" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <vertex id="InputCondition">
+          <attributes>
+            <bounds x="36" y="104" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <container id="A">
+          <vertex>
+            <attributes>
+              <bounds x="176" y="104" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="144" y="136" w="96" h="20"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="B">
+          <vertex>
+            <attributes>
+              <bounds x="352" y="104" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="320" y="136" w="96" h="20"/>
+            </attributes>
+          </label>
+        </container>
+        <flow source="InputCondition" target="A">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="67" y="115.5"/>
+              <value x="176" y="115.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="B" target="OutputCondition">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="383" y="115.5"/>
+              <value x="508" y="115.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="A" target="B">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="207" y="115.5"/>
+              <value x="352" y="115.5"/>
+            </points>
+          </attributes>
+        </flow>
+      </net>
+    </specification>
+  </layout>
+</specificationSet>

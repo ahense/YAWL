@@ -1,0 +1,529 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<specificationSet xmlns="http://www.yawlfoundation.org/yawlschema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4.0" xsi:schemaLocation="http://www.yawlfoundation.org/yawlschema http://www.yawlfoundation.org/yawlschema/YAWL_Schema4.0.xsd">
+  <specification uri="Tutorial8">
+    <name>Tutorial8</name>
+    <documentation>YAWL BPMS Tutorial 8 OR</documentation>
+    <metaData>
+      <title>Tutorial8</title>
+      <creator>Andreas V. Hense</creator>
+      <description>YAWL BPMS Tutorial 8 OR</description>
+      <coverage>4.3.1.769</coverage>
+      <version>0.2</version>
+      <persistent>false</persistent>
+      <identifier>UID_87f60871-78ee-482b-b3f1-99fab3ae0b14</identifier>
+    </metaData>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" elementFormDefault="qualified">
+      <xs:simpleType name="EntreeType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Minestrone in Brodo" />
+          <xs:enumeration value="Gnocchi al Sugo" />
+          <xs:enumeration value="Pasta e Fagioli" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="MainType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Trippa alla Romana" />
+          <xs:enumeration value="Ossobuco con Piselli" />
+          <xs:enumeration value="Bistecca di Manzo" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="DessertType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Tiramisu con Biscotto Pasta Frolla" />
+          <xs:enumeration value="Forestera Nera" />
+          <xs:enumeration value="Dolci della Casa" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:schema>
+    <decomposition id="Net" isRootNet="true" xsi:type="NetFactsType">
+      <localVariable>
+        <index>0</index>
+        <name>Entree_selected</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>true</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>1</index>
+        <name>Dessert_selected</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>true</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>2</index>
+        <name>Entree_choice</name>
+        <type>EntreeType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>Minestrone in Brodo</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>3</index>
+        <name>Main_choice</name>
+        <type>MainType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>Trippa alla Romana</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>4</index>
+        <name>Dessert_choice</name>
+        <type>DessertType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>Tiramisu con Biscotto Pasta Frolla</initialValue>
+      </localVariable>
+      <processControlElements>
+        <inputCondition id="InputCondition">
+          <flowsInto>
+            <nextElementRef id="Decide_on_menu" />
+          </flowsInto>
+        </inputCondition>
+        <task id="Decide_on_menu">
+          <name>Decide on menu</name>
+          <flowsInto>
+            <nextElementRef id="Choose_main" />
+            <predicate>true()</predicate>
+            <isDefaultFlow />
+          </flowsInto>
+          <flowsInto>
+            <nextElementRef id="Choose_dessert" />
+            <predicate>/Net/Dessert_selected/text() = 'true'</predicate>
+          </flowsInto>
+          <flowsInto>
+            <nextElementRef id="Choose_entree" />
+            <predicate>/Net/Entree_selected/text() = 'true'</predicate>
+          </flowsInto>
+          <join code="xor" />
+          <split code="or" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Dessert_selected&gt;{/Net/Dessert_selected/text()}&lt;/Dessert_selected&gt;" />
+              <mapsTo>Dessert_selected</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Entree_selected&gt;{/Net/Entree_selected/text()}&lt;/Entree_selected&gt;" />
+              <mapsTo>Entree_selected</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;Dessert_selected&gt;{/Decide_on_menu/Dessert_selected/text()}&lt;/Dessert_selected&gt;" />
+              <mapsTo>Dessert_selected</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Entree_selected&gt;{/Decide_on_menu/Entree_selected/text()}&lt;/Entree_selected&gt;" />
+              <mapsTo>Entree_selected</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="user" />
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Decide_on_menu" />
+        </task>
+        <task id="Choose_dessert">
+          <name>Choose dessert</name>
+          <flowsInto>
+            <nextElementRef id="Order" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Dessert_choice&gt;{/Net/Dessert_choice/text()}&lt;/Dessert_choice&gt;" />
+              <mapsTo>Dessert_choice</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;Dessert_choice&gt;{/Choose_dessert/Dessert_choice/text()}&lt;/Dessert_choice&gt;" />
+              <mapsTo>Dessert_choice</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet />
+              </distributionSet>
+              <familiarParticipant taskID="Decide_on_menu" />
+            </offer>
+            <allocate initiator="system">
+              <allocator>
+                <name>RandomChoice</name>
+              </allocator>
+            </allocate>
+            <start initiator="system" />
+          </resourcing>
+          <decomposesTo id="Choose_dessert" />
+        </task>
+        <task id="Choose_entree">
+          <name>Choose entree</name>
+          <flowsInto>
+            <nextElementRef id="Order" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Entree_choice&gt;{/Net/Entree_choice/text()}&lt;/Entree_choice&gt;" />
+              <mapsTo>Entree_choice</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;Entree_choice&gt;{/Choose_entree/Entree_choice/text()}&lt;/Entree_choice&gt;" />
+              <mapsTo>Entree_choice</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet />
+              </distributionSet>
+              <familiarParticipant taskID="Decide_on_menu" />
+            </offer>
+            <allocate initiator="system">
+              <allocator>
+                <name>RandomChoice</name>
+              </allocator>
+            </allocate>
+            <start initiator="system" />
+          </resourcing>
+          <decomposesTo id="Choose_entree" />
+        </task>
+        <task id="Choose_main">
+          <name>Choose main</name>
+          <flowsInto>
+            <nextElementRef id="Order" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Main_choice&gt;{/Net/Main_choice/text()}&lt;/Main_choice&gt;" />
+              <mapsTo>Main_choice</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;Main_choice&gt;{/Choose_main/Main_choice/text()}&lt;/Main_choice&gt;" />
+              <mapsTo>Main_choice</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet />
+              </distributionSet>
+              <familiarParticipant taskID="Decide_on_menu" />
+            </offer>
+            <allocate initiator="system">
+              <allocator>
+                <name>RandomChoice</name>
+              </allocator>
+            </allocate>
+            <start initiator="system" />
+          </resourcing>
+          <decomposesTo id="Choose_main" />
+        </task>
+        <task id="Order">
+          <name>Order</name>
+          <flowsInto>
+            <nextElementRef id="OutputCondition" />
+          </flowsInto>
+          <join code="or" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Dessert_selected&gt;{/Net/Dessert_selected/text()}&lt;/Dessert_selected&gt;" />
+              <mapsTo>Dessert_selected</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Entree_selected&gt;{/Net/Entree_selected/text()}&lt;/Entree_selected&gt;" />
+              <mapsTo>Entree_selected</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Main_choice&gt;{/Net/Main_choice/text()}&lt;/Main_choice&gt;" />
+              <mapsTo>Main_choice</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Entree_choice&gt;{/Net/Entree_choice/text()}&lt;/Entree_choice&gt;" />
+              <mapsTo>Entree_choice</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Dessert_choice&gt;{/Net/Dessert_choice/text()}&lt;/Dessert_choice&gt;" />
+              <mapsTo>Dessert_choice</mapsTo>
+            </mapping>
+          </startingMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet />
+              </distributionSet>
+              <familiarParticipant taskID="Decide_on_menu" />
+            </offer>
+            <allocate initiator="system">
+              <allocator>
+                <name>RandomChoice</name>
+              </allocator>
+            </allocate>
+            <start initiator="system" />
+          </resourcing>
+          <decomposesTo id="Order" />
+        </task>
+        <outputCondition id="OutputCondition" />
+      </processControlElements>
+    </decomposition>
+    <decomposition id="Choose_dessert" xsi:type="WebServiceGatewayFactsType">
+      <name>Choose dessert#</name>
+      <inputParam>
+        <index>0</index>
+        <name>Dessert_choice</name>
+        <type>DessertType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>0</index>
+        <name>Dessert_choice</name>
+        <type>DessertType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Choose_entree" xsi:type="WebServiceGatewayFactsType">
+      <name>Choose entree</name>
+      <inputParam>
+        <index>0</index>
+        <name>Entree_choice</name>
+        <type>EntreeType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>0</index>
+        <name>Entree_choice</name>
+        <type>EntreeType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Choose_main" xsi:type="WebServiceGatewayFactsType">
+      <name>Choose main</name>
+      <inputParam>
+        <index>0</index>
+        <name>Main_choice</name>
+        <type>MainType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>0</index>
+        <name>Main_choice</name>
+        <type>MainType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Decide_on_menu" xsi:type="WebServiceGatewayFactsType">
+      <name>Decide on menu</name>
+      <inputParam>
+        <index>0</index>
+        <name>Entree_selected</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>1</index>
+        <name>Dessert_selected</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>0</index>
+        <name>Entree_selected</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <outputParam>
+        <index>1</index>
+        <name>Dessert_selected</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Order" xsi:type="WebServiceGatewayFactsType">
+      <inputParam hide="true">
+        <index>0</index>
+        <name>Entree_selected</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam hideIf="/Order/Entree_selected/text() = 'false'">
+        <index>1</index>
+        <name>Entree_choice</name>
+        <type>EntreeType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>2</index>
+        <name>Main_choice</name>
+        <type>MainType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam hide="true">
+        <index>3</index>
+        <name>Dessert_selected</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam hideIf="/Order/Dessert_selected/text() = 'false'">
+        <index>4</index>
+        <name>Dessert_choice</name>
+        <type>DessertType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+  </specification>
+  <layout>
+    <locale language="en" country="GB"/>
+    <specification id="Tutorial8" defaultBgColor="-526351">
+      <size w="58" h="28"/>
+      <net id="Net">
+        <bounds x="0" y="0" w="982" h="639"/>
+        <frame x="0" y="0" w="985" h="642"/>
+        <viewport x="0" y="0" w="985" h="642"/>
+        <scale>1.5</scale>
+        <vertex id="OutputCondition">
+          <attributes>
+            <bounds x="556" y="212" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <vertex id="InputCondition">
+          <attributes>
+            <bounds x="36" y="212" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <container id="Order">
+          <vertex>
+            <attributes>
+              <bounds x="436" y="212" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="402" y="246" w="97" h="19"/>
+            </attributes>
+          </label>
+          <decorator type="OR_join">
+            <position>12</position>
+            <attributes>
+              <bounds x="426" y="212" w="11" h="32"/>
+            </attributes>
+          </decorator>
+        </container>
+        <container id="Choose_main">
+          <vertex>
+            <attributes>
+              <bounds x="284" y="212" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="252" y="246" w="96" h="20"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="Choose_entree">
+          <vertex>
+            <attributes>
+              <bounds x="284" y="140" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="252" y="170" w="96" h="20"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="Choose_dessert">
+          <vertex>
+            <attributes>
+              <bounds x="284" y="288" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="252" y="318" w="96" h="20"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="Decide_on_menu">
+          <vertex>
+            <attributes>
+              <bounds x="140" y="212" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="114" y="246" w="96" h="40"/>
+            </attributes>
+          </label>
+          <decorator type="OR_split">
+            <position>13</position>
+            <attributes>
+              <bounds x="171" y="212" w="11" h="32"/>
+            </attributes>
+          </decorator>
+        </container>
+        <flow source="Decide_on_menu" target="Choose_main">
+          <ports in="2" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="Decide_on_menu" target="Choose_entree">
+          <ports in="2" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="Decide_on_menu" target="Choose_dessert">
+          <ports in="3" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="InputCondition" target="Decide_on_menu">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="Choose_main" target="Order">
+          <ports in="13" out="2"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="Order" target="OutputCondition">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="Choose_dessert" target="Order">
+          <ports in="13" out="2"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="Choose_entree" target="Order">
+          <ports in="13" out="2"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+      </net>
+    </specification>
+  </layout>
+</specificationSet>

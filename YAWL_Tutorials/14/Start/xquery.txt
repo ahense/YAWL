@@ -1,0 +1,4 @@
+for $e in /Net/Customer_list/* return  
+<E-mail>  
+  {$e/E-Mail/text()}
+</E-mail>

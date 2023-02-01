@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:Fill_Out_Continuity_Report xmlns:ns2="http://www.yawlfoundation.org/sb/continuityInfo">
+    <generalInfo>
+        <production>Magic Movie</production>
+        <date>2009-12-08</date>
+        <weekday>TUES</weekday>
+        <shootDayNo>1</shootDayNo>
+    </generalInfo>
+    <producer>Michael West</producer>
+    <director>John Jason</director>
+    <directorOfPhotography>Vicent Rain</directorOfPhotography>
+    <editor>Claire Douglus</editor>
+    <continuity>Jay Green</continuity>
+    <continuityInfo>
+        <sceneInfo>
+            <scene>2</scene>
+            <slateInfo>
+                <slate>10</slate>
+                <takeInfo>
+                    <take>1</take>
+                    <duration>00:00:15</duration>
+                    <directorChoice>false</directorChoice>
+                    <print>true</print>
+                    <comments>h/h WS entering dressing room. C and S. CR kissing. OK. Directors choice.</comments>
+                    <camRoll>A3</camRoll>
+                    <soundRoll>1</soundRoll>
+                </takeInfo>
+            </slateInfo>
+            <slateInfo>
+                <slate>11</slate>
+                <takeInfo>
+                    <take>1</take>
+                    <duration>00:00:16</duration>
+                    <directorChoice>false</directorChoice>
+                    <print>true</print>
+                    <comments>h/h CU as S10. Okay</comments>
+                    <camRoll>A3</camRoll>
+                    <soundRoll>1</soundRoll>
+                </takeInfo>
+                <takeInfo>
+                    <take>2</take>
+                    <duration>00:00:18</duration>
+                    <directorChoice>false</directorChoice>
+                    <print>true</print>
+                    <comments>ok. Directors choice.</comments>
+                    <camRoll>A3</camRoll>
+                    <soundRoll>1</soundRoll>
+                </takeInfo>
+            </slateInfo>
+            <slateInfo>
+                <slate>12</slate>
+                <takeInfo>
+                    <take>1</take>
+                    <duration>00:00:28</duration>
+                    <directorChoice>false</directorChoice>
+                    <print>true</print>
+                    <comments>WS corridor master. S enter CL, C enter CL. S ex CL. C ex CR. Okay. Directors choice.</comments>
+                    <camRoll>A3</camRoll>
+                    <soundRoll>1</soundRoll>
+                </takeInfo>
+            </slateInfo>
+            <slateInfo>
+                <slate>13</slate>
+                <takeInfo>
+                    <take>1</take>
+                    <duration>00:00:31</duration>
+                    <directorChoice>false</directorChoice>
+                    <print>true</print>
+                    <comments>CU as S12 (not master) OK</comments>
+                    <camRoll>A3</camRoll>
+                    <soundRoll>1</soundRoll>
+                </takeInfo>
+                <takeInfo>
+                    <take>2</take>
+                    <duration>00:00:27</duration>
+                    <directorChoice>false</directorChoice>
+                    <print>true</print>
+                    <comments>OK back not wet. Directors choice.</comments>
+                    <camRoll>A3</camRoll>
+                    <soundRoll>1</soundRoll>
+                </takeInfo>
+                <takeInfo>
+                    <take>3</take>
+                    <duration>00:00:22</duration>
+                    <directorChoice>false</directorChoice>
+                    <print>true</print>
+                    <comments>PU up to when S turns - &quot;not safe with you&quot;. Directors choice.</comments>
+                    <camRoll>A3</camRoll>
+                    <soundRoll>1</soundRoll>
+                </takeInfo>
+            </slateInfo>
+            <slateInfo>
+                <slate>14</slate>
+                <takeInfo>
+                    <take>1</take>
+                    <duration>00:00:15</duration>
+                    <directorChoice>false</directorChoice>
+                    <print>true</print>
+                    <comments>ECU S and C argue. S enters CL. C enters CL. S ex CL. C ex CR</comments>
+                    <camRoll>A3</camRoll>
+                    <soundRoll>1</soundRoll>
+                </takeInfo>
+                <takeInfo>
+                    <take>2</take>
+                    <duration>00:00:15</duration>
+                    <directorChoice>false</directorChoice>
+                    <print>true</print>
+                    <comments>okay. correct eyeline. Directors choice.</comments>
+                    <camRoll>A3</camRoll>
+                    <soundRoll>1</soundRoll>
+                </takeInfo>
+            </slateInfo>
+            <slateInfo>
+                <slate>6</slate>
+                <takeInfo>
+                    <take>1</take>
+                    <duration>00:00:50</duration>
+                    <directorChoice>false</directorChoice>
+                    <print>true</print>
+                    <comments>h/h 2-s CU of C and S. Whip pan to B. S and C kiss. B in mirror. Missed reveal of B in mirror.</comments>
+                    <camRoll>A2</camRoll>
+                    <soundRoll>1</soundRoll>
+                </takeInfo>
+                <takeInfo>
+                    <take>2</take>
+                    <duration>00:00:51</duration>
+                    <directorChoice>false</directorChoice>
+                    <print>true</print>
+                    <comments>missed reveal again. Glove on took longer.</comments>
+                    <camRoll>A2</camRoll>
+                    <soundRoll>1</soundRoll>
+                </takeInfo>
+                <takeInfo>
+                    <take>3</take>
+                    <duration>00:00:22</duration>
+                    <directorChoice>false</directorChoice>
+                    <print>true</print>
+                    <comments>actors missed glove.</comments>
+                    <camRoll>A2</camRoll>
+                    <soundRoll>1</soundRoll>
+                </takeInfo>
+                <takeInfo>
+                    <take>4</take>
+                    <duration>00:00:48</duration>
+                    <directorChoice>false</directorChoice>
+                    <print>true</print>
+                    <comments>no B reveal. Directors choice.</comments>
+                    <camRoll>A2</camRoll>
+                    <soundRoll>1</soundRoll>
+                </takeInfo>
+                <takeInfo>
+                    <take>5</take>
+                    <duration>00:00:11</duration>
+                    <directorChoice>false</directorChoice>
+                    <print>true</print>
+                    <comments>PU of B reveal. Whip pan OK</comments>
+                    <camRoll>A2</camRoll>
+                    <soundRoll>1</soundRoll>
+                </takeInfo>
+                <takeInfo>
+                    <take>6</take>
+                    <duration>00:00:12</duration>
+                    <directorChoice>false</directorChoice>
+                    <print>true</print>
+                    <comments>PU ok. Directors choice.</comments>
+                    <camRoll>A2</camRoll>
+                    <soundRoll>1</soundRoll>
+                </takeInfo>
+            </slateInfo>
+            <slateInfo>
+                <slate>7</slate>
+                <takeInfo>
+                    <take>1</take>
+                    <duration>00:00:40</duration>
+                    <directorChoice>false</directorChoice>
+                    <print>true</print>
+                    <comments>h/h 2s CU of C and S kissing favouring C. OK. Directors choice.</comments>
+                    <camRoll>A2</camRoll>
+                    <soundRoll>1</soundRoll>
+                </takeInfo>
+                <takeInfo>
+                    <take>2</take>
+                    <duration>00:00:39</duration>
+                    <directorChoice>false</directorChoice>
+                    <print>true</print>
+                    <comments>OK &quot;hotter&quot;. Directors choice.</comments>
+                    <camRoll>A2</camRoll>
+                    <soundRoll>1</soundRoll>
+                </takeInfo>
+            </slateInfo>
+            <slateInfo>
+                <slate>8</slate>
+                <takeInfo>
+                    <take>1</take>
+                    <duration>00:00:23</duration>
+                    <directorChoice>false</directorChoice>
+                    <print>true</print>
+                    <comments>MCU B on door. B and C. Line of C. B covered. Exit by C</comments>
+                    <camRoll>A2</camRoll>
+                    <soundRoll>1</soundRoll>
+                </takeInfo>
+                <takeInfo>
+                    <take>2</take>
+                    <duration>00:00:20</duration>
+                    <directorChoice>false</directorChoice>
+                    <print>true</print>
+                    <comments>okay. Directors choice.</comments>
+                    <camRoll>A2</camRoll>
+                    <soundRoll>1</soundRoll>
+                </takeInfo>
+            </slateInfo>
+            <slateInfo>
+                <slate>9</slate>
+                <takeInfo>
+                    <take>1</take>
+                    <duration>00:00:28</duration>
+                    <directorChoice>false</directorChoice>
+                    <print>true</print>
+                    <comments>MCU 2s - S ad C busted and C exits. S and C CR. C exits CL</comments>
+                    <camRoll>A2</camRoll>
+                    <soundRoll>1</soundRoll>
+                </takeInfo>
+                <takeInfo>
+                    <take>2</take>
+                    <duration>00:00:29</duration>
+                    <directorChoice>false</directorChoice>
+                    <print>true</print>
+                    <comments>okay. tail slate</comments>
+                    <camRoll>A2</camRoll>
+                    <soundRoll>1</soundRoll>
+                </takeInfo>
+                <takeInfo>
+                    <take>3</take>
+                    <duration>00:00:29</duration>
+                    <directorChoice>false</directorChoice>
+                    <print>true</print>
+                    <comments>okay. tail slate. Missed &quot;tail slate&quot; SYNC. Directors choice.</comments>
+                    <camRoll>A2</camRoll>
+                    <soundRoll>1</soundRoll>
+                </takeInfo>
+                <takeInfo>
+                    <take>4</take>
+                    <duration>00:00:28</duration>
+                    <directorChoice>false</directorChoice>
+                    <print>true</print>
+                    <comments>okay T.S</comments>
+                    <camRoll>A2</camRoll>
+                    <soundRoll>1</soundRoll>
+                </takeInfo>
+            </slateInfo>
+        </sceneInfo>
+        <sceneInfo>
+            <scene>9</scene>
+            <slateInfo>
+                <slate>1</slate>
+                <takeInfo>
+                    <take>1</take>
+                    <duration>00:01:30</duration>
+                    <directorChoice>false</directorChoice>
+                    <print>true</print>
+                    <comments>Track in thru dressing room. S sits, CR C enters CL. C leaves CL, Good dolly. S better performance. As above. Directors choice.</comments>
+                    <camRoll>A1</camRoll>
+                    <soundRoll>1</soundRoll>
+                </takeInfo>
+                <takeInfo>
+                    <take>2</take>
+                    <duration>00:01:18</duration>
+                    <directorChoice>false</directorChoice>
+                    <print>true</print>
+                    <comments>As above. Safety shot. S looks up to C a few times. - directors choice</comments>
+                    <camRoll>A1</camRoll>
+                    <soundRoll>1</soundRoll>
+                </takeInfo>
+            </slateInfo>
+            <slateInfo>
+                <slate>2</slate>
+                <takeInfo>
+                    <take>1</take>
+                    <duration>00:00:24</duration>
+                    <directorChoice>false</directorChoice>
+                    <print>true</print>
+                    <comments>CU C puts gloves down - tilt up. S on mirror. S. CR</comments>
+                    <camRoll>A1</camRoll>
+                    <soundRoll>1</soundRoll>
+                </takeInfo>
+                <takeInfo>
+                    <take>2</take>
+                    <duration>00:00:25</duration>
+                    <directorChoice>false</directorChoice>
+                    <print>true</print>
+                    <comments>S good look. Tilt too fast.</comments>
+                    <camRoll>A1</camRoll>
+                    <soundRoll>1</soundRoll>
+                </takeInfo>
+                <takeInfo>
+                    <take>3</take>
+                    <duration>00:00:24</duration>
+                    <directorChoice>false</directorChoice>
+                    <print>true</print>
+                    <comments>Good - directors choice</comments>
+                    <camRoll>A1</camRoll>
+                    <soundRoll>1</soundRoll>
+                </takeInfo>
+            </slateInfo>
+            <slateInfo>
+                <slate>3</slate>
+                <takeInfo>
+                    <take>1</take>
+                    <duration>00:00:55</duration>
+                    <directorChoice>false</directorChoice>
+                    <print>true</print>
+                    <comments>CU of S - CR O/S of C. S.R.H puts bottle down.</comments>
+                    <camRoll>A1</camRoll>
+                    <soundRoll>1</soundRoll>
+                </takeInfo>
+                <takeInfo>
+                    <take>2</take>
+                    <duration>00:00:59</duration>
+                    <directorChoice>false</directorChoice>
+                    <print>true</print>
+                    <comments>Good - directors choice</comments>
+                    <camRoll>A1</camRoll>
+                    <soundRoll>1</soundRoll>
+                </takeInfo>
+                <takeInfo>
+                    <take>3</take>
+                    <duration>00:01:04</duration>
+                    <directorChoice>false</directorChoice>
+                    <print>true</print>
+                    <comments>Director happy with last 2/3s shot - - directors choice</comments>
+                    <camRoll>A1</camRoll>
+                    <soundRoll>1</soundRoll>
+                </takeInfo>
+            </slateInfo>
+            <slateInfo>
+                <slate>4</slate>
+                <takeInfo>
+                    <take>1</take>
+                    <duration>00:00:52</duration>
+                    <directorChoice>false</directorChoice>
+                    <print>true</print>
+                    <comments>CU if C. (Reverse S3). C enter CR-CL pan to follow C to S table. Top half good</comments>
+                    <camRoll>A1</camRoll>
+                    <soundRoll>1</soundRoll>
+                </takeInfo>
+                <takeInfo>
+                    <take>2</take>
+                    <duration>00:00:46</duration>
+                    <directorChoice>false</directorChoice>
+                    <print>true</print>
+                    <comments>All good but last line. Directors choice.</comments>
+                    <camRoll>A1</camRoll>
+                    <soundRoll>1</soundRoll>
+                </takeInfo>
+                <takeInfo>
+                    <take>3</take>
+                    <duration>00:00:14</duration>
+                    <directorChoice>false</directorChoice>
+                    <print>true</print>
+                    <comments>pick up last line. Directors choice.</comments>
+                    <camRoll>A1</camRoll>
+                    <soundRoll>1</soundRoll>
+                </takeInfo>
+            </slateInfo>
+            <slateInfo>
+                <slate>5</slate>
+                <takeInfo>
+                    <take>1</take>
+                    <duration>00:00:47</duration>
+                    <directorChoice>false</directorChoice>
+                    <print>true</print>
+                    <comments>WS C enters 25 pan pan S and C. Track out door as C enters. OK directer prefers this take</comments>
+                    <camRoll>A2</camRoll>
+                    <soundRoll>1</soundRoll>
+                </takeInfo>
+                <takeInfo>
+                    <take>2</take>
+                    <duration>00:00:44</duration>
+                    <directorChoice>false</directorChoice>
+                    <print>true</print>
+                    <comments>OK director not sure to print or not. Lines intentionally left out. Only C 1st and last line. Directors choice.</comments>
+                    <camRoll>A2</camRoll>
+                    <soundRoll>1</soundRoll>
+                </takeInfo>
+            </slateInfo>
+        </sceneInfo>
+        <remarks>null</remarks>
+    </continuityInfo>
+    <finalSubmission>false</finalSubmission>
+</ns2:Fill_Out_Continuity_Report>

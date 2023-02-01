@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:Fill_Out_Continuity_Report xmlns:ns2="http://www.yawlfoundation.org/sb/continuityInfo">
+    <generalInfo>
+        <production>MAGIC MOVIE</production>
+        <date>2009-12-09</date>
+        <weekday>WEDS</weekday>
+        <shootDayNo>2</shootDayNo>
+    </generalInfo>
+    <producer>Michael West</producer>
+    <director>John Jason</director>
+    <directorOfPhotography>Vicent Rain</directorOfPhotography>
+    <editor>Claire Douglus</editor>
+    <continuity>Jay Green</continuity>
+    <continuityInfo>
+        <sceneInfo>
+            <scene>5</scene>
+            <slateInfo>
+                <slate>10</slate>
+                <takeInfo>
+                    <take>1</take>
+                    <duration>00:00:15</duration>
+                    <directorChoice>false</directorChoice>
+                    <print>true</print>
+                    <comments>h/h WS entering dressing room. C and S. CR kissing. OK. Directors choice.</comments>
+                    <camRoll>A3</camRoll>
+                    <soundRoll>1</soundRoll>
+                </takeInfo>
+            </slateInfo>
+            <slateInfo>
+                <slate>11</slate>
+                <takeInfo>
+                    <take>1</take>
+                    <duration>00:00:16</duration>
+                    <directorChoice>false</directorChoice>
+                    <print>true</print>
+                    <comments>h/h CU as S10. Okay</comments>
+                    <camRoll>A3</camRoll>
+                    <soundRoll>1</soundRoll>
+                </takeInfo>
+                <takeInfo>
+                    <take>2</take>
+                    <duration>00:00:18</duration>
+                    <directorChoice>false</directorChoice>
+                    <print>true</print>
+                    <comments>ok. Directors choice.</comments>
+                    <camRoll>A3</camRoll>
+                    <soundRoll>1</soundRoll>
+                </takeInfo>
+            </slateInfo>
+            <slateInfo>
+                <slate>12</slate>
+                <takeInfo>
+                    <take>1</take>
+                    <duration>00:00:28</duration>
+                    <directorChoice>false</directorChoice>
+                    <print>true</print>
+                    <comments>WS corridor master. S enter CL, C enter CL. S ex CL. C ex CR. Okay. Directors choice.</comments>
+                    <camRoll>A3</camRoll>
+                    <soundRoll>1</soundRoll>
+                </takeInfo>
+            </slateInfo>
+            <slateInfo>
+                <slate>13</slate>
+                <takeInfo>
+                    <take>1</take>
+                    <duration>00:00:31</duration>
+                    <directorChoice>false</directorChoice>
+                    <print>true</print>
+                    <comments>CU as S12 (not master) OK</comments>
+                    <camRoll>A3</camRoll>
+                    <soundRoll>1</soundRoll>
+                </takeInfo>
+                <takeInfo>
+                    <take>2</take>
+                    <duration>00:00:27</duration>
+                    <directorChoice>false</directorChoice>
+                    <print>true</print>
+                    <comments>OK back not wet. Directors choice.</comments>
+                    <camRoll>A3</camRoll>
+                    <soundRoll>1</soundRoll>
+                </takeInfo>
+                <takeInfo>
+                    <take>3</take>
+                    <duration>00:00:22</duration>
+                    <directorChoice>false</directorChoice>
+                    <print>true</print>
+                    <comments>PU up to when S turns -  &quot;not safe with you&quot;. Directors choice.</comments>
+                    <camRoll>A3</camRoll>
+                    <soundRoll>1</soundRoll>
+                </takeInfo>
+            </slateInfo>
+            <slateInfo>
+                <slate>14</slate>
+                <takeInfo>
+                    <take>1</take>
+                    <duration>00:00:15</duration>
+                    <directorChoice>false</directorChoice>
+                    <print>true</print>
+                    <comments>ECU S and C argue. S enters CL. C enters CL. S ex CL. C ex CR</comments>
+                    <camRoll>A3</camRoll>
+                    <soundRoll>1</soundRoll>
+                </takeInfo>
+                <takeInfo>
+                    <take>2</take>
+                    <duration>00:00:15</duration>
+                    <directorChoice>false</directorChoice>
+                    <print>true</print>
+                    <comments>okay. correct eyeline. Directors choice.</comments>
+                    <camRoll>A3</camRoll>
+                    <soundRoll>1</soundRoll>
+                </takeInfo>
+            </slateInfo>
+        </sceneInfo>
+        <remarks>null</remarks>
+    </continuityInfo>
+    <finalSubmission>true</finalSubmission>
+</ns2:Fill_Out_Continuity_Report>

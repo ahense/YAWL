@@ -1,0 +1,553 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<specificationSet xmlns="http://www.yawlfoundation.org/yawlschema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="3.0" xsi:schemaLocation="http://www.yawlfoundation.org/yawlschema http://www.yawlfoundation.org/yawlschema/YAWL_Schema3.0.xsd">
+  <specification uri="Fix_Minor_Issue">
+    <documentation>No description provided</documentation>
+    <metaData>
+      <creator>apika</creator>
+      <description>No description provided</description>
+      <coverage>4.1.720</coverage>
+      <version>0.1</version>
+      <persistent>false</persistent>
+      <identifier>UID_171f1dbb-98a6-4a62-a3ff-eda8d0618103</identifier>
+    </metaData>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:simpleType name="Urgency">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Urgent" />
+          <xs:enumeration value="Normal" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="Quality">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="No_Issues" />
+          <xs:enumeration value="Minor_Issue" />
+          <xs:enumeration value="Major_Issue" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="Issue">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Terminal" />
+          <xs:enumeration value="Host" />
+          <xs:enumeration value="Network" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="Choice">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Yes" />
+          <xs:enumeration value="No" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:schema>
+    <decomposition id="Net" isRootNet="true" xsi:type="NetFactsType">
+      <inputParam>
+        <index>1</index>
+        <name>Report</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>2</index>
+        <name>Urgency</name>
+        <type>Urgency</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>3</index>
+        <name>Quality</name>
+        <type>Quality</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <localVariable>
+        <index>0</index>
+        <name>IssuesFixed</name>
+        <type>Choice</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>No</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>4</index>
+        <name>issue</name>
+        <type>Issue</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue />
+      </localVariable>
+      <localVariable>
+        <index>5</index>
+        <name>MajorIssue</name>
+        <type>Choice</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>No</initialValue>
+      </localVariable>
+      <processControlElements>
+        <inputCondition id="InputCondition">
+          <flowsInto>
+            <nextElementRef id="Check_Issue" />
+          </flowsInto>
+        </inputCondition>
+        <task id="Check_Issue">
+          <name>Check_Issue</name>
+          <flowsInto>
+            <nextElementRef id="Fix_Host_Settings" />
+            <predicate ordering="1">/Net/issue/text()='Host'</predicate>
+          </flowsInto>
+          <flowsInto>
+            <nextElementRef id="Fix_Network_Issue" />
+            <isDefaultFlow />
+          </flowsInto>
+          <flowsInto>
+            <nextElementRef id="Fix_Terminal_Settings" />
+            <predicate ordering="0">/Net/issue/text()='Terminal'</predicate>
+          </flowsInto>
+          <join code="xor" />
+          <split code="xor" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;IssuesFixed&gt;{/Net/IssuesFixed/text()}&lt;/IssuesFixed&gt;" />
+              <mapsTo>IssuesFixed</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Urgency&gt;{/Net/Urgency/text()}&lt;/Urgency&gt;" />
+              <mapsTo>Urgency</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Report&gt;{/Net/Report/text()}&lt;/Report&gt;" />
+              <mapsTo>Report</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Quality&gt;{/Net/Quality/text()}&lt;/Quality&gt;" />
+              <mapsTo>Quality</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;IssuesFixed&gt;{/Initial_Check/IssuesFixed/text()}&lt;/IssuesFixed&gt;" />
+              <mapsTo>IssuesFixed</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;issue&gt;{/Initial_Check/Issue/text()}&lt;/issue&gt;" />
+              <mapsTo>issue</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-d247d0c1-7012-4cba-aeea-d1244bacbcbd</role>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Initial_Check" />
+        </task>
+        <task id="Fix_Host_Settings">
+          <name>Fix_Host_Settings</name>
+          <flowsInto>
+            <nextElementRef id="Test_Solution" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Report&gt;{/Net/Report/text()}&lt;/Report&gt;" />
+              <mapsTo>Report</mapsTo>
+            </mapping>
+          </startingMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-d247d0c1-7012-4cba-aeea-d1244bacbcbd</role>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Fix_Host_Settings" />
+        </task>
+        <task id="Fix_Network_Issue">
+          <name>Fix_Network_Issue</name>
+          <flowsInto>
+            <nextElementRef id="Test_Solution" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Report&gt;{/Net/Report/text()}&lt;/Report&gt;" />
+              <mapsTo>Report</mapsTo>
+            </mapping>
+          </startingMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-d247d0c1-7012-4cba-aeea-d1244bacbcbd</role>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Fix_Network_Issue" />
+        </task>
+        <task id="Fix_Terminal_Settings">
+          <name>Fix_Terminal_Settings</name>
+          <flowsInto>
+            <nextElementRef id="Test_Solution" />
+            <isDefaultFlow />
+          </flowsInto>
+          <join code="and" />
+          <split code="xor" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;report&gt;{/Net/Report/text()}&lt;/report&gt;" />
+              <mapsTo>report</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Report&gt;{/Net/Report/text()}&lt;/Report&gt;" />
+              <mapsTo>Report</mapsTo>
+            </mapping>
+          </startingMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-d247d0c1-7012-4cba-aeea-d1244bacbcbd</role>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Fix_Terminal_Settings" />
+        </task>
+        <task id="Test_Solution">
+          <name>Test_Solution</name>
+          <flowsInto>
+            <nextElementRef id="OutputCondition" />
+            <isDefaultFlow />
+          </flowsInto>
+          <flowsInto>
+            <nextElementRef id="Check_Issue" />
+            <predicate ordering="0">/Net/IssuesFixed/text() = 'No'</predicate>
+          </flowsInto>
+          <join code="xor" />
+          <split code="xor" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;IssuesFixed&gt;{/Net/IssuesFixed/text()}&lt;/IssuesFixed&gt;" />
+              <mapsTo>IssuesFixed</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;MajorIssue&gt;{/Net/MajorIssue/text()}&lt;/MajorIssue&gt;" />
+              <mapsTo>MajorIssue</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Report&gt;{/Net/Report/text()}&lt;/Report&gt;" />
+              <mapsTo>Report</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;MajorIssue&gt;{/Test_Solution/MajorIssue/text()}&lt;/MajorIssue&gt;" />
+              <mapsTo>MajorIssue</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;IssuesFixed&gt;{/Test_Solution/IssuesFixed/text()}&lt;/IssuesFixed&gt;" />
+              <mapsTo>IssuesFixed</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-d247d0c1-7012-4cba-aeea-d1244bacbcbd</role>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Test_Solution" />
+        </task>
+        <outputCondition id="OutputCondition" />
+      </processControlElements>
+    </decomposition>
+    <decomposition id="Fix_Host_Settings" xsi:type="WebServiceGatewayFactsType">
+      <inputParam>
+        <index>0</index>
+        <name>Report</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Fix_Network_Issue" xsi:type="WebServiceGatewayFactsType">
+      <inputParam>
+        <index>0</index>
+        <name>Report</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Fix_Terminal_Settings" xsi:type="WebServiceGatewayFactsType">
+      <inputParam>
+        <index>0</index>
+        <name>Report</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Initial_Check" xsi:type="WebServiceGatewayFactsType">
+      <inputParam>
+        <index>1</index>
+        <name>Report</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>2</index>
+        <name>Urgency</name>
+        <type>Urgency</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>3</index>
+        <name>Quality</name>
+        <type>Quality</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam label="The issue is fixed">
+        <index>4</index>
+        <name>IssuesFixed</name>
+        <type>Choice</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>0</index>
+        <name>Issue</name>
+        <type>Issue</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <outputParam label="The issue is fixed">
+        <index>4</index>
+        <name>IssuesFixed</name>
+        <type>Choice</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Test_Solution" xsi:type="WebServiceGatewayFactsType">
+      <inputParam>
+        <index>0</index>
+        <name>Report</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam label="The issue is fixed">
+        <index>1</index>
+        <name>IssuesFixed</name>
+        <type>Choice</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam label="Is a major issue">
+        <index>2</index>
+        <name>MajorIssue</name>
+        <type>Choice</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam label="The issue is fixed">
+        <index>1</index>
+        <name>IssuesFixed</name>
+        <type>Choice</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <outputParam label="Is a major issue">
+        <index>2</index>
+        <name>MajorIssue</name>
+        <type>Choice</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+  </specification>
+  <layout>
+    <locale language="en" country="AU"/>
+    <specification id="Fix_Minor_Issue" defaultBgColor="-526351">
+      <size w="63" h="33"/>
+      <net id="Net">
+        <bounds x="0" y="0" w="1227" h="473"/>
+        <frame x="0" y="0" w="1230" h="476"/>
+        <viewport x="0" y="0" w="1230" h="476"/>
+        <vertex id="OutputCondition">
+          <attributes>
+            <bounds x="436" y="116" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <vertex id="InputCondition">
+          <attributes>
+            <bounds x="32" y="116" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <container id="Test_Solution">
+          <vertex>
+            <attributes>
+              <bounds x="344" y="116" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="312" y="148" w="96" h="20"/>
+            </attributes>
+          </label>
+          <decorator type="XOR_split">
+            <position>13</position>
+            <attributes>
+              <bounds x="375" y="116" w="11" h="32"/>
+            </attributes>
+          </decorator>
+          <decorator type="XOR_join">
+            <position>12</position>
+            <attributes>
+              <bounds x="334" y="116" w="11" h="32"/>
+            </attributes>
+          </decorator>
+        </container>
+        <container id="Fix_Host_Settings">
+          <vertex>
+            <attributes>
+              <bounds x="224" y="116" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="188" y="148" w="109" h="21"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="Check_Issue">
+          <vertex>
+            <attributes>
+              <bounds x="112" y="116" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="80" y="148" w="96" h="20"/>
+            </attributes>
+          </label>
+          <decorator type="XOR_split">
+            <position>13</position>
+            <attributes>
+              <bounds x="143" y="116" w="11" h="32"/>
+            </attributes>
+          </decorator>
+          <decorator type="XOR_join">
+            <position>12</position>
+            <attributes>
+              <bounds x="102" y="116" w="11" h="32"/>
+            </attributes>
+          </decorator>
+        </container>
+        <container id="Fix_Terminal_Settings">
+          <vertex>
+            <attributes>
+              <bounds x="224" y="28" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="176" y="60" w="133" h="21"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="Fix_Network_Issue">
+          <vertex>
+            <attributes>
+              <bounds x="228" y="200" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="188" y="232" w="117" h="21"/>
+            </attributes>
+          </label>
+        </container>
+        <flow source="Fix_Network_Issue" target="Test_Solution">
+          <ports in="13" out="2"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="Test_Solution" target="Check_Issue">
+          <ports in="2" out="2"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="385" y="131.5"/>
+              <value x="388" y="12"/>
+              <value x="100" y="12"/>
+              <value x="102" y="87.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="InputCondition" target="Check_Issue">
+          <ports in="13" out="2"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="Check_Issue" target="Fix_Network_Issue">
+          <ports in="2" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="Check_Issue" target="Fix_Terminal_Settings">
+          <ports in="2" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="Test_Solution" target="OutputCondition">
+          <ports in="2" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="389" y="131.5"/>
+              <value x="440" y="131.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Fix_Terminal_Settings" target="Test_Solution">
+          <ports in="13" out="2"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="Fix_Host_Settings" target="Test_Solution">
+          <ports in="13" out="2"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="Check_Issue" target="Fix_Host_Settings">
+          <ports in="2" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="145" y="131.5"/>
+              <value x="224" y="139.5"/>
+            </points>
+          </attributes>
+        </flow>
+      </net>
+    </specification>
+  </layout>
+</specificationSet>

@@ -1,0 +1,2085 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<specificationSet xmlns="http://www.yawlfoundation.org/yawlschema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4.0" xsi:schemaLocation="http://www.yawlfoundation.org/yawlschema http://www.yawlfoundation.org/yawlschema/YAWL_Schema4.0.xsd">
+  <specification uri="ATM-new">
+    <documentation>No description has been given.</documentation>
+    <metaData>
+      <creator>rmalz2s</creator>
+      <description>No description has been given.</description>
+      <coverage>4.3.1.771</coverage>
+      <version>0.85</version>
+      <persistent>false</persistent>
+      <identifier>UID_ac1e167f-0006-4c1c-bd51-36580d0b3021</identifier>
+    </metaData>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:simpleType name="ActionMenuType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="No Action" />
+          <xs:enumeration value="View balance" />
+          <xs:enumeration value="Withdraw cash" />
+          <xs:enumeration value="Ask for account statement" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="CardStatusType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Card OK" />
+          <xs:enumeration value="Card not readable" />
+          <xs:enumeration value="Card stolen" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:schema>
+    <decomposition id="ATM" isRootNet="true" xsi:type="NetFactsType">
+      <localVariable>
+        <index>0</index>
+        <name>PIN</name>
+        <type>positiveInteger</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>1</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>1</index>
+        <name>dailyLimit</name>
+        <type>positiveInteger</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>1000</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>2</index>
+        <name>amountWithdrawnToday</name>
+        <type>integer</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>200</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>3</index>
+        <name>success</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>false</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>4</index>
+        <name>PINentered</name>
+        <type>positiveInteger</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>9999</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>5</index>
+        <name>actionMenu</name>
+        <type>ActionMenuType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>View balance</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>6</index>
+        <name>accountNumber</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>none</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>7</index>
+        <name>cardStatus</name>
+        <type>CardStatusType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>Card OK</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>8</index>
+        <name>PINfailureCounter</name>
+        <type>long</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>0</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>9</index>
+        <name>NoTimeout</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>false</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>10</index>
+        <name>cardRetracted</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>false</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>11</index>
+        <name>ToEnd</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>false</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>12</index>
+        <name>error</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>Card retracted</initialValue>
+      </localVariable>
+      <processControlElements>
+        <inputCondition id="InputCondition_1">
+          <flowsInto>
+            <nextElementRef id="Insert_card" />
+          </flowsInto>
+        </inputCondition>
+        <task id="Insert_card">
+          <name>Insert card</name>
+          <flowsInto>
+            <nextElementRef id="Check_card" />
+            <isDefaultFlow />
+          </flowsInto>
+          <join code="xor" />
+          <split code="xor" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;PINfailureCounter&gt;{/ATM/PINfailureCounter/text()}&lt;/PINfailureCounter&gt;" />
+              <mapsTo>PINfailureCounter</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;amountWithdrawnToday&gt;{/Insert_card/amountWithdrawnToday/text()}&lt;/amountWithdrawnToday&gt;" />
+              <mapsTo>amountWithdrawnToday</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;dailyLimit&gt;{/Insert_card/dailyLimit/text()}&lt;/dailyLimit&gt;" />
+              <mapsTo>dailyLimit</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;PIN&gt;{/Insert_card/PIN/text()}&lt;/PIN&gt;" />
+              <mapsTo>PIN</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;PINfailureCounter&gt;{0}&lt;/PINfailureCounter&gt;" />
+              <mapsTo>PINfailureCounter</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;accountNumber&gt;{/Insert_card/accountNumber/text()}&lt;/accountNumber&gt;" />
+              <mapsTo>accountNumber</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-16acabe4-a5fd-4daa-b178-0d4f1954f79e</role>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="system" />
+          </resourcing>
+          <decomposesTo id="Insert_card" />
+        </task>
+        <task id="Check_card">
+          <name>Check card</name>
+          <flowsInto>
+            <nextElementRef id="Keep_card" />
+            <predicate ordering="0">/ATM/cardStatus/text()='Card stolen'</predicate>
+          </flowsInto>
+          <flowsInto>
+            <nextElementRef id="Enter_PIN" />
+            <isDefaultFlow />
+          </flowsInto>
+          <flowsInto>
+            <nextElementRef id="Return_card" />
+            <predicate ordering="1">/ATM/cardStatus/text()='Card not readable'</predicate>
+          </flowsInto>
+          <join code="xor" />
+          <split code="xor" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;PIN&gt;{/ATM/PIN/text()}&lt;/PIN&gt;" />
+              <mapsTo>PIN</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;accountNumber&gt;{/ATM/accountNumber/text()}&lt;/accountNumber&gt;" />
+              <mapsTo>accountNumber</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;amountWithdrawnToday&gt;{/ATM/amountWithdrawnToday/text()}&lt;/amountWithdrawnToday&gt;" />
+              <mapsTo>amountWithdrawnToday</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;cardStatus&gt;{/ATM/cardStatus/text()}&lt;/cardStatus&gt;" />
+              <mapsTo>cardStatus</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;dailyLimit&gt;{/ATM/dailyLimit/text()}&lt;/dailyLimit&gt;" />
+              <mapsTo>dailyLimit</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;cardStatus&gt;{/Read_card_info/cardStatus/text()}&lt;/cardStatus&gt;" />
+              <mapsTo>cardStatus</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-8128fa1c-ffb0-4631-ad93-f41da72f2f81</role>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="system">
+              <allocator>
+                <name>RandomChoice</name>
+              </allocator>
+            </allocate>
+            <start initiator="system" />
+          </resourcing>
+          <decomposesTo id="Read_card_info" />
+        </task>
+        <task id="Enter_PIN">
+          <name>Enter PIN</name>
+          <flowsInto>
+            <nextElementRef id="Select_action" />
+            <predicate ordering="0">/ATM/PIN/text() = /ATM/PINentered/text()</predicate>
+          </flowsInto>
+          <flowsInto>
+            <nextElementRef id="Enter_PIN" />
+            <predicate ordering="1">number(/ATM/PINfailureCounter/text())!=3 and /ATM/PIN/text() != /ATM/PINentered/text()</predicate>
+          </flowsInto>
+          <flowsInto>
+            <nextElementRef id="Keep_card" />
+            <predicate ordering="2">number(/ATM/PINfailureCounter/text())=3 and /ATM/PIN/text() != /ATM/PINentered/text()</predicate>
+          </flowsInto>
+          <flowsInto>
+            <nextElementRef id="Return_card" />
+            <isDefaultFlow />
+          </flowsInto>
+          <join code="xor" />
+          <split code="xor" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;PINfailureCounter&gt;{/ATM/PINfailureCounter/text()}&lt;/PINfailureCounter&gt;" />
+              <mapsTo>PINfailureCounter</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;PINentered&gt;{/Enter_PIN/PINentered/text()}&lt;/PINentered&gt;" />
+              <mapsTo>PINentered</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;NoTimeout&gt;{/Enter_PIN/NoTimeout/text()}&lt;/NoTimeout&gt;" />
+              <mapsTo>NoTimeout</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;PINfailureCounter&gt;{  &#xA;if (/Enter_PIN/PINentered/text()=/ATM/PIN/text()) then &#xA; /Enter_PIN/PINfailureCounter/text()&#xA;else&#xA;number(/Enter_PIN/PINfailureCounter/text())+1 &#xA;}&lt;/PINfailureCounter&gt;" />
+              <mapsTo>PINfailureCounter</mapsTo>
+            </mapping>
+          </completedMappings>
+          <timer>
+            <trigger>OnEnabled</trigger>
+            <duration>PT2M</duration>
+          </timer>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet />
+              </distributionSet>
+              <familiarParticipant taskID="Insert_card" />
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="system" />
+          </resourcing>
+          <decomposesTo id="Enter_PIN" />
+        </task>
+        <task id="Keep_card">
+          <name>Keep card</name>
+          <flowsInto>
+            <nextElementRef id="Insert_card" />
+            <isDefaultFlow />
+          </flowsInto>
+          <join code="xor" />
+          <split code="xor" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;error&gt;{/ATM/error/text()}&lt;/error&gt;" />
+              <mapsTo>error</mapsTo>
+            </mapping>
+          </startingMappings>
+          <timer>
+            <trigger>OnEnabled</trigger>
+            <duration>PT1M</duration>
+          </timer>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet />
+              </distributionSet>
+              <familiarParticipant taskID="Insert_card" />
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="system" />
+          </resourcing>
+          <decomposesTo id="Keep_card" />
+        </task>
+        <task id="Return_card">
+          <name>Return card</name>
+          <flowsInto>
+            <nextElementRef id="Retract_card" />
+            <isDefaultFlow />
+          </flowsInto>
+          <join code="xor" />
+          <split code="xor" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;accountNumber&gt;{/ATM/accountNumber/text()}&lt;/accountNumber&gt;" />
+              <mapsTo>accountNumber</mapsTo>
+            </mapping>
+          </startingMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-6d2ea491-eb16-4ad5-8fed-6a07a5555506</role>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="system">
+              <allocator>
+                <name>RandomChoice</name>
+              </allocator>
+            </allocate>
+            <start initiator="system" />
+          </resourcing>
+          <decomposesTo id="Return_card" />
+        </task>
+        <task id="Retract_card">
+          <name>Retract card</name>
+          <flowsInto>
+            <nextElementRef id="Insert_card" />
+            <predicate ordering="0">/ATM/cardRetracted/text()='true' and /ATM/ToEnd/text()='false'</predicate>
+          </flowsInto>
+          <flowsInto>
+            <nextElementRef id="Keep_card" />
+            <predicate ordering="1">/ATM/cardRetracted/text()='false' and /ATM/ToEnd/text()='false'</predicate>
+          </flowsInto>
+          <flowsInto>
+            <nextElementRef id="OutputCondition_1" />
+            <isDefaultFlow />
+          </flowsInto>
+          <join code="xor" />
+          <split code="xor" />
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;cardRetracted&gt;{/Retract_card/cardRetracted/text()}&lt;/cardRetracted&gt;" />
+              <mapsTo>cardRetracted</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;ToEnd&gt;{/Retract_card/ToEnd/text()}&lt;/ToEnd&gt;" />
+              <mapsTo>ToEnd</mapsTo>
+            </mapping>
+          </completedMappings>
+          <timer>
+            <trigger>OnEnabled</trigger>
+            <duration>PT2M</duration>
+          </timer>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet />
+              </distributionSet>
+              <familiarParticipant taskID="Insert_card" />
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="system" />
+          </resourcing>
+          <decomposesTo id="Retract_card" />
+        </task>
+        <task id="Select_action">
+          <name>Select action</name>
+          <flowsInto>
+            <nextElementRef id="View_balance" />
+            <predicate ordering="0">/ATM/actionMenu/text() = 'View balance'</predicate>
+          </flowsInto>
+          <flowsInto>
+            <nextElementRef id="Ask_for_account_statement" />
+            <predicate ordering="1">/ATM/actionMenu/text() = 'Ask for account statement'</predicate>
+          </flowsInto>
+          <flowsInto>
+            <nextElementRef id="Withdraw_cash" />
+            <predicate ordering="2">/ATM/actionMenu/text() = 'Withdraw cash'</predicate>
+          </flowsInto>
+          <flowsInto>
+            <nextElementRef id="Return_card" />
+            <isDefaultFlow />
+          </flowsInto>
+          <join code="xor" />
+          <split code="xor" />
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;actionMenu&gt;{/Select_action/actionMenu/text()}&lt;/actionMenu&gt;" />
+              <mapsTo>actionMenu</mapsTo>
+            </mapping>
+          </completedMappings>
+          <timer>
+            <trigger>OnEnabled</trigger>
+            <duration>PT2M</duration>
+          </timer>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet />
+              </distributionSet>
+              <familiarParticipant taskID="Insert_card" />
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="system" />
+          </resourcing>
+          <decomposesTo id="Select_action" />
+        </task>
+        <task id="Ask_for_account_statement">
+          <name>Ask for account statement</name>
+          <flowsInto>
+            <nextElementRef id="Return_card" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;accountNumber&gt;{/ATM/accountNumber/text()}&lt;/accountNumber&gt;" />
+              <mapsTo>accountNumber</mapsTo>
+            </mapping>
+          </startingMappings>
+          <decomposesTo id="Ask_for_account_statement" />
+        </task>
+        <task id="View_balance">
+          <name>View balance</name>
+          <flowsInto>
+            <nextElementRef id="Return_card" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;accountNumber&gt;{/ATM/accountNumber/text()}&lt;/accountNumber&gt;" />
+              <mapsTo>accountNumber</mapsTo>
+            </mapping>
+          </startingMappings>
+          <decomposesTo id="View_balance" />
+        </task>
+        <task id="Withdraw_cash">
+          <name>Withdraw cash</name>
+          <flowsInto>
+            <nextElementRef id="Return_card" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;accountNumber&gt;{/ATM/accountNumber/text()}&lt;/accountNumber&gt;" />
+              <mapsTo>accountNumber</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;amountWithdrawnToday&gt;{/ATM/amountWithdrawnToday/text()}&lt;/amountWithdrawnToday&gt;" />
+              <mapsTo>amountWithdrawnToday</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;dailyLimit&gt;{/ATM/dailyLimit/text()}&lt;/dailyLimit&gt;" />
+              <mapsTo>dailyLimit</mapsTo>
+            </mapping>
+          </startingMappings>
+          <decomposesTo id="Withdraw_cash" />
+        </task>
+        <outputCondition id="OutputCondition_1" />
+      </processControlElements>
+    </decomposition>
+    <decomposition id="Ask_for_account_statement" xsi:type="NetFactsType">
+      <inputParam>
+        <index>0</index>
+        <name>accountNumber</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <localVariable>
+        <index>1</index>
+        <name>ackMessage</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>none</initialValue>
+      </localVariable>
+      <processControlElements>
+        <inputCondition id="InputCondition_2">
+          <flowsInto>
+            <nextElementRef id="Send_acknowledgement" />
+          </flowsInto>
+        </inputCondition>
+        <task id="Send_acknowledgement">
+          <name>Send acknowledgement</name>
+          <flowsInto>
+            <nextElementRef id="Note_reply" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;accountNumber&gt;{/Ask_for_account_statement/accountNumber/text()}&lt;/accountNumber&gt;" />
+              <mapsTo>accountNumber</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;ackMessage&gt;{/Send_acknowledgement/ackMessage/text()}&lt;/ackMessage&gt;" />
+              <mapsTo>ackMessage</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-6d2ea491-eb16-4ad5-8fed-6a07a5555506</role>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="system">
+              <allocator>
+                <name>RandomChoice</name>
+              </allocator>
+            </allocate>
+            <start initiator="system" />
+          </resourcing>
+          <decomposesTo id="Send_acknowledgement" />
+        </task>
+        <task id="Note_reply">
+          <name>Note reply</name>
+          <flowsInto>
+            <nextElementRef id="OutputCondition_2" />
+          </flowsInto>
+          <join code="and" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;accountNumber&gt;{/Ask_for_account_statement/accountNumber/text()}&lt;/accountNumber&gt;" />
+              <mapsTo>accountNumber</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;ackMessage&gt;{/Ask_for_account_statement/ackMessage/text()}&lt;/ackMessage&gt;" />
+              <mapsTo>ackMessage</mapsTo>
+            </mapping>
+          </startingMappings>
+          <timer>
+            <trigger>OnEnabled</trigger>
+            <duration>PT2M</duration>
+          </timer>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet />
+              </distributionSet>
+              <familiarParticipant taskID="Insert_card" />
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="system" />
+          </resourcing>
+          <decomposesTo id="Note_reply" />
+        </task>
+        <outputCondition id="OutputCondition_2" />
+      </processControlElements>
+    </decomposition>
+    <decomposition id="View_balance" xsi:type="NetFactsType">
+      <inputParam>
+        <index>0</index>
+        <name>accountNumber</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <localVariable>
+        <index>1</index>
+        <name>balance</name>
+        <type>integer</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>0</initialValue>
+      </localVariable>
+      <processControlElements>
+        <inputCondition id="InputCondition_3">
+          <flowsInto>
+            <nextElementRef id="Send_balance" />
+          </flowsInto>
+        </inputCondition>
+        <task id="Send_balance">
+          <name>Send balance</name>
+          <flowsInto>
+            <nextElementRef id="View_balance_1" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;accountNumber&gt;{/View_balance/accountNumber/text()}&lt;/accountNumber&gt;" />
+              <mapsTo>accountNumber</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;balance&gt;{/Send_balance/balance/text()}&lt;/balance&gt;" />
+              <mapsTo>balance</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-8128fa1c-ffb0-4631-ad93-f41da72f2f81</role>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="system">
+              <allocator>
+                <name>RandomChoice</name>
+              </allocator>
+            </allocate>
+            <start initiator="system" />
+          </resourcing>
+          <decomposesTo id="Send_balance" />
+        </task>
+        <task id="View_balance_1">
+          <name>View balance</name>
+          <flowsInto>
+            <nextElementRef id="OutputCondition_3" />
+          </flowsInto>
+          <join code="and" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;balance&gt;{/View_balance/balance/text()}&lt;/balance&gt;" />
+              <mapsTo>balance</mapsTo>
+            </mapping>
+          </startingMappings>
+          <timer>
+            <trigger>OnEnabled</trigger>
+            <duration>PT2M</duration>
+          </timer>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet />
+              </distributionSet>
+              <familiarParticipant taskID="Insert_card" />
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="system" />
+          </resourcing>
+          <decomposesTo id="View_balance_" />
+        </task>
+        <outputCondition id="OutputCondition_3" />
+      </processControlElements>
+    </decomposition>
+    <decomposition id="Withdraw_cash" xsi:type="NetFactsType">
+      <inputParam>
+        <index>0</index>
+        <name>dailyLimit</name>
+        <type>positiveInteger</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>1</index>
+        <name>amountWithdrawnToday</name>
+        <type>integer</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>2</index>
+        <name>accountNumber</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <localVariable>
+        <index>3</index>
+        <name>amountToWithdraw</name>
+        <type>positiveInteger</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>10</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>4</index>
+        <name>balance</name>
+        <type>int</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>0</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>5</index>
+        <name>amountAvailable</name>
+        <type>int</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>0</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>6</index>
+        <name>dispense</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>false</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>7</index>
+        <name>errorMessage</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>There is something wrong</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>8</index>
+        <name>NoTimeout</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>false</initialValue>
+      </localVariable>
+      <processControlElements>
+        <inputCondition id="InputCondition">
+          <flowsInto>
+            <nextElementRef id="Enter_amount" />
+          </flowsInto>
+        </inputCondition>
+        <task id="Enter_amount">
+          <name>Enter amount</name>
+          <flowsInto>
+            <nextElementRef id="get_Balance_for_withdrawal" />
+            <predicate ordering="0">/Withdraw_cash/NoTimeout/text()='true'</predicate>
+          </flowsInto>
+          <flowsInto>
+            <nextElementRef id="OutputCondition" />
+            <isDefaultFlow />
+          </flowsInto>
+          <join code="xor" />
+          <split code="xor" />
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;NoTimeout&gt;{/Enter_amount/NoTimeout/text()}&lt;/NoTimeout&gt;" />
+              <mapsTo>NoTimeout</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;amountToWithdraw&gt;{/Enter_amount/amountToWithdraw/text()}&lt;/amountToWithdraw&gt;" />
+              <mapsTo>amountToWithdraw</mapsTo>
+            </mapping>
+          </completedMappings>
+          <timer>
+            <trigger>OnEnabled</trigger>
+            <duration>PT2M</duration>
+          </timer>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet />
+              </distributionSet>
+              <familiarParticipant taskID="Insert_card" />
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="system" />
+          </resourcing>
+          <decomposesTo id="Enter_amount" />
+        </task>
+        <task id="get_Balance_for_withdrawal">
+          <name>get Balance for withdrawal</name>
+          <flowsInto>
+            <nextElementRef id="Decide_on_payment" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;accountNumber&gt;{/Withdraw_cash/accountNumber/text()}&lt;/accountNumber&gt;" />
+              <mapsTo>accountNumber</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;amountToWithdraw&gt;{/Withdraw_cash/amountToWithdraw/text()}&lt;/amountToWithdraw&gt;" />
+              <mapsTo>amountToWithdraw</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;dailyLimit&gt;{/Withdraw_cash/dailyLimit/text()}&lt;/dailyLimit&gt;" />
+              <mapsTo>dailyLimit</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;balance&gt;{/get_Balance_for_withdrawal/balance/text()}&lt;/balance&gt;" />
+              <mapsTo>balance</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-8128fa1c-ffb0-4631-ad93-f41da72f2f81</role>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="system">
+              <allocator>
+                <name>RandomChoice</name>
+              </allocator>
+            </allocate>
+            <start initiator="system" />
+          </resourcing>
+          <decomposesTo id="get_Balance_for_withdrawal" />
+        </task>
+        <task id="Decide_on_payment">
+          <name>Decide on payment</name>
+          <flowsInto>
+            <nextElementRef id="OutputCondition" />
+            <isDefaultFlow />
+          </flowsInto>
+          <flowsInto>
+            <nextElementRef id="Dispense_cash" />
+            <predicate ordering="0">number(/Withdraw_cash/amountToWithdraw/text()) &lt;= number(/Withdraw_cash/dailyLimit/text()-/Withdraw_cash/amountWithdrawnToday/text())  and number(/Withdraw_cash/amountToWithdraw/text()) &lt;= number(/Withdraw_cash/balance/text())</predicate>
+          </flowsInto>
+          <join code="and" />
+          <split code="xor" />
+          <resourcing>
+            <offer initiator="user" />
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Decide_on_payment" />
+        </task>
+        <task id="Dispense_cash">
+          <name>Dispense</name>
+          <flowsInto>
+            <nextElementRef id="Debit_account" />
+            <predicate ordering="0">true()</predicate>
+          </flowsInto>
+          <flowsInto>
+            <nextElementRef id="Log_dispense_timeout" />
+            <isDefaultFlow />
+          </flowsInto>
+          <join code="and" />
+          <split code="xor" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;amountToWithdraw&gt;{/Withdraw_cash/amountToWithdraw/text()}&lt;/amountToWithdraw&gt;" />
+              <mapsTo>amountToWithdraw</mapsTo>
+            </mapping>
+          </startingMappings>
+          <timer>
+            <trigger>OnEnabled</trigger>
+            <duration>PT2M</duration>
+          </timer>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet />
+              </distributionSet>
+              <familiarParticipant taskID="Insert_card" />
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="system" />
+          </resourcing>
+          <decomposesTo id="Pay_cash" />
+        </task>
+        <task id="Debit_account">
+          <name>Debit account</name>
+          <flowsInto>
+            <nextElementRef id="Adapt_daily_limit" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;balance&gt;{number(/Withdraw_cash/balance/text())-number(/Withdraw_cash/amountToWithdraw/text())}&lt;/balance&gt;" />
+              <mapsTo>balance</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;balance&gt;{/Debit_account/balance/text()}&lt;/balance&gt;" />
+              <mapsTo>balance</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-8128fa1c-ffb0-4631-ad93-f41da72f2f81</role>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="system">
+              <allocator>
+                <name>RandomChoice</name>
+              </allocator>
+            </allocate>
+            <start initiator="system" />
+          </resourcing>
+          <decomposesTo id="Debit_account" />
+        </task>
+        <task id="Log_dispense_timeout">
+          <name>Log dispense timeout</name>
+          <flowsInto>
+            <nextElementRef id="Debit_account" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;errorMessage&gt;{/Withdraw_cash/errorMessage/text()}&lt;/errorMessage&gt;" />
+              <mapsTo>errorMessage</mapsTo>
+            </mapping>
+          </startingMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-8128fa1c-ffb0-4631-ad93-f41da72f2f81</role>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="system">
+              <allocator>
+                <name>RandomChoice</name>
+              </allocator>
+            </allocate>
+            <start initiator="system" />
+          </resourcing>
+          <decomposesTo id="Log_dispense_timeout" />
+        </task>
+        <task id="Adapt_daily_limit">
+          <name>Adapt daily limit</name>
+          <flowsInto>
+            <nextElementRef id="OutputCondition" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;amountWithdrawnToday&gt;{number(/Withdraw_cash/amountWithdrawnToday/text())+number(/Withdraw_cash/amountToWithdraw/text())}&lt;/amountWithdrawnToday&gt;" />
+              <mapsTo>amountWithdrawnToday</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;balance&gt;{/Withdraw_cash/balance/text()}&lt;/balance&gt;" />
+              <mapsTo>balance</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;dailyLimit&gt;{/Withdraw_cash/dailyLimit/text()}&lt;/dailyLimit&gt;" />
+              <mapsTo>dailyLimit</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;amountWithdrawnToday&gt;{/Adapt_daily_limit/amountWithdrawnToday/text()}&lt;/amountWithdrawnToday&gt;" />
+              <mapsTo>amountWithdrawnToday</mapsTo>
+            </mapping>
+          </completedMappings>
+          <timer>
+            <trigger>OnEnabled</trigger>
+            <duration>PT2M</duration>
+          </timer>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet />
+              </distributionSet>
+              <familiarParticipant taskID="Insert_card" />
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="system" />
+          </resourcing>
+          <decomposesTo id="Register_on_card" />
+        </task>
+        <outputCondition id="OutputCondition" />
+      </processControlElements>
+    </decomposition>
+    <decomposition id="Debit_account" xsi:type="WebServiceGatewayFactsType">
+      <name>Debit account</name>
+      <inputParam readOnly="true">
+        <index>0</index>
+        <name>balance</name>
+        <type>integer</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam readOnly="true">
+        <index>0</index>
+        <name>balance</name>
+        <type>integer</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <codelet>org.yawlfoundation.yawl.resourcing.codelets.MinSpecialCodelet</codelet>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Decide_on_payment" xsi:type="WebServiceGatewayFactsType">
+      <name>Decide on payment</name>
+      <externalInteraction>automated</externalInteraction>
+    </decomposition>
+    <decomposition id="Enter_PIN" xsi:type="WebServiceGatewayFactsType">
+      <inputParam hide="true" readOnly="true">
+        <index>2</index>
+        <name>PINfailureCounter</name>
+        <type>long</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>0</index>
+        <name>PINentered</name>
+        <type>positiveInteger</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <outputParam>
+        <index>1</index>
+        <name>NoTimeout</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <outputParam hide="true" readOnly="true">
+        <index>2</index>
+        <name>PINfailureCounter</name>
+        <type>long</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Enter_amount" xsi:type="WebServiceGatewayFactsType">
+      <outputParam>
+        <index>0</index>
+        <name>amountToWithdraw</name>
+        <type>positiveInteger</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <outputParam>
+        <index>1</index>
+        <name>NoTimeout</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Insert_card" xsi:type="WebServiceGatewayFactsType">
+      <inputParam hide="true" readOnly="true">
+        <index>4</index>
+        <name>PINfailureCounter</name>
+        <type>long</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>0</index>
+        <name>accountNumber</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <outputParam>
+        <index>1</index>
+        <name>PIN</name>
+        <type>positiveInteger</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <outputParam>
+        <index>2</index>
+        <name>dailyLimit</name>
+        <type>positiveInteger</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <outputParam>
+        <index>3</index>
+        <name>amountWithdrawnToday</name>
+        <type>integer</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <outputParam hide="true" readOnly="true">
+        <index>4</index>
+        <name>PINfailureCounter</name>
+        <type>long</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Keep_card" xsi:type="WebServiceGatewayFactsType">
+      <name>Keep card</name>
+      <inputParam>
+        <index>0</index>
+        <name>error</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Log_dispense_timeout" xsi:type="WebServiceGatewayFactsType">
+      <name>Log dispense timeout</name>
+      <inputParam>
+        <index>0</index>
+        <name>errorMessage</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Note_reply" xsi:type="WebServiceGatewayFactsType">
+      <inputParam>
+        <index>0</index>
+        <name>accountNumber</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>1</index>
+        <name>ackMessage</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Pay_cash" xsi:type="WebServiceGatewayFactsType">
+      <inputParam>
+        <index>0</index>
+        <name>amountToWithdraw</name>
+        <type>positiveInteger</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Read_card_info" xsi:type="WebServiceGatewayFactsType">
+      <inputParam>
+        <index>0</index>
+        <name>accountNumber</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>1</index>
+        <name>PIN</name>
+        <type>positiveInteger</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>2</index>
+        <name>dailyLimit</name>
+        <type>positiveInteger</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>3</index>
+        <name>amountWithdrawnToday</name>
+        <type>positiveInteger</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>4</index>
+        <name>cardStatus</name>
+        <type>CardStatusType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>4</index>
+        <name>cardStatus</name>
+        <type>CardStatusType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Register_on_card" xsi:type="WebServiceGatewayFactsType">
+      <inputParam>
+        <index>0</index>
+        <name>balance</name>
+        <type>integer</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>1</index>
+        <name>dailyLimit</name>
+        <type>positiveInteger</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam readOnly="true">
+        <index>2</index>
+        <name>amountWithdrawnToday</name>
+        <type>integer</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam readOnly="true">
+        <index>2</index>
+        <name>amountWithdrawnToday</name>
+        <type>integer</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <codelet>ExampleCodelet</codelet>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Retract_card" xsi:type="WebServiceGatewayFactsType">
+      <name>Retract card</name>
+      <outputParam>
+        <index>0</index>
+        <name>cardRetracted</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <outputParam>
+        <index>1</index>
+        <name>ToEnd</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Return_card" xsi:type="WebServiceGatewayFactsType">
+      <inputParam>
+        <index>0</index>
+        <name>accountNumber</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Select_action" xsi:type="WebServiceGatewayFactsType">
+      <outputParam text-above="Please select an action.">
+        <index>0</index>
+        <name>actionMenu</name>
+        <type>ActionMenuType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Send_acknowledgement" xsi:type="WebServiceGatewayFactsType">
+      <inputParam>
+        <index>0</index>
+        <name>accountNumber</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>1</index>
+        <name>ackMessage</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue>An account statement will be sent</defaultValue>
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Send_balance" xsi:type="WebServiceGatewayFactsType">
+      <inputParam>
+        <index>0</index>
+        <name>accountNumber</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>1</index>
+        <name>balance</name>
+        <type>integer</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="View_balance_" xsi:type="WebServiceGatewayFactsType">
+      <inputParam>
+        <index>0</index>
+        <name>balance</name>
+        <type>integer</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="get_Balance_for_withdrawal" xsi:type="WebServiceGatewayFactsType">
+      <name>get Balance for withdrawal</name>
+      <inputParam>
+        <index>0</index>
+        <name>accountNumber</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>1</index>
+        <name>dailyLimit</name>
+        <type>positiveInteger</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>2</index>
+        <name>amountToWithdraw</name>
+        <type>positiveInteger</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>3</index>
+        <name>balance</name>
+        <type>integer</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+  </specification>
+  <layout>
+    <locale language="en" country="GB"/>
+    <specification id="ATM-new" defaultBgColor="-526351">
+      <size w="233" h="81"/>
+      <net id="ATM">
+        <bounds x="0" y="-119" w="853" h="484"/>
+        <frame x="0" y="0" w="871" h="368"/>
+        <viewport x="0" y="0" w="871" h="368"/>
+        <vertex id="InputCondition_1">
+          <attributes>
+            <bounds x="12" y="252" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <vertex id="OutputCondition_1">
+          <attributes>
+            <bounds x="788" y="252" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <container id="Check_card">
+          <vertex>
+            <iconpath>database.png</iconpath>
+            <attributes>
+              <bounds x="164" y="252" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="136" y="284" w="96" h="20"/>
+            </attributes>
+          </label>
+          <decorator type="XOR_split">
+            <position>13</position>
+            <attributes>
+              <bounds x="195" y="252" w="11" h="32"/>
+            </attributes>
+          </decorator>
+        </container>
+        <container id="Return_card">
+          <vertex>
+            <iconpath>automaticone.png</iconpath>
+            <attributes>
+              <bounds x="628" y="252" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="592" y="284" w="96" h="20"/>
+            </attributes>
+          </label>
+          <decorator type="XOR_join">
+            <position>12</position>
+            <attributes>
+              <bounds x="618" y="252" w="11" h="32"/>
+            </attributes>
+          </decorator>
+        </container>
+        <container id="Retract_card">
+          <vertex>
+            <iconpath>monitor.png</iconpath>
+            <attributes>
+              <bounds x="700" y="252" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="672" y="284" w="96" h="20"/>
+            </attributes>
+          </label>
+          <decorator type="XOR_split">
+            <position>13</position>
+            <attributes>
+              <bounds x="731" y="252" w="11" h="32"/>
+            </attributes>
+          </decorator>
+        </container>
+        <container id="Keep_card">
+          <vertex>
+            <iconpath>monitor.png</iconpath>
+            <attributes>
+              <bounds x="160" y="352" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="132" y="384" w="96" h="20"/>
+            </attributes>
+          </label>
+          <decorator type="XOR_join">
+            <position>13</position>
+            <attributes>
+              <bounds x="191" y="352" w="11" h="32"/>
+            </attributes>
+          </decorator>
+        </container>
+        <container id="Withdraw_cash">
+          <vertex>
+            <attributes>
+              <bounds x="512" y="252" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="480" y="284" w="96" h="20"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="Select_action">
+          <vertex>
+            <iconpath>monitor.png</iconpath>
+            <attributes>
+              <bounds x="376" y="252" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="348" y="284" w="96" h="20"/>
+            </attributes>
+          </label>
+          <decorator type="XOR_split">
+            <position>13</position>
+            <attributes>
+              <bounds x="407" y="252" w="11" h="32"/>
+            </attributes>
+          </decorator>
+        </container>
+        <container id="Enter_PIN">
+          <vertex>
+            <iconpath>monitor.png</iconpath>
+            <attributes>
+              <bounds x="288" y="252" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="256" y="284" w="96" h="20"/>
+            </attributes>
+          </label>
+          <decorator type="XOR_split">
+            <position>13</position>
+            <attributes>
+              <bounds x="319" y="252" w="11" h="32"/>
+            </attributes>
+          </decorator>
+          <decorator type="XOR_join">
+            <position>12</position>
+            <attributes>
+              <bounds x="278" y="252" w="11" h="32"/>
+            </attributes>
+          </decorator>
+        </container>
+        <container id="Insert_card">
+          <vertex>
+            <iconpath>monitor.png</iconpath>
+            <attributes>
+              <bounds x="96" y="252" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="60" y="284" w="96" h="20"/>
+            </attributes>
+          </label>
+          <decorator type="XOR_join">
+            <position>12</position>
+            <attributes>
+              <bounds x="86" y="252" w="11" h="32"/>
+            </attributes>
+          </decorator>
+        </container>
+        <container id="Ask_for_account_statement">
+          <vertex>
+            <attributes>
+              <bounds x="512" y="308" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="480" y="340" w="96" h="60"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="View_balance">
+          <vertex>
+            <attributes>
+              <bounds x="512" y="200" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="480" y="232" w="96" h="20"/>
+            </attributes>
+          </label>
+        </container>
+        <flow source="Enter_PIN" target="Select_action">
+          <ports in="2" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="Retract_card" target="OutputCondition_1">
+          <ports in="2" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="985" y="239.5"/>
+              <value x="972" y="167.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Check_card" target="Keep_card">
+          <ports in="3" out="2"/>
+          <attributes>
+            <offset x="0" y="-0"/>
+            <labelposition x="364.752" y="1.204"/>
+            <lineStyle>13</lineStyle>
+            <points>
+              <value x="205" y="275.25"/>
+              <value x="256" y="356"/>
+              <value x="201" y="367.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="InputCondition_1" target="Insert_card">
+          <ports in="13" out="2"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="47" y="167.5"/>
+              <value x="88" y="167.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Select_action" target="Ask_for_account_statement">
+          <ports in="2" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="577" y="251.5"/>
+              <value x="628" y="331.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Select_action" target="Return_card">
+          <ports in="1" out="2"/>
+          <attributes>
+            <lineStyle>13</lineStyle>
+            <points>
+              <value x="417" y="259.75"/>
+              <value x="532" y="192"/>
+              <value x="618" y="267.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Return_card" target="Retract_card">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="Enter_PIN" target="Enter_PIN">
+          <ports in="3" out="3"/>
+          <attributes>
+            <lineStyle>13</lineStyle>
+            <points>
+              <value x="329" y="275.25"/>
+              <value x="336" y="304"/>
+              <value x="264" y="300"/>
+              <value x="278" y="275.25"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Select_action" target="View_balance">
+          <ports in="2" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="577" y="251.5"/>
+              <value x="628" y="167.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Check_card" target="Return_card">
+          <ports in="1" out="2"/>
+          <attributes>
+            <offset x="0" y="-0"/>
+            <labelposition x="469.148" y="-23.931"/>
+            <lineStyle>13</lineStyle>
+            <points>
+              <value x="205" y="259.75"/>
+              <value x="324" y="200"/>
+              <value x="568" y="196"/>
+              <value x="618" y="267.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Keep_card" target="Insert_card">
+          <ports in="12" out="2"/>
+          <attributes>
+            <lineStyle>13</lineStyle>
+            <points>
+              <value x="256" y="391.5"/>
+              <value x="64" y="316"/>
+              <value x="86" y="267.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Enter_PIN" target="Keep_card">
+          <ports in="3" out="2"/>
+          <attributes>
+            <lineStyle>13</lineStyle>
+            <points>
+              <value x="329" y="275.25"/>
+              <value x="352" y="316"/>
+              <value x="201" y="367.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Select_action" target="Withdraw_cash">
+          <ports in="2" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="577" y="251.5"/>
+              <value x="628" y="251.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Retract_card" target="Keep_card">
+          <ports in="2" out="2"/>
+          <attributes>
+            <lineStyle>13</lineStyle>
+            <points>
+              <value x="741" y="267.5"/>
+              <value x="760" y="288"/>
+              <value x="640" y="384"/>
+              <value x="512" y="412"/>
+              <value x="464" y="416"/>
+              <value x="225" y="371.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Withdraw_cash" target="Return_card">
+          <ports in="13" out="2"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="671" y="267.5"/>
+              <value x="834" y="275.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="View_balance" target="Return_card">
+          <ports in="13" out="2"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="671" y="199.5"/>
+              <value x="834" y="267.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Check_card" target="Enter_PIN">
+          <ports in="2" out="2"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="Enter_PIN" target="Return_card">
+          <ports in="2" out="2"/>
+          <attributes>
+            <lineStyle>13</lineStyle>
+            <points>
+              <value x="329" y="267.5"/>
+              <value x="548" y="188"/>
+              <value x="618" y="267.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Ask_for_account_statement" target="Return_card">
+          <ports in="13" out="2"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="671" y="335.5"/>
+              <value x="834" y="267.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Insert_card" target="Check_card">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="Retract_card" target="Insert_card">
+          <ports in="2" out="2"/>
+          <attributes>
+            <lineStyle>13</lineStyle>
+            <points>
+              <value x="741" y="267.5"/>
+              <value x="780" y="320"/>
+              <value x="668" y="412"/>
+              <value x="508" y="456"/>
+              <value x="256" y="440"/>
+              <value x="56" y="304"/>
+              <value x="86" y="267.5"/>
+            </points>
+          </attributes>
+        </flow>
+      </net>
+      <net id="Withdraw_cash">
+        <bounds x="0" y="0" w="868" h="365"/>
+        <frame x="0" y="0" w="871" h="368"/>
+        <viewport x="0" y="0" w="871" h="368"/>
+        <vertex id="OutputCondition">
+          <attributes>
+            <bounds x="740" y="216" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <vertex id="InputCondition">
+          <attributes>
+            <bounds x="36" y="216" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <container id="Decide_on_payment">
+          <vertex>
+            <iconpath>automaticone.png</iconpath>
+            <attributes>
+              <bounds x="292" y="216" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="264" y="248" w="96" h="40"/>
+            </attributes>
+          </label>
+          <decorator type="XOR_split">
+            <position>13</position>
+            <attributes>
+              <bounds x="323" y="216" w="11" h="32"/>
+            </attributes>
+          </decorator>
+        </container>
+        <container id="Enter_amount">
+          <vertex>
+            <iconpath>monitor.png</iconpath>
+            <attributes>
+              <bounds x="104" y="216" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="76" y="248" w="96" h="20"/>
+            </attributes>
+          </label>
+          <decorator type="XOR_split">
+            <position>13</position>
+            <attributes>
+              <bounds x="135" y="216" w="11" h="32"/>
+            </attributes>
+          </decorator>
+        </container>
+        <container id="Adapt_daily_limit">
+          <vertex>
+            <iconpath>monitor.png</iconpath>
+            <attributes>
+              <bounds x="664" y="216" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="632" y="248" w="96" h="20"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="Log_dispense_timeout">
+          <vertex>
+            <iconpath>database.png</iconpath>
+            <attributes>
+              <bounds x="484" y="260" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="452" y="292" w="96" h="40"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="get_Balance_for_withdrawal">
+          <vertex>
+            <iconpath>database.png</iconpath>
+            <attributes>
+              <bounds x="212" y="216" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="180" y="248" w="96" h="40"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="Dispense_cash">
+          <vertex>
+            <iconpath>monitor.png</iconpath>
+            <attributes>
+              <bounds x="396" y="216" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="368" y="248" w="96" h="20"/>
+            </attributes>
+          </label>
+          <decorator type="XOR_split">
+            <position>13</position>
+            <attributes>
+              <bounds x="427" y="216" w="11" h="32"/>
+            </attributes>
+          </decorator>
+        </container>
+        <container id="Debit_account">
+          <vertex>
+            <iconpath>database.png</iconpath>
+            <attributes>
+              <bounds x="572" y="216" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="536" y="248" w="96" h="20"/>
+            </attributes>
+          </label>
+          <decorator type="XOR_join">
+            <position>12</position>
+            <attributes>
+              <bounds x="562" y="216" w="11" h="32"/>
+            </attributes>
+          </decorator>
+        </container>
+        <flow source="Dispense_cash" target="Debit_account">
+          <ports in="2" out="2"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="629" y="226.5"/>
+              <value x="734" y="222.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Enter_amount" target="OutputCondition">
+          <ports in="2" out="12"/>
+          <attributes>
+            <lineStyle>13</lineStyle>
+            <points>
+              <value x="145" y="231.5"/>
+              <value x="232" y="204"/>
+              <value x="736" y="228"/>
+              <value x="740" y="231.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="InputCondition" target="Enter_amount">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="get_Balance_for_withdrawal" target="Decide_on_payment">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="Dispense_cash" target="Log_dispense_timeout">
+          <ports in="3" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="Adapt_daily_limit" target="OutputCondition">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="883" y="255.5"/>
+              <value x="1,072" y="231.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Debit_account" target="Adapt_daily_limit">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="Decide_on_payment" target="Dispense_cash">
+          <ports in="2" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="509" y="226.5"/>
+              <value x="588" y="226.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Log_dispense_timeout" target="Debit_account">
+          <ports in="13" out="2"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="591" y="287.5"/>
+              <value x="662" y="231.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Decide_on_payment" target="OutputCondition">
+          <ports in="2" out="12"/>
+          <attributes>
+            <lineStyle>13</lineStyle>
+            <points>
+              <value x="333" y="231.5"/>
+              <value x="689" y="201"/>
+              <value x="740" y="231.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Enter_amount" target="get_Balance_for_withdrawal">
+          <ports in="2" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+      </net>
+      <net id="Ask_for_account_statement">
+        <bounds x="0" y="0" w="868" h="365"/>
+        <frame x="0" y="0" w="871" h="368"/>
+        <viewport x="0" y="0" w="871" h="368"/>
+        <vertex id="InputCondition_2">
+          <attributes>
+            <bounds x="36" y="108" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <vertex id="OutputCondition_2">
+          <attributes>
+            <bounds x="304" y="108" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <container id="Note_reply">
+          <vertex>
+            <iconpath>monitor.png</iconpath>
+            <attributes>
+              <bounds x="216" y="108" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="184" y="140" w="96" h="20"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="Send_acknowledgement">
+          <vertex>
+            <iconpath>/org/yawlfoundation/yawl/editor/ui/resources/taskicons/AutomaticOne.png</iconpath>
+            <attributes>
+              <bounds x="116" y="108" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="79" y="140" w="106" h="40"/>
+            </attributes>
+          </label>
+        </container>
+        <flow source="Send_acknowledgement" target="Note_reply">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="295" y="35.5"/>
+              <value x="410" y="127.3"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Note_reply" target="OutputCondition_2">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="451" y="119.5"/>
+              <value x="492" y="119.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="InputCondition_2" target="Send_acknowledgement">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+      </net>
+      <net id="View_balance">
+        <bounds x="0" y="0" w="868" h="365"/>
+        <frame x="0" y="0" w="871" h="368"/>
+        <viewport x="0" y="0" w="871" h="368"/>
+        <vertex id="InputCondition_3">
+          <attributes>
+            <bounds x="36" y="108" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <vertex id="OutputCondition_3">
+          <attributes>
+            <bounds x="292" y="108" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <container id="Send_balance">
+          <vertex>
+            <iconpath>database.png</iconpath>
+            <attributes>
+              <bounds x="124" y="108" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="92" y="140" w="96" h="20"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="View_balance_1">
+          <vertex>
+            <iconpath>monitor.png</iconpath>
+            <attributes>
+              <bounds x="220" y="108" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="188" y="140" w="96" h="20"/>
+            </attributes>
+          </label>
+        </container>
+        <flow source="Send_balance" target="View_balance_1">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="295" y="47.5"/>
+              <value x="354" y="115.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="InputCondition_3" target="Send_balance">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="View_balance_1" target="OutputCondition_3">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="405" y="115.5"/>
+              <value x="488" y="115.5"/>
+            </points>
+          </attributes>
+        </flow>
+      </net>
+      <labelFontSize>12</labelFontSize>
+    </specification>
+  </layout>
+</specificationSet>

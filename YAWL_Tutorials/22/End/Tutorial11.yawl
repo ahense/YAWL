@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<specificationSet xmlns="http://www.yawlfoundation.org/yawlschema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4.0" xsi:schemaLocation="http://www.yawlfoundation.org/yawlschema http://www.yawlfoundation.org/yawlschema/YAWL_Schema4.0.xsd">
+  <specification uri="Tutorial11">
+    <name>Interview Candidates</name>
+    <documentation>A simple tutorial for using multiple instance tasks in YAWL.</documentation>
+    <metaData>
+      <title>Interview Candidates</title>
+      <creator>ahense</creator>
+      <description>Using multiple instance tasks in YAWL.</description>
+      <coverage>4.3.1.772</coverage>
+      <version>0.1</version>
+      <persistent>false</persistent>
+      <identifier>UID_174c49ee-92fc-4a3e-9e4a-1faaf0005f24</identifier>
+    </metaData>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:complexType name="candidateType">
+        <xs:sequence>
+          <xs:element name="Name" type="xs:string" />
+          <xs:element name="Phone_number" type="xs:string" />
+          <xs:element name="Comment" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="candidatesType">
+        <xs:sequence>
+          <xs:element name="Candidate" type="candidateType" minOccurs="1" maxOccurs="unbounded" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <decomposition id="Interview_Candidates" isRootNet="true" xsi:type="NetFactsType">
+      <localVariable>
+        <index>0</index>
+        <name>candidates</name>
+        <type>candidatesType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>&lt;Candidate&gt;    &lt;Name&gt;&lt;/Name&gt;    &lt;Phone_number&gt;&lt;/Phone_number&gt;    &lt;Comment&gt;&lt;/Comment&gt; &lt;/Candidate&gt;</initialValue>
+      </localVariable>
+      <processControlElements>
+        <inputCondition id="InputCondition">
+          <flowsInto>
+            <nextElementRef id="Edit_candidate_list" />
+          </flowsInto>
+        </inputCondition>
+        <task id="Edit_candidate_list">
+          <name>Edit candidate list</name>
+          <flowsInto>
+            <nextElementRef id="Interview_candidates" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;candidates&gt;{/Interview_Candidates/candidates/*}&lt;/candidates&gt;" />
+              <mapsTo>candidates</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;candidates&gt;{/Edit_candidate_list/candidates/*}&lt;/candidates&gt;" />
+              <mapsTo>candidates</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="user" />
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Edit_candidate_list" />
+        </task>
+        <task id="Interview_candidates" xsi:type="MultipleInstanceExternalTaskFactsType">
+          <name>Interview candidates</name>
+          <flowsInto>
+            <nextElementRef id="Check_candidate_list" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <resourcing>
+            <offer initiator="user" />
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Interview_candidates" />
+          <minimum>1</minimum>
+          <maximum>100</maximum>
+          <threshold>3</threshold>
+          <creationMode code="dynamic" />
+          <miDataInput>
+            <expression query="/Interview_Candidates/candidates" />
+            <splittingExpression query="for $s in /candidates/* return &lt;candidates_Item&gt;{$s/*}&lt;/candidates_Item&gt;" />
+            <formalInputParam>candidates_Item</formalInputParam>
+          </miDataInput>
+          <miDataOutput>
+            <formalOutputExpression query="&lt;Candidate&gt;{/Interview_candidates/candidates_Item/*}&lt;/Candidate&gt;" />
+            <outputJoiningExpression query="&lt;candidates&gt;{for $j in /Interview_candidates/Candidate return $j}&lt;/candidates&gt;" />
+            <resultAppliedToLocalVariable>candidates</resultAppliedToLocalVariable>
+          </miDataOutput>
+        </task>
+        <task id="Check_candidate_list">
+          <name>Check candidate list</name>
+          <flowsInto>
+            <nextElementRef id="OutputCondition" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;candidates&gt;{/Interview_Candidates/candidates/*}&lt;/candidates&gt;" />
+              <mapsTo>candidates</mapsTo>
+            </mapping>
+          </startingMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet />
+              </distributionSet>
+              <familiarParticipant taskID="Edit_candidate_list" />
+            </offer>
+            <allocate initiator="system">
+              <allocator>
+                <name>RandomChoice</name>
+              </allocator>
+            </allocate>
+            <start initiator="system" />
+          </resourcing>
+          <decomposesTo id="Check_candidate_list" />
+        </task>
+        <outputCondition id="OutputCondition" />
+      </processControlElements>
+    </decomposition>
+    <decomposition id="Check_candidate_list" xsi:type="WebServiceGatewayFactsType">
+      <name>Check candidate list</name>
+      <inputParam>
+        <index>0</index>
+        <name>candidates</name>
+        <type>candidatesType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Edit_candidate_list" xsi:type="WebServiceGatewayFactsType">
+      <name>Edit candidate list</name>
+      <inputParam>
+        <index>0</index>
+        <name>candidates</name>
+        <type>candidatesType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>0</index>
+        <name>candidates</name>
+        <type>candidatesType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Interview_candidates" xsi:type="WebServiceGatewayFactsType">
+      <name>Interview candidates</name>
+      <inputParam>
+        <index>0</index>
+        <name>candidates_Item</name>
+        <type>candidateType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>0</index>
+        <name>candidates_Item</name>
+        <type>candidateType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+  </specification>
+  <layout>
+    <locale language="en" country="GB"/>
+    <specification id="Tutorial11" defaultBgColor="-526351">
+      <size w="144" h="43"/>
+      <net id="Interview_Candidates">
+        <bounds x="0" y="0" w="962" h="402"/>
+        <frame x="0" y="0" w="965" h="405"/>
+        <viewport x="0" y="0" w="965" h="405"/>
+        <scale>1.5</scale>
+        <vertex id="OutputCondition">
+          <attributes>
+            <bounds x="548" y="96" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <vertex id="InputCondition">
+          <attributes>
+            <bounds x="36" y="96" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <container id="Check_candidate_list">
+          <vertex>
+            <attributes>
+              <bounds x="420" y="96" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="388" y="128" w="96" h="54"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="Interview_candidates">
+          <vertex>
+            <attributes>
+              <bounds x="284" y="96" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="252" y="126" w="97" h="43"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="Edit_candidate_list">
+          <vertex>
+            <attributes>
+              <bounds x="152" y="96" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="120" y="128" w="96" h="54"/>
+            </attributes>
+          </label>
+        </container>
+        <flow source="Edit_candidate_list" target="Interview_candidates">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="183" y="107.5"/>
+              <value x="328" y="107.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Check_candidate_list" target="OutputCondition">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="Interview_candidates" target="Check_candidate_list">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="InputCondition" target="Edit_candidate_list">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="67" y="107.5"/>
+              <value x="152" y="107.5"/>
+            </points>
+          </attributes>
+        </flow>
+      </net>
+    </specification>
+  </layout>
+</specificationSet>

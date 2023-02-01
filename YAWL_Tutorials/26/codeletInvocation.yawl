@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<specificationSet xmlns="http://www.yawlfoundation.org/yawlschema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4.0" xsi:schemaLocation="http://www.yawlfoundation.org/yawlschema http://www.yawlfoundation.org/yawlschema/YAWL_Schema4.0.xsd">
+  <specification uri="codeletInvocation">
+    <documentation>No description provided</documentation>
+    <metaData>
+      <creator>ahense</creator>
+      <description>No description provided</description>
+      <coverage>4.3.1.769</coverage>
+      <version>0.3</version>
+      <persistent>false</persistent>
+      <identifier>UID_9559a7d4-3e92-4071-8b6c-5c435cd3b21b</identifier>
+    </metaData>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+    <decomposition id="Net" isRootNet="true" xsi:type="NetFactsType">
+      <localVariable>
+        <index>0</index>
+        <name>max</name>
+        <type>positiveInteger</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>1</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>1</index>
+        <name>r</name>
+        <type>positiveInteger</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>1</initialValue>
+      </localVariable>
+      <processControlElements>
+        <inputCondition id="InputCondition">
+          <flowsInto>
+            <nextElementRef id="Set_max" />
+          </flowsInto>
+        </inputCondition>
+        <task id="Set_max">
+          <name>Set max</name>
+          <flowsInto>
+            <nextElementRef id="Invoke_codelet" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;max&gt;{/Set_max/max/text()}&lt;/max&gt;" />
+              <mapsTo>max</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="user" />
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Set_max" />
+        </task>
+        <task id="Invoke_codelet">
+          <name>Invoke codelet</name>
+          <flowsInto>
+            <nextElementRef id="Check_random_number" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;max&gt;{/Net/max/text()}&lt;/max&gt;" />
+              <mapsTo>max</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;r&gt;{/Invoke_codelet/r/text()}&lt;/r&gt;" />
+              <mapsTo>r</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="user" />
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Invoke_codelet" />
+        </task>
+        <task id="Check_random_number">
+          <name>Check random number</name>
+          <flowsInto>
+            <nextElementRef id="OutputCondition" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;r&gt;{/Net/r/text()}&lt;/r&gt;" />
+              <mapsTo>r</mapsTo>
+            </mapping>
+          </startingMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet />
+              </distributionSet>
+              <familiarParticipant taskID="Set_max" />
+            </offer>
+            <allocate initiator="system">
+              <allocator>
+                <name>RandomChoice</name>
+              </allocator>
+            </allocate>
+            <start initiator="system" />
+          </resourcing>
+          <decomposesTo id="Check_random_number" />
+        </task>
+        <outputCondition id="OutputCondition" />
+      </processControlElements>
+    </decomposition>
+    <decomposition id="Check_random_number" xsi:type="WebServiceGatewayFactsType">
+      <name>Check random number</name>
+      <inputParam>
+        <index>0</index>
+        <name>r</name>
+        <type>positiveInteger</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Invoke_codelet" xsi:type="WebServiceGatewayFactsType">
+      <name>Invoke codelet</name>
+      <inputParam>
+        <index>1</index>
+        <documentation>maximum random number</documentation>
+        <name>max</name>
+        <type>int</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>1</index>
+        <documentation>randomized number</documentation>
+        <name>r</name>
+        <type>int</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <codelet>org.yawlfoundation.yawl.resourcing.codelets.RandomNumberCodelet</codelet>
+      <externalInteraction>automated</externalInteraction>
+    </decomposition>
+    <decomposition id="Set_max" xsi:type="WebServiceGatewayFactsType">
+      <name>Set max</name>
+      <outputParam>
+        <index>0</index>
+        <name>max</name>
+        <type>positiveInteger</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+  </specification>
+  <layout>
+    <locale language="en" country="GB"/>
+    <specification id="codeletInvocation" defaultBgColor="-526351">
+      <size w="62" h="26"/>
+      <net id="Net">
+        <bounds x="0" y="0" w="875" h="510"/>
+        <frame x="0" y="0" w="878" h="513"/>
+        <viewport x="0" y="0" w="878" h="513"/>
+        <vertex id="OutputCondition">
+          <attributes>
+            <bounds x="652" y="68" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <vertex id="InputCondition">
+          <attributes>
+            <bounds x="36" y="68" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <container id="Check_random_number">
+          <vertex>
+            <attributes>
+              <bounds x="480" y="68" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="448" y="100" w="96" h="40"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="Set_max">
+          <vertex>
+            <attributes>
+              <bounds x="168" y="68" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="136" y="100" w="96" h="20"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="Invoke_codelet">
+          <vertex>
+            <attributes>
+              <bounds x="316" y="68" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="284" y="100" w="96" h="20"/>
+            </attributes>
+          </label>
+        </container>
+        <flow source="Invoke_codelet" target="Check_random_number">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="511" y="79.5"/>
+              <value x="680" y="79.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Check_random_number" target="OutputCondition">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="711" y="79.5"/>
+              <value x="872" y="79.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Set_max" target="Invoke_codelet">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="275" y="79.5"/>
+              <value x="480" y="79.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="InputCondition" target="Set_max">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="67" y="79.5"/>
+              <value x="244" y="79.5"/>
+            </points>
+          </attributes>
+        </flow>
+      </net>
+    </specification>
+  </layout>
+</specificationSet>

@@ -1,0 +1,39 @@
+<spec uri="Fix_Locally" version="0.1" identifier="UID_a05bf1fd-2310-44d3-8418-f4cbbdddc15f">
+  <timeout>
+    <task name="Fix_Locally">
+      <ruleNode>
+        <id>231</id>
+        <parent>-1</parent>
+        <trueChild>232</trueChild>
+        <falseChild>-1</falseChild>
+        <condition>true</condition>
+        <description>root node</description>
+      </ruleNode>
+      <ruleNode>
+        <id>232</id>
+        <parent>231</parent>
+        <trueChild>-1</trueChild>
+        <falseChild>-1</falseChild>
+        <condition>hasTimerExpired(this)</condition>
+        <conclusion>
+          <step index="1">
+            <action>suspend</action>
+            <target>case</target>
+          </step>
+          <step index="2">
+            <action>compensate</action>
+            <target>UID_a05bf1fd-2310-44d3-8418-f4cbbdddc15f</target>
+          </step>
+          <step index="3">
+            <action>continue</action>
+            <target>case</target>
+          </step>
+        </conclusion>
+        <cornerstone>
+          <Report type="string"/>
+        </cornerstone>
+      </ruleNode>
+    </task>
+  </timeout>
+</spec>
+

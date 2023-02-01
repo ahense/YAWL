@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<specificationSet xmlns="http://www.yawlfoundation.org/yawlschema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="3.0" xsi:schemaLocation="http://www.yawlfoundation.org/yawlschema http://www.yawlfoundation.org/yawlschema/YAWL_Schema3.0.xsd">
+  <specification uri="Handle_TestFailed">
+    <documentation>No description provided</documentation>
+    <metaData>
+      <creator>apika</creator>
+      <description>No description provided</description>
+      <coverage>4.1.720</coverage>
+      <version>0.1</version>
+      <persistent>false</persistent>
+      <identifier>UID_7600cd35-72f5-45dd-a34e-9f722a65ab42</identifier>
+    </metaData>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+    <decomposition id="Net" isRootNet="true" xsi:type="NetFactsType">
+      <localVariable>
+        <index>0</index>
+        <name>newTime</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue />
+      </localVariable>
+      <localVariable>
+        <index>1</index>
+        <name>newBudget</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue />
+      </localVariable>
+      <processControlElements>
+        <inputCondition id="InputCondition">
+          <flowsInto>
+            <nextElementRef id="T" />
+          </flowsInto>
+        </inputCondition>
+        <task id="T">
+          <flowsInto>
+            <nextElementRef id="Update_SLA_Time" />
+          </flowsInto>
+          <flowsInto>
+            <nextElementRef id="Update_Budget" />
+          </flowsInto>
+          <join code="and" />
+          <split code="and" />
+          <resourcing>
+            <offer initiator="user" />
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+        </task>
+        <task id="Update_Budget">
+          <name>Update_Budget</name>
+          <flowsInto>
+            <nextElementRef id="T_1" />
+            <isDefaultFlow />
+          </flowsInto>
+          <join code="and" />
+          <split code="xor" />
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;newBudget&gt;{/Update_budget/New_Budget/text()}&lt;/newBudget&gt;" />
+              <mapsTo>newBudget</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-7a4ac8cd-53ac-4f20-9d2c-f2f702909b24</role>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Update_budget" />
+        </task>
+        <task id="Update_SLA_Time">
+          <name>Update_SLA_Time</name>
+          <flowsInto>
+            <nextElementRef id="T_1" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;newTime&gt;{/Update_SLA_Time/New_SLA/text()}&lt;/newTime&gt;" />
+              <mapsTo>newTime</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-7a4ac8cd-53ac-4f20-9d2c-f2f702909b24</role>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Update_SLA_Time" />
+        </task>
+        <task id="T_1">
+          <flowsInto>
+            <nextElementRef id="OutputCondition" />
+          </flowsInto>
+          <join code="and" />
+          <split code="and" />
+          <resourcing>
+            <offer initiator="user" />
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+        </task>
+        <outputCondition id="OutputCondition" />
+      </processControlElements>
+    </decomposition>
+    <decomposition id="Update_SLA_Time" xsi:type="WebServiceGatewayFactsType">
+      <outputParam label="New completion time:">
+        <index>0</index>
+        <name>New_SLA</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Update_budget" xsi:type="WebServiceGatewayFactsType">
+      <outputParam label="Expected budget:">
+        <index>0</index>
+        <name>New_Budget</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+  </specification>
+  <layout>
+    <locale language="en" country="AU"/>
+    <specification id="Handle_TestFailed" defaultBgColor="-526351">
+      <size w="63" h="33"/>
+      <net id="Net">
+        <bounds x="0" y="0" w="1227" h="473"/>
+        <frame x="0" y="0" w="1230" h="476"/>
+        <viewport x="0" y="0" w="1230" h="476"/>
+        <vertex id="OutputCondition">
+          <attributes>
+            <bounds x="468" y="120" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <vertex id="InputCondition">
+          <attributes>
+            <bounds x="32" y="128" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <container id="Update_Budget">
+          <vertex>
+            <attributes>
+              <bounds x="236" y="172" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="204" y="204" w="97" h="21"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="Update_SLA_Time">
+          <vertex>
+            <attributes>
+              <bounds x="236" y="76" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="194" y="108" w="117" h="20"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="T">
+          <vertex>
+            <attributes>
+              <bounds x="108" y="128" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <decorator type="AND_split">
+            <position>13</position>
+            <attributes>
+              <bounds x="139" y="128" w="11" h="32"/>
+            </attributes>
+          </decorator>
+        </container>
+        <container id="T_1">
+          <vertex>
+            <attributes>
+              <bounds x="372" y="120" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <decorator type="AND_join">
+            <position>12</position>
+            <attributes>
+              <bounds x="362" y="120" w="11" h="32"/>
+            </attributes>
+          </decorator>
+        </container>
+        <flow source="Update_SLA_Time" target="T_1">
+          <ports in="13" out="2"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="InputCondition" target="T">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="Update_Budget" target="T_1">
+          <ports in="13" out="2"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="T_1" target="OutputCondition">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="T" target="Update_SLA_Time">
+          <ports in="2" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="T" target="Update_Budget">
+          <ports in="2" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+      </net>
+    </specification>
+  </layout>
+</specificationSet>

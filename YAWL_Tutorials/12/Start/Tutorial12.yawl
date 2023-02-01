@@ -1,0 +1,953 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<specificationSet xmlns="http://www.yawlfoundation.org/yawlschema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4.0" xsi:schemaLocation="http://www.yawlfoundation.org/yawlschema http://www.yawlfoundation.org/yawlschema/YAWL_Schema4.0.xsd">
+  <specification uri="Tutorial12">
+    <documentation>YAWL Tutorial 12: Cancellation</documentation>
+    <metaData>
+      <title>Tutorial12</title>
+      <creator>Andreas V. Hense</creator>
+      <description>YAWL Tutorial 12: Cancellation</description>
+      <coverage>4.3.1.772</coverage>
+      <version>0.1</version>
+      <persistent>false</persistent>
+      <identifier>UID_720a4ff8-2b18-48ae-9845-bbbb65d326b4</identifier>
+    </metaData>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+    <decomposition id="Net" isRootNet="true" xsi:type="NetFactsType">
+      <localVariable>
+        <index>0</index>
+        <name>Title</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue />
+      </localVariable>
+      <localVariable>
+        <index>1</index>
+        <name>Requirement_description</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue />
+      </localVariable>
+      <localVariable>
+        <index>2</index>
+        <name>Estimated_cost</name>
+        <type>positiveInteger</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>1</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>3</index>
+        <name>make</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>true</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>4</index>
+        <name>approved</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>true</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>5</index>
+        <name>Technology</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>Java</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>6</index>
+        <name>Supplier</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>C Corp</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>7</index>
+        <name>Project_manager</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue />
+      </localVariable>
+      <localVariable>
+        <index>8</index>
+        <name>Purchase_order_number</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue />
+      </localVariable>
+      <processControlElements>
+        <inputCondition id="InputCondition">
+          <flowsInto>
+            <nextElementRef id="Formulate_requirement" />
+          </flowsInto>
+        </inputCondition>
+        <task id="Formulate_requirement">
+          <name>Formulate requirement</name>
+          <flowsInto>
+            <nextElementRef id="C" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;Requirement_description&gt;{/Formulate_requirement/Requirement_description/text()}&lt;/Requirement_description&gt;" />
+              <mapsTo>Requirement_description</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Estimated_cost&gt;{/Formulate_requirement/Estimated_cost/text()}&lt;/Estimated_cost&gt;" />
+              <mapsTo>Estimated_cost</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Title&gt;{/Formulate_requirement/Title/text()}&lt;/Title&gt;" />
+              <mapsTo>Title</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <participant>PA-ed6697cc-084a-4b47-b0fb-9597682ce5ce</participant>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="system">
+              <allocator>
+                <name>RandomChoice</name>
+              </allocator>
+            </allocate>
+            <start initiator="system" />
+          </resourcing>
+          <decomposesTo id="Formulate_requirement" />
+        </task>
+        <condition id="C">
+          <flowsInto>
+            <nextElementRef id="Define_SW_development_project" />
+          </flowsInto>
+          <flowsInto>
+            <nextElementRef id="Prepare_SW_procurement" />
+          </flowsInto>
+        </condition>
+        <task id="Define_SW_development_project">
+          <name>Define SW development project</name>
+          <flowsInto>
+            <nextElementRef id="Start_project" />
+            <predicate ordering="0">/Net/Estimated_cost/text() &lt; 100000</predicate>
+          </flowsInto>
+          <flowsInto>
+            <nextElementRef id="Approve_proposition" />
+            <isDefaultFlow />
+          </flowsInto>
+          <join code="xor" />
+          <split code="xor" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Technology&gt;{/Net/Technology/text()}&lt;/Technology&gt;" />
+              <mapsTo>Technology</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Requirement_description&gt;{/Net/Requirement_description/text()}&lt;/Requirement_description&gt;" />
+              <mapsTo>Requirement_description</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Title&gt;{/Net/Title/text()}&lt;/Title&gt;" />
+              <mapsTo>Title</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;make&gt;{/Net/make/text()}&lt;/make&gt;" />
+              <mapsTo>make</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Estimated_cost&gt;{/Net/Estimated_cost/text()}&lt;/Estimated_cost&gt;" />
+              <mapsTo>Estimated_cost</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;make&gt;{'true'}&lt;/make&gt;" />
+              <mapsTo>make</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Estimated_cost&gt;{/Define_SW_development_project/Estimated_cost/text()}&lt;/Estimated_cost&gt;" />
+              <mapsTo>Estimated_cost</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Technology&gt;{/Define_SW_development_project/Technology/text()}&lt;/Technology&gt;" />
+              <mapsTo>Technology</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <participant>PA-ed6697cc-084a-4b47-b0fb-9597682ce5ce</participant>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Define_SW_development_project" />
+        </task>
+        <task id="Prepare_SW_procurement">
+          <name>Prepare SW procurement</name>
+          <flowsInto>
+            <nextElementRef id="Prepare_purchase_order" />
+            <predicate ordering="0">/Net/Estimated_cost/text() &lt; 100000</predicate>
+          </flowsInto>
+          <flowsInto>
+            <nextElementRef id="Approve_proposition" />
+            <isDefaultFlow />
+          </flowsInto>
+          <join code="xor" />
+          <split code="xor" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Requirement_description&gt;{/Net/Requirement_description/text()}&lt;/Requirement_description&gt;" />
+              <mapsTo>Requirement_description</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Title&gt;{/Net/Title/text()}&lt;/Title&gt;" />
+              <mapsTo>Title</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Supplier&gt;{/Net/Supplier/text()}&lt;/Supplier&gt;" />
+              <mapsTo>Supplier</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;make&gt;{/Net/make/text()}&lt;/make&gt;" />
+              <mapsTo>make</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Estimated_cost&gt;{/Net/Estimated_cost/text()}&lt;/Estimated_cost&gt;" />
+              <mapsTo>Estimated_cost</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;Estimated_cost&gt;{/Prepare_SW_procurement/Estimated_cost/text()}&lt;/Estimated_cost&gt;" />
+              <mapsTo>Estimated_cost</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;make&gt;{'false'}&lt;/make&gt;" />
+              <mapsTo>make</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Supplier&gt;{/Prepare_SW_procurement/Supplier/text()}&lt;/Supplier&gt;" />
+              <mapsTo>Supplier</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <participant>PA-ed6697cc-084a-4b47-b0fb-9597682ce5ce</participant>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Prepare_SW_procurement" />
+        </task>
+        <task id="Approve_proposition">
+          <name>Approve proposition</name>
+          <flowsInto>
+            <nextElementRef id="Start_project" />
+            <predicate ordering="1">/Net/make/text() = 'true'</predicate>
+          </flowsInto>
+          <flowsInto>
+            <nextElementRef id="OutputCondition" />
+            <predicate ordering="0">/Net/approved/text() = 'false'</predicate>
+          </flowsInto>
+          <flowsInto>
+            <nextElementRef id="Prepare_purchase_order" />
+            <isDefaultFlow />
+          </flowsInto>
+          <join code="xor" />
+          <split code="xor" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;approved&gt;{/Net/approved/text()}&lt;/approved&gt;" />
+              <mapsTo>approved</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Technology&gt;{/Net/Technology/text()}&lt;/Technology&gt;" />
+              <mapsTo>Technology</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Requirement_description&gt;{/Net/Requirement_description/text()}&lt;/Requirement_description&gt;" />
+              <mapsTo>Requirement_description</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Title&gt;{/Net/Title/text()}&lt;/Title&gt;" />
+              <mapsTo>Title</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Supplier&gt;{/Net/Supplier/text()}&lt;/Supplier&gt;" />
+              <mapsTo>Supplier</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;make&gt;{/Net/make/text()}&lt;/make&gt;" />
+              <mapsTo>make</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Estimated_cost&gt;{/Net/Estimated_cost/text()}&lt;/Estimated_cost&gt;" />
+              <mapsTo>Estimated_cost</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;approved&gt;{/Approve_proposition/approved/text()}&lt;/approved&gt;" />
+              <mapsTo>approved</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <participant>PA-ed6697cc-084a-4b47-b0fb-9597682ce5ce</participant>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="system">
+              <allocator>
+                <name>RandomChoice</name>
+              </allocator>
+            </allocate>
+            <start initiator="system" />
+          </resourcing>
+          <decomposesTo id="Approve_proposition" />
+        </task>
+        <task id="Prepare_purchase_order">
+          <name>Prepare purchase order</name>
+          <flowsInto>
+            <nextElementRef id="OutputCondition" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Requirement_description&gt;{/Net/Requirement_description/text()}&lt;/Requirement_description&gt;" />
+              <mapsTo>Requirement_description</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Title&gt;{/Net/Title/text()}&lt;/Title&gt;" />
+              <mapsTo>Title</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Supplier&gt;{/Net/Supplier/text()}&lt;/Supplier&gt;" />
+              <mapsTo>Supplier</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Estimated_cost&gt;{/Net/Estimated_cost/text()}&lt;/Estimated_cost&gt;" />
+              <mapsTo>Estimated_cost</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;Purchase_order_number&gt;{/Prepare_purchase_order/Purchase_order_number/text()}&lt;/Purchase_order_number&gt;" />
+              <mapsTo>Purchase_order_number</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet />
+              </distributionSet>
+              <familiarParticipant taskID="Prepare_SW_procurement" />
+            </offer>
+            <allocate initiator="system">
+              <allocator>
+                <name>RandomChoice</name>
+              </allocator>
+            </allocate>
+            <start initiator="system" />
+          </resourcing>
+          <decomposesTo id="Prepare_purchase_order" />
+        </task>
+        <task id="Start_project">
+          <name>Start project</name>
+          <flowsInto>
+            <nextElementRef id="OutputCondition" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Technology&gt;{/Net/Technology/text()}&lt;/Technology&gt;" />
+              <mapsTo>Technology</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Requirement_description&gt;{/Net/Requirement_description/text()}&lt;/Requirement_description&gt;" />
+              <mapsTo>Requirement_description</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Title&gt;{/Net/Title/text()}&lt;/Title&gt;" />
+              <mapsTo>Title</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Estimated_cost&gt;{/Net/Estimated_cost/text()}&lt;/Estimated_cost&gt;" />
+              <mapsTo>Estimated_cost</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;Project_manager&gt;{/Start_project/Project_manager/text()}&lt;/Project_manager&gt;" />
+              <mapsTo>Project_manager</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet />
+              </distributionSet>
+              <familiarParticipant taskID="Define_SW_development_project" />
+            </offer>
+            <allocate initiator="system">
+              <allocator>
+                <name>RandomChoice</name>
+              </allocator>
+            </allocate>
+            <start initiator="system" />
+          </resourcing>
+          <decomposesTo id="Start_project" />
+        </task>
+        <outputCondition id="OutputCondition" />
+      </processControlElements>
+    </decomposition>
+    <decomposition id="Approve_proposition" xsi:type="WebServiceGatewayFactsType">
+      <name>Approve proposition</name>
+      <inputParam>
+        <index>0</index>
+        <name>Title</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>1</index>
+        <name>Requirement_description</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>2</index>
+        <name>Estimated_cost</name>
+        <type>positiveInteger</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>3</index>
+        <name>make</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam hideIf="/Approve_proposition/make/text() = 'false'">
+        <index>4</index>
+        <name>Technology</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam hideIf="/Approve_proposition/make/text() = 'true'">
+        <index>5</index>
+        <name>Supplier</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>6</index>
+        <name>approved</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>6</index>
+        <name>approved</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Define_SW_development_project" xsi:type="WebServiceGatewayFactsType">
+      <name>Define SW development project</name>
+      <inputParam>
+        <index>0</index>
+        <name>Title</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>1</index>
+        <name>Requirement_description</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>2</index>
+        <name>Estimated_cost</name>
+        <type>positiveInteger</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam hide="true">
+        <index>3</index>
+        <name>make</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>4</index>
+        <name>Technology</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>2</index>
+        <name>Estimated_cost</name>
+        <type>positiveInteger</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <outputParam hide="true">
+        <index>3</index>
+        <name>make</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <outputParam>
+        <index>4</index>
+        <name>Technology</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Formulate_requirement" xsi:type="WebServiceGatewayFactsType">
+      <name>Formulate requirement</name>
+      <outputParam>
+        <index>0</index>
+        <name>Title</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <outputParam textarea="true">
+        <index>1</index>
+        <name>Requirement_description</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <outputParam>
+        <index>2</index>
+        <name>Estimated_cost</name>
+        <type>positiveInteger</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Prepare_SW_procurement" xsi:type="WebServiceGatewayFactsType">
+      <name>Prepare SW procurement</name>
+      <inputParam>
+        <index>0</index>
+        <name>Title</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>1</index>
+        <name>Requirement_description</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>2</index>
+        <name>Estimated_cost</name>
+        <type>positiveInteger</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam hide="true">
+        <index>3</index>
+        <name>make</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>4</index>
+        <name>Supplier</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>2</index>
+        <name>Estimated_cost</name>
+        <type>positiveInteger</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <outputParam hide="true">
+        <index>3</index>
+        <name>make</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <outputParam>
+        <index>4</index>
+        <name>Supplier</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Prepare_purchase_order" xsi:type="WebServiceGatewayFactsType">
+      <name>Prepare purchase order</name>
+      <inputParam>
+        <index>0</index>
+        <name>Title</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>1</index>
+        <name>Requirement_description</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>2</index>
+        <name>Estimated_cost</name>
+        <type>positiveInteger</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>3</index>
+        <name>Supplier</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>4</index>
+        <name>Purchase_order_number</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Start_project" xsi:type="WebServiceGatewayFactsType">
+      <name>Start project</name>
+      <inputParam>
+        <index>0</index>
+        <name>Title</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>1</index>
+        <name>Requirement_description</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>2</index>
+        <name>Technology</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>3</index>
+        <name>Estimated_cost</name>
+        <type>positiveInteger</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>4</index>
+        <name>Project_manager</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+  </specification>
+  <layout>
+    <locale language="en" country="GB"/>
+    <specification id="Tutorial9">
+      <size w="58" h="28"/>
+      <net id="Net">
+        <bounds x="0" y="0" w="1211" h="513"/>
+        <frame x="0" y="0" w="1214" h="516"/>
+        <viewport x="0" y="0" w="1214" h="516"/>
+        <scale>1.5</scale>
+        <vertex id="C">
+          <attributes>
+            <bounds x="196" y="136" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <vertex id="OutputCondition">
+          <attributes>
+            <bounds x="756" y="136" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <vertex id="InputCondition">
+          <attributes>
+            <bounds x="32" y="136" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <container id="Define_SW_development_project">
+          <vertex>
+            <attributes>
+              <bounds x="324" y="32" w="32" h="32"/>
+              <backgroundColor>-4280620</backgroundColor>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="296" y="64" w="96" h="60"/>
+            </attributes>
+          </label>
+          <decorator type="XOR_split">
+            <position>13</position>
+            <attributes>
+              <bounds x="355" y="32" w="11" h="32"/>
+            </attributes>
+          </decorator>
+        </container>
+        <container id="Start_project">
+          <vertex>
+            <attributes>
+              <bounds x="624" y="32" w="32" h="32"/>
+              <backgroundColor>-4280620</backgroundColor>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="588" y="64" w="96" h="20"/>
+            </attributes>
+          </label>
+          <decorator type="XOR_join">
+            <position>12</position>
+            <attributes>
+              <bounds x="614" y="32" w="11" h="32"/>
+            </attributes>
+          </decorator>
+        </container>
+        <container id="Formulate_requirement">
+          <vertex>
+            <attributes>
+              <bounds x="128" y="136" w="32" h="32"/>
+              <backgroundColor>-8402561</backgroundColor>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="96" y="168" w="96" h="40"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="Approve_proposition">
+          <vertex>
+            <attributes>
+              <bounds x="468" y="136" w="32" h="32"/>
+              <backgroundColor>-147322</backgroundColor>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="436" y="168" w="96" h="40"/>
+            </attributes>
+          </label>
+          <decorator type="XOR_split">
+            <position>13</position>
+            <attributes>
+              <bounds x="499" y="136" w="11" h="32"/>
+            </attributes>
+          </decorator>
+          <decorator type="XOR_join">
+            <position>12</position>
+            <attributes>
+              <bounds x="458" y="136" w="11" h="32"/>
+            </attributes>
+          </decorator>
+        </container>
+        <container id="Prepare_purchase_order">
+          <vertex>
+            <attributes>
+              <bounds x="624" y="252" w="32" h="32"/>
+              <backgroundColor>-103</backgroundColor>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="586" y="286" w="96" h="40"/>
+            </attributes>
+          </label>
+          <decorator type="XOR_join">
+            <position>12</position>
+            <attributes>
+              <bounds x="614" y="252" w="11" h="32"/>
+            </attributes>
+          </decorator>
+        </container>
+        <container id="Prepare_SW_procurement">
+          <vertex>
+            <attributes>
+              <bounds x="324" y="252" w="32" h="32"/>
+              <backgroundColor>-103</backgroundColor>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="296" y="284" w="96" h="40"/>
+            </attributes>
+          </label>
+          <decorator type="XOR_split">
+            <position>13</position>
+            <attributes>
+              <bounds x="355" y="252" w="11" h="32"/>
+            </attributes>
+          </decorator>
+        </container>
+        <flow source="C" target="Define_SW_development_project">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="223" y="151.5"/>
+              <value x="324" y="47.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Prepare_SW_procurement" target="Prepare_purchase_order">
+          <label>cost &lt; 100000</label>
+          <ports in="2" out="2"/>
+          <attributes>
+            <labelposition x="285.141" y="12.5"/>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="361" y="267.5"/>
+              <value x="610" y="267.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="InputCondition" target="Formulate_requirement">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="59" y="151.5"/>
+              <value x="128" y="151.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Formulate_requirement" target="C">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="159" y="151.5"/>
+              <value x="192" y="151.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Approve_proposition" target="Prepare_purchase_order">
+          <ports in="2" out="2"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="505" y="151.5"/>
+              <value x="610" y="267.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Start_project" target="OutputCondition">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="651" y="47.5"/>
+              <value x="752" y="151.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Define_SW_development_project" target="Approve_proposition">
+          <label>cost &gt;= 100000</label>
+          <ports in="2" out="2"/>
+          <attributes>
+            <offset x="0" y="0"/>
+            <labelposition x="594" y="-45"/>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="361" y="47.5"/>
+              <value x="454" y="151.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Approve_proposition" target="Start_project">
+          <ports in="2" out="2"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="505" y="151.5"/>
+              <value x="610" y="47.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Prepare_purchase_order" target="OutputCondition">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="651" y="267.5"/>
+              <value x="752" y="151.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Define_SW_development_project" target="Start_project">
+          <label>cost &lt; 100000</label>
+          <ports in="2" out="2"/>
+          <attributes>
+            <labelposition x="277.108" y="-23.5"/>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="361" y="47.5"/>
+              <value x="610" y="47.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Prepare_SW_procurement" target="Approve_proposition">
+          <label>cost &gt;= 100000</label>
+          <ports in="2" out="2"/>
+          <attributes>
+            <offset x="0" y="0"/>
+            <labelposition x="476" y="39"/>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="361" y="267.5"/>
+              <value x="454" y="151.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="C" target="Prepare_SW_procurement">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="223" y="151.5"/>
+              <value x="324" y="267.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Approve_proposition" target="OutputCondition">
+          <label>disapprove</label>
+          <ports in="2" out="12"/>
+          <attributes>
+            <labelposition x="470" y="-16"/>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="505" y="151.5"/>
+              <value x="752" y="151.5"/>
+            </points>
+          </attributes>
+        </flow>
+      </net>
+    </specification>
+  </layout>
+</specificationSet>

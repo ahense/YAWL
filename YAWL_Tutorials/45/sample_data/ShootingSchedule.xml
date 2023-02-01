@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:Input_Shooting_Schedule xmlns:ns2="http://www.yawlfoundation.org/sb/shootingSchedule">
+    <production>MAGIC MOVIE</production>
+    <shootingSchedule>
+        <lastUpdatedDate>2009-12-01</lastUpdatedDate>
+        <director>John Jason</director>
+        <producer>Micheal West</producer>
+        <startDate>2009-12-08</startDate>
+        <scheduledFinish>2009-12-09</scheduledFinish>
+        <scheduledShootingDays>2</scheduledShootingDays>
+        <singleDaySchedule>
+            <shootDayNo>1</shootDayNo>
+            <shootDayDate>2009-12-08</shootDayDate>
+            <shootDayWeekday>TUES</shootDayWeekday>
+            <crewCall>08:00:00</crewCall>
+            <travelToLoc>00:00:00</travelToLoc>
+            <startDayNotes>Breakfast 08:00-08:15 Block thru 0800-0830 then light/rig/complete. MUP and WR 0830-0900</startDayNotes>
+            <sceneSchedule>
+                <scene>9</scene>
+                <pageTime>
+                    <number>0</number>
+                    <numerator>4</numerator>
+                </pageTime>
+                <D_N>Night</D_N>
+                <IN_EX>INT</IN_EX>
+                <locationID>1</locationID>
+                <set>DRESSING ROOM</set>
+                <address>Tea Tree Studio 1</address>
+                <synopsis>Charlie's not going to Europe with them</synopsis>
+                <characters>
+                    <character>CHARLIE</character>
+                    <character>SIMONE</character>
+                </characters>
+                <estShootTimes>09:00-11:15</estShootTimes>
+                <estScriptTiming>00:00:25</estScriptTiming>
+                <setRequirements>
+                    <singleEntry>
+                        <item>Props</item>
+                        <requirements>Charlie's new fingerless gloves. </requirements>
+                    </singleEntry>
+                    <singleEntry>
+                        <item>Makeup/Hair</item>
+                        <requirements>Charlie's bloodied fingers.</requirements>
+                    </singleEntry>
+                    <singleEntry>
+                        <item>Art Department</item>
+                        <requirements>Dressing table and chairs</requirements>
+                    </singleEntry>
+                    <singleEntry>
+                        <item>Notes</item>
+                        <requirements>Block Sc2 and 4 then Simone to MUP/WR for change 11:15-11:45. Charlie to MUP to remove bloodied fingers</requirements>
+                    </singleEntry>
+                </setRequirements>
+            </sceneSchedule>
+            <sceneSchedule>
+                <scene>2</scene>
+                <pageTime>
+                    <number>1</number>
+                    <numerator>2</numerator>
+                </pageTime>
+                <D_N>Night</D_N>
+                <IN_EX>INT</IN_EX>
+                <locationID>1</locationID>
+                <set>DRESSING ROOM</set>
+                <address>Tea Tree Studio 1</address>
+                <synopsis>Simone and Charlie get it on but are interrupted.</synopsis>
+                <characters>
+                    <character>CHARLIE</character>
+                    <character>SIMONE</character>
+                    <character>BELLA</character>
+                </characters>
+                <estShootTimes>11:45-16:45</estShootTimes>
+                <estScriptTiming>00:01:07</estScriptTiming>
+                <setRequirements>
+                    <singleEntry>
+                        <item>Props</item>
+                        <requirements>Charlies new fingerless gloves</requirements>
+                    </singleEntry>
+                    <singleEntry>
+                        <item>Art Department</item>
+                        <requirements>Dressing table and chairs</requirements>
+                    </singleEntry>
+                    <singleEntry>
+                        <item>Wardrobe</item>
+                        <requirements>Charlie wears jacket</requirements>
+                    </singleEntry>
+                </setRequirements>
+                <mealBreak>
+                    <meal>Lunch</meal>
+                    <break>13:00 approx</break>
+                </mealBreak>
+            </sceneSchedule>
+            <sceneSchedule>
+                <scene>4</scene>
+                <pageTime>
+                    <number>0</number>
+                    <numerator>6</numerator>
+                </pageTime>
+                <D_N>Night</D_N>
+                <IN_EX>INT</IN_EX>
+                <locationID>1</locationID>
+                <set>BACKSTAGE CORRIDOR</set>
+                <address>Tea Tree Studio 1</address>
+                <synopsis>Charlie tries to apologise to Simone</synopsis>
+                <characters>
+                    <character>CHARLIE</character>
+                    <character>SIMONE</character>
+                    <character>BELLA</character>
+                </characters>
+                <estShootTimes>16:45-18:45</estShootTimes>
+                <estScriptTiming>00:00:38</estScriptTiming>
+                <setRequirements>
+                    <singleEntry>
+                        <item>Props</item>
+                        <requirements>Charlie's new fingerless gloves. Safety belt. Shelves, crates, suitcases. </requirements>
+                    </singleEntry>
+                    <singleEntry>
+                        <item>Art Department</item>
+                        <requirements>Green exit sign. </requirements>
+                    </singleEntry>
+                    <singleEntry>
+                        <item>Background Actors</item>
+                        <requirements>stage crew x 2</requirements>
+                    </singleEntry>
+                </setRequirements>
+            </sceneSchedule>
+            <endDayNotes></endDayNotes>
+            <totalScriptPages>
+                <number>2</number>
+                <numerator>4</numerator>
+            </totalScriptPages>
+        </singleDaySchedule>
+        <singleDaySchedule>
+            <shootDayNo>2</shootDayNo>
+            <shootDayDate>2009-12-09</shootDayDate>
+            <shootDayWeekday>WEDS</shootDayWeekday>
+            <crewCall>08:00:00</crewCall>
+            <travelToLoc>00:00:00</travelToLoc>
+            <startDayNotes>Breakfast 08:00-08:15</startDayNotes>
+            <sceneSchedule>
+                <scene>3</scene>
+                <pageTime>
+                    <number>0</number>
+                    <numerator>6</numerator>
+                </pageTime>
+                <D_N>Night</D_N>
+                <IN_EX>INT</IN_EX>
+                <locationID>1</locationID>
+                <set>BACKSTAGE CORRIDOR</set>
+                <address>Tea Tree Studio 2</address>
+                <synopsis>The secret is out</synopsis>
+                <characters>
+                    <character>CHARLIE</character>
+                    <character>SIMONE</character>
+                    <character>BELLA</character>
+                    <character>TARLA</character>
+                </characters>
+                <estShootTimes>08:30-11:00</estShootTimes>
+                <estScriptTiming>00:00:39</estScriptTiming>
+                <setRequirements>
+                    <singleEntry>
+                        <item>Props</item>
+                        <requirements>Coil of thick white rope, Charlies new fingerless gloves.</requirements>
+                    </singleEntry>
+                    <singleEntry>
+                        <item>Background Actors</item>
+                        <requirements>extras x 2 or 3</requirements>
+                    </singleEntry>
+                    <singleEntry>
+                        <item>Notes</item>
+                        <requirements>Bloch Sc 5 and 6 then Simone and Bella to MUP/WR</requirements>
+                    </singleEntry>
+                </setRequirements>
+            </sceneSchedule>
+            <sceneSchedule>
+                <scene>5</scene>
+                <pageTime>
+                    <number>1</number>
+                    <numerator>0</numerator>
+                </pageTime>
+                <D_N>Night</D_N>
+                <IN_EX>INT</IN_EX>
+                <locationID>1</locationID>
+                <set>THEATRE STAGE AND WINGS</set>
+                <address>Tea Tree Studio 2</address>
+                <synopsis>Charlie tries to stop the show, telling Bella it was a mistake</synopsis>
+                <characters>
+                    <character>CHARLIE</character>
+                    <character>SIMONE</character>
+                    <character>BELLA</character>
+                    <character>TARA</character>
+                </characters>
+                <estShootTimes>11:00-</estShootTimes>
+                <estScriptTiming>00:00:38</estScriptTiming>
+                <setRequirements>
+                    <singleEntry>
+                        <item>Props</item>
+                        <requirements>Charlies new fingerless gloves.</requirements>
+                    </singleEntry>
+                    <singleEntry>
+                        <item>Art Department</item>
+                        <requirements>Closed audience curtains</requirements>
+                    </singleEntry>
+                    <singleEntry>
+                        <item>Background Actors</item>
+                        <requirements>Stage crew 2 or 3</requirements>
+                    </singleEntry>
+                </setRequirements>
+            </sceneSchedule>
+            <sceneSchedule>
+                <scene>6</scene>
+                <pageTime>
+                    <number>0</number>
+                    <numerator>5</numerator>
+                </pageTime>
+                <D_N>Night</D_N>
+                <IN_EX>INT</IN_EX>
+                <locationID>1</locationID>
+                <set>THEATRE STAGE AND WINGS</set>
+                <address>Tea Tree Studio 2</address>
+                <synopsis>Charlie is still trying to make it up to Simone</synopsis>
+                <characters>
+                    <character>CHARLIE</character>
+                    <character>SIMONE</character>
+                    <character>BELLA</character>
+                </characters>
+                <estShootTimes>-16:45</estShootTimes>
+                <estScriptTiming>00:00:36</estScriptTiming>
+                <setRequirements>
+                    <singleEntry>
+                        <item>Props</item>
+                        <requirements>Charlies new fingerless gloves,&#xD;
+&#xD;
+Safety belts,&#xD;
+&#xD;
+Trapeze bar and black ropes,&#xD;
+&#xD;
+Rope to ascend trapze.</requirements>
+                    </singleEntry>
+                    <singleEntry>
+                        <item>Notes</item>
+                        <requirements>Mats and safety ropes etc as required.</requirements>
+                    </singleEntry>
+                    <singleEntry>
+                        <item>Art Department</item>
+                        <requirements>Closed curtains.</requirements>
+                    </singleEntry>
+                    <singleEntry>
+                        <item>Notes</item>
+                        <requirements>Tarla may be required for Sc 8 - TBC</requirements>
+                    </singleEntry>
+                </setRequirements>
+            </sceneSchedule>
+            <sceneSchedule>
+                <scene>8</scene>
+                <pageTime>
+                    <number>0</number>
+                    <numerator>2</numerator>
+                </pageTime>
+                <D_N>Night</D_N>
+                <IN_EX>INT</IN_EX>
+                <locationID>1</locationID>
+                <set>THEATRE STAGE AND WINGS</set>
+                <address>Tea Tree Studio 2</address>
+                <synopsis>Simone storms off stage</synopsis>
+                <characters>
+                    <character>CHARLIE</character>
+                    <character>SIMONE</character>
+                    <character>BELLA</character>
+                </characters>
+                <estShootTimes>16:45-17:45</estShootTimes>
+                <estScriptTiming>00:00:24</estScriptTiming>
+                <setRequirements>
+                    <singleEntry>
+                        <item>Props</item>
+                        <requirements>Black rope, Charlie's new fingerless gloves, Safety belts.</requirements>
+                    </singleEntry>
+                    <singleEntry>
+                        <item>Makeup/Hair</item>
+                        <requirements>Charlie's bloodied fingers.</requirements>
+                    </singleEntry>
+                    <singleEntry>
+                        <item>Notes</item>
+                        <requirements>Care RE throwing belt at Charlie.</requirements>
+                    </singleEntry>
+                </setRequirements>
+            </sceneSchedule>
+            <sceneSchedule>
+                <scene>7A</scene>
+                <pageTime>
+                    <number>0</number>
+                    <numerator>7</numerator>
+                </pageTime>
+                <D_N>Night</D_N>
+                <IN_EX>INT</IN_EX>
+                <locationID>1</locationID>
+                <set>THEATRE STAGE AND WINGS</set>
+                <address>Tea Tree Studio 2</address>
+                <synopsis>Charlie takes the rope, then it burns her fingers.</synopsis>
+                <characters>
+                    <character>CHARLIE</character>
+                </characters>
+                <estShootTimes>17:45-</estShootTimes>
+                <estScriptTiming>00:01:19</estScriptTiming>
+                <setRequirements>
+                    <singleEntry>
+                        <item>Props</item>
+                        <requirements>Black rope, Charlie's new fingerless gloves.</requirements>
+                    </singleEntry>
+                    <singleEntry>
+                        <item>Notes</item>
+                        <requirements>Care running rope through fingers.</requirements>
+                    </singleEntry>
+                    <singleEntry>
+                        <item>Art Department</item>
+                        <requirements>may need to get wel/wet rope etc for safety</requirements>
+                    </singleEntry>
+                </setRequirements>
+            </sceneSchedule>
+            <sceneSchedule>
+                <scene>8A</scene>
+                <pageTime>
+                    <number>0</number>
+                    <numerator>2</numerator>
+                </pageTime>
+                <D_N>Night</D_N>
+                <IN_EX>INT</IN_EX>
+                <locationID>1</locationID>
+                <set>THEATRE STAGE AND WINGS</set>
+                <address>Tea Tree Studio 2</address>
+                <synopsis>Charlie's gloved hands let go, they are cut open by rope burn.</synopsis>
+                <characters>
+                    <character>CHARLIE</character>
+                </characters>
+                <estShootTimes>-18:45</estShootTimes>
+                <estScriptTiming>00:00:24</estScriptTiming>
+                <setRequirements>
+                    <singleEntry>
+                        <item>Props</item>
+                        <requirements>Black rope, Charlie's new fingerless gloves.</requirements>
+                    </singleEntry>
+                    <singleEntry>
+                        <item>Makeup/Hair</item>
+                        <requirements>Charlie's bloodied fingers.</requirements>
+                    </singleEntry>
+                    <singleEntry>
+                        <item>Notes</item>
+                        <requirements>Pre-rig scaff tower for Day 3 if possible. </requirements>
+                    </singleEntry>
+                </setRequirements>
+            </sceneSchedule>
+            <endDayNotes></endDayNotes>
+            <totalScriptPages>
+                <number>3</number>
+                <numerator>6</numerator>
+            </totalScriptPages>
+        </singleDaySchedule>
+    </shootingSchedule>
+    <totalScenes>9</totalScenes>
+    <totalPageTime>
+        <number>6</number>
+        <numerator>2</numerator>
+    </totalPageTime>
+    <originalTiming>00:06:10</originalTiming>
+</ns2:Input_Shooting_Schedule>

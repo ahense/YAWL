@@ -1,0 +1,71 @@
+<spec uri="Fix_Minor_Issue" version="0.1" identifier="UID_171f1dbb-98a6-4a62-a3ff-eda8d0618103">
+  <constraints>
+    <item>
+      <post>
+        <task name="Check_Issue">
+          <ruleNode>
+            <id>204</id>
+            <parent>-1</parent>
+            <trueChild>205</trueChild>
+            <falseChild>-1</falseChild>
+            <condition>true</condition>
+            <description>root node</description>
+          </ruleNode>
+          <ruleNode>
+            <id>205</id>
+            <parent>204</parent>
+            <trueChild>-1</trueChild>
+            <falseChild>-1</falseChild>
+            <condition>IssuesFixed = Yes</condition>
+            <conclusion>
+              <step index="1">
+                <action>remove</action>
+                <target>case</target>
+              </step>
+            </conclusion>
+            <cornerstone>
+              <Issue type="Issue"/>
+              <IssuesFixed type="Choice">Yes</IssuesFixed>
+            </cornerstone>
+          </ruleNode>
+        </task>
+        <task name="Test_Solution">
+          <ruleNode>
+            <id>206</id>
+            <parent>-1</parent>
+            <trueChild>207</trueChild>
+            <falseChild>-1</falseChild>
+            <condition>true</condition>
+            <description>root node</description>
+          </ruleNode>
+          <ruleNode>
+            <id>207</id>
+            <parent>206</parent>
+            <trueChild>-1</trueChild>
+            <falseChild>-1</falseChild>
+            <condition>MajorIssue = Yes</condition>
+            <conclusion>
+              <step index="1">
+                <action>suspend</action>
+                <target>case</target>
+              </step>
+              <step index="2">
+                <action>compensate</action>
+                <target>UID_e4830662-c1b6-4adc-bc50-21aa7591a733</target>
+              </step>
+              <step index="3">
+                <action>remove</action>
+                <target>case</target>
+              </step>
+            </conclusion>
+            <cornerstone>
+              <IssuesFixed type="Choice"/>
+              <MajorIssue type="Choice">Yes</MajorIssue>
+            </cornerstone>
+          </ruleNode>
+        </task>
+      </post>
+    </item>
+  </constraints>
+</spec>
+

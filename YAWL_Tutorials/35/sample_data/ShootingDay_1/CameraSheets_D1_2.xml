@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:Fill_Out_Camera_Sheets xmlns:ns2="http://www.yawlfoundation.org/sb/cameraInfo">
+    <generalInfo>
+        <production>MAGIC MOVIE</production>
+        <date>2009-12-08</date>
+        <weekday>TUES</weekday>
+        <shootDayNo>1</shootDayNo>
+    </generalInfo>
+    <producer>Michael West</producer>
+    <director>John Jason</director>
+    <directorOfPhotography>Vicent Rain</directorOfPhotography>
+    <cameraOperator></cameraOperator>
+    <cameraAssistant>Thomas Raymond</cameraAssistant>
+    <cameraInfo>
+        <sheetNumber>10750</sheetNumber>
+        <camRoll>A2</camRoll>
+        <studios_location>Tea Tree Studio 1 @ Cnr Cudmore and Balanch Roads, Tea Tree Valley.</studios_location>
+        <techInfo>
+            <cameraType_and_Number>SR3 16MM</cameraType_and_Number>
+            <stockNumber>500T</stockNumber>
+            <emulsion>177071.03</emulsion>
+            <totalCansNumber>1</totalCansNumber>
+        </techInfo>
+        <slateInfo>
+            <magNumber>5</magNumber>
+            <slate>7</slate>
+            <takeInfo>
+                <take>1</take>
+                <counter>242</counter>
+                <length>28</length>
+                <print>true</print>
+                <printSetting>Colour</printSetting>
+                <essentialInfo>25MM T2 2/3RDS HAND HELD</essentialInfo>
+            </takeInfo>
+            <takeInfo>
+                <take>2</take>
+                <counter>270</counter>
+                <length>18</length>
+                <print>true</print>
+                <printSetting>Colour</printSetting>
+                <essentialInfo>25MM T2 2/3RDS HAND HELD</essentialInfo>
+            </takeInfo>
+        </slateInfo>
+        <slateInfo>
+            <magNumber>5</magNumber>
+            <slate>6</slate>
+            <takeInfo>
+                <take>1</take>
+                <counter>100</counter>
+                <length>36</length>
+                <print>true</print>
+                <printSetting>Colour</printSetting>
+                <essentialInfo>25MM T2 1/2 HANDHELD</essentialInfo>
+            </takeInfo>
+            <takeInfo>
+                <take>2</take>
+                <counter>136</counter>
+                <length>18</length>
+                <print>true</print>
+                <printSetting>Colour</printSetting>
+                <essentialInfo>25MM T2 1/2 HANDHELD</essentialInfo>
+            </takeInfo>
+            <takeInfo>
+                <take>3</take>
+                <counter>154</counter>
+                <length>36</length>
+                <print>true</print>
+                <printSetting>Colour</printSetting>
+                <essentialInfo>FALSE START HAND HELD</essentialInfo>
+            </takeInfo>
+            <takeInfo>
+                <take>4</take>
+                <counter>190</counter>
+                <length>11</length>
+                <print>true</print>
+                <printSetting>Colour</printSetting>
+                <essentialInfo>25MM T2 1/2 3'-8' HAND HELD</essentialInfo>
+            </takeInfo>
+            <takeInfo>
+                <take>5</take>
+                <counter>201</counter>
+                <length>12</length>
+                <print>true</print>
+                <printSetting>Colour</printSetting>
+                <essentialInfo>P UP&#xD;
+25MM T2 1/2 3'-8' HAND HELD</essentialInfo>
+            </takeInfo>
+            <takeInfo>
+                <take>6</take>
+                <counter>213</counter>
+                <length>29</length>
+                <print>true</print>
+                <printSetting>Colour</printSetting>
+                <essentialInfo>P UP&#xD;
+25MM T2 1/2 3'-8' HAND HELD</essentialInfo>
+            </takeInfo>
+        </slateInfo>
+        <slateInfo>
+            <magNumber>5</magNumber>
+            <slate>5</slate>
+            <takeInfo>
+                <take>1</take>
+                <counter>3</counter>
+                <length>61</length>
+                <print>true</print>
+                <printSetting>Colour</printSetting>
+                <essentialInfo>12MM 10' T2 DOLLY TRACK</essentialInfo>
+            </takeInfo>
+            <takeInfo>
+                <take>2</take>
+                <counter>64</counter>
+                <length>36</length>
+                <print>true</print>
+                <printSetting>Colour</printSetting>
+                <essentialInfo>12MM 10' T2 DOLLY TRACK</essentialInfo>
+            </takeInfo>
+        </slateInfo>
+        <slateInfo>
+            <magNumber>5</magNumber>
+            <slate>9</slate>
+            <takeInfo>
+                <take>1</take>
+                <counter>327</counter>
+                <length>23</length>
+                <print>true</print>
+                <printSetting>Colour</printSetting>
+                <essentialInfo>25MM SHOT OPEN T1.3</essentialInfo>
+            </takeInfo>
+            <takeInfo>
+                <take>2</take>
+                <counter>350</counter>
+                <length>20</length>
+                <print>true</print>
+                <printSetting>Colour</printSetting>
+                <essentialInfo>24MM T2 2/3RDS 5' TAIL</essentialInfo>
+            </takeInfo>
+            <takeInfo>
+                <take>3</take>
+                <counter>370</counter>
+                <length>25</length>
+                <print>true</print>
+                <printSetting>Colour</printSetting>
+                <essentialInfo>MISSED THE TAIL, CAMERA VUT</essentialInfo>
+            </takeInfo>
+            <takeInfo>
+                <take>4</take>
+                <counter>391</counter>
+                <length>0</length>
+                <print>false</print>
+                <printSetting>B/W</printSetting>
+                <essentialInfo>FINISH</essentialInfo>
+            </takeInfo>
+        </slateInfo>
+        <slateInfo>
+            <magNumber>5</magNumber>
+            <slate>8</slate>
+            <takeInfo>
+                <take>1</take>
+                <counter>288</counter>
+                <length>16</length>
+                <print>true</print>
+                <printSetting>Colour</printSetting>
+                <essentialInfo>25MM T2/3RDS 3'-8'</essentialInfo>
+            </takeInfo>
+            <takeInfo>
+                <take>2</take>
+                <counter>304</counter>
+                <length>23</length>
+                <print>true</print>
+                <printSetting>Colour</printSetting>
+                <essentialInfo>25MM T2/3RDS 3'-8'</essentialInfo>
+            </takeInfo>
+        </slateInfo>
+        <shortEndMin>0</shortEndMin>
+        <camInfoSum>
+            <footageLoaded>400</footageLoaded>
+            <totalExposed>392</totalExposed>
+            <shortEnds>8</shortEnds>
+            <waste>0</waste>
+        </camInfoSum>
+        <instructionsToLab>PROCESS NORMAL     PREP FOR TELECINE</instructionsToLab>
+        <signatureOfCameraAssistant>THOMAS RAYMOND</signatureOfCameraAssistant>
+    </cameraInfo>
+    <anotherRoll>false</anotherRoll>
+    <stockInfo>
+        <loaded>400</loaded>
+        <gross>376</gross>
+        <exposed>376</exposed>
+        <print>376</print>
+        <N_G>0</N_G>
+        <waste>0</waste>
+        <shortEnds>24</shortEnds>
+    </stockInfo>
+    <camRolls>A1</camRolls>
+</ns2:Fill_Out_Camera_Sheets>

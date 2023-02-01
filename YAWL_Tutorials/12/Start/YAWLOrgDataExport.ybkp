@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<orgdata>
+  <participants>
+    <participant id="PA-ed6697cc-084a-4b47-b0fb-9597682ce5ce">
+      <userid>lom</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Lorenzo</firstname>
+      <lastname>Monaco</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>true</isAdministrator>
+      <roles/>
+      <positions/>
+      <capabilities/>
+      <privileges>00000000</privileges>
+    </participant>
+  </participants>
+  <roles/>
+  <positions/>
+  <capabilities/>
+  <orggroups/>
+  <nonhumanresources/>
+  <nonhumancategories/>
+</orgdata>
+
