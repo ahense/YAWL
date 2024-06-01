@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<orgdata>
+  <participants>
+    <participant id="PA-f509a9e7-acd4-4d9d-9acd-c8712e008eb3">
+      <userid>sandy</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Sandy</firstname>
+      <lastname>Denny</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-b2b197c5-ca2a-4ca4-809b-d0608b61ab4a</role>
+      </roles>
+      <positions/>
+      <capabilities/>
+      <privileges>00000000</privileges>
+    </participant>
+    <participant id="PA-e448bc00-62e4-472d-8ed5-1e342333f637">
+      <userid>john</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>John</firstname>
+      <lastname>Wayne</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-b2b197c5-ca2a-4ca4-809b-d0608b61ab4a</role>
+      </roles>
+      <positions/>
+      <capabilities/>
+      <privileges>00000000</privileges>
+    </participant>
+    <participant id="PA-2fc135e2-f0f4-448e-a4c7-47108110489d">
+      <userid>fiona</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Fiona</firstname>
+      <lastname>Kelly</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-b2b197c5-ca2a-4ca4-809b-d0608b61ab4a</role>
+      </roles>
+      <positions/>
+      <capabilities/>
+      <privileges>00000000</privileges>
+    </participant>
+  </participants>
+  <roles>
+    <role id="RO-b2b197c5-ca2a-4ca4-809b-d0608b61ab4a">
+      <name>Accountant</name>
+      <description/>
+      <notes/>
+    </role>
+  </roles>
+  <positions/>
+  <capabilities/>
+  <orggroups/>
+  <nonhumanresources/>
+  <nonhumancategories/>
+</orgdata>
+

@@ -1,2 +1,2 @@
 # YAWL
-Supplementary material for the YAWL tutorials
+This repository contains supplementary material for the YAWL tutorials of the following Youtube channel: https://www.youtube.com/@yawlusergroup

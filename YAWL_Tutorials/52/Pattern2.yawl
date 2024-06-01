@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<specificationSet xmlns="http://www.yawlfoundation.org/yawlschema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4.0" xsi:schemaLocation="http://www.yawlfoundation.org/yawlschema http://www.yawlfoundation.org/yawlschema/YAWL_Schema4.0.xsd">
+  <specification uri="Pattern2">
+    <name>Role-based distribution</name>
+    <documentation>Role-based distribution</documentation>
+    <metaData>
+      <title>Role-based distribution</title>
+      <creator>User</creator>
+      <description>Role-based distribution</description>
+      <coverage>5.0.805</coverage>
+      <version>0.1</version>
+      <persistent>false</persistent>
+      <identifier>UID_243a4c71-7e8c-4365-9d0f-0fb35fda77a6</identifier>
+    </metaData>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+    <decomposition id="Net" isRootNet="true" xsi:type="NetFactsType">
+      <localVariable>
+        <index>0</index>
+        <name>Inventory_List</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>Pencils
+
+ Paper
+
+ Toner</initialValue>
+      </localVariable>
+      <processControlElements>
+        <inputCondition id="InputCondition">
+          <flowsInto>
+            <nextElementRef id="Make_inventory_list" />
+          </flowsInto>
+        </inputCondition>
+        <task id="Make_inventory_list">
+          <name>Make inventory list</name>
+          <flowsInto>
+            <nextElementRef id="Order_supplies" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Inventory_List&gt;{/Net/Inventory_List/text()}&lt;/Inventory_List&gt;" />
+              <mapsTo>Inventory_List</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;Inventory_List&gt;{/Make_inventory_list/Inventory_List/text()}&lt;/Inventory_List&gt;" />
+              <mapsTo>Inventory_List</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-d056f4fc-6dc3-452e-b3f9-009626803b6d</role>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Make_inventory_list" />
+        </task>
+        <task id="Order_supplies">
+          <name>Order supplies</name>
+          <flowsInto>
+            <nextElementRef id="OutputCondition" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Inventory_List&gt;{/Net/Inventory_List/text()}&lt;/Inventory_List&gt;" />
+              <mapsTo>Inventory_List</mapsTo>
+            </mapping>
+          </startingMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-b7dfd05a-a197-4d0a-8479-da93ec82a0de</role>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Order_supplies" />
+        </task>
+        <outputCondition id="OutputCondition" />
+      </processControlElements>
+    </decomposition>
+    <decomposition id="Make_inventory_list" xsi:type="WebServiceGatewayFactsType">
+      <name>Make inventory list</name>
+      <inputParam textarea="true">
+        <index>0</index>
+        <name>Inventory_List</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam textarea="true">
+        <index>0</index>
+        <name>Inventory_List</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Order_supplies" xsi:type="WebServiceGatewayFactsType">
+      <name>Order supplies</name>
+      <inputParam textarea="true">
+        <index>0</index>
+        <name>Inventory_List</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+  </specification>
+  <layout>
+    <locale language="en" country="GB"/>
+    <specification id="Pattern2" defaultBgColor="-526351">
+      <size w="58" h="28"/>
+      <net id="Net" bgColor="-526351">
+        <bounds x="0" y="0" w="1685" h="789"/>
+        <frame x="0" y="0" w="1688" h="792"/>
+        <viewport x="0" y="0" w="1688" h="792"/>
+        <vertex id="OutputCondition">
+          <attributes>
+            <bounds x="428" y="380" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <vertex id="InputCondition">
+          <attributes>
+            <bounds x="72" y="380" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <container id="Order_supplies">
+          <vertex>
+            <attributes>
+              <bounds x="292" y="380" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="260" y="412" w="96" h="14"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="Make_inventory_list">
+          <vertex>
+            <attributes>
+              <bounds x="180" y="380" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="148" y="412" w="96" h="28"/>
+            </attributes>
+          </label>
+        </container>
+        <flow source="InputCondition" target="Make_inventory_list">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="67" y="386.5"/>
+              <value x="180" y="386.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Order_supplies" target="OutputCondition">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="323" y="386.5"/>
+              <value x="468" y="386.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Make_inventory_list" target="Order_supplies">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="211" y="386.5"/>
+              <value x="292" y="386.5"/>
+            </points>
+          </attributes>
+        </flow>
+      </net>
+      <labelFontSize>12</labelFontSize>
+    </specification>
+  </layout>
+</specificationSet>

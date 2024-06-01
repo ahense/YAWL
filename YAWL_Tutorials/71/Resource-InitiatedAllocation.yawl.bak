@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<specificationSet xmlns="http://www.yawlfoundation.org/yawlschema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4.0" xsi:schemaLocation="http://www.yawlfoundation.org/yawlschema http://www.yawlfoundation.org/yawlschema/YAWL_Schema4.0.xsd">
+  <specification uri="Resource-InitiatedAllocation">
+    <documentation>Resource-Initiated Allocation</documentation>
+    <metaData>
+      <title>Resource-Initiated Allocation</title>
+      <creator>AVH</creator>
+      <description>Resource-Initiated Allocation</description>
+      <coverage>5.0.805</coverage>
+      <version>0.1</version>
+      <persistent>false</persistent>
+      <identifier>UID_2aeea599-7724-419e-b526-e275f0ab3d87</identifier>
+    </metaData>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+    <decomposition id="Net" isRootNet="true" xsi:type="NetFactsType">
+      <localVariable>
+        <index>0</index>
+        <name>Audit_Topic</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>IT Security</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>1</index>
+        <name>Audit_Result</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>OK</initialValue>
+      </localVariable>
+      <processControlElements>
+        <inputCondition id="InputCondition">
+          <flowsInto>
+            <nextElementRef id="Conduct_audit" />
+          </flowsInto>
+        </inputCondition>
+        <task id="Conduct_audit">
+          <name>Conduct audit</name>
+          <flowsInto>
+            <nextElementRef id="Review_audit" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Audit_Topic&gt;{/Net/Audit_Topic/text()}&lt;/Audit_Topic&gt;" />
+              <mapsTo>Audit_Topic</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Audit_Result&gt;{/Net/Audit_Result/text()}&lt;/Audit_Result&gt;" />
+              <mapsTo>Audit_Result</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;Audit_Result&gt;{/Conduct_audit/Audit_Result/text()}&lt;/Audit_Result&gt;" />
+              <mapsTo>Audit_Result</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-3f5fad0a-850e-431c-a05c-3b965eeaa7fe</role>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Conduct_audit" />
+        </task>
+        <task id="Review_audit">
+          <name>Review audit</name>
+          <flowsInto>
+            <nextElementRef id="OutputCondition" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Audit_Topic&gt;{/Net/Audit_Topic/text()}&lt;/Audit_Topic&gt;" />
+              <mapsTo>Audit_Topic</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Audit_Result&gt;{/Net/Audit_Result/text()}&lt;/Audit_Result&gt;" />
+              <mapsTo>Audit_Result</mapsTo>
+            </mapping>
+          </startingMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-3f5fad0a-850e-431c-a05c-3b965eeaa7fe</role>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Review_audit" />
+        </task>
+        <outputCondition id="OutputCondition" />
+      </processControlElements>
+    </decomposition>
+    <decomposition id="Conduct_audit" xsi:type="WebServiceGatewayFactsType">
+      <name>Conduct audit</name>
+      <inputParam>
+        <index>0</index>
+        <name>Audit_Topic</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>1</index>
+        <name>Audit_Result</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>1</index>
+        <name>Audit_Result</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Review_audit" xsi:type="WebServiceGatewayFactsType">
+      <name>Review audit</name>
+      <inputParam>
+        <index>0</index>
+        <name>Audit_Topic</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>1</index>
+        <name>Audit_Result</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+  </specification>
+  <layout>
+    <locale language="en" country="GB"/>
+    <specification id="Resource-InitiatedAllocation" defaultBgColor="-526351">
+      <size w="58" h="28"/>
+      <net id="Net">
+        <bounds x="0" y="0" w="652" h="520"/>
+        <frame x="0" y="0" w="655" h="523"/>
+        <viewport x="0" y="0" w="655" h="523"/>
+        <vertex id="OutputCondition">
+          <attributes>
+            <bounds x="464" y="120" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <vertex id="InputCondition">
+          <attributes>
+            <bounds x="36" y="120" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <container id="Review_audit">
+          <vertex>
+            <attributes>
+              <bounds x="316" y="120" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="284" y="152" w="96" h="14"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="Conduct_audit">
+          <vertex>
+            <attributes>
+              <bounds x="168" y="120" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="136" y="152" w="96" h="14"/>
+            </attributes>
+          </label>
+        </container>
+        <flow source="InputCondition" target="Conduct_audit">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="67" y="131.5"/>
+              <value x="168" y="131.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Review_audit" target="OutputCondition">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="347" y="131.5"/>
+              <value x="464" y="131.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Conduct_audit" target="Review_audit">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="199" y="131.5"/>
+              <value x="316" y="131.5"/>
+            </points>
+          </attributes>
+        </flow>
+      </net>
+      <labelFontSize>12</labelFontSize>
+    </specification>
+  </layout>
+</specificationSet>

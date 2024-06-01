@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<specificationSet xmlns="http://www.yawlfoundation.org/yawlschema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4.0" xsi:schemaLocation="http://www.yawlfoundation.org/yawlschema http://www.yawlfoundation.org/yawlschema/YAWL_Schema4.0.xsd">
+  <specification uri="Pattern1">
+    <name>Direct Distribution</name>
+    <documentation>Direct Distribution</documentation>
+    <metaData>
+      <title>Direct Distribution</title>
+      <creator>AVH</creator>
+      <description>Direct Distribution</description>
+      <coverage>5.0.805</coverage>
+      <version>0.1</version>
+      <persistent>false</persistent>
+      <identifier>UID_039a8663-ca2a-4d67-96f2-d0455844d10b</identifier>
+    </metaData>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+    <decomposition id="Net" isRootNet="true" xsi:type="NetFactsType">
+      <localVariable>
+        <index>0</index>
+        <name>Current_Date</name>
+        <type>date</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>2024-01-01</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>1</index>
+        <name>Office_Number</name>
+        <type>positiveInteger</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>1</initialValue>
+      </localVariable>
+      <processControlElements>
+        <inputCondition id="InputCondition">
+          <flowsInto>
+            <nextElementRef id="Open_office" />
+          </flowsInto>
+        </inputCondition>
+        <task id="Open_office">
+          <name>Open office</name>
+          <flowsInto>
+            <nextElementRef id="Do_banking" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Office_Number&gt;{/Net/Office_Number/text()}&lt;/Office_Number&gt;" />
+              <mapsTo>Office_Number</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Current_Date&gt;{/Net/Current_Date/text()}&lt;/Current_Date&gt;" />
+              <mapsTo>Current_Date</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;Office_Number&gt;{/Open_office/Office_Number/text()}&lt;/Office_Number&gt;" />
+              <mapsTo>Office_Number</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Current_Date&gt;{/Open_office/Current_Date/text()}&lt;/Current_Date&gt;" />
+              <mapsTo>Current_Date</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <participant>PA-c3fd8bd0-b6bd-4334-9285-339f94ffc725</participant>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="system">
+              <allocator>
+                <name>RandomChoice</name>
+              </allocator>
+            </allocate>
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Open_office" />
+        </task>
+        <task id="Do_banking">
+          <name>Do banking</name>
+          <flowsInto>
+            <nextElementRef id="Close_office" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Office_Number&gt;{/Net/Office_Number/text()}&lt;/Office_Number&gt;" />
+              <mapsTo>Office_Number</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Current_Date&gt;{/Net/Current_Date/text()}&lt;/Current_Date&gt;" />
+              <mapsTo>Current_Date</mapsTo>
+            </mapping>
+          </startingMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <participant>PA-e2cadbd7-451e-43d1-ac18-85f52e08a1de</participant>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="system">
+              <allocator>
+                <name>RandomChoice</name>
+              </allocator>
+            </allocate>
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Do_banking" />
+        </task>
+        <task id="Close_office">
+          <name>Close office</name>
+          <flowsInto>
+            <nextElementRef id="OutputCondition" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Office_Number&gt;{/Net/Office_Number/text()}&lt;/Office_Number&gt;" />
+              <mapsTo>Office_Number</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Current_Date&gt;{/Net/Current_Date/text()}&lt;/Current_Date&gt;" />
+              <mapsTo>Current_Date</mapsTo>
+            </mapping>
+          </startingMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <participant>PA-c3fd8bd0-b6bd-4334-9285-339f94ffc725</participant>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="system">
+              <allocator>
+                <name>RandomChoice</name>
+              </allocator>
+            </allocate>
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Close_office" />
+        </task>
+        <outputCondition id="OutputCondition" />
+      </processControlElements>
+    </decomposition>
+    <decomposition id="Close_office" xsi:type="WebServiceGatewayFactsType">
+      <name>Close office</name>
+      <inputParam>
+        <index>0</index>
+        <name>Office_Number</name>
+        <type>positiveInteger</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>1</index>
+        <name>Current_Date</name>
+        <type>date</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Do_banking" xsi:type="WebServiceGatewayFactsType">
+      <name>Do banking</name>
+      <inputParam>
+        <index>0</index>
+        <name>Office_Number</name>
+        <type>positiveInteger</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>1</index>
+        <name>Current_Date</name>
+        <type>date</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Open_office" xsi:type="WebServiceGatewayFactsType">
+      <name>Open office</name>
+      <inputParam>
+        <index>0</index>
+        <name>Office_Number</name>
+        <type>positiveInteger</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>1</index>
+        <name>Current_Date</name>
+        <type>date</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>0</index>
+        <name>Office_Number</name>
+        <type>positiveInteger</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <outputParam>
+        <index>1</index>
+        <name>Current_Date</name>
+        <type>date</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+  </specification>
+  <layout>
+    <locale language="en" country="GB"/>
+    <specification id="Pattern1" defaultBgColor="-526351">
+      <size w="58" h="28"/>
+      <net id="Net">
+        <bounds x="0" y="0" w="780" h="221"/>
+        <frame x="0" y="0" w="783" h="224"/>
+        <viewport x="0" y="0" w="783" h="224"/>
+        <vertex id="OutputCondition">
+          <attributes>
+            <bounds x="552" y="104" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <vertex id="InputCondition">
+          <attributes>
+            <bounds x="36" y="104" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <container id="Do_banking">
+          <vertex>
+            <attributes>
+              <bounds x="280" y="104" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="248" y="136" w="96" h="14"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="Open_office">
+          <vertex>
+            <attributes>
+              <bounds x="148" y="104" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="116" y="136" w="96" h="14"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="Close_office">
+          <vertex>
+            <attributes>
+              <bounds x="412" y="104" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="380" y="136" w="96" h="14"/>
+            </attributes>
+          </label>
+        </container>
+        <flow source="Open_office" target="Do_banking">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="179" y="119.5"/>
+              <value x="280" y="119.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="InputCondition" target="Open_office">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="67" y="115.5"/>
+              <value x="148" y="119.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Do_banking" target="Close_office">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="311" y="115.5"/>
+              <value x="412" y="115.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Close_office" target="OutputCondition">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="443" y="115.5"/>
+              <value x="552" y="115.5"/>
+            </points>
+          </attributes>
+        </flow>
+      </net>
+      <labelFontSize>12</labelFontSize>
+    </specification>
+  </layout>
+</specificationSet>

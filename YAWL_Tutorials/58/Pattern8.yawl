@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<specificationSet xmlns="http://www.yawlfoundation.org/yawlschema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4.0" xsi:schemaLocation="http://www.yawlfoundation.org/yawlschema http://www.yawlfoundation.org/yawlschema/YAWL_Schema4.0.xsd">
+  <specification uri="Pattern8">
+    <documentation>Capability-based Distribution</documentation>
+    <metaData>
+      <title>Capability-based Distribution</title>
+      <creator>AVH</creator>
+      <description>Capability-based Distribution</description>
+      <coverage>5.0.805</coverage>
+      <version>0.1</version>
+      <persistent>false</persistent>
+      <identifier>UID_5404fb76-bf3f-47d8-b652-b472b5e5765f</identifier>
+    </metaData>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+    <decomposition id="Net" isRootNet="true" xsi:type="NetFactsType">
+      <localVariable>
+        <index>0</index>
+        <name>Examination_Results</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>The hull is solid.</initialValue>
+      </localVariable>
+      <processControlElements>
+        <inputCondition id="InputCondition">
+          <flowsInto>
+            <nextElementRef id="Examine_airframe" />
+          </flowsInto>
+        </inputCondition>
+        <task id="Examine_airframe">
+          <name>Examine airframe</name>
+          <flowsInto>
+            <nextElementRef id="OutputCondition" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Examination_Results&gt;{/Net/Examination_Results/text()}&lt;/Examination_Results&gt;" />
+              <mapsTo>Examination_Results</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;Examination_Results&gt;{/Examine_airframe/Examination_Results/text()}&lt;/Examination_Results&gt;" />
+              <mapsTo>Examination_Results</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-e1fad568-6111-49e3-9e3f-3f43296f582b</role>
+                </initialSet>
+                <filters>
+                  <filter>
+                    <name>CapabilityFilter</name>
+                    <params>
+                      <param>
+                        <key>Capability</key>
+                        <value>Aeronautics Degree &amp; Airbus in-service accreditation &amp; 10 years experience</value>
+                      </param>
+                    </params>
+                  </filter>
+                </filters>
+              </distributionSet>
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Examine_airframe" />
+        </task>
+        <outputCondition id="OutputCondition" />
+      </processControlElements>
+    </decomposition>
+    <decomposition id="Examine_airframe" xsi:type="WebServiceGatewayFactsType">
+      <name>Examine airframe</name>
+      <inputParam>
+        <index>0</index>
+        <name>Examination_Results</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>0</index>
+        <name>Examination_Results</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+  </specification>
+  <layout>
+    <locale language="en" country="GB"/>
+    <specification id="Pattern8">
+      <size w="58" h="28"/>
+      <net id="Net">
+        <bounds x="0" y="0" w="1280" h="424"/>
+        <frame x="0" y="0" w="1283" h="427"/>
+        <viewport x="0" y="0" w="1283" h="427"/>
+        <vertex id="OutputCondition">
+          <attributes>
+            <bounds x="304" y="260" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <vertex id="InputCondition">
+          <attributes>
+            <bounds x="36" y="260" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <container id="Examine_airframe">
+          <vertex>
+            <attributes>
+              <bounds x="168" y="260" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="136" y="292" w="96" h="28"/>
+            </attributes>
+          </label>
+        </container>
+        <flow source="InputCondition" target="Examine_airframe">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="67" y="266.5"/>
+              <value x="196" y="266.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Examine_airframe" target="OutputCondition">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="227" y="266.5"/>
+              <value x="376" y="266.5"/>
+            </points>
+          </attributes>
+        </flow>
+      </net>
+      <labelFontSize>12</labelFontSize>
+    </specification>
+  </layout>
+</specificationSet>

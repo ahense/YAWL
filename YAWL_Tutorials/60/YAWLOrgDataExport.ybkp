@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<orgdata>
+  <participants>
+    <participant id="PA-e5fd7e46-0ffc-4b06-9bc4-381464362ff4">
+      <userid>roger</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Roger</firstname>
+      <lastname>Daltrey</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-220eccf9-9b20-435c-ad1e-9de9c3a48104</role>
+      </roles>
+      <positions>
+        <position>PO-ad177f8f-220f-496e-99c5-fd9614ee9ce8</position>
+      </positions>
+      <capabilities/>
+      <privileges>00000000</privileges>
+    </participant>
+    <participant id="PA-7d2da3e6-d37b-42b3-80e6-6f8ac3714134">
+      <userid>jessica</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Jessica</firstname>
+      <lastname>Lange</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-220eccf9-9b20-435c-ad1e-9de9c3a48104</role>
+      </roles>
+      <positions>
+        <position>PO-ab860a86-ec8e-4dae-9dd8-d2e5338a651d</position>
+      </positions>
+      <capabilities/>
+      <privileges>00000000</privileges>
+    </participant>
+    <participant id="PA-1e15eef3-8ab9-40ef-aa67-eadd3a42faf1">
+      <userid>martin</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Martin</firstname>
+      <lastname>Scorcese</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-220eccf9-9b20-435c-ad1e-9de9c3a48104</role>
+      </roles>
+      <positions>
+        <position>PO-0831a8a9-c320-4eef-836b-a3cb6a9dd2e4</position>
+      </positions>
+      <capabilities/>
+      <privileges>00000000</privileges>
+    </participant>
+    <participant id="PA-625be13d-a57f-4520-9e3d-1465a35d0750">
+      <userid>katrina</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Katrina</firstname>
+      <lastname>Daschner</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-220eccf9-9b20-435c-ad1e-9de9c3a48104</role>
+      </roles>
+      <positions>
+        <position>PO-ce63738c-0d00-4e20-8419-db92959e0483</position>
+      </positions>
+      <capabilities/>
+      <privileges>00000000</privileges>
+    </participant>
+    <participant id="PA-b4bede75-b97b-4526-8903-1dab376de6dc">
+      <userid>gary</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Gary</firstname>
+      <lastname>Cooper</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-220eccf9-9b20-435c-ad1e-9de9c3a48104</role>
+      </roles>
+      <positions>
+        <position>PO-9f9f77cc-776b-45a1-a85a-371572e31dce</position>
+      </positions>
+      <capabilities/>
+      <privileges>00000000</privileges>
+    </participant>
+    <participant id="PA-938488c7-7346-4487-a427-42b8e51c0728">
+      <userid>tony</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Tony</firstname>
+      <lastname>Hoare</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-220eccf9-9b20-435c-ad1e-9de9c3a48104</role>
+      </roles>
+      <positions>
+        <position>PO-b6d44e1c-dc3d-4ff7-bb23-c2586e4f8c0e</position>
+      </positions>
+      <capabilities/>
+      <privileges>00000000</privileges>
+    </participant>
+    <participant id="PA-eccc16b0-c01e-477c-9205-41199340ac7c">
+      <userid>john</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>John</firstname>
+      <lastname>Wayne</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-220eccf9-9b20-435c-ad1e-9de9c3a48104</role>
+      </roles>
+      <positions>
+        <position>PO-95343695-d989-4367-b348-621b335c6851</position>
+      </positions>
+      <capabilities/>
+      <privileges>00000000</privileges>
+    </participant>
+  </participants>
+  <roles>
+    <role id="RO-220eccf9-9b20-435c-ad1e-9de9c3a48104">
+      <name>Organisation Member</name>
+      <description/>
+      <notes/>
+    </role>
+  </roles>
+  <positions>
+    <position id="PO-95343695-d989-4367-b348-621b335c6851">
+      <title>Accountant1</title>
+      <positionid/>
+      <description/>
+      <notes/>
+      <reportstoid>PO-0831a8a9-c320-4eef-836b-a3cb6a9dd2e4</reportstoid>
+    </position>
+    <position id="PO-9f9f77cc-776b-45a1-a85a-371572e31dce">
+      <title>Accountant2</title>
+      <positionid/>
+      <description/>
+      <notes/>
+      <reportstoid>PO-0831a8a9-c320-4eef-836b-a3cb6a9dd2e4</reportstoid>
+    </position>
+    <position id="PO-ad177f8f-220f-496e-99c5-fd9614ee9ce8">
+      <title>CEO</title>
+      <positionid/>
+      <description/>
+      <notes/>
+    </position>
+    <position id="PO-0831a8a9-c320-4eef-836b-a3cb6a9dd2e4">
+      <title>CFO</title>
+      <positionid/>
+      <description/>
+      <notes/>
+      <reportstoid>PO-ad177f8f-220f-496e-99c5-fd9614ee9ce8</reportstoid>
+    </position>
+    <position id="PO-b6d44e1c-dc3d-4ff7-bb23-c2586e4f8c0e">
+      <title>CIO</title>
+      <positionid/>
+      <description/>
+      <notes/>
+      <reportstoid>PO-ad177f8f-220f-496e-99c5-fd9614ee9ce8</reportstoid>
+    </position>
+    <position id="PO-ab860a86-ec8e-4dae-9dd8-d2e5338a651d">
+      <title>Technician1</title>
+      <positionid/>
+      <description/>
+      <notes/>
+      <reportstoid>PO-b6d44e1c-dc3d-4ff7-bb23-c2586e4f8c0e</reportstoid>
+    </position>
+    <position id="PO-ce63738c-0d00-4e20-8419-db92959e0483">
+      <title>Technician2</title>
+      <positionid/>
+      <description/>
+      <notes/>
+      <reportstoid>PO-b6d44e1c-dc3d-4ff7-bb23-c2586e4f8c0e</reportstoid>
+    </position>
+  </positions>
+  <capabilities/>
+  <orggroups/>
+  <nonhumanresources/>
+  <nonhumancategories/>
+</orgdata>
+

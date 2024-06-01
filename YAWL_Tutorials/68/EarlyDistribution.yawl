@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<specificationSet xmlns="http://www.yawlfoundation.org/yawlschema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4.0" xsi:schemaLocation="http://www.yawlfoundation.org/yawlschema http://www.yawlfoundation.org/yawlschema/YAWL_Schema4.0.xsd">
+  <specification uri="EarlyDistribution">
+    <documentation>Early Distribution</documentation>
+    <metaData>
+      <title>Early Distribution</title>
+      <creator>AVH</creator>
+      <description>Early Distribution</description>
+      <coverage>5.0.805</coverage>
+      <version>0.1</version>
+      <persistent>false</persistent>
+      <identifier>UID_f762c91c-8fe4-4f0a-ad96-8d7711a1612c</identifier>
+    </metaData>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+    <decomposition id="Net" isRootNet="true" xsi:type="NetFactsType">
+      <localVariable>
+        <index>0</index>
+        <name>Flight_Number</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>80</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>1</index>
+        <name>Flight_Destination</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>London</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>2</index>
+        <name>Date_of_Announcment</name>
+        <type>date</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>2024-03-02</initialValue>
+      </localVariable>
+      <processControlElements>
+        <inputCondition id="InputCondition">
+          <flowsInto>
+            <nextElementRef id="T" />
+          </flowsInto>
+        </inputCondition>
+        <task id="T">
+          <flowsInto>
+            <nextElementRef id="Announce_flight" />
+          </flowsInto>
+          <flowsInto>
+            <nextElementRef id="_14_days_timeout" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <resourcing>
+            <offer initiator="user" />
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+        </task>
+        <task id="Announce_flight">
+          <name>Announce flight</name>
+          <flowsInto>
+            <nextElementRef id="Pilot_flight" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Flight_Destination&gt;{/Net/Flight_Destination/text()}&lt;/Flight_Destination&gt;" />
+              <mapsTo>Flight_Destination</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Date_of_Announcment&gt;{current-date()}&lt;/Date_of_Announcment&gt;" />
+              <mapsTo>Date_of_Announcment</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Flight_Number&gt;{/Net/Flight_Number/text()}&lt;/Flight_Number&gt;" />
+              <mapsTo>Flight_Number</mapsTo>
+            </mapping>
+          </startingMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <participant>PA-4c2e2972-0e84-4f17-b417-8b051fcf38ed</participant>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="system">
+              <allocator>
+                <name>RandomChoice</name>
+              </allocator>
+            </allocate>
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Announce_flight" />
+        </task>
+        <task id="_14_days_timeout">
+          <name>14 days timeout</name>
+          <flowsInto>
+            <nextElementRef id="Pilot_flight" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <removesTokens id="Announce_flight" />
+          <removesTokensFromFlow>
+            <flowSource id="T" />
+            <flowDestination id="Announce_flight" />
+          </removesTokensFromFlow>
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Flight_Number&gt;{/Net/Flight_Number/text()}&lt;/Flight_Number&gt;" />
+              <mapsTo>Flight_Number</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;Flight_Number&gt;{/_14_days_timeout/Flight_Number/text()}&lt;/Flight_Number&gt;" />
+              <mapsTo>Flight_Number</mapsTo>
+            </mapping>
+          </completedMappings>
+          <timer>
+            <trigger>OnEnabled</trigger>
+            <duration>PT30S</duration>
+          </timer>
+          <resourcing>
+            <offer initiator="user" />
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="_14_days_timeout" />
+        </task>
+        <task id="Pilot_flight">
+          <name>Pilot flight</name>
+          <flowsInto>
+            <nextElementRef id="OutputCondition" />
+          </flowsInto>
+          <join code="or" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Flight_Destination&gt;{/Net/Flight_Destination/text()}&lt;/Flight_Destination&gt;" />
+              <mapsTo>Flight_Destination</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Flight_Number&gt;{/Net/Flight_Number/text()}&lt;/Flight_Number&gt;" />
+              <mapsTo>Flight_Number</mapsTo>
+            </mapping>
+          </startingMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <participant>PA-4c2e2972-0e84-4f17-b417-8b051fcf38ed</participant>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="system">
+              <allocator>
+                <name>RandomChoice</name>
+              </allocator>
+            </allocate>
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Pilot_flight" />
+        </task>
+        <outputCondition id="OutputCondition" />
+      </processControlElements>
+    </decomposition>
+    <decomposition id="Announce_flight" xsi:type="WebServiceGatewayFactsType">
+      <name>Announce flight</name>
+      <inputParam text-above="In 14 days you will have to pilot the following flight:">
+        <index>0</index>
+        <name>Flight_Number</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>1</index>
+        <name>Flight_Destination</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>2</index>
+        <name>Date_of_Announcment</name>
+        <type>date</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Pilot_flight" xsi:type="WebServiceGatewayFactsType">
+      <name>Pilot flight</name>
+      <inputParam>
+        <index>0</index>
+        <name>Flight_Number</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>1</index>
+        <name>Flight_Destination</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="_14_days_timeout" xsi:type="WebServiceGatewayFactsType">
+      <name>14 days timeout</name>
+      <inputParam>
+        <index>0</index>
+        <name>Flight_Number</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>0</index>
+        <name>Flight_Number</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+  </specification>
+  <layout>
+    <locale language="en" country="GB"/>
+    <specification id="EarlyDistribution" defaultBgColor="-526351">
+      <size w="58" h="28"/>
+      <net id="Net">
+        <bounds x="0" y="0" w="643" h="426"/>
+        <frame x="0" y="0" w="646" h="429"/>
+        <viewport x="0" y="0" w="646" h="429"/>
+        <cancellationtask>_14_days_timeout</cancellationtask>
+        <vertex id="OutputCondition">
+          <attributes>
+            <bounds x="544" y="64" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <vertex id="InputCondition">
+          <attributes>
+            <bounds x="36" y="64" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <container id="T">
+          <vertex>
+            <attributes>
+              <bounds x="144" y="64" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <decorator type="AND_split">
+            <position>13</position>
+            <attributes>
+              <bounds x="175" y="64" w="11" h="32"/>
+            </attributes>
+          </decorator>
+        </container>
+        <container id="Pilot_flight">
+          <vertex>
+            <attributes>
+              <bounds x="412" y="64" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="376" y="96" w="96" h="14"/>
+            </attributes>
+          </label>
+          <decorator type="OR_join">
+            <position>12</position>
+            <attributes>
+              <bounds x="402" y="64" w="11" h="32"/>
+            </attributes>
+          </decorator>
+        </container>
+        <container id="_14_days_timeout">
+          <vertex>
+            <attributes>
+              <bounds x="272" y="156" w="32" h="32"/>
+              <backgroundColor>-4144960</backgroundColor>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="240" y="188" w="96" h="14"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="Announce_flight">
+          <vertex>
+            <attributes>
+              <bounds x="272" y="64" w="32" h="32"/>
+              <foregroundColor>-65536</foregroundColor>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="240" y="96" w="96" h="14"/>
+            </attributes>
+          </label>
+        </container>
+        <flow source="T" target="Announce_flight">
+          <ports in="2" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="185" y="75.5"/>
+              <value x="272" y="79.5"/>
+            </points>
+            <linecolor>-65536</linecolor>
+          </attributes>
+        </flow>
+        <flow source="T" target="_14_days_timeout">
+          <ports in="2" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="185" y="75.5"/>
+              <value x="272" y="171.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="_14_days_timeout" target="Pilot_flight">
+          <ports in="13" out="2"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="303" y="171.5"/>
+              <value x="402" y="75.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="InputCondition" target="T">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="67" y="75.5"/>
+              <value x="144" y="75.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Announce_flight" target="Pilot_flight">
+          <ports in="13" out="2"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="303" y="79.5"/>
+              <value x="402" y="75.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Pilot_flight" target="OutputCondition">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="443" y="75.5"/>
+              <value x="544" y="75.5"/>
+            </points>
+          </attributes>
+        </flow>
+      </net>
+      <labelFontSize>12</labelFontSize>
+    </specification>
+  </layout>
+</specificationSet>

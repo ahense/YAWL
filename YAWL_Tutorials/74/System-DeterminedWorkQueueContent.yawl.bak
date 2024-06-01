@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<specificationSet xmlns="http://www.yawlfoundation.org/yawlschema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4.0" xsi:schemaLocation="http://www.yawlfoundation.org/yawlschema http://www.yawlfoundation.org/yawlschema/YAWL_Schema4.0.xsd">
+  <specification uri="System-DeterminedWorkQueueContent">
+    <documentation>ystem-Determined Work Queue Content</documentation>
+    <metaData>
+      <title>ystem-Determined Work Queue Content</title>
+      <creator>AVH</creator>
+      <description>ystem-Determined Work Queue Content</description>
+      <coverage>5.0.805</coverage>
+      <version>0.1</version>
+      <persistent>false</persistent>
+      <identifier>UID_32e76e72-50cc-49f7-a16e-58fca9d07b8c</identifier>
+    </metaData>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:simpleType name="PriorityType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="High" />
+          <xs:enumeration value="Medium" />
+          <xs:enumeration value="Low" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:schema>
+    <decomposition id="Net" isRootNet="true" xsi:type="NetFactsType">
+      <localVariable>
+        <index>0</index>
+        <name>Priority_Prepare_Defence</name>
+        <type>PriorityType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>Low</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>1</index>
+        <name>Priority_Gather_Evidence</name>
+        <type>PriorityType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>Low</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>2</index>
+        <name>Priority_Submit_Review</name>
+        <type>PriorityType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>Low</initialValue>
+      </localVariable>
+      <processControlElements>
+        <inputCondition id="InputCondition">
+          <flowsInto>
+            <nextElementRef id="Set_priorities" />
+          </flowsInto>
+        </inputCondition>
+        <task id="Set_priorities">
+          <name>Set priorities</name>
+          <flowsInto>
+            <nextElementRef id="Prepare_defence" />
+          </flowsInto>
+          <flowsInto>
+            <nextElementRef id="Submit_review" />
+          </flowsInto>
+          <flowsInto>
+            <nextElementRef id="Gather_evidence" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-7ab9f546-1471-4067-874c-0b60db9eb563</role>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Set_priorities" />
+        </task>
+        <task id="Gather_evidence">
+          <name>Gather evidence</name>
+          <documentation>Priority: ${/Net/Priority_Gather_Evidence/text()}</documentation>
+          <flowsInto>
+            <nextElementRef id="T_4" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Priority_Gather_Evidence&gt;{/Net/Priority_Gather_Evidence/text()}&lt;/Priority_Gather_Evidence&gt;" />
+              <mapsTo>Priority_Gather_Evidence</mapsTo>
+            </mapping>
+          </startingMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-7ab9f546-1471-4067-874c-0b60db9eb563</role>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Gather_evidence" />
+        </task>
+        <task id="Prepare_defence">
+          <name>Prepare defence</name>
+          <documentation>Priority: ${/Net/Priority_Prepare_Defence/text()}</documentation>
+          <flowsInto>
+            <nextElementRef id="T_4" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Priority_Prepare_Defence&gt;{/Net/Priority_Prepare_Defence/text()}&lt;/Priority_Prepare_Defence&gt;" />
+              <mapsTo>Priority_Prepare_Defence</mapsTo>
+            </mapping>
+          </startingMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-7ab9f546-1471-4067-874c-0b60db9eb563</role>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Prepare_defence" />
+        </task>
+        <task id="Submit_review">
+          <name>Submit review</name>
+          <documentation>Priority: ${/Net/Priority_Submit_Review/text()}</documentation>
+          <flowsInto>
+            <nextElementRef id="T_4" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Priority_Submit_Review&gt;{/Net/Priority_Submit_Review/text()}&lt;/Priority_Submit_Review&gt;" />
+              <mapsTo>Priority_Submit_Review</mapsTo>
+            </mapping>
+          </startingMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-7ab9f546-1471-4067-874c-0b60db9eb563</role>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Submit_review" />
+        </task>
+        <task id="T_4">
+          <flowsInto>
+            <nextElementRef id="OutputCondition" />
+          </flowsInto>
+          <join code="and" />
+          <split code="and" />
+          <resourcing>
+            <offer initiator="user" />
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+        </task>
+        <outputCondition id="OutputCondition" />
+      </processControlElements>
+    </decomposition>
+    <decomposition id="Gather_evidence" xsi:type="WebServiceGatewayFactsType">
+      <name>Gather evidence</name>
+      <inputParam>
+        <index>0</index>
+        <name>Priority_Gather_Evidence</name>
+        <type>PriorityType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Prepare_defence" xsi:type="WebServiceGatewayFactsType">
+      <name>Prepare defence</name>
+      <inputParam>
+        <index>0</index>
+        <name>Priority_Prepare_Defence</name>
+        <type>PriorityType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Set_priorities" xsi:type="WebServiceGatewayFactsType">
+      <name>Set priorities</name>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Submit_review" xsi:type="WebServiceGatewayFactsType">
+      <name>Submit review</name>
+      <inputParam>
+        <index>0</index>
+        <name>Priority_Submit_Review</name>
+        <type>PriorityType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+  </specification>
+  <layout>
+    <locale language="en" country="GB"/>
+    <specification id="System-DeterminedWorkQueueContent" defaultBgColor="-526351">
+      <size w="58" h="28"/>
+      <net id="Net">
+        <bounds x="0" y="0" w="716" h="456"/>
+        <frame x="0" y="0" w="719" h="459"/>
+        <viewport x="0" y="0" w="719" h="459"/>
+        <vertex id="OutputCondition">
+          <attributes>
+            <bounds x="580" y="252" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <vertex id="InputCondition">
+          <attributes>
+            <bounds x="36" y="252" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <container id="Set_priorities">
+          <vertex>
+            <attributes>
+              <bounds x="132" y="252" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="104" y="284" w="96" h="14"/>
+            </attributes>
+          </label>
+          <decorator type="AND_split">
+            <position>13</position>
+            <attributes>
+              <bounds x="163" y="252" w="11" h="32"/>
+            </attributes>
+          </decorator>
+        </container>
+        <container id="T_4">
+          <vertex>
+            <attributes>
+              <bounds x="428" y="252" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <decorator type="AND_join">
+            <position>12</position>
+            <attributes>
+              <bounds x="418" y="252" w="11" h="32"/>
+            </attributes>
+          </decorator>
+        </container>
+        <container id="Prepare_defence">
+          <vertex>
+            <attributes>
+              <bounds x="268" y="120" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="236" y="152" w="96" h="14"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="Submit_review">
+          <vertex>
+            <attributes>
+              <bounds x="268" y="376" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="236" y="408" w="96" h="14"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="Gather_evidence">
+          <vertex>
+            <attributes>
+              <bounds x="268" y="252" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="236" y="284" w="96" h="14"/>
+            </attributes>
+          </label>
+        </container>
+        <flow source="T_4" target="OutputCondition">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="459" y="258.5"/>
+              <value x="580" y="258.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Gather_evidence" target="T_4">
+          <ports in="13" out="2"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="299" y="258.5"/>
+              <value x="418" y="258.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="InputCondition" target="Set_priorities">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="67" y="258.5"/>
+              <value x="132" y="258.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Set_priorities" target="Gather_evidence">
+          <ports in="2" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="173" y="258.5"/>
+              <value x="268" y="258.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Submit_review" target="T_4">
+          <ports in="13" out="2"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="Set_priorities" target="Submit_review">
+          <ports in="2" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="Set_priorities" target="Prepare_defence">
+          <ports in="2" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="Prepare_defence" target="T_4">
+          <ports in="13" out="2"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+      </net>
+      <labelFontSize>12</labelFontSize>
+    </specification>
+  </layout>
+</specificationSet>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<specificationSet xmlns="http://www.yawlfoundation.org/yawlschema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4.0" xsi:schemaLocation="http://www.yawlfoundation.org/yawlschema http://www.yawlfoundation.org/yawlschema/YAWL_Schema4.0.xsd">
+  <specification uri="Pattern9">
+    <documentation>History-Based Distribution</documentation>
+    <metaData>
+      <title>History-Based Distribution</title>
+      <creator>AVH</creator>
+      <description>History-Based Distribution</description>
+      <coverage>5.0.805</coverage>
+      <version>0.1</version>
+      <persistent>false</persistent>
+      <identifier>UID_f7a9fcc3-dd30-4a0b-a12f-69c560955b4e</identifier>
+    </metaData>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+    <decomposition id="Net" isRootNet="true" xsi:type="NetFactsType">
+      <localVariable>
+        <index>0</index>
+        <name>Patient_Name</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>Herbert</initialValue>
+      </localVariable>
+      <processControlElements>
+        <inputCondition id="InputCondition">
+          <flowsInto>
+            <nextElementRef id="Finalise_heart_bypass" />
+          </flowsInto>
+        </inputCondition>
+        <task id="Finalise_heart_bypass">
+          <name>Finalise heart bypass</name>
+          <flowsInto>
+            <nextElementRef id="OutputCondition" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Patient_Name&gt;{/Net/Patient_Name/text()}&lt;/Patient_Name&gt;" />
+              <mapsTo>Patient_Name</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;Patient_Name&gt;{/Finalise_heart_bypass/Patient_Name/text()}&lt;/Patient_Name&gt;" />
+              <mapsTo>Patient_Name</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-9525a5d6-4d00-4c63-a983-869b743199e8</role>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="system">
+              <allocator>
+                <name>RoundRobinByExperience</name>
+              </allocator>
+            </allocate>
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Finalise_heart_bypass" />
+        </task>
+        <outputCondition id="OutputCondition" />
+      </processControlElements>
+    </decomposition>
+    <decomposition id="Finalise_heart_bypass" xsi:type="WebServiceGatewayFactsType">
+      <name>Finalise heart bypass</name>
+      <inputParam>
+        <index>0</index>
+        <name>Patient_Name</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>0</index>
+        <name>Patient_Name</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+  </specification>
+  <layout>
+    <locale language="en" country="GB"/>
+    <specification id="Pattern9">
+      <size w="58" h="28"/>
+      <net id="Net">
+        <bounds x="0" y="0" w="1280" h="539"/>
+        <frame x="0" y="0" w="1283" h="542"/>
+        <viewport x="0" y="0" w="1283" h="542"/>
+        <vertex id="OutputCondition">
+          <attributes>
+            <bounds x="328" y="260" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <vertex id="InputCondition">
+          <attributes>
+            <bounds x="36" y="260" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <container id="Finalise_heart_bypass">
+          <vertex>
+            <attributes>
+              <bounds x="180" y="260" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="148" y="292" w="96" h="28"/>
+            </attributes>
+          </label>
+        </container>
+        <flow source="InputCondition" target="Finalise_heart_bypass">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="Finalise_heart_bypass" target="OutputCondition">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+      </net>
+      <labelFontSize>12</labelFontSize>
+    </specification>
+  </layout>
+</specificationSet>

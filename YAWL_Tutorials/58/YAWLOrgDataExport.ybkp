@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<orgdata>
+  <participants>
+    <participant id="PA-a20a7c66-33a5-4734-92af-0d475c970649">
+      <userid>shaun</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Shaun</firstname>
+      <lastname>Sheep</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-e1fad568-6111-49e3-9e3f-3f43296f582b</role>
+      </roles>
+      <positions/>
+      <capabilities>
+        <capability>CA-5276844a-31b3-44ed-8cb5-6c283081e0bb</capability>
+        <capability>CA-cc1e1fef-24f4-4534-9f69-8f86f441566a</capability>
+      </capabilities>
+      <privileges>00000000</privileges>
+    </participant>
+    <participant id="PA-840f2582-f4d7-4982-90f4-2bec3ecec783">
+      <userid>alicia</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Alicia</firstname>
+      <lastname>Vikander</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-e1fad568-6111-49e3-9e3f-3f43296f582b</role>
+      </roles>
+      <positions/>
+      <capabilities>
+        <capability>CA-e38f2c06-ec74-4fde-83db-b9d6871e07a0</capability>
+        <capability>CA-5276844a-31b3-44ed-8cb5-6c283081e0bb</capability>
+        <capability>CA-cc1e1fef-24f4-4534-9f69-8f86f441566a</capability>
+      </capabilities>
+      <privileges>00000000</privileges>
+    </participant>
+    <participant id="PA-0fcb08b1-26a1-4c76-b590-0b8a1efee853">
+      <userid>nathan</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Nathan</firstname>
+      <lastname>Fillion</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-e1fad568-6111-49e3-9e3f-3f43296f582b</role>
+      </roles>
+      <positions/>
+      <capabilities>
+        <capability>CA-cc1e1fef-24f4-4534-9f69-8f86f441566a</capability>
+      </capabilities>
+      <privileges>00000000</privileges>
+    </participant>
+  </participants>
+  <roles>
+    <role id="RO-e1fad568-6111-49e3-9e3f-3f43296f582b">
+      <name>Engineer</name>
+      <description/>
+      <notes/>
+    </role>
+  </roles>
+  <positions/>
+  <capabilities>
+    <capability id="CA-e38f2c06-ec74-4fde-83db-b9d6871e07a0">
+      <name>10 years experience</name>
+      <description/>
+      <notes/>
+    </capability>
+    <capability id="CA-cc1e1fef-24f4-4534-9f69-8f86f441566a">
+      <name>Aeronautics Degree</name>
+      <description/>
+      <notes/>
+    </capability>
+    <capability id="CA-5276844a-31b3-44ed-8cb5-6c283081e0bb">
+      <name>Airbus in-service accreditation</name>
+      <description/>
+      <notes/>
+    </capability>
+  </capabilities>
+  <orggroups/>
+  <nonhumanresources/>
+  <nonhumancategories/>
+</orgdata>
+

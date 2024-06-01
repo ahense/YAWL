@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<specificationSet xmlns="http://www.yawlfoundation.org/yawlschema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4.0" xsi:schemaLocation="http://www.yawlfoundation.org/yawlschema http://www.yawlfoundation.org/yawlschema/YAWL_Schema4.0.xsd">
+  <specification uri="document">
+    <name>Document Handling</name>
+    <documentation>No description provided</documentation>
+    <metaData>
+      <title>Document Handling</title>
+      <creator>Andreas V. Hense</creator>
+      <creator>September 2014</creator>
+      <description>A simple workflow that demonstrates the document handling feature of YAWL.</description>
+      <coverage>5.0.805</coverage>
+      <version>0.6</version>
+      <persistent>false</persistent>
+      <identifier>UID_af746526-a31f-490d-a43b-8bfa8c522a5d</identifier>
+    </metaData>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+    <decomposition id="Net" isRootNet="true" xsi:type="NetFactsType">
+      <localVariable>
+        <index>0</index>
+        <name>document</name>
+        <type>YDocumentType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue />
+      </localVariable>
+      <processControlElements>
+        <inputCondition id="InputCondition">
+          <flowsInto>
+            <nextElementRef id="Upload" />
+          </flowsInto>
+        </inputCondition>
+        <task id="Upload">
+          <name>Upload</name>
+          <flowsInto>
+            <nextElementRef id="Download" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;document&gt;{/Upload/document/*}&lt;/document&gt;" />
+              <mapsTo>document</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="user" />
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Upload" />
+        </task>
+        <task id="Download">
+          <name>Download</name>
+          <flowsInto>
+            <nextElementRef id="Change" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;document&gt;{/Net/document/*}&lt;/document&gt;" />
+              <mapsTo>document</mapsTo>
+            </mapping>
+          </startingMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet />
+              </distributionSet>
+              <familiarParticipant taskID="Upload" />
+            </offer>
+            <allocate initiator="system">
+              <allocator>
+                <name>RandomChoice</name>
+              </allocator>
+            </allocate>
+            <start initiator="system" />
+          </resourcing>
+          <decomposesTo id="Download" />
+        </task>
+        <task id="Change">
+          <name>Change</name>
+          <flowsInto>
+            <nextElementRef id="OutputCondition" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;document&gt;{/Net/document/*}&lt;/document&gt;" />
+              <mapsTo>document</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;document&gt;{/Change/document/*}&lt;/document&gt;" />
+              <mapsTo>document</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet />
+              </distributionSet>
+              <familiarParticipant taskID="Upload" />
+            </offer>
+            <allocate initiator="system">
+              <allocator>
+                <name>RandomChoice</name>
+              </allocator>
+            </allocate>
+            <start initiator="system" />
+          </resourcing>
+          <decomposesTo id="Change" />
+        </task>
+        <outputCondition id="OutputCondition" />
+      </processControlElements>
+    </decomposition>
+    <decomposition id="Change" xsi:type="WebServiceGatewayFactsType">
+      <inputParam>
+        <index>0</index>
+        <name>document</name>
+        <type>YDocumentType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>0</index>
+        <name>document</name>
+        <type>YDocumentType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Download" xsi:type="WebServiceGatewayFactsType">
+      <inputParam>
+        <index>0</index>
+        <name>document</name>
+        <type>YDocumentType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Upload" xsi:type="WebServiceGatewayFactsType">
+      <outputParam>
+        <index>0</index>
+        <name>document</name>
+        <type>YDocumentType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+  </specification>
+  <layout>
+    <locale language="en" country="US"/>
+    <specification id="document" defaultBgColor="-526351">
+      <size w="62" h="26"/>
+      <net id="Net">
+        <bounds x="0" y="0" w="612" h="312"/>
+        <frame x="0" y="0" w="615" h="315"/>
+        <viewport x="0" y="0" w="615" h="315"/>
+        <vertex id="OutputCondition">
+          <attributes>
+            <bounds x="532" y="44" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <vertex id="InputCondition">
+          <attributes>
+            <bounds x="36" y="44" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <container id="Upload">
+          <vertex>
+            <attributes>
+              <bounds x="140" y="44" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="108" y="76" w="96" h="18"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="Change">
+          <vertex>
+            <attributes>
+              <bounds x="404" y="44" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="372" y="76" w="96" h="14"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="Download">
+          <vertex>
+            <attributes>
+              <bounds x="276" y="44" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="244" y="76" w="96" h="14"/>
+            </attributes>
+          </label>
+        </container>
+        <flow source="InputCondition" target="Upload">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="67" y="55.5"/>
+              <value x="212" y="55.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Download" target="Change">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="Upload" target="Download">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="243" y="55.5"/>
+              <value x="404" y="55.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Change" target="OutputCondition">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+      </net>
+      <labelFontSize>12</labelFontSize>
+    </specification>
+  </layout>
+</specificationSet>

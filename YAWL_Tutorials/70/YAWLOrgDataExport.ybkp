@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<orgdata>
+  <participants>
+    <participant id="PA-c7ad6f9d-a135-4657-8056-ef32c00c68c5">
+      <userid>martha</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Martha</firstname>
+      <lastname>Moody</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles/>
+      <positions>
+        <position>PO-a0be7acc-de90-44eb-8bb5-69ea87fbea04</position>
+      </positions>
+      <capabilities/>
+      <privileges>00000000</privileges>
+    </participant>
+    <participant id="PA-52744600-f688-40e2-94a7-cd9b1a03c8e3">
+      <userid>george</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>George</firstname>
+      <lastname>Harrison</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles/>
+      <positions>
+        <position>PO-09e11c96-e743-4023-86f9-80edd2b24576</position>
+      </positions>
+      <capabilities/>
+      <privileges>00010000</privileges>
+    </participant>
+  </participants>
+  <roles/>
+  <positions>
+    <position id="PO-a0be7acc-de90-44eb-8bb5-69ea87fbea04">
+      <title>Mechanics Team Member</title>
+      <positionid/>
+      <description/>
+      <notes/>
+      <orggroupid>OG-e6d10720-28c1-471d-b839-b065e2f7bc05</orggroupid>
+      <reportstoid>PO-09e11c96-e743-4023-86f9-80edd2b24576</reportstoid>
+    </position>
+    <position id="PO-09e11c96-e743-4023-86f9-80edd2b24576">
+      <title>Mechanics Teamleader</title>
+      <positionid/>
+      <description/>
+      <notes/>
+      <orggroupid>OG-e6d10720-28c1-471d-b839-b065e2f7bc05</orggroupid>
+    </position>
+  </positions>
+  <capabilities/>
+  <orggroups>
+    <orggroup id="OG-e6d10720-28c1-471d-b839-b065e2f7bc05">
+      <groupName>Mechanic</groupName>
+      <groupType>TEAM</groupType>
+      <description/>
+      <notes/>
+    </orggroup>
+  </orggroups>
+  <nonhumanresources/>
+  <nonhumancategories/>
+</orgdata>
+

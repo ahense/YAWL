@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<orgdata>
+  <participants>
+    <participant id="PA-895bb767-c394-4934-b4b8-c9a2e9c3d8e8">
+      <userid>nina</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Nina</firstname>
+      <lastname>Hagen</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-290a0b33-0a42-4441-8a08-8aa432ff47f1</role>
+      </roles>
+      <positions/>
+      <capabilities/>
+      <privileges>00000000</privileges>
+    </participant>
+    <participant id="PA-afa5cfea-d4bb-4a5a-9e66-2cae774c6445">
+      <userid>alan</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Alan</firstname>
+      <lastname>Parsons</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-290a0b33-0a42-4441-8a08-8aa432ff47f1</role>
+      </roles>
+      <positions/>
+      <capabilities/>
+      <privileges>00000000</privileges>
+    </participant>
+    <participant id="PA-c4b1d3be-9881-4979-97ab-2ce7c68286fd">
+      <userid>max</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Max</firstname>
+      <lastname>La Menace</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-290a0b33-0a42-4441-8a08-8aa432ff47f1</role>
+      </roles>
+      <positions/>
+      <capabilities/>
+      <privileges>00000000</privileges>
+    </participant>
+  </participants>
+  <roles>
+    <role id="RO-290a0b33-0a42-4441-8a08-8aa432ff47f1">
+      <name>Accountant</name>
+      <description/>
+      <notes/>
+    </role>
+  </roles>
+  <positions/>
+  <capabilities/>
+  <orggroups/>
+  <nonhumanresources/>
+  <nonhumancategories/>
+</orgdata>
+

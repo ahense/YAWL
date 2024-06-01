@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<specificationSet xmlns="http://www.yawlfoundation.org/yawlschema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4.0" xsi:schemaLocation="http://www.yawlfoundation.org/yawlschema http://www.yawlfoundation.org/yawlschema/YAWL_Schema4.0.xsd">
+  <specification uri="New_Specification">
+    <documentation>Selection Autonomy</documentation>
+    <metaData>
+      <title>Selection Autonomy</title>
+      <creator>AVH</creator>
+      <description>Selection Autonomy</description>
+      <coverage>5.0.805</coverage>
+      <version>0.1</version>
+      <persistent>false</persistent>
+      <identifier>UID_5938a36e-52c0-4df5-9df6-db00b538b042</identifier>
+    </metaData>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+    <decomposition id="Net" isRootNet="true" xsi:type="NetFactsType">
+      <localVariable>
+        <index>0</index>
+        <name>Case_Description</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>The lakeside murder</initialValue>
+      </localVariable>
+      <processControlElements>
+        <inputCondition id="InputCondition">
+          <flowsInto>
+            <nextElementRef id="T" />
+          </flowsInto>
+        </inputCondition>
+        <task id="T">
+          <flowsInto>
+            <nextElementRef id="Judge_case" />
+          </flowsInto>
+          <flowsInto>
+            <nextElementRef id="Gather_evidence" />
+          </flowsInto>
+          <flowsInto>
+            <nextElementRef id="Write_report" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <resourcing>
+            <offer initiator="user" />
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+        </task>
+        <task id="Gather_evidence">
+          <name>Gather evidence</name>
+          <flowsInto>
+            <nextElementRef id="T_1" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Case_Description&gt;{/Net/Case_Description/text()}&lt;/Case_Description&gt;" />
+              <mapsTo>Case_Description</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;Case_Description&gt;{/Gather_evidence/Case_Description/text()}&lt;/Case_Description&gt;" />
+              <mapsTo>Case_Description</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <participant>PA-27ee7976-05a6-45ce-94b5-4df51ab00dd4</participant>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="system">
+              <allocator>
+                <name>RandomChoice</name>
+              </allocator>
+            </allocate>
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Gather_evidence" />
+        </task>
+        <task id="Judge_case">
+          <name>Judge case</name>
+          <flowsInto>
+            <nextElementRef id="T_1" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Case_Description&gt;{/Net/Case_Description/text()}&lt;/Case_Description&gt;" />
+              <mapsTo>Case_Description</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;Case_Description&gt;{/Judge_case/Case_Description/text()}&lt;/Case_Description&gt;" />
+              <mapsTo>Case_Description</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <participant>PA-27ee7976-05a6-45ce-94b5-4df51ab00dd4</participant>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="system">
+              <allocator>
+                <name>RandomChoice</name>
+              </allocator>
+            </allocate>
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Judge_case" />
+        </task>
+        <task id="Write_report">
+          <name>Write report</name>
+          <flowsInto>
+            <nextElementRef id="T_1" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Case_Description&gt;{/Net/Case_Description/text()}&lt;/Case_Description&gt;" />
+              <mapsTo>Case_Description</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;Case_Description&gt;{/Write_report/Case_Description/text()}&lt;/Case_Description&gt;" />
+              <mapsTo>Case_Description</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <participant>PA-27ee7976-05a6-45ce-94b5-4df51ab00dd4</participant>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="system">
+              <allocator>
+                <name>RandomChoice</name>
+              </allocator>
+            </allocate>
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Write_report" />
+        </task>
+        <task id="T_1">
+          <flowsInto>
+            <nextElementRef id="OutputCondition" />
+          </flowsInto>
+          <join code="and" />
+          <split code="and" />
+          <resourcing>
+            <offer initiator="user" />
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+        </task>
+        <outputCondition id="OutputCondition" />
+      </processControlElements>
+    </decomposition>
+    <decomposition id="Gather_evidence" xsi:type="WebServiceGatewayFactsType">
+      <name>Gather evidence</name>
+      <inputParam>
+        <index>0</index>
+        <name>Case_Description</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>0</index>
+        <name>Case_Description</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Judge_case" xsi:type="WebServiceGatewayFactsType">
+      <name>Judge case</name>
+      <inputParam>
+        <index>0</index>
+        <name>Case_Description</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>0</index>
+        <name>Case_Description</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Write_report" xsi:type="WebServiceGatewayFactsType">
+      <name>Write report</name>
+      <inputParam>
+        <index>0</index>
+        <name>Case_Description</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>0</index>
+        <name>Case_Description</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+  </specification>
+  <layout>
+    <locale language="en" country="GB"/>
+    <specification id="New_Specification" defaultBgColor="-526351">
+      <size w="58" h="28"/>
+      <net id="Net">
+        <bounds x="0" y="0" w="716" h="579"/>
+        <frame x="0" y="0" w="719" h="582"/>
+        <viewport x="0" y="0" w="719" h="582"/>
+        <vertex id="OutputCondition">
+          <attributes>
+            <bounds x="556" y="280" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <vertex id="InputCondition">
+          <attributes>
+            <bounds x="36" y="280" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <container id="Judge_case">
+          <vertex>
+            <attributes>
+              <bounds x="280" y="180" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="248" y="212" w="96" h="14"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="T">
+          <vertex>
+            <attributes>
+              <bounds x="136" y="280" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <decorator type="AND_split">
+            <position>13</position>
+            <attributes>
+              <bounds x="167" y="280" w="11" h="32"/>
+            </attributes>
+          </decorator>
+        </container>
+        <container id="T_1">
+          <vertex>
+            <attributes>
+              <bounds x="428" y="280" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <decorator type="AND_join">
+            <position>12</position>
+            <attributes>
+              <bounds x="418" y="280" w="11" h="32"/>
+            </attributes>
+          </decorator>
+        </container>
+        <container id="Gather_evidence">
+          <vertex>
+            <attributes>
+              <bounds x="280" y="280" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="248" y="312" w="96" h="14"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="Write_report">
+          <vertex>
+            <attributes>
+              <bounds x="280" y="380" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="248" y="412" w="96" h="14"/>
+            </attributes>
+          </label>
+        </container>
+        <flow source="T" target="Write_report">
+          <ports in="2" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="Gather_evidence" target="T_1">
+          <ports in="13" out="2"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="355" y="286.5"/>
+              <value x="506" y="286.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="T" target="Judge_case">
+          <ports in="2" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="Write_report" target="T_1">
+          <ports in="13" out="2"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="InputCondition" target="T">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="67" y="281.5"/>
+              <value x="136" y="289.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Judge_case" target="T_1">
+          <ports in="13" out="2"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="T_1" target="OutputCondition">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="547" y="294.5"/>
+              <value x="644" y="286.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="T" target="Gather_evidence">
+          <ports in="2" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="177" y="286.5"/>
+              <value x="324" y="286.5"/>
+            </points>
+          </attributes>
+        </flow>
+      </net>
+      <labelFontSize>12</labelFontSize>
+    </specification>
+  </layout>
+</specificationSet>

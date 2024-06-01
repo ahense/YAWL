@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<specificationSet xmlns="http://www.yawlfoundation.org/yawlschema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4.0" xsi:schemaLocation="http://www.yawlfoundation.org/yawlschema http://www.yawlfoundation.org/yawlschema/YAWL_Schema4.0.xsd">
+  <specification uri="DistributionOnEnablement">
+    <documentation>Distribution on Enablement</documentation>
+    <metaData>
+      <title>Distribution on Enablement</title>
+      <creator>AVH</creator>
+      <description>Distribution on Enablement</description>
+      <coverage>5.0.805</coverage>
+      <version>0.1</version>
+      <persistent>false</persistent>
+      <identifier>UID_863811d4-d550-46dd-8d05-636f7c541f76</identifier>
+    </metaData>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+    <decomposition id="Net" isRootNet="true" xsi:type="NetFactsType">
+      <localVariable>
+        <index>0</index>
+        <name>Delivery_Zone</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>345</initialValue>
+      </localVariable>
+      <processControlElements>
+        <inputCondition id="InputCondition">
+          <flowsInto>
+            <nextElementRef id="Deliver_paper" />
+          </flowsInto>
+        </inputCondition>
+        <task id="Deliver_paper">
+          <name>Deliver paper</name>
+          <flowsInto>
+            <nextElementRef id="OutputCondition" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Delivery_Zone&gt;{/Net/Delivery_Zone/text()}&lt;/Delivery_Zone&gt;" />
+              <mapsTo>Delivery_Zone</mapsTo>
+            </mapping>
+          </startingMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <participant>PA-ba7f7717-1239-4203-b6fb-36f790cc7152</participant>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="system">
+              <allocator>
+                <name>RandomChoice</name>
+              </allocator>
+            </allocate>
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Deliver_paper" />
+        </task>
+        <outputCondition id="OutputCondition" />
+      </processControlElements>
+    </decomposition>
+    <decomposition id="Deliver_paper" xsi:type="WebServiceGatewayFactsType">
+      <name>Deliver paper</name>
+      <inputParam>
+        <index>0</index>
+        <name>Delivery_Zone</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+  </specification>
+  <layout>
+    <locale language="en" country="GB"/>
+    <specification id="DistributionOnEnablement" defaultBgColor="-526351">
+      <size w="58" h="28"/>
+      <net id="Net">
+        <bounds x="0" y="0" w="652" h="520"/>
+        <frame x="0" y="0" w="655" h="523"/>
+        <viewport x="0" y="0" w="655" h="523"/>
+        <vertex id="OutputCondition">
+          <attributes>
+            <bounds x="312" y="252" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <vertex id="InputCondition">
+          <attributes>
+            <bounds x="36" y="252" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <container id="Deliver_paper">
+          <vertex>
+            <attributes>
+              <bounds x="172" y="252" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="140" y="284" w="96" h="14"/>
+            </attributes>
+          </label>
+        </container>
+        <flow source="InputCondition" target="Deliver_paper">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="67" y="258.5"/>
+              <value x="172" y="258.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Deliver_paper" target="OutputCondition">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="203" y="258.5"/>
+              <value x="312" y="258.5"/>
+            </points>
+          </attributes>
+        </flow>
+      </net>
+      <labelFontSize>12</labelFontSize>
+    </specification>
+  </layout>
+</specificationSet>

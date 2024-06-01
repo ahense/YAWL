@@ -1,0 +1,32 @@
+version: '3.4'
+
+services:
+  yawl:
+      build:
+        context: ./yawl
+        dockerfile: Dockerfile
+      depends_on:
+        postgresql:
+          condition: service_healthy
+      ports:
+      - 8080:8080
+      environment:
+        - DB_URL=jdbc:postgresql://postgresql:5432/yawldb
+        - DB_USERNAME=yawlusr
+        - DB_PASSWORD=yawlpwd
+      volumes:
+        - type: bind
+          source: './yawl/codelets'
+          target: '/usr/local/tomcat/codelets'
+
+  postgresql:
+      image: postgres:9.4
+      environment:
+        - POSTGRES_DB=yawldb
+        - POSTGRES_PASSWORD=yawlpwd
+        - POSTGRES_USER=yawlusr
+      healthcheck:
+        test: [ "CMD-SHELL", "pg_isready -U yawlusr -d yawldb" ]
+        interval: 5s
+        timeout: 5s
+        retries: 5

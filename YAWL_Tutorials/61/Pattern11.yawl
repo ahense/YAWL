@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<specificationSet xmlns="http://www.yawlfoundation.org/yawlschema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4.0" xsi:schemaLocation="http://www.yawlfoundation.org/yawlschema http://www.yawlfoundation.org/yawlschema/YAWL_Schema4.0.xsd">
+  <specification uri="Pattern11">
+    <documentation>Automatic Execution</documentation>
+    <metaData>
+      <title>Automatic Execution</title>
+      <creator>AVH</creator>
+      <description>Automatic Execution</description>
+      <coverage>5.0.805</coverage>
+      <version>0.1</version>
+      <persistent>false</persistent>
+      <identifier>UID_097f3681-c2f1-43cb-95c7-1532867152a0</identifier>
+    </metaData>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+    <decomposition id="Net" isRootNet="true" xsi:type="NetFactsType">
+      <localVariable>
+        <index>0</index>
+        <name>interval</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>S</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>1</index>
+        <name>max</name>
+        <type>long</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>7</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>2</index>
+        <name>waitTime</name>
+        <type>long</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>0</initialValue>
+      </localVariable>
+      <processControlElements>
+        <inputCondition id="InputCondition">
+          <flowsInto>
+            <nextElementRef id="Get_tape_identity" />
+          </flowsInto>
+        </inputCondition>
+        <task id="Get_tape_identity">
+          <name>Get tape identity</name>
+          <flowsInto>
+            <nextElementRef id="Request_tape_load" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;max&gt;{/Net/max/text()}&lt;/max&gt;" />
+              <mapsTo>max</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;interval&gt;{/Net/interval/text()}&lt;/interval&gt;" />
+              <mapsTo>interval</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;waitTime&gt;{/Get_tape_identity/waitTime/text()}&lt;/waitTime&gt;" />
+              <mapsTo>waitTime</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="user" />
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Get_tape_identity" />
+        </task>
+        <task id="Request_tape_load">
+          <name>Request tape load</name>
+          <flowsInto>
+            <nextElementRef id="Do_backup" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;max&gt;{/Net/max/text()}&lt;/max&gt;" />
+              <mapsTo>max</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;interval&gt;{/Net/interval/text()}&lt;/interval&gt;" />
+              <mapsTo>interval</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;waitTime&gt;{/Request_tape_load/waitTime/text()}&lt;/waitTime&gt;" />
+              <mapsTo>waitTime</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="user" />
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Request_tape_load" />
+        </task>
+        <task id="Do_backup">
+          <name>Do backup</name>
+          <flowsInto>
+            <nextElementRef id="OutputCondition" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;max&gt;{/Net/max/text()}&lt;/max&gt;" />
+              <mapsTo>max</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;interval&gt;{/Net/interval/text()}&lt;/interval&gt;" />
+              <mapsTo>interval</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;waitTime&gt;{/Do_backup/waitTime/text()}&lt;/waitTime&gt;" />
+              <mapsTo>waitTime</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="user" />
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Do_backup" />
+        </task>
+        <outputCondition id="OutputCondition" />
+      </processControlElements>
+    </decomposition>
+    <decomposition id="Do_backup" xsi:type="WebServiceGatewayFactsType">
+      <name>Do backup</name>
+      <inputParam>
+        <index>0</index>
+        <documentation>H, M or S (for hour, minute or second)</documentation>
+        <name>interval</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>1</index>
+        <documentation>Maximum wait time</documentation>
+        <name>max</name>
+        <type>long</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>0</index>
+        <documentation>The time actually waited</documentation>
+        <name>waitTime</name>
+        <type>long</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <codelet>org.yawlfoundation.yawl.resourcing.codelets.RandomWait</codelet>
+      <externalInteraction>automated</externalInteraction>
+    </decomposition>
+    <decomposition id="Get_tape_identity" xsi:type="WebServiceGatewayFactsType">
+      <name>Get tape identity</name>
+      <inputParam>
+        <index>0</index>
+        <documentation>H, M or S (for hour, minute or second)</documentation>
+        <name>interval</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>1</index>
+        <documentation>Maximum wait time</documentation>
+        <name>max</name>
+        <type>long</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>0</index>
+        <documentation>The time actually waited</documentation>
+        <name>waitTime</name>
+        <type>long</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <codelet>org.yawlfoundation.yawl.resourcing.codelets.RandomWait</codelet>
+      <externalInteraction>automated</externalInteraction>
+    </decomposition>
+    <decomposition id="Request_tape_load" xsi:type="WebServiceGatewayFactsType">
+      <name>Request tape load</name>
+      <inputParam>
+        <index>0</index>
+        <documentation>H, M or S (for hour, minute or second)</documentation>
+        <name>interval</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>1</index>
+        <documentation>Maximum wait time</documentation>
+        <name>max</name>
+        <type>long</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>0</index>
+        <documentation>The time actually waited</documentation>
+        <name>waitTime</name>
+        <type>long</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <codelet>org.yawlfoundation.yawl.resourcing.codelets.RandomWait</codelet>
+      <externalInteraction>automated</externalInteraction>
+    </decomposition>
+  </specification>
+  <layout>
+    <locale language="en" country="GB"/>
+    <specification id="Pattern11">
+      <size w="58" h="28"/>
+      <net id="Net">
+        <bounds x="0" y="0" w="780" h="424"/>
+        <frame x="0" y="0" w="783" h="427"/>
+        <viewport x="0" y="0" w="783" h="427"/>
+        <vertex id="OutputCondition">
+          <attributes>
+            <bounds x="528" y="248" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <vertex id="InputCondition">
+          <attributes>
+            <bounds x="36" y="248" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <container id="Request_tape_load">
+          <vertex>
+            <attributes>
+              <bounds x="268" y="248" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="236" y="280" w="96" h="28"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="Get_tape_identity">
+          <vertex>
+            <attributes>
+              <bounds x="140" y="248" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="108" y="280" w="96" h="14"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="Do_backup">
+          <vertex>
+            <attributes>
+              <bounds x="392" y="248" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="360" y="280" w="96" h="14"/>
+            </attributes>
+          </label>
+        </container>
+        <flow source="InputCondition" target="Get_tape_identity">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="67" y="254.5"/>
+              <value x="140" y="254.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Do_backup" target="OutputCondition">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="423" y="254.5"/>
+              <value x="556" y="254.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Get_tape_identity" target="Request_tape_load">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="171" y="254.5"/>
+              <value x="268" y="254.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Request_tape_load" target="Do_backup">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="299" y="254.5"/>
+              <value x="392" y="254.5"/>
+            </points>
+          </attributes>
+        </flow>
+      </net>
+      <labelFontSize>12</labelFontSize>
+    </specification>
+  </layout>
+</specificationSet>

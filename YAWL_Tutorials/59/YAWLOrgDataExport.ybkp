@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<orgdata>
+  <participants>
+    <participant id="PA-c9f7e704-3a90-43b1-8b86-7bba31e77c72">
+      <userid>fiona</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Fiona</firstname>
+      <lastname>Kelly</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-9525a5d6-4d00-4c63-a983-869b743199e8</role>
+      </roles>
+      <positions/>
+      <capabilities/>
+      <privileges>00000000</privileges>
+    </participant>
+    <participant id="PA-97137be4-d9a5-4c3b-a5bb-8e40ca7b0acc">
+      <userid>john</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>John</firstname>
+      <lastname>Wayne</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-9525a5d6-4d00-4c63-a983-869b743199e8</role>
+      </roles>
+      <positions/>
+      <capabilities/>
+      <privileges>00000000</privileges>
+    </participant>
+    <participant id="PA-9715c67c-c3a9-4bff-885f-ddb2930f792d">
+      <userid>sandy</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Sandy</firstname>
+      <lastname>Shaw</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-9525a5d6-4d00-4c63-a983-869b743199e8</role>
+      </roles>
+      <positions/>
+      <capabilities/>
+      <privileges>00000000</privileges>
+    </participant>
+  </participants>
+  <roles>
+    <role id="RO-9525a5d6-4d00-4c63-a983-869b743199e8">
+      <name>Surgeon</name>
+      <description/>
+      <notes/>
+    </role>
+  </roles>
+  <positions/>
+  <capabilities/>
+  <orggroups/>
+  <nonhumanresources/>
+  <nonhumancategories/>
+</orgdata>
+

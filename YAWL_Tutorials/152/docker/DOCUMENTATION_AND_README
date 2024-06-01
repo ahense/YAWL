@@ -1,0 +1,103 @@
+This is a basic framework for using YAWL in
+docker with docker-compose.
+
+
+= Prerequisites =
+
+- docker and docker-compose
+- internet connection
+
+
+
+= Using with docker-compose =
+
+(1)
+Configure your environment variables in the docker-compose.yml file.
+
+(2)
+Run following command in root directory of this project:
+> docker-compose up --build
+
+Use the "--build" flag if you've made any changes to scripts or Dockerfile.
+Without the flag, you may experience problems due to caching.
+
+(3)
+To stop and delete any container, run following command
+in root directory of this project:
+> docker-compose down
+
+
+
+= Using without docker-compose =
+
+> cd yawl
+> docker build --build-arg YAWL_VERSION=v4.5.1 -t yawl:4.5.1
+> docker run --expose 8080 -v codelets:/usr/local/tomcat/codelets -v codeletlibs:/usr/local/tomcat/codeletlib --env DB_URL=jdbc:postgresql://postgresql:5432/yawldb --env DB_USERNAME=yawlusr --env DB_PASSWORD=yawlpwd yawl:4.5.1
+
+
+
+
+
+= Pushing to docker registry =
+
+> cd yawl
+> docker build --build-arg YAWL_VERSION=v4.5.1 -t yawl:4.5.1 .
+> docker image tag yawl:4.5.1 yawl:latest
+
+
+= Advantages =
+
+(1)
+Easier to update. You only need to set version numbers in dockerfile.
+You do not need to edit any configuration files, except for possible breaking changes in the future.
+(It must be tested before production deployment. There could be breaking changes in the future.)
+
+(2)
+Repository is very small with 39KB and does not need any predownloaded files of Java, Tomcat or YAWL.
+
+(3)
+The current Dockerfile brings the latest compatible versions at the time of creation.
+- Latest YAWL version 4.5.1
+- Tomcat version 9 (latest minor version, version 10 is not compatible with YAWL)
+- Latest Java 11 LTS version
+
+(4)
+Whole configuration files of YAWL and Tomcat are NOT replaced or copied.
+Instead the values in the files are replaced/set.
+This is more stable for future updates, because with replacement of whole files
+other parts could be missing and changed.
+
+(5)
+The enterprise version of YAWL is used. It's the package called "CoreServices" without
+the installer, without the launcher and without the YAWL editor.
+
+(6)
+Codelets can be stored in ./yawl/codelets directory on the host system.
+They need not be copied at docker build, but can be changed after container is created and started.
+Tomcat/YAWL respectively the container must be restarted for codelet changes.
+
+(7)
+Database configuration is done via environment variables at runtime and not at build time.
+It is done out of Dockerfile, can be done via external environment files and so can be excluded from git repository.
+This is more secure, if you don't want passwords to be stored in git repositories.
+
+
+
+
+= How it works =
+
+(1)
+The base docker image brings Ubuntu, Java Development Kit and Apache Tomcat.
+
+(2)
+A script retrieves the download link for YAWL from github API and
+downloads YAWL and the YAWL-Lib. After that it installs the YAWL
+services in Tomcat and does some configuration changes.
+(This is done at build time with "install-yawl.sh" script.)
+
+(3)
+At first startup, environment variables are used to configure database connection.
+(This is done at startup with "install-yawl-hibernate.sh" and "install-yawl-ldap.sh".)
+
+
+

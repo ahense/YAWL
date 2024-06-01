@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<specificationSet xmlns="http://www.yawlfoundation.org/yawlschema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4.0" xsi:schemaLocation="http://www.yawlfoundation.org/yawlschema http://www.yawlfoundation.org/yawlschema/YAWL_Schema4.0.xsd">
+  <specification uri="Pattern6">
+    <name>Case Handling</name>
+    <documentation>Case Handling</documentation>
+    <metaData>
+      <title>Case Handling</title>
+      <creator>AVH</creator>
+      <description>Case Handling</description>
+      <coverage>5.0.805</coverage>
+      <version>0.1</version>
+      <persistent>false</persistent>
+      <identifier>UID_c37b2005-29f5-4fd1-8a4b-ca4fbd2e4811</identifier>
+    </metaData>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+    <decomposition id="Net" isRootNet="true" xsi:type="NetFactsType">
+      <localVariable>
+        <index>0</index>
+        <name>Evidence</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>The axe lay on the ground.</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>1</index>
+        <name>Defence</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>My client is innocent.</initialValue>
+      </localVariable>
+      <processControlElements>
+        <inputCondition id="InputCondition">
+          <flowsInto>
+            <nextElementRef id="Gather_evidence" />
+          </flowsInto>
+        </inputCondition>
+        <task id="Gather_evidence">
+          <name>Gather evidence</name>
+          <flowsInto>
+            <nextElementRef id="Prepare_defence" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Evidence&gt;{/Net/Evidence/text()}&lt;/Evidence&gt;" />
+              <mapsTo>Evidence</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;Evidence&gt;{/Gather_evidence/Evidence/text()}&lt;/Evidence&gt;" />
+              <mapsTo>Evidence</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-9525a5d6-4d00-4c63-a983-869b743199e8</role>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Gather_evidence" />
+        </task>
+        <task id="Prepare_defence">
+          <name>Prepare defence</name>
+          <flowsInto>
+            <nextElementRef id="OutputCondition" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Evidence&gt;{/Net/Evidence/text()}&lt;/Evidence&gt;" />
+              <mapsTo>Evidence</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Defence&gt;{/Net/Defence/text()}&lt;/Defence&gt;" />
+              <mapsTo>Defence</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;Defence&gt;{/Prepare_defence/Defence/text()}&lt;/Defence&gt;" />
+              <mapsTo>Defence</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-9525a5d6-4d00-4c63-a983-869b743199e8</role>
+                </initialSet>
+              </distributionSet>
+              <familiarParticipant taskID="Gather_evidence" />
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Prepare_defence" />
+        </task>
+        <outputCondition id="OutputCondition" />
+      </processControlElements>
+    </decomposition>
+    <decomposition id="Gather_evidence" xsi:type="WebServiceGatewayFactsType">
+      <name>Gather evidence</name>
+      <inputParam>
+        <index>0</index>
+        <name>Evidence</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>0</index>
+        <name>Evidence</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Prepare_defence" xsi:type="WebServiceGatewayFactsType">
+      <name>Prepare defence</name>
+      <inputParam>
+        <index>0</index>
+        <name>Evidence</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>1</index>
+        <name>Defence</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>1</index>
+        <name>Defence</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+  </specification>
+  <layout>
+    <locale language="en" country="GB"/>
+    <specification id="Pattern6">
+      <size w="58" h="28"/>
+      <net id="Net">
+        <bounds x="0" y="0" w="1280" h="539"/>
+        <frame x="0" y="0" w="1283" h="542"/>
+        <viewport x="0" y="0" w="1283" h="542"/>
+        <vertex id="OutputCondition">
+          <attributes>
+            <bounds x="472" y="260" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <vertex id="InputCondition">
+          <attributes>
+            <bounds x="36" y="260" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <container id="Prepare_defence">
+          <vertex>
+            <attributes>
+              <bounds x="328" y="260" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="296" y="292" w="96" h="14"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="Gather_evidence">
+          <vertex>
+            <attributes>
+              <bounds x="188" y="260" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="156" y="292" w="96" h="14"/>
+            </attributes>
+          </label>
+        </container>
+        <flow source="InputCondition" target="Gather_evidence">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="67" y="266.5"/>
+              <value x="188" y="266.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Gather_evidence" target="Prepare_defence">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="219" y="266.5"/>
+              <value x="328" y="266.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Prepare_defence" target="OutputCondition">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="359" y="266.5"/>
+              <value x="516" y="266.5"/>
+            </points>
+          </attributes>
+        </flow>
+      </net>
+      <labelFontSize>12</labelFontSize>
+    </specification>
+  </layout>
+</specificationSet>

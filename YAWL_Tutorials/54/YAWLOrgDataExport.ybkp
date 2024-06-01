@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<orgdata>
+  <participants>
+    <participant id="PA-b3f37128-e3b9-42d5-a7a9-cf77916d3387">
+      <userid>amanda</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Amanda</firstname>
+      <lastname>Lear</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-048d1595-a7b5-4055-967e-e07983e9a483</role>
+      </roles>
+      <positions/>
+      <capabilities/>
+      <privileges>00000000</privileges>
+    </participant>
+    <participant id="PA-c2f3aa0b-ecd7-4fa3-a438-447f0eabc93a">
+      <userid>laura</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Laura</firstname>
+      <lastname>Nyro</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-048d1595-a7b5-4055-967e-e07983e9a483</role>
+      </roles>
+      <positions/>
+      <capabilities/>
+      <privileges>00000000</privileges>
+    </participant>
+    <participant id="PA-cffcd6c2-6a52-4e1c-949d-350c074bd285">
+      <userid>chris</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Chris</firstname>
+      <lastname>Elliott</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-048d1595-a7b5-4055-967e-e07983e9a483</role>
+      </roles>
+      <positions/>
+      <capabilities/>
+      <privileges>00000000</privileges>
+    </participant>
+  </participants>
+  <roles>
+    <role id="RO-048d1595-a7b5-4055-967e-e07983e9a483">
+      <name>Manager</name>
+      <description/>
+      <notes/>
+    </role>
+  </roles>
+  <positions/>
+  <capabilities/>
+  <orggroups/>
+  <nonhumanresources/>
+  <nonhumancategories/>
+</orgdata>
+

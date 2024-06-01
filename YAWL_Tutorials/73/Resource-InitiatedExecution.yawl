@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<specificationSet xmlns="http://www.yawlfoundation.org/yawlschema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4.0" xsi:schemaLocation="http://www.yawlfoundation.org/yawlschema http://www.yawlfoundation.org/yawlschema/YAWL_Schema4.0.xsd">
+  <specification uri="Resource-InitiatedExecution">
+    <name>Resource-Initiated Execution</name>
+    <documentation>Resource-Initiated Execution - Offered Work Item</documentation>
+    <metaData>
+      <title>Resource-Initiated Execution</title>
+      <creator>AVH</creator>
+      <description>Resource-Initiated Execution - Offered Work Item</description>
+      <coverage>5.0.805</coverage>
+      <version>0.1</version>
+      <persistent>false</persistent>
+      <identifier>UID_78bfff57-eb8d-4345-a78f-0ffd481393ca</identifier>
+    </metaData>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+    <decomposition id="Net" isRootNet="true" xsi:type="NetFactsType">
+      <localVariable>
+        <index>0</index>
+        <name>Case_Number</name>
+        <type>positiveInteger</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>123</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>1</index>
+        <name>Evidence</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>an axe</initialValue>
+      </localVariable>
+      <processControlElements>
+        <inputCondition id="InputCondition">
+          <flowsInto>
+            <nextElementRef id="Gather_evidence" />
+          </flowsInto>
+        </inputCondition>
+        <task id="Gather_evidence">
+          <name>Gather evidence</name>
+          <flowsInto>
+            <nextElementRef id="OutputCondition" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Case_Number&gt;{/Net/Case_Number/text()}&lt;/Case_Number&gt;" />
+              <mapsTo>Case_Number</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Evidence&gt;{/Net/Evidence/text()}&lt;/Evidence&gt;" />
+              <mapsTo>Evidence</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;Evidence&gt;{/Gather_evidence/Evidence/text()}&lt;/Evidence&gt;" />
+              <mapsTo>Evidence</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-5f424681-2391-4329-bbc0-96e5cc4380ee</role>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Gather_evidence" />
+        </task>
+        <outputCondition id="OutputCondition" />
+      </processControlElements>
+    </decomposition>
+    <decomposition id="Gather_evidence" xsi:type="WebServiceGatewayFactsType">
+      <name>Gather evidence</name>
+      <inputParam>
+        <index>0</index>
+        <name>Case_Number</name>
+        <type>positiveInteger</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>1</index>
+        <name>Evidence</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>1</index>
+        <name>Evidence</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+  </specification>
+  <layout>
+    <locale language="en" country="GB"/>
+    <specification id="Resource-InitiatedExecution" defaultBgColor="-526351">
+      <size w="58" h="28"/>
+      <net id="Net">
+        <bounds x="0" y="0" w="652" h="520"/>
+        <frame x="0" y="0" w="655" h="523"/>
+        <viewport x="0" y="0" w="655" h="523"/>
+        <vertex id="OutputCondition">
+          <attributes>
+            <bounds x="328" y="104" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <vertex id="InputCondition">
+          <attributes>
+            <bounds x="36" y="104" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <container id="Gather_evidence">
+          <vertex>
+            <attributes>
+              <bounds x="180" y="104" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="148" y="136" w="96" h="14"/>
+            </attributes>
+          </label>
+        </container>
+        <flow source="Gather_evidence" target="OutputCondition">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="211" y="115.5"/>
+              <value x="328" y="115.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="InputCondition" target="Gather_evidence">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="67" y="115.5"/>
+              <value x="180" y="115.5"/>
+            </points>
+          </attributes>
+        </flow>
+      </net>
+      <labelFontSize>12</labelFontSize>
+    </specification>
+  </layout>
+</specificationSet>

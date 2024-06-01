@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<orgdata>
+  <participants>
+    <participant id="PA-65bec91c-e5b3-43be-9435-155d3b1e9721">
+      <userid>jane</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Jane</firstname>
+      <lastname>Fonda</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-3f5fad0a-850e-431c-a05c-3b965eeaa7fe</role>
+      </roles>
+      <positions/>
+      <capabilities/>
+      <privileges>00000000</privileges>
+    </participant>
+    <participant id="PA-4e0c6d06-a602-4227-bc48-68f6f0dd93fe">
+      <userid>fred</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Fred</firstname>
+      <lastname>Flintstone</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-3f5fad0a-850e-431c-a05c-3b965eeaa7fe</role>
+      </roles>
+      <positions/>
+      <capabilities/>
+      <privileges>00000000</privileges>
+    </participant>
+  </participants>
+  <roles>
+    <role id="RO-3f5fad0a-850e-431c-a05c-3b965eeaa7fe">
+      <name>Accountant</name>
+      <description/>
+      <notes/>
+    </role>
+  </roles>
+  <positions/>
+  <capabilities/>
+  <orggroups/>
+  <nonhumanresources/>
+  <nonhumancategories/>
+</orgdata>
+

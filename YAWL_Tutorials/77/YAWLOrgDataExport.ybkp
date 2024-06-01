@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<orgdata>
+  <participants>
+    <participant id="PA-7875d22b-da24-4f90-a608-e6217a6ddc33">
+      <userid>alan</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Alan</firstname>
+      <lastname>Turing</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles/>
+      <positions>
+        <position>PO-19f3c964-d283-4cb8-ab71-adb6f7db75c4</position>
+      </positions>
+      <capabilities/>
+      <privileges>00000000</privileges>
+    </participant>
+    <participant id="PA-e2f20cfa-fbbf-4657-ab9b-7296a96fc341">
+      <userid>nina</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Nina</firstname>
+      <lastname>Hagen</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles/>
+      <positions>
+        <position>PO-d2412c82-8722-4ea2-b50e-4dcea56260bd</position>
+      </positions>
+      <capabilities/>
+      <privileges>00000000</privileges>
+    </participant>
+    <participant id="PA-ed1c8936-e945-4644-a9dc-177ef2ffb852">
+      <userid>max</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Max</firstname>
+      <lastname>Schmeling</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles/>
+      <positions>
+        <position>PO-65d14e18-dd8b-4beb-951c-eeedaa12d923</position>
+      </positions>
+      <capabilities/>
+      <privileges>00000000</privileges>
+    </participant>
+  </participants>
+  <roles/>
+  <positions>
+    <position id="PO-65d14e18-dd8b-4beb-951c-eeedaa12d923">
+      <title>Magistrate 1</title>
+      <positionid/>
+      <description/>
+      <notes/>
+      <reportstoid>PO-19f3c964-d283-4cb8-ab71-adb6f7db75c4</reportstoid>
+    </position>
+    <position id="PO-d2412c82-8722-4ea2-b50e-4dcea56260bd">
+      <title>Magistrate 2</title>
+      <positionid/>
+      <description/>
+      <notes/>
+      <reportstoid>PO-19f3c964-d283-4cb8-ab71-adb6f7db75c4</reportstoid>
+    </position>
+    <position id="PO-19f3c964-d283-4cb8-ab71-adb6f7db75c4">
+      <title>Magistrates Teamleader</title>
+      <positionid/>
+      <description/>
+      <notes/>
+    </position>
+  </positions>
+  <capabilities/>
+  <orggroups/>
+  <nonhumanresources/>
+  <nonhumancategories/>
+</orgdata>
+

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<orgdata>
+  <participants>
+    <participant id="PA-ae6ac9a0-a65f-4180-8051-61dcb046e692">
+      <userid>tina</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Tina</firstname>
+      <lastname>Turner</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-b7dfd05a-a197-4d0a-8479-da93ec82a0de</role>
+      </roles>
+      <positions/>
+      <capabilities/>
+      <privileges>00000000</privileges>
+    </participant>
+    <participant id="PA-0bf96f6c-c5e0-49ab-a3e1-018625863ac8">
+      <userid>shaun</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Shaun</firstname>
+      <lastname>Sheep</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-d056f4fc-6dc3-452e-b3f9-009626803b6d</role>
+      </roles>
+      <positions/>
+      <capabilities/>
+      <privileges>00000000</privileges>
+    </participant>
+    <participant id="PA-aebc3d17-9e15-4a6b-b718-f4453b9c530f">
+      <userid>grant</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Grant</firstname>
+      <lastname>Stewart</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-b7dfd05a-a197-4d0a-8479-da93ec82a0de</role>
+      </roles>
+      <positions/>
+      <capabilities/>
+      <privileges>00000000</privileges>
+    </participant>
+    <participant id="PA-e1591908-38bd-4d4e-83b4-ec1da82ca78f">
+      <userid>alicia</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Alicia</firstname>
+      <lastname>Keys</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-d056f4fc-6dc3-452e-b3f9-009626803b6d</role>
+      </roles>
+      <positions/>
+      <capabilities/>
+      <privileges>00000000</privileges>
+    </participant>
+  </participants>
+  <roles>
+    <role id="RO-b7dfd05a-a197-4d0a-8479-da93ec82a0de">
+      <name>Manager</name>
+      <description/>
+      <notes/>
+    </role>
+    <role id="RO-d056f4fc-6dc3-452e-b3f9-009626803b6d">
+      <name>StoreClerk</name>
+      <description/>
+      <notes/>
+    </role>
+  </roles>
+  <positions/>
+  <capabilities/>
+  <orggroups/>
+  <nonhumanresources/>
+  <nonhumancategories/>
+</orgdata>
+

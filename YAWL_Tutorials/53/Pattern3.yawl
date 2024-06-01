@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<specificationSet xmlns="http://www.yawlfoundation.org/yawlschema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4.0" xsi:schemaLocation="http://www.yawlfoundation.org/yawlschema http://www.yawlfoundation.org/yawlschema/YAWL_Schema4.0.xsd">
+  <specification uri="Pattern3">
+    <documentation>Deferred Distribution</documentation>
+    <metaData>
+      <title>Deferred Distribution</title>
+      <creator>User</creator>
+      <description>Deferred Distribution</description>
+      <coverage>5.0.805</coverage>
+      <version>0.1</version>
+      <persistent>false</persistent>
+      <identifier>UID_6ac38a90-b1d4-493d-9ebd-e9e0c7e08b5f</identifier>
+    </metaData>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:simpleType name="ParticipantType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="allen" />
+          <xs:enumeration value="bill" />
+          <xs:enumeration value="tracey" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:schema>
+    <decomposition id="Net" isRootNet="true" xsi:type="NetFactsType">
+      <localVariable>
+        <index>0</index>
+        <name>Volunteer</name>
+        <type>ParticipantType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>tracey</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>1</index>
+        <name>Employee_Name</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>Herbert</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>2</index>
+        <name>VolunteerString</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue />
+      </localVariable>
+      <processControlElements>
+        <inputCondition id="InputCondition">
+          <flowsInto>
+            <nextElementRef id="Find_volunteer" />
+          </flowsInto>
+        </inputCondition>
+        <task id="Find_volunteer">
+          <name>Find volunteer</name>
+          <flowsInto>
+            <nextElementRef id="Train_employee" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Volunteer&gt;{/Net/Volunteer/text()}&lt;/Volunteer&gt;" />
+              <mapsTo>Volunteer</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;VolunteerString&gt;{/Find_volunteer/Volunteer/text()}&lt;/VolunteerString&gt;" />
+              <mapsTo>VolunteerString</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="user" />
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Find_volunteer" />
+        </task>
+        <task id="Train_employee">
+          <name>Train employee</name>
+          <flowsInto>
+            <nextElementRef id="OutputCondition" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Employee_Name&gt;{/Net/Employee_Name/text()}&lt;/Employee_Name&gt;" />
+              <mapsTo>Employee_Name</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;Employee_Name&gt;{/Train_employee/Employee_Name/text()}&lt;/Employee_Name&gt;" />
+              <mapsTo>Employee_Name</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <param>
+                    <name>VolunteerString</name>
+                    <refers>participant</refers>
+                  </param>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="system">
+              <allocator>
+                <name>RandomChoice</name>
+              </allocator>
+            </allocate>
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Train_employee" />
+        </task>
+        <outputCondition id="OutputCondition" />
+      </processControlElements>
+    </decomposition>
+    <decomposition id="Find_volunteer" xsi:type="WebServiceGatewayFactsType">
+      <name>Find volunteer</name>
+      <inputParam>
+        <index>0</index>
+        <name>Volunteer</name>
+        <type>ParticipantType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>0</index>
+        <name>Volunteer</name>
+        <type>ParticipantType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Train_employee" xsi:type="WebServiceGatewayFactsType">
+      <name>Train employee</name>
+      <inputParam>
+        <index>0</index>
+        <name>Employee_Name</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>0</index>
+        <name>Employee_Name</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+  </specification>
+  <layout>
+    <locale language="en" country="GB"/>
+    <specification id="Pattern3" defaultBgColor="-526351">
+      <size w="58" h="28"/>
+      <net id="Net" bgColor="-526351">
+        <bounds x="0" y="0" w="1685" h="624"/>
+        <frame x="0" y="0" w="1688" h="627"/>
+        <viewport x="0" y="0" w="1688" h="627"/>
+        <vertex id="OutputCondition">
+          <attributes>
+            <bounds x="424" y="388" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <vertex id="InputCondition">
+          <attributes>
+            <bounds x="36" y="388" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <container id="Train_employee">
+          <vertex>
+            <attributes>
+              <bounds x="292" y="388" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="260" y="420" w="96" h="14"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="Find_volunteer">
+          <vertex>
+            <attributes>
+              <bounds x="152" y="388" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="120" y="420" w="96" h="14"/>
+            </attributes>
+          </label>
+        </container>
+        <flow source="InputCondition" target="Find_volunteer">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="67" y="394.5"/>
+              <value x="152" y="394.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Find_volunteer" target="Train_employee">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="183" y="394.5"/>
+              <value x="308" y="394.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Train_employee" target="OutputCondition">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="339" y="394.5"/>
+              <value x="424" y="394.5"/>
+            </points>
+          </attributes>
+        </flow>
+      </net>
+      <labelFontSize>12</labelFontSize>
+    </specification>
+  </layout>
+</specificationSet>
