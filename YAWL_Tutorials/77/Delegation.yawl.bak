@@ -94,9 +94,9 @@
     <specification id="Delegation" defaultBgColor="-526351">
       <size w="58" h="28"/>
       <net id="Net">
-        <bounds x="0" y="0" w="716" h="579"/>
-        <frame x="0" y="0" w="719" h="582"/>
-        <viewport x="0" y="0" w="719" h="582"/>
+        <bounds x="0" y="0" w="652" h="227"/>
+        <frame x="0" y="0" w="655" h="230"/>
+        <viewport x="0" y="0" w="655" h="230"/>
         <vertex id="OutputCondition">
           <attributes>
             <bounds x="312" y="72" w="32" h="32"/>

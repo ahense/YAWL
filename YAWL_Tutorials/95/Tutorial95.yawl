@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<specificationSet xmlns="http://www.yawlfoundation.org/yawlschema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4.0" xsi:schemaLocation="http://www.yawlfoundation.org/yawlschema http://www.yawlfoundation.org/yawlschema/YAWL_Schema4.0.xsd">
+  <specification uri="Tutorial95">
+    <name>Tutorial95</name>
+    <documentation>Tutorial on work item documentation.</documentation>
+    <metaData>
+      <title>Tutorial95</title>
+      <creator>AVH</creator>
+      <description>Tutorial on work item documentation.</description>
+      <coverage>5.1.810</coverage>
+      <version>0.1</version>
+      <persistent>false</persistent>
+      <identifier>UID_211e15c2-49f1-487b-b259-93234cdb3664</identifier>
+    </metaData>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+    <decomposition id="Net" isRootNet="true" xsi:type="NetFactsType">
+      <localVariable>
+        <index>0</index>
+        <name>First_name</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue />
+      </localVariable>
+      <localVariable>
+        <index>1</index>
+        <name>Last_name</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue />
+      </localVariable>
+      <localVariable>
+        <index>2</index>
+        <name>Age</name>
+        <type>positiveInteger</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>1</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>3</index>
+        <name>ID_document_number</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue />
+      </localVariable>
+      <localVariable>
+        <index>4</index>
+        <name>ID_document_expiration_date</name>
+        <type>date</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue />
+      </localVariable>
+      <localVariable>
+        <index>5</index>
+        <name>Price_reduction</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>false</initialValue>
+      </localVariable>
+      <processControlElements>
+        <inputCondition id="InputCondition">
+          <flowsInto>
+            <nextElementRef id="Self-register" />
+          </flowsInto>
+        </inputCondition>
+        <task id="Self-register">
+          <name>Self-register</name>
+          <flowsInto>
+            <nextElementRef id="Check_personal_data" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;ID_document_expiration_date&gt;{/Self-register/ID_document_expiration_date/text()}&lt;/ID_document_expiration_date&gt;" />
+              <mapsTo>ID_document_expiration_date</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;ID_document_number&gt;{/Self-register/ID_document_number/text()}&lt;/ID_document_number&gt;" />
+              <mapsTo>ID_document_number</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Age&gt;{/Self-register/Age/text()}&lt;/Age&gt;" />
+              <mapsTo>Age</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;First_name&gt;{/Self-register/First_name/text()}&lt;/First_name&gt;" />
+              <mapsTo>First_name</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Last_name&gt;{/Self-register/Last_name/text()}&lt;/Last_name&gt;" />
+              <mapsTo>Last_name</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-b9ff9dfc-18cf-41c7-9a38-704ffd1e17a2</role>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Self-register" />
+        </task>
+        <task id="Check_personal_data">
+          <name>Check personal data</name>
+          <documentation>${/Net/First_name/text()} ${/Net/Last_name/text()}, age: ${/Net/Age/text()}</documentation>
+          <flowsInto>
+            <nextElementRef id="Hand_out_ticket" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;ID_document_number&gt;{/Net/ID_document_number/text()}&lt;/ID_document_number&gt;" />
+              <mapsTo>ID_document_number</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;First_name&gt;{/Net/First_name/text()}&lt;/First_name&gt;" />
+              <mapsTo>First_name</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;ID_document_expiration_date&gt;{/Net/ID_document_expiration_date/text()}&lt;/ID_document_expiration_date&gt;" />
+              <mapsTo>ID_document_expiration_date</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Last_name&gt;{/Net/Last_name/text()}&lt;/Last_name&gt;" />
+              <mapsTo>Last_name</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Age&gt;{/Net/Age/text()}&lt;/Age&gt;" />
+              <mapsTo>Age</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;Price_reduction&gt;{/Check_personal_data/Price_reduction/text()}&lt;/Price_reduction&gt;" />
+              <mapsTo>Price_reduction</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-de7a5352-c303-49c1-8efd-93265fc48fe8</role>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Check_personal_data" />
+        </task>
+        <task id="Hand_out_ticket">
+          <name>Hand out ticket</name>
+          <documentation>${/Net/First_name/text()} ${/Net/Last_name/text()}, age: ${/Net/Age/text()}</documentation>
+          <flowsInto>
+            <nextElementRef id="OutputCondition" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;ID_document_number&gt;{/Net/ID_document_number/text()}&lt;/ID_document_number&gt;" />
+              <mapsTo>ID_document_number</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;First_name&gt;{/Net/First_name/text()}&lt;/First_name&gt;" />
+              <mapsTo>First_name</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;ID_document_expiration_date&gt;{/Net/ID_document_expiration_date/text()}&lt;/ID_document_expiration_date&gt;" />
+              <mapsTo>ID_document_expiration_date</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Last_name&gt;{/Net/Last_name/text()}&lt;/Last_name&gt;" />
+              <mapsTo>Last_name</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Price_reduction&gt;{/Net/Price_reduction/text()}&lt;/Price_reduction&gt;" />
+              <mapsTo>Price_reduction</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Age&gt;{/Net/Age/text()}&lt;/Age&gt;" />
+              <mapsTo>Age</mapsTo>
+            </mapping>
+          </startingMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-37515eee-d391-4a7b-89d9-8a4ba2ba6424</role>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Hand_out_ticket" />
+        </task>
+        <outputCondition id="OutputCondition" />
+      </processControlElements>
+    </decomposition>
+    <decomposition id="Check_personal_data" xsi:type="WebServiceGatewayFactsType">
+      <name>Check personal data</name>
+      <inputParam>
+        <index>0</index>
+        <name>First_name</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>1</index>
+        <name>Last_name</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>2</index>
+        <name>Age</name>
+        <type>positiveInteger</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>3</index>
+        <name>ID_document_number</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>4</index>
+        <name>ID_document_expiration_date</name>
+        <type>date</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>5</index>
+        <name>Price_reduction</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Hand_out_ticket" xsi:type="WebServiceGatewayFactsType">
+      <name>Hand out ticket</name>
+      <inputParam>
+        <index>0</index>
+        <name>First_name</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>1</index>
+        <name>Last_name</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>2</index>
+        <name>Age</name>
+        <type>positiveInteger</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>3</index>
+        <name>ID_document_number</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>4</index>
+        <name>ID_document_expiration_date</name>
+        <type>date</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>5</index>
+        <name>Price_reduction</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Self-register" xsi:type="WebServiceGatewayFactsType">
+      <outputParam>
+        <index>0</index>
+        <name>First_name</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <outputParam>
+        <index>1</index>
+        <name>Last_name</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <outputParam>
+        <index>2</index>
+        <name>Age</name>
+        <type>positiveInteger</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <outputParam>
+        <index>3</index>
+        <name>ID_document_number</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <outputParam>
+        <index>4</index>
+        <name>ID_document_expiration_date</name>
+        <type>date</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+  </specification>
+  <layout>
+    <locale language="en" country="GB"/>
+    <specification id="Tutorial95" defaultBgColor="-526351">
+      <size w="62" h="26"/>
+      <net id="Net">
+        <bounds x="0" y="0" w="1909" h="891"/>
+        <frame x="0" y="0" w="1912" h="894"/>
+        <viewport x="0" y="0" w="1912" h="894"/>
+        <scale>2.25</scale>
+        <vertex id="OutputCondition">
+          <attributes>
+            <bounds x="556" y="244" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <vertex id="InputCondition">
+          <attributes>
+            <bounds x="36" y="244" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <container id="Hand_out_ticket">
+          <vertex>
+            <attributes>
+              <bounds x="428" y="244" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="396" y="276" w="96" h="14"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="Self-register">
+          <vertex>
+            <attributes>
+              <bounds x="168" y="244" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="136" y="276" w="96" h="14"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="Check_personal_data">
+          <vertex>
+            <attributes>
+              <bounds x="296" y="244" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="264" y="276" w="96" h="28"/>
+            </attributes>
+          </label>
+        </container>
+        <flow source="Self-register" target="Check_personal_data">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="199" y="255.5"/>
+              <value x="296" y="447.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Hand_out_ticket" target="OutputCondition">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="459" y="255.5"/>
+              <value x="556" y="259.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Check_personal_data" target="Hand_out_ticket">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="327" y="447.5"/>
+              <value x="428" y="259.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="InputCondition" target="Self-register">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="67" y="255.5"/>
+              <value x="168" y="259.5"/>
+            </points>
+          </attributes>
+        </flow>
+      </net>
+      <labelFontSize>12</labelFontSize>
+    </specification>
+  </layout>
+</specificationSet>

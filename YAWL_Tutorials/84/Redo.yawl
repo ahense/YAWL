@@ -1,0 +1,794 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<specificationSet xmlns="http://www.yawlfoundation.org/yawlschema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4.0" xsi:schemaLocation="http://www.yawlfoundation.org/yawlschema http://www.yawlfoundation.org/yawlschema/YAWL_Schema4.0.xsd">
+  <specification uri="Redo">
+    <name>Redo</name>
+    <documentation>Skip</documentation>
+    <metaData>
+      <title>Redo</title>
+      <creator>AVH</creator>
+      <description>Redo</description>
+      <coverage>5.0.805</coverage>
+      <version>0.1</version>
+      <persistent>false</persistent>
+      <identifier>UID_c2f12c42-d8eb-409b-9b34-3acd85385baa</identifier>
+    </metaData>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+    <decomposition id="Net" isRootNet="true" xsi:type="NetFactsType">
+      <localVariable>
+        <index>0</index>
+        <name>Date</name>
+        <type>date</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue />
+      </localVariable>
+      <localVariable>
+        <index>1</index>
+        <name>Evidence</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue />
+      </localVariable>
+      <localVariable>
+        <index>2</index>
+        <name>Interview_result</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue />
+      </localVariable>
+      <localVariable>
+        <index>3</index>
+        <name>Suspect_name</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue />
+      </localVariable>
+      <processControlElements>
+        <inputCondition id="InputCondition">
+          <flowsInto>
+            <nextElementRef id="Gather_evidence" />
+          </flowsInto>
+        </inputCondition>
+        <task id="Gather_evidence">
+          <name>Gather evidence</name>
+          <flowsInto>
+            <nextElementRef id="Interview_key_witness" />
+          </flowsInto>
+          <join code="and" />
+          <split code="and" />
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;Date&gt;{/Gather_evidence/Date/text()}&lt;/Date&gt;" />
+              <mapsTo>Date</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Evidence&gt;{/Gather_evidence/Evidence/text()}&lt;/Evidence&gt;" />
+              <mapsTo>Evidence</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <participant>PA-ae864e03-4e0f-44a9-9df4-903f2cdd1bfb</participant>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="system">
+              <allocator>
+                <name>RandomChoice</name>
+              </allocator>
+            </allocate>
+            <start initiator="user" />
+            <privileges>
+              <privilege>
+                <name>canSkip</name>
+                <allowall>true</allowall>
+              </privilege>
+            </privileges>
+          </resourcing>
+          <decomposesTo id="Gather_evidence" />
+        </task>
+        <task id="Interview_key_witness">
+          <name>Interview key witness</name>
+          <flowsInto>
+            <nextElementRef id="Charge_suspect" />
+          </flowsInto>
+          <join code="and" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Evidence&gt;{/Net/Evidence/text()}&lt;/Evidence&gt;" />
+              <mapsTo>Evidence</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Date&gt;{/Net/Date/text()}&lt;/Date&gt;" />
+              <mapsTo>Date</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;Interview_result&gt;{/Interview_key_witness/Interview_result/text()}&lt;/Interview_result&gt;" />
+              <mapsTo>Interview_result</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <participant>PA-ae864e03-4e0f-44a9-9df4-903f2cdd1bfb</participant>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="system">
+              <allocator>
+                <name>RandomChoice</name>
+              </allocator>
+            </allocate>
+            <start initiator="user" />
+            <privileges>
+              <privilege>
+                <name>canSkip</name>
+                <allowall>true</allowall>
+              </privilege>
+            </privileges>
+          </resourcing>
+          <decomposesTo id="Interview_key_witness" />
+        </task>
+        <task id="Charge_suspect">
+          <name>Charge suspect</name>
+          <flowsInto>
+            <nextElementRef id="C" />
+          </flowsInto>
+          <flowsInto>
+            <nextElementRef id="C_1" />
+          </flowsInto>
+          <flowsInto>
+            <nextElementRef id="C_2" />
+          </flowsInto>
+          <flowsInto>
+            <nextElementRef id="C_6" />
+          </flowsInto>
+          <join code="and" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Evidence&gt;{/Net/Evidence/text()}&lt;/Evidence&gt;" />
+              <mapsTo>Evidence</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Interview_result&gt;{/Net/Interview_result/text()}&lt;/Interview_result&gt;" />
+              <mapsTo>Interview_result</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Date&gt;{/Net/Date/text()}&lt;/Date&gt;" />
+              <mapsTo>Date</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;Evidence&gt;{/Charge_suspect/Evidence/text()}&lt;/Evidence&gt;" />
+              <mapsTo>Evidence</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Interview_result&gt;{/Charge_suspect/Interview_result/text()}&lt;/Interview_result&gt;" />
+              <mapsTo>Interview_result</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Suspect_name&gt;{/Charge_suspect/Suspect_name/text()}&lt;/Suspect_name&gt;" />
+              <mapsTo>Suspect_name</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <participant>PA-ae864e03-4e0f-44a9-9df4-903f2cdd1bfb</participant>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="system">
+              <allocator>
+                <name>RandomChoice</name>
+              </allocator>
+            </allocate>
+            <start initiator="user" />
+            <privileges>
+              <privilege>
+                <name>canSkip</name>
+                <allowall>true</allowall>
+              </privilege>
+            </privileges>
+          </resourcing>
+          <decomposesTo id="Charge_suspect" />
+        </task>
+        <condition id="C">
+          <flowsInto>
+            <nextElementRef id="Gather_evidence_2" />
+          </flowsInto>
+        </condition>
+        <condition id="C_1">
+          <flowsInto>
+            <nextElementRef id="Interview_key_witness_2" />
+          </flowsInto>
+        </condition>
+        <condition id="C_2">
+          <flowsInto>
+            <nextElementRef id="Charge_suspect_2" />
+          </flowsInto>
+        </condition>
+        <condition id="C_6">
+          <flowsInto>
+            <nextElementRef id="Finish_case" />
+          </flowsInto>
+        </condition>
+        <task id="Charge_suspect_2">
+          <name>Charge suspect</name>
+          <flowsInto>
+            <nextElementRef id="C_5" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Interview_result&gt;{/Net/Interview_result/text()}&lt;/Interview_result&gt;" />
+              <mapsTo>Interview_result</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Evidence&gt;{/Net/Evidence/text()}&lt;/Evidence&gt;" />
+              <mapsTo>Evidence</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Date&gt;{/Net/Date/text()}&lt;/Date&gt;" />
+              <mapsTo>Date</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;Evidence&gt;{/Charge_suspect/Evidence/text()}&lt;/Evidence&gt;" />
+              <mapsTo>Evidence</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Suspect_name&gt;{/Charge_suspect/Suspect_name/text()}&lt;/Suspect_name&gt;" />
+              <mapsTo>Suspect_name</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Interview_result&gt;{/Charge_suspect/Interview_result/text()}&lt;/Interview_result&gt;" />
+              <mapsTo>Interview_result</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <participant>PA-ae864e03-4e0f-44a9-9df4-903f2cdd1bfb</participant>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="system">
+              <allocator>
+                <name>RandomChoice</name>
+              </allocator>
+            </allocate>
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Charge_suspect" />
+        </task>
+        <task id="Finish_case">
+          <name>Finish case</name>
+          <flowsInto>
+            <nextElementRef id="OutputCondition" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Interview_result&gt;{/Net/Interview_result/text()}&lt;/Interview_result&gt;" />
+              <mapsTo>Interview_result</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Evidence&gt;{/Net/Evidence/text()}&lt;/Evidence&gt;" />
+              <mapsTo>Evidence</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Date&gt;{/Net/Date/text()}&lt;/Date&gt;" />
+              <mapsTo>Date</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Suspect_name&gt;{/Net/Suspect_name/text()}&lt;/Suspect_name&gt;" />
+              <mapsTo>Suspect_name</mapsTo>
+            </mapping>
+          </startingMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <participant>PA-ae864e03-4e0f-44a9-9df4-903f2cdd1bfb</participant>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="system">
+              <allocator>
+                <name>RandomChoice</name>
+              </allocator>
+            </allocate>
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Finish_case" />
+        </task>
+        <task id="Gather_evidence_2">
+          <name>Gather evidence</name>
+          <flowsInto>
+            <nextElementRef id="C_3" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;Date&gt;{/Gather_evidence/Date/text()}&lt;/Date&gt;" />
+              <mapsTo>Date</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Evidence&gt;{/Gather_evidence/Evidence/text()}&lt;/Evidence&gt;" />
+              <mapsTo>Evidence</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <participant>PA-ae864e03-4e0f-44a9-9df4-903f2cdd1bfb</participant>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="system">
+              <allocator>
+                <name>RandomChoice</name>
+              </allocator>
+            </allocate>
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Gather_evidence" />
+        </task>
+        <task id="Interview_key_witness_2">
+          <name>Interview key witness</name>
+          <flowsInto>
+            <nextElementRef id="C_4" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Evidence&gt;{/Net/Evidence/text()}&lt;/Evidence&gt;" />
+              <mapsTo>Evidence</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Date&gt;{/Net/Date/text()}&lt;/Date&gt;" />
+              <mapsTo>Date</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;Interview_result&gt;{/Interview_key_witness/Interview_result/text()}&lt;/Interview_result&gt;" />
+              <mapsTo>Interview_result</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <participant>PA-ae864e03-4e0f-44a9-9df4-903f2cdd1bfb</participant>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="system">
+              <allocator>
+                <name>RandomChoice</name>
+              </allocator>
+            </allocate>
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Interview_key_witness" />
+        </task>
+        <condition id="C_3">
+          <flowsInto>
+            <nextElementRef id="Finish_case" />
+          </flowsInto>
+        </condition>
+        <condition id="C_4">
+          <flowsInto>
+            <nextElementRef id="Finish_case" />
+          </flowsInto>
+        </condition>
+        <condition id="C_5">
+          <flowsInto>
+            <nextElementRef id="Finish_case" />
+          </flowsInto>
+        </condition>
+        <outputCondition id="OutputCondition" />
+      </processControlElements>
+    </decomposition>
+    <decomposition id="Charge_suspect" xsi:type="WebServiceGatewayFactsType">
+      <name>Charge suspect</name>
+      <inputParam>
+        <index>0</index>
+        <name>Date</name>
+        <type>date</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>1</index>
+        <name>Evidence</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>2</index>
+        <name>Interview_result</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>1</index>
+        <name>Evidence</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <outputParam>
+        <index>2</index>
+        <name>Interview_result</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <outputParam>
+        <index>3</index>
+        <name>Suspect_name</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Finish_case" xsi:type="WebServiceGatewayFactsType">
+      <name>Finish case</name>
+      <inputParam>
+        <index>0</index>
+        <name>Date</name>
+        <type>date</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>1</index>
+        <name>Evidence</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>2</index>
+        <name>Interview_result</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>3</index>
+        <name>Suspect_name</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Gather_evidence" xsi:type="WebServiceGatewayFactsType">
+      <name>Gather evidence</name>
+      <outputParam>
+        <index>0</index>
+        <name>Date</name>
+        <type>date</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue>2024-06-29</defaultValue>
+      </outputParam>
+      <outputParam>
+        <index>1</index>
+        <name>Evidence</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Interview_key_witness" xsi:type="WebServiceGatewayFactsType">
+      <name>Interview key witness</name>
+      <inputParam>
+        <index>0</index>
+        <name>Date</name>
+        <type>date</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>1</index>
+        <name>Evidence</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>2</index>
+        <name>Interview_result</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+  </specification>
+  <layout>
+    <locale language="en" country="GB"/>
+    <specification id="Redo" defaultBgColor="-526351">
+      <size w="205" h="60"/>
+      <net id="Net">
+        <bounds x="0" y="0" w="1685" h="651"/>
+        <frame x="0" y="0" w="1688" h="654"/>
+        <viewport x="0" y="0" w="1688" h="654"/>
+        <vertex id="C">
+          <attributes>
+            <bounds x="504" y="284" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <vertex id="C_1">
+          <attributes>
+            <bounds x="504" y="416" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <vertex id="C_3">
+          <attributes>
+            <bounds x="704" y="284" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <vertex id="C_2">
+          <attributes>
+            <bounds x="504" y="544" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <vertex id="OutputCondition">
+          <attributes>
+            <bounds x="900" y="416" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <vertex id="C_5">
+          <attributes>
+            <bounds x="704" y="544" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <vertex id="C_4">
+          <attributes>
+            <bounds x="704" y="416" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <vertex id="C_6">
+          <attributes>
+            <bounds x="596" y="352" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <vertex id="InputCondition">
+          <attributes>
+            <bounds x="36" y="416" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <container id="Finish_case">
+          <vertex>
+            <attributes>
+              <bounds x="808" y="416" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="772" y="448" w="96" h="14"/>
+            </attributes>
+          </label>
+          <decorator type="XOR_join">
+            <position>12</position>
+            <attributes>
+              <bounds x="798" y="416" w="11" h="32"/>
+            </attributes>
+          </decorator>
+        </container>
+        <container id="Gather_evidence_2">
+          <vertex>
+            <attributes>
+              <bounds x="596" y="284" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="564" y="316" w="96" h="14"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="Charge_suspect_2">
+          <vertex>
+            <attributes>
+              <bounds x="596" y="544" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="564" y="576" w="96" h="14"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="Charge_suspect">
+          <vertex>
+            <attributes>
+              <bounds x="408" y="416" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="380" y="448" w="96" h="14"/>
+            </attributes>
+          </label>
+          <decorator type="AND_split">
+            <position>13</position>
+            <attributes>
+              <bounds x="439" y="416" w="11" h="32"/>
+            </attributes>
+          </decorator>
+        </container>
+        <container id="Interview_key_witness">
+          <vertex>
+            <attributes>
+              <bounds x="280" y="416" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="248" y="448" w="96" h="28"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="Gather_evidence">
+          <vertex>
+            <attributes>
+              <bounds x="148" y="416" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="116" y="448" w="96" h="14"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="Interview_key_witness_2">
+          <vertex>
+            <attributes>
+              <bounds x="596" y="416" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="564" y="448" w="96" h="28"/>
+            </attributes>
+          </label>
+        </container>
+        <flow source="Gather_evidence" target="Interview_key_witness">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="179" y="422.5"/>
+              <value x="280" y="422.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Finish_case" target="OutputCondition">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="Interview_key_witness" target="Charge_suspect">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="311" y="422.5"/>
+              <value x="408" y="422.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Charge_suspect" target="C">
+          <ports in="2" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="C_6" target="Finish_case">
+          <ports in="13" out="2"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="Gather_evidence_2" target="C_3">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="C_2" target="Charge_suspect_2">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="C_4" target="Finish_case">
+          <ports in="13" out="2"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="C_5" target="Finish_case">
+          <ports in="13" out="2"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="C" target="Gather_evidence_2">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="InputCondition" target="Gather_evidence">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="67" y="422.5"/>
+              <value x="148" y="422.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="C_3" target="Finish_case">
+          <ports in="13" out="2"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="Interview_key_witness_2" target="C_4">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="C_1" target="Interview_key_witness_2">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="Charge_suspect" target="C_6">
+          <ports in="2" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="Charge_suspect" target="C_1">
+          <ports in="2" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="Charge_suspect" target="C_2">
+          <ports in="2" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="Charge_suspect_2" target="C_5">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+      </net>
+      <labelFontSize>12</labelFontSize>
+    </specification>
+  </layout>
+</specificationSet>

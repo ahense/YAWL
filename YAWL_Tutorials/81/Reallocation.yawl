@@ -1,34 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <specificationSet xmlns="http://www.yawlfoundation.org/yawlschema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4.0" xsi:schemaLocation="http://www.yawlfoundation.org/yawlschema http://www.yawlfoundation.org/yawlschema/YAWL_Schema4.0.xsd">
-  <specification uri="Delegation">
-    <name>Delegation</name>
-    <documentation>Delegation</documentation>
+  <specification uri="Reallocation">
+    <name>Reallocation</name>
+    <documentation>Reallocation</documentation>
     <metaData>
-      <title>Delegation</title>
-      <creator>AVH</creator>
-      <description>Delegation</description>
+      <title>Reallocation</title>
+      <creator>ahense</creator>
+      <description>Reallocation</description>
       <coverage>5.0.805</coverage>
-      <version>0.1</version>
+      <version>0.2</version>
       <persistent>false</persistent>
-      <identifier>UID_0987a957-f45b-4373-9b26-7c7b402c2583</identifier>
+      <identifier>UID_93d0f71f-93e9-4ddc-b27e-fad1a46bf3b5</identifier>
     </metaData>
     <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" />
     <decomposition id="Net" isRootNet="true" xsi:type="NetFactsType">
       <localVariable>
         <index>0</index>
-        <name>Audit_Number</name>
+        <name>Pay</name>
         <type>positiveInteger</type>
         <namespace>http://www.w3.org/2001/XMLSchema</namespace>
-        <initialValue>1345</initialValue>
+        <initialValue>1800</initialValue>
       </localVariable>
       <processControlElements>
         <inputCondition id="InputCondition">
           <flowsInto>
-            <nextElementRef id="Review_audit" />
+            <nextElementRef id="Review_pay" />
           </flowsInto>
         </inputCondition>
-        <task id="Review_audit">
-          <name>Review audit</name>
+        <task id="Review_pay">
+          <name>Review pay</name>
           <flowsInto>
             <nextElementRef id="OutputCondition" />
           </flowsInto>
@@ -36,53 +36,43 @@
           <split code="and" />
           <startingMappings>
             <mapping>
-              <expression query="&lt;Audit_Number&gt;{/Net/Audit_Number/text()}&lt;/Audit_Number&gt;" />
-              <mapsTo>Audit_Number</mapsTo>
+              <expression query="&lt;Pay&gt;{/Net/Pay/text()}&lt;/Pay&gt;" />
+              <mapsTo>Pay</mapsTo>
             </mapping>
           </startingMappings>
           <completedMappings>
             <mapping>
-              <expression query="&lt;Audit_Number&gt;{/Review_audit/Audit_Number/text()}&lt;/Audit_Number&gt;" />
-              <mapsTo>Audit_Number</mapsTo>
+              <expression query="&lt;Pay&gt;{/Review_pay/Pay/text()}&lt;/Pay&gt;" />
+              <mapsTo>Pay</mapsTo>
             </mapping>
           </completedMappings>
           <resourcing>
-            <offer initiator="system">
-              <distributionSet>
-                <initialSet>
-                  <participant>PA-7875d22b-da24-4f90-a608-e6217a6ddc33</participant>
-                </initialSet>
-              </distributionSet>
-            </offer>
-            <allocate initiator="system">
-              <allocator>
-                <name>RandomChoice</name>
-              </allocator>
-            </allocate>
+            <offer initiator="user" />
+            <allocate initiator="user" />
             <start initiator="user" />
             <privileges>
               <privilege>
-                <name>canDelegate</name>
+                <name>canReallocateStateless</name>
                 <allowall>true</allowall>
               </privilege>
             </privileges>
           </resourcing>
-          <decomposesTo id="Review_audit" />
+          <decomposesTo id="Review_pay" />
         </task>
         <outputCondition id="OutputCondition" />
       </processControlElements>
     </decomposition>
-    <decomposition id="Review_audit" xsi:type="WebServiceGatewayFactsType">
-      <name>Review audit</name>
+    <decomposition id="Review_pay" xsi:type="WebServiceGatewayFactsType">
+      <name>Review pay</name>
       <inputParam>
         <index>0</index>
-        <name>Audit_Number</name>
+        <name>Pay</name>
         <type>positiveInteger</type>
         <namespace>http://www.w3.org/2001/XMLSchema</namespace>
       </inputParam>
       <outputParam>
         <index>0</index>
-        <name>Audit_Number</name>
+        <name>Pay</name>
         <type>positiveInteger</type>
         <namespace>http://www.w3.org/2001/XMLSchema</namespace>
       </outputParam>
@@ -91,15 +81,15 @@
   </specification>
   <layout>
     <locale language="en" country="GB"/>
-    <specification id="Delegation" defaultBgColor="-526351">
-      <size w="58" h="28"/>
+    <specification id="Reallocation" defaultBgColor="-526351">
+      <size w="205" h="60"/>
       <net id="Net">
-        <bounds x="0" y="0" w="652" h="227"/>
-        <frame x="0" y="0" w="655" h="230"/>
-        <viewport x="0" y="0" w="655" h="230"/>
+        <bounds x="0" y="0" w="1685" h="651"/>
+        <frame x="0" y="0" w="1688" h="654"/>
+        <viewport x="0" y="0" w="1688" h="654"/>
         <vertex id="OutputCondition">
           <attributes>
-            <bounds x="312" y="72" w="32" h="32"/>
+            <bounds x="236" y="72" w="32" h="32"/>
           </attributes>
         </vertex>
         <vertex id="InputCondition">
@@ -107,35 +97,35 @@
             <bounds x="36" y="72" w="32" h="32"/>
           </attributes>
         </vertex>
-        <container id="Review_audit">
+        <container id="Review_pay">
           <vertex>
             <attributes>
-              <bounds x="160" y="72" w="32" h="32"/>
+              <bounds x="136" y="72" w="32" h="32"/>
             </attributes>
           </vertex>
           <label>
             <attributes>
-              <bounds x="128" y="104" w="96" h="14"/>
+              <bounds x="104" y="104" w="96" h="19"/>
             </attributes>
           </label>
         </container>
-        <flow source="InputCondition" target="Review_audit">
+        <flow source="InputCondition" target="Review_pay">
           <ports in="13" out="12"/>
           <attributes>
             <lineStyle>11</lineStyle>
             <points>
               <value x="67" y="83.5"/>
-              <value x="288" y="83.5"/>
+              <value x="136" y="87.5"/>
             </points>
           </attributes>
         </flow>
-        <flow source="Review_audit" target="OutputCondition">
+        <flow source="Review_pay" target="OutputCondition">
           <ports in="13" out="12"/>
           <attributes>
             <lineStyle>11</lineStyle>
             <points>
-              <value x="319" y="83.5"/>
-              <value x="644" y="83.5"/>
+              <value x="167" y="87.5"/>
+              <value x="236" y="83.5"/>
             </points>
           </attributes>
         </flow>

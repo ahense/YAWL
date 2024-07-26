@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <specificationSet xmlns="http://www.yawlfoundation.org/yawlschema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4.0" xsi:schemaLocation="http://www.yawlfoundation.org/yawlschema http://www.yawlfoundation.org/yawlschema/YAWL_Schema4.0.xsd">
   <specification uri="Resource-InitiatedAllocation">
+    <name>Resource-Initiated Allocation</name>
     <documentation>Resource-Initiated Allocation</documentation>
     <metaData>
       <title>Resource-Initiated Allocation</title>
@@ -42,12 +43,12 @@
           <split code="and" />
           <startingMappings>
             <mapping>
-              <expression query="&lt;Audit_Topic&gt;{/Net/Audit_Topic/text()}&lt;/Audit_Topic&gt;" />
-              <mapsTo>Audit_Topic</mapsTo>
-            </mapping>
-            <mapping>
               <expression query="&lt;Audit_Result&gt;{/Net/Audit_Result/text()}&lt;/Audit_Result&gt;" />
               <mapsTo>Audit_Result</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Audit_Topic&gt;{/Net/Audit_Topic/text()}&lt;/Audit_Topic&gt;" />
+              <mapsTo>Audit_Topic</mapsTo>
             </mapping>
           </startingMappings>
           <completedMappings>
@@ -57,13 +58,7 @@
             </mapping>
           </completedMappings>
           <resourcing>
-            <offer initiator="system">
-              <distributionSet>
-                <initialSet>
-                  <role>RO-3f5fad0a-850e-431c-a05c-3b965eeaa7fe</role>
-                </initialSet>
-              </distributionSet>
-            </offer>
+            <offer initiator="user" />
             <allocate initiator="user" />
             <start initiator="user" />
           </resourcing>
@@ -78,22 +73,16 @@
           <split code="and" />
           <startingMappings>
             <mapping>
-              <expression query="&lt;Audit_Topic&gt;{/Net/Audit_Topic/text()}&lt;/Audit_Topic&gt;" />
-              <mapsTo>Audit_Topic</mapsTo>
-            </mapping>
-            <mapping>
               <expression query="&lt;Audit_Result&gt;{/Net/Audit_Result/text()}&lt;/Audit_Result&gt;" />
               <mapsTo>Audit_Result</mapsTo>
             </mapping>
+            <mapping>
+              <expression query="&lt;Audit_Topic&gt;{/Net/Audit_Topic/text()}&lt;/Audit_Topic&gt;" />
+              <mapsTo>Audit_Topic</mapsTo>
+            </mapping>
           </startingMappings>
           <resourcing>
-            <offer initiator="system">
-              <distributionSet>
-                <initialSet>
-                  <role>RO-3f5fad0a-850e-431c-a05c-3b965eeaa7fe</role>
-                </initialSet>
-              </distributionSet>
-            </offer>
+            <offer initiator="user" />
             <allocate initiator="user" />
             <start initiator="user" />
           </resourcing>
@@ -146,9 +135,9 @@
     <specification id="Resource-InitiatedAllocation" defaultBgColor="-526351">
       <size w="58" h="28"/>
       <net id="Net">
-        <bounds x="0" y="0" w="652" h="409"/>
-        <frame x="0" y="0" w="655" h="412"/>
-        <viewport x="0" y="0" w="655" h="412"/>
+        <bounds x="0" y="0" w="675" h="294"/>
+        <frame x="0" y="0" w="678" h="297"/>
+        <viewport x="0" y="0" w="678" h="297"/>
         <vertex id="OutputCondition">
           <attributes>
             <bounds x="464" y="120" w="32" h="32"/>
@@ -183,16 +172,6 @@
             </attributes>
           </label>
         </container>
-        <flow source="InputCondition" target="Conduct_audit">
-          <ports in="13" out="12"/>
-          <attributes>
-            <lineStyle>11</lineStyle>
-            <points>
-              <value x="67" y="131.5"/>
-              <value x="168" y="131.5"/>
-            </points>
-          </attributes>
-        </flow>
         <flow source="Review_audit" target="OutputCondition">
           <ports in="13" out="12"/>
           <attributes>
@@ -200,6 +179,16 @@
             <points>
               <value x="347" y="131.5"/>
               <value x="464" y="131.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="InputCondition" target="Conduct_audit">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="67" y="131.5"/>
+              <value x="168" y="131.5"/>
             </points>
           </attributes>
         </flow>

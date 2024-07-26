@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<orgdata>
+  <participants>
+    <participant id="PA-ae864e03-4e0f-44a9-9df4-903f2cdd1bfb">
+      <userid>john</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>John</firstname>
+      <lastname>Bohi</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles/>
+      <positions/>
+      <capabilities/>
+      <privileges>11100100</privileges>
+    </participant>
+  </participants>
+  <roles/>
+  <positions/>
+  <capabilities/>
+  <orggroups/>
+  <nonhumanresources/>
+  <nonhumancategories/>
+</orgdata>
+

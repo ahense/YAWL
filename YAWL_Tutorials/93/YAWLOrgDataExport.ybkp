@@ -1,40 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <orgdata>
   <participants>
-    <participant id="PA-d6d18a83-71b3-48d1-b488-9e6396e84a22">
-      <userid>erin</userid>
+    <participant id="PA-8cb975ad-f83d-49e2-9970-dd8dc26e231b">
+      <userid>josh</userid>
       <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
-      <firstname>Erin</firstname>
-      <lastname>Gray</lastname>
+      <firstname>Josh</firstname>
+      <lastname>White</lastname>
       <description/>
       <notes/>
       <isAdministrator>false</isAdministrator>
       <roles>
-        <role>RO-7ab9f546-1471-4067-874c-0b60db9eb563</role>
+        <role>RO-dd26180a-91a1-413d-9883-52e4977366f2</role>
       </roles>
       <positions/>
       <capabilities/>
-      <privileges>11100000</privileges>
+      <privileges>00000000</privileges>
     </participant>
-    <participant id="PA-6ec23d95-3256-46ca-8f79-21d41ca46d20">
-      <userid>susan</userid>
+    <participant id="PA-e4bb67e0-bb3e-4c0c-8e83-410c28e32217">
+      <userid>jessica</userid>
       <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
-      <firstname>Susan</firstname>
-      <lastname>Calvin</lastname>
+      <firstname>Jessica</firstname>
+      <lastname>Lange</lastname>
       <description/>
       <notes/>
       <isAdministrator>false</isAdministrator>
       <roles>
-        <role>RO-7ab9f546-1471-4067-874c-0b60db9eb563</role>
+        <role>RO-dd26180a-91a1-413d-9883-52e4977366f2</role>
       </roles>
       <positions/>
       <capabilities/>
-      <privileges>11100000</privileges>
+      <privileges>00000000</privileges>
     </participant>
   </participants>
   <roles>
-    <role id="RO-7ab9f546-1471-4067-874c-0b60db9eb563">
-      <name>Magistrate</name>
+    <role id="RO-dd26180a-91a1-413d-9883-52e4977366f2">
+      <name>Auditor</name>
       <description/>
       <notes/>
     </role>

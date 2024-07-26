@@ -7,7 +7,7 @@
       <title>Interview Candidates</title>
       <creator>ahense</creator>
       <description>Using multiple instance tasks in YAWL.</description>
-      <coverage>5.1.810</coverage>
+      <coverage>4.3.1.772</coverage>
       <version>0.10</version>
       <persistent>false</persistent>
       <identifier>UID_d8650b42-4129-4e2a-9f84-f7359e10ea55</identifier>
@@ -82,7 +82,7 @@
           <minimum>1</minimum>
           <maximum>100</maximum>
           <threshold>50</threshold>
-          <creationMode code="dynamic" />
+          <creationMode code="static" />
           <miDataInput>
             <expression query="/Interview_Candidates/candidates" />
             <splittingExpression query="for $s in /candidates/* return &lt;candidates_Item&gt;{$s/*}&lt;/candidates_Item&gt;" />
@@ -174,9 +174,9 @@
     <specification id="Interview_Candidates" defaultBgColor="-526351">
       <size w="144" h="43"/>
       <net id="Interview_Candidates">
-        <bounds x="-116" y="0" w="890" h="723"/>
-        <frame x="0" y="0" w="777" h="741"/>
-        <viewport x="0" y="0" w="777" h="741"/>
+        <bounds x="0" y="0" w="1282" h="699"/>
+        <frame x="0" y="0" w="1285" h="702"/>
+        <viewport x="0" y="0" w="1285" h="702"/>
         <scale>1.5</scale>
         <vertex id="OutputCondition">
           <attributes>
@@ -257,7 +257,6 @@
           </attributes>
         </flow>
       </net>
-      <labelFontSize>12</labelFontSize>
     </specification>
   </layout>
 </specificationSet>

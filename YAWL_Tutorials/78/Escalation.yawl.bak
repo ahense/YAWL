@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<specificationSet xmlns="http://www.yawlfoundation.org/yawlschema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4.0" xsi:schemaLocation="http://www.yawlfoundation.org/yawlschema http://www.yawlfoundation.org/yawlschema/YAWL_Schema4.0.xsd">
+  <specification uri="Escalation">
+    <name>Escalation</name>
+    <documentation>Escalation</documentation>
+    <metaData>
+      <title>Escalation</title>
+      <creator>AVH</creator>
+      <description>Escalation</description>
+      <coverage>5.0.805</coverage>
+      <version>0.1</version>
+      <persistent>false</persistent>
+      <identifier>UID_2eed8880-2f2e-4e92-b8f0-fe2f49467e6b</identifier>
+    </metaData>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+    <decomposition id="Net" isRootNet="true" xsi:type="NetFactsType">
+      <localVariable>
+        <index>0</index>
+        <name>Pay</name>
+        <type>positiveInteger</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>1800</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>1</index>
+        <name>start_time_Review_pay</name>
+        <type>time</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>14:01:58</initialValue>
+      </localVariable>
+      <processControlElements>
+        <inputCondition id="InputCondition">
+          <flowsInto>
+            <nextElementRef id="Write_current_time" />
+          </flowsInto>
+        </inputCondition>
+        <task id="Write_current_time">
+          <name>Write current time</name>
+          <flowsInto>
+            <nextElementRef id="Review_pay" />
+            <isDefaultFlow />
+          </flowsInto>
+          <join code="xor" />
+          <split code="xor" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;start_time_Review_pay&gt;{current-time()}&lt;/start_time_Review_pay&gt;" />
+              <mapsTo>start_time_Review_pay</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;start_time_Review_pay&gt;{/Write_current_time/start_time_Review_pay/text()}&lt;/start_time_Review_pay&gt;" />
+              <mapsTo>start_time_Review_pay</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="user" />
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Write_current_time" />
+        </task>
+        <task id="Review_pay">
+          <name>Review pay</name>
+          <flowsInto>
+            <nextElementRef id="OutputCondition" />
+            <predicate ordering="0">hours-from-time(current-time()) * 3600  + minutes-from-time(current-time()) * 60  + seconds-from-time(current-time())  - hours-from-time(/Net/start_time_Review_pay/text()) * 3600 - minutes-from-time(/Net/start_time_Review_pay/text()) * 60 - seconds-from-time(/Net/start_time_Review_pay/text()) &lt;= 44</predicate>
+          </flowsInto>
+          <flowsInto>
+            <nextElementRef id="Write_current_time" />
+            <isDefaultFlow />
+          </flowsInto>
+          <join code="and" />
+          <split code="xor" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Pay&gt;{/Net/Pay/text()}&lt;/Pay&gt;" />
+              <mapsTo>Pay</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;Pay&gt;{/Review_pay/Pay/text()}&lt;/Pay&gt;" />
+              <mapsTo>Pay</mapsTo>
+            </mapping>
+          </completedMappings>
+          <timer>
+            <trigger>OnEnabled</trigger>
+            <duration>PT45S</duration>
+          </timer>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-290a0b33-0a42-4441-8a08-8aa432ff47f1</role>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="system">
+              <allocator>
+                <name>RandomChoice</name>
+              </allocator>
+            </allocate>
+            <start initiator="system" />
+          </resourcing>
+          <decomposesTo id="Review_pay" />
+        </task>
+        <outputCondition id="OutputCondition" />
+      </processControlElements>
+    </decomposition>
+    <decomposition id="Review_pay" xsi:type="WebServiceGatewayFactsType">
+      <name>Review pay</name>
+      <inputParam>
+        <index>0</index>
+        <name>Pay</name>
+        <type>positiveInteger</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>0</index>
+        <name>Pay</name>
+        <type>positiveInteger</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Write_current_time" xsi:type="WebServiceGatewayFactsType">
+      <name>Write current time</name>
+      <inputParam>
+        <index>0</index>
+        <name>start_time_Review_pay</name>
+        <type>time</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>0</index>
+        <name>start_time_Review_pay</name>
+        <type>time</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <externalInteraction>automated</externalInteraction>
+    </decomposition>
+  </specification>
+  <layout>
+    <locale language="en" country="GB"/>
+    <specification id="Escalation" defaultBgColor="-526351">
+      <size w="205" h="60"/>
+      <net id="Net" bgColor="-526351">
+        <bounds x="0" y="0" w="1685" h="863"/>
+        <frame x="0" y="0" w="1688" h="866"/>
+        <viewport x="0" y="0" w="1688" h="866"/>
+        <vertex id="OutputCondition">
+          <attributes>
+            <bounds x="516" y="424" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <vertex id="InputCondition">
+          <attributes>
+            <bounds x="36" y="424" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <container id="Review_pay">
+          <vertex>
+            <attributes>
+              <bounds x="360" y="424" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="332" y="456" w="96" h="14"/>
+            </attributes>
+          </label>
+          <decorator type="XOR_split">
+            <position>13</position>
+            <attributes>
+              <bounds x="391" y="424" w="11" h="32"/>
+            </attributes>
+          </decorator>
+        </container>
+        <container id="Write_current_time">
+          <vertex>
+            <attributes>
+              <bounds x="184" y="424" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="148" y="456" w="96" h="14"/>
+            </attributes>
+          </label>
+          <decorator type="XOR_join">
+            <position>12</position>
+            <attributes>
+              <bounds x="174" y="424" w="11" h="32"/>
+            </attributes>
+          </decorator>
+        </container>
+        <flow source="InputCondition" target="Write_current_time">
+          <ports in="13" out="2"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="Write_current_time" target="Review_pay">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="Review_pay" target="Write_current_time">
+          <label>.</label>
+          <ports in="2" out="2"/>
+          <attributes>
+            <labelposition x="500" y="0"/>
+            <lineStyle>13</lineStyle>
+            <points>
+              <value x="401" y="439.5"/>
+              <value x="304" y="304"/>
+              <value x="174" y="439.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Review_pay" target="OutputCondition">
+          <ports in="2" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+      </net>
+      <labelFontSize>12</labelFontSize>
+    </specification>
+  </layout>
+</specificationSet>

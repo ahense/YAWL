@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<specificationSet xmlns="http://www.yawlfoundation.org/yawlschema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4.0" xsi:schemaLocation="http://www.yawlfoundation.org/yawlschema http://www.yawlfoundation.org/yawlschema/YAWL_Schema4.0.xsd">
+  <specification uri="Hotel">
+    <documentation>Hotel</documentation>
+    <metaData>
+      <title>Hotel</title>
+      <creator>AVH</creator>
+      <description>Hotel</description>
+      <coverage>5.1.810</coverage>
+      <version>0.1</version>
+      <persistent>false</persistent>
+      <identifier>UID_a395b3c6-221b-4f68-a66a-6ca4c9121b69</identifier>
+    </metaData>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+    <decomposition id="Net" isRootNet="true" xsi:type="NetFactsType">
+      <localVariable>
+        <index>0</index>
+        <name>Room_number</name>
+        <type>positiveInteger</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>1</initialValue>
+      </localVariable>
+      <processControlElements>
+        <inputCondition id="InputCondition">
+          <flowsInto>
+            <nextElementRef id="Make_bed" />
+          </flowsInto>
+        </inputCondition>
+        <task id="Make_bed">
+          <name>Make bed</name>
+          <flowsInto>
+            <nextElementRef id="Clean_room" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;Room_number&gt;{/Make_bed/Room_number/text()}&lt;/Room_number&gt;" />
+              <mapsTo>Room_number</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-861f1e88-7078-469f-b09f-1dae05da0e2a</role>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Make_bed" />
+        </task>
+        <task id="Clean_room">
+          <name>Clean room</name>
+          <flowsInto>
+            <nextElementRef id="OutputCondition" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Room_number&gt;{/Net/Room_number/text()}&lt;/Room_number&gt;" />
+              <mapsTo>Room_number</mapsTo>
+            </mapping>
+          </startingMappings>
+          <resourcing>
+            <offer initiator="user" />
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Clean_room" />
+        </task>
+        <outputCondition id="OutputCondition" />
+      </processControlElements>
+    </decomposition>
+    <decomposition id="Clean_room" xsi:type="WebServiceGatewayFactsType">
+      <name>Clean room</name>
+      <inputParam>
+        <index>0</index>
+        <name>Room_number</name>
+        <type>positiveInteger</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Make_bed" xsi:type="WebServiceGatewayFactsType">
+      <name>Make bed</name>
+      <outputParam>
+        <index>0</index>
+        <name>Room_number</name>
+        <type>positiveInteger</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+  </specification>
+  <layout>
+    <locale language="en" country="GB"/>
+    <specification id="Hotel" defaultBgColor="-526351">
+      <size w="58" h="28"/>
+      <net id="Net">
+        <bounds x="0" y="0" w="730" h="482"/>
+        <frame x="0" y="0" w="733" h="485"/>
+        <viewport x="0" y="0" w="733" h="485"/>
+        <vertex id="OutputCondition">
+          <attributes>
+            <bounds x="532" y="232" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <vertex id="InputCondition">
+          <attributes>
+            <bounds x="36" y="232" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <container id="Make_bed">
+          <vertex>
+            <attributes>
+              <bounds x="172" y="232" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="140" y="264" w="96" h="14"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="Clean_room">
+          <vertex>
+            <attributes>
+              <bounds x="352" y="232" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="320" y="264" w="96" h="14"/>
+            </attributes>
+          </label>
+        </container>
+        <flow source="InputCondition" target="Make_bed">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="67" y="238.5"/>
+              <value x="172" y="238.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Clean_room" target="OutputCondition">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="399" y="238.5"/>
+              <value x="656" y="238.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Make_bed" target="Clean_room">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="203" y="238.5"/>
+              <value x="368" y="238.5"/>
+            </points>
+          </attributes>
+        </flow>
+      </net>
+      <labelFontSize>12</labelFontSize>
+    </specification>
+  </layout>
+</specificationSet>

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<specificationSet xmlns="http://www.yawlfoundation.org/yawlschema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4.0" xsi:schemaLocation="http://www.yawlfoundation.org/yawlschema http://www.yawlfoundation.org/yawlschema/YAWL_Schema4.0.xsd">
+  <specification uri="AdditionalResources">
+    <name>Additional Resources</name>
+    <documentation>Additional Resources</documentation>
+    <metaData>
+      <title>Additional Resources</title>
+      <creator>AVH</creator>
+      <description>Additional Resources</description>
+      <coverage>5.1.810</coverage>
+      <version>0.1</version>
+      <persistent>false</persistent>
+      <identifier>UID_64bcca7a-e8f6-4acb-9766-dd27bdae0162</identifier>
+    </metaData>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+    <decomposition id="Net" isRootNet="true" xsi:type="NetFactsType">
+      <localVariable>
+        <index>0</index>
+        <name>Audit_name</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>Security audit</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>1</index>
+        <name>Audit_number</name>
+        <type>positiveInteger</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>1</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>2</index>
+        <name>Audit_findings</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue />
+      </localVariable>
+      <processControlElements>
+        <inputCondition id="InputCondition">
+          <flowsInto>
+            <nextElementRef id="Conduct_audit" />
+          </flowsInto>
+        </inputCondition>
+        <task id="Conduct_audit">
+          <name>Conduct audit</name>
+          <flowsInto>
+            <nextElementRef id="OutputCondition" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Audit_name&gt;{/Net/Audit_name/text()}&lt;/Audit_name&gt;" />
+              <mapsTo>Audit_name</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;Audit_findings&gt;{/Conduct_audit/Audit_findings/text()}&lt;/Audit_findings&gt;" />
+              <mapsTo>Audit_findings</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Audit_name&gt;{/Conduct_audit/Audit_name/text()}&lt;/Audit_name&gt;" />
+              <mapsTo>Audit_name</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Audit_number&gt;{/Conduct_audit/Audit_number/text()}&lt;/Audit_number&gt;" />
+              <mapsTo>Audit_number</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-dd26180a-91a1-413d-9883-52e4977366f2</role>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="user" />
+            <secondary>
+              <nonHumanResource>NH-298cae23-5b3f-4bcf-ae2f-1ce42679fc08</nonHumanResource>
+            </secondary>
+          </resourcing>
+          <decomposesTo id="Conduct_audit" />
+        </task>
+        <outputCondition id="OutputCondition" />
+      </processControlElements>
+    </decomposition>
+    <decomposition id="Conduct_audit" xsi:type="WebServiceGatewayFactsType">
+      <name>Conduct audit</name>
+      <inputParam>
+        <index>0</index>
+        <name>Audit_name</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>0</index>
+        <name>Audit_name</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <outputParam>
+        <index>1</index>
+        <name>Audit_number</name>
+        <type>positiveInteger</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <outputParam textarea="true">
+        <index>2</index>
+        <name>Audit_findings</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+  </specification>
+  <layout>
+    <locale language="en" country="GB"/>
+    <specification id="AdditionalResources" defaultBgColor="-526351">
+      <size w="58" h="28"/>
+      <net id="Net">
+        <bounds x="0" y="0" w="730" h="482"/>
+        <frame x="0" y="0" w="733" h="485"/>
+        <viewport x="0" y="0" w="733" h="485"/>
+        <vertex id="OutputCondition">
+          <attributes>
+            <bounds x="384" y="232" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <vertex id="InputCondition">
+          <attributes>
+            <bounds x="36" y="232" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <container id="Conduct_audit">
+          <vertex>
+            <attributes>
+              <bounds x="192" y="232" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="160" y="264" w="96" h="14"/>
+            </attributes>
+          </label>
+        </container>
+        <flow source="InputCondition" target="Conduct_audit">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="Conduct_audit" target="OutputCondition">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+      </net>
+      <labelFontSize>12</labelFontSize>
+    </specification>
+  </layout>
+</specificationSet>

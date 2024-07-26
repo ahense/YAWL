@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<orgdata>
+  <participants>
+    <participant id="PA-61e83fb8-4862-47eb-9ffc-ee7ed431b658">
+      <userid>nina</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Nina</firstname>
+      <lastname>Hagen</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-b1d8d966-e948-476b-a3db-e1bbe90a74a0</role>
+      </roles>
+      <positions>
+        <position>PO-1c674c80-c911-422a-a706-9fb19a4f3d2f</position>
+      </positions>
+      <capabilities/>
+      <privileges>00000000</privileges>
+    </participant>
+    <participant id="PA-b01e1209-eed8-4a76-921e-89099ab42732">
+      <userid>max</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Max</firstname>
+      <lastname>Schmeling</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-b1d8d966-e948-476b-a3db-e1bbe90a74a0</role>
+      </roles>
+      <positions>
+        <position>PO-c914695c-cbf2-4d7e-a180-f6ac8dac1fd7</position>
+      </positions>
+      <capabilities/>
+      <privileges>00000000</privileges>
+    </participant>
+    <participant id="PA-df4504dd-e824-4e38-88ce-a50d83c11ddb">
+      <userid>alan</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Alan</firstname>
+      <lastname>Parsons</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-b1d8d966-e948-476b-a3db-e1bbe90a74a0</role>
+      </roles>
+      <positions>
+        <position>PO-c914695c-cbf2-4d7e-a180-f6ac8dac1fd7</position>
+      </positions>
+      <capabilities/>
+      <privileges>00000000</privileges>
+    </participant>
+  </participants>
+  <roles>
+    <role id="RO-b1d8d966-e948-476b-a3db-e1bbe90a74a0">
+      <name>Accountant</name>
+      <description/>
+      <notes/>
+    </role>
+  </roles>
+  <positions>
+    <position id="PO-1c674c80-c911-422a-a706-9fb19a4f3d2f">
+      <title>Accounting Team Leader</title>
+      <positionid/>
+      <description/>
+      <notes/>
+    </position>
+    <position id="PO-c914695c-cbf2-4d7e-a180-f6ac8dac1fd7">
+      <title>Accounting Team Member</title>
+      <positionid/>
+      <description/>
+      <notes/>
+      <reportstoid>PO-1c674c80-c911-422a-a706-9fb19a4f3d2f</reportstoid>
+    </position>
+  </positions>
+  <capabilities/>
+  <orggroups/>
+  <nonhumanresources/>
+  <nonhumancategories/>
+</orgdata>
+

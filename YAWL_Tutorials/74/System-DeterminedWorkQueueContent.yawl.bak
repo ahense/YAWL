@@ -61,6 +61,34 @@
           </flowsInto>
           <join code="xor" />
           <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Priority_Submit_Review&gt;{/Net/Priority_Submit_Review/text()}&lt;/Priority_Submit_Review&gt;" />
+              <mapsTo>Priority_Submit_Review</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Priority_Gather_Evidence&gt;{/Net/Priority_Gather_Evidence/text()}&lt;/Priority_Gather_Evidence&gt;" />
+              <mapsTo>Priority_Gather_Evidence</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Priority_Prepare_Defence&gt;{/Net/Priority_Prepare_Defence/text()}&lt;/Priority_Prepare_Defence&gt;" />
+              <mapsTo>Priority_Prepare_Defence</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;Priority_Gather_Evidence&gt;{/Set_priorities/Priority_Gather_Evidence/text()}&lt;/Priority_Gather_Evidence&gt;" />
+              <mapsTo>Priority_Gather_Evidence</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Priority_Submit_Review&gt;{/Set_priorities/Priority_Submit_Review/text()}&lt;/Priority_Submit_Review&gt;" />
+              <mapsTo>Priority_Submit_Review</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Priority_Prepare_Defence&gt;{/Set_priorities/Priority_Prepare_Defence/text()}&lt;/Priority_Prepare_Defence&gt;" />
+              <mapsTo>Priority_Prepare_Defence</mapsTo>
+            </mapping>
+          </completedMappings>
           <resourcing>
             <offer initiator="system">
               <distributionSet>
@@ -192,6 +220,42 @@
     </decomposition>
     <decomposition id="Set_priorities" xsi:type="WebServiceGatewayFactsType">
       <name>Set priorities</name>
+      <inputParam>
+        <index>0</index>
+        <name>Priority_Prepare_Defence</name>
+        <type>PriorityType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>1</index>
+        <name>Priority_Gather_Evidence</name>
+        <type>PriorityType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>2</index>
+        <name>Priority_Submit_Review</name>
+        <type>PriorityType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>0</index>
+        <name>Priority_Prepare_Defence</name>
+        <type>PriorityType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <outputParam>
+        <index>1</index>
+        <name>Priority_Gather_Evidence</name>
+        <type>PriorityType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <outputParam>
+        <index>2</index>
+        <name>Priority_Submit_Review</name>
+        <type>PriorityType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
       <externalInteraction>manual</externalInteraction>
     </decomposition>
     <decomposition id="Submit_review" xsi:type="WebServiceGatewayFactsType">

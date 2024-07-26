@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<orgdata>
+  <participants>
+    <participant id="PA-fcfb233c-f7ac-4b5a-8b9e-d21b08bd7262">
+      <userid>laura</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Laura</firstname>
+      <lastname>Nyro</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-861f1e88-7078-469f-b09f-1dae05da0e2a</role>
+      </roles>
+      <positions>
+        <position>PO-b8f092e0-af9b-4c5b-ba89-12d2c5a08cd1</position>
+      </positions>
+      <capabilities/>
+      <privileges>00000000</privileges>
+    </participant>
+    <participant id="PA-a8db262c-da0d-4034-96ba-281c007539d0">
+      <userid>josh</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Josh</firstname>
+      <lastname>White</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-bbe7eae2-b0f7-484f-b80c-f90da7a1607a</role>
+      </roles>
+      <positions>
+        <position>PO-b8f092e0-af9b-4c5b-ba89-12d2c5a08cd1</position>
+      </positions>
+      <capabilities/>
+      <privileges>01000000</privileges>
+    </participant>
+    <participant id="PA-68f73fe5-77a6-446b-9d99-53e1ca792b09">
+      <userid>cody</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Cody</firstname>
+      <lastname>Johnson</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles/>
+      <positions>
+        <position>PO-b8f092e0-af9b-4c5b-ba89-12d2c5a08cd1</position>
+      </positions>
+      <capabilities/>
+      <privileges>00001000</privileges>
+    </participant>
+  </participants>
+  <roles>
+    <role id="RO-861f1e88-7078-469f-b09f-1dae05da0e2a">
+      <name>Cleaner</name>
+      <description/>
+      <notes/>
+    </role>
+    <role id="RO-bbe7eae2-b0f7-484f-b80c-f90da7a1607a">
+      <name>Lawyer</name>
+      <description/>
+      <notes/>
+    </role>
+  </roles>
+  <positions>
+    <position id="PO-b8f092e0-af9b-4c5b-ba89-12d2c5a08cd1">
+      <title>Employee</title>
+      <positionid/>
+      <description/>
+      <notes/>
+      <orggroupid>OG-2a48783c-eb82-479e-9e97-88dfe351a58d</orggroupid>
+    </position>
+  </positions>
+  <capabilities/>
+  <orggroups>
+    <orggroup id="OG-2a48783c-eb82-479e-9e97-88dfe351a58d">
+      <groupName>Company</groupName>
+      <groupType>GROUP</groupType>
+      <description>the whole company</description>
+      <notes/>
+    </orggroup>
+  </orggroups>
+  <nonhumanresources/>
+  <nonhumancategories/>
+</orgdata>
+

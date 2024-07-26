@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <specificationSet xmlns="http://www.yawlfoundation.org/yawlschema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4.0" xsi:schemaLocation="http://www.yawlfoundation.org/yawlschema http://www.yawlfoundation.org/yawlschema/YAWL_Schema4.0.xsd">
-  <specification uri="System-DeterminedWorkQueueContent">
+  <specification uri="Resource-DeterminedWorkQueueContent">
     <name>ystem-Determined Work Queue Content</name>
-    <documentation>System-Determined Work Queue Content</documentation>
+    <documentation>Resource-Determined Work Queue Content</documentation>
     <metaData>
-      <title>ystem-Determined Work Queue Content</title>
+      <title>Resource-Determined Work Queue Content</title>
       <creator>AVH</creator>
-      <description>System-Determined Work Queue Content</description>
-      <coverage>5.1.810</coverage>
+      <description>Resource-Determined Work Queue Content</description>
+      <coverage>5.0.805</coverage>
       <version>0.1</version>
       <persistent>false</persistent>
-      <identifier>UID_32e76e72-50cc-49f7-a16e-58fca9d07b8c</identifier>
+      <identifier>UID_32e76e72-50cc-49f7-a16e-58fca9d99c8c</identifier>
     </metaData>
     <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
       <xs:simpleType name="PriorityType">
@@ -52,10 +52,10 @@
         <task id="Set_priorities">
           <name>Set priorities</name>
           <flowsInto>
-            <nextElementRef id="Prepare_defence" />
+            <nextElementRef id="A2" />
           </flowsInto>
           <flowsInto>
-            <nextElementRef id="Submit_review" />
+            <nextElementRef id="A1" />
           </flowsInto>
           <flowsInto>
             <nextElementRef id="Gather_evidence" />
@@ -102,6 +102,66 @@
             <start initiator="user" />
           </resourcing>
           <decomposesTo id="Set_priorities" />
+        </task>
+        <task id="A1">
+          <name>A1</name>
+          <flowsInto>
+            <nextElementRef id="Prepare_defence" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Priority_Prepare_Defence&gt;{/Net/Priority_Prepare_Defence/text()}&lt;/Priority_Prepare_Defence&gt;" />
+              <mapsTo>Priority_Prepare_Defence</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;Priority_Prepare_Defence&gt;{/A1/Priority_Prepare_Defence/text()}&lt;/Priority_Prepare_Defence&gt;" />
+              <mapsTo>Priority_Prepare_Defence</mapsTo>
+            </mapping>
+          </completedMappings>
+          <timer>
+            <trigger>OnEnabled</trigger>
+            <duration>PT10S</duration>
+          </timer>
+          <resourcing>
+            <offer initiator="user" />
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="A1" />
+        </task>
+        <task id="A2">
+          <name>A2</name>
+          <flowsInto>
+            <nextElementRef id="Submit_review" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Priority_Submit_Review&gt;{/Net/Priority_Submit_Review/text()}&lt;/Priority_Submit_Review&gt;" />
+              <mapsTo>Priority_Submit_Review</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;Priority_Submit_Review&gt;{/A2/Priority_Submit_Review/text()}&lt;/Priority_Submit_Review&gt;" />
+              <mapsTo>Priority_Submit_Review</mapsTo>
+            </mapping>
+          </completedMappings>
+          <timer>
+            <trigger>OnEnabled</trigger>
+            <duration>PT20S</duration>
+          </timer>
+          <resourcing>
+            <offer initiator="user" />
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="A2" />
         </task>
         <task id="Gather_evidence">
           <name>Gather evidence</name>
@@ -152,7 +212,11 @@
                 </initialSet>
               </distributionSet>
             </offer>
-            <allocate initiator="user" />
+            <allocate initiator="system">
+              <allocator>
+                <name>RandomChoice</name>
+              </allocator>
+            </allocate>
             <start initiator="user" />
           </resourcing>
           <decomposesTo id="Prepare_defence" />
@@ -179,7 +243,11 @@
                 </initialSet>
               </distributionSet>
             </offer>
-            <allocate initiator="user" />
+            <allocate initiator="system">
+              <allocator>
+                <name>ShortestQueue</name>
+              </allocator>
+            </allocate>
             <start initiator="user" />
           </resourcing>
           <decomposesTo id="Submit_review" />
@@ -198,6 +266,36 @@
         </task>
         <outputCondition id="OutputCondition" />
       </processControlElements>
+    </decomposition>
+    <decomposition id="A1" xsi:type="WebServiceGatewayFactsType">
+      <inputParam>
+        <index>0</index>
+        <name>Priority_Prepare_Defence</name>
+        <type>PriorityType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>0</index>
+        <name>Priority_Prepare_Defence</name>
+        <type>PriorityType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="A2" xsi:type="WebServiceGatewayFactsType">
+      <inputParam>
+        <index>0</index>
+        <name>Priority_Submit_Review</name>
+        <type>PriorityType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>0</index>
+        <name>Priority_Submit_Review</name>
+        <type>PriorityType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
     </decomposition>
     <decomposition id="Gather_evidence" xsi:type="WebServiceGatewayFactsType">
       <name>Gather evidence</name>
@@ -272,91 +370,131 @@
   </specification>
   <layout>
     <locale language="en" country="GB"/>
-    <specification id="System-DeterminedWorkQueueContent" defaultBgColor="-526351">
+    <specification id="Resource-DeterminedWorkQueueContent" defaultBgColor="-526351">
       <size w="58" h="28"/>
       <net id="Net">
-        <bounds x="0" y="0" w="774" h="738"/>
-        <frame x="0" y="0" w="777" h="741"/>
-        <viewport x="0" y="0" w="777" h="741"/>
+        <bounds x="0" y="0" w="830" h="683"/>
+        <frame x="0" y="0" w="833" h="686"/>
+        <viewport x="0" y="0" w="833" h="686"/>
         <vertex id="OutputCondition">
           <attributes>
-            <bounds x="580" y="252" w="32" h="32"/>
+            <bounds x="584" y="144" w="32" h="32"/>
           </attributes>
         </vertex>
         <vertex id="InputCondition">
           <attributes>
-            <bounds x="36" y="252" w="32" h="32"/>
+            <bounds x="8" y="144" w="32" h="32"/>
           </attributes>
         </vertex>
+        <container id="A1">
+          <vertex>
+            <attributes>
+              <bounds x="224" y="64" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="192" y="96" w="96" h="14"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="A2">
+          <vertex>
+            <attributes>
+              <bounds x="224" y="228" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="192" y="260" w="96" h="14"/>
+            </attributes>
+          </label>
+        </container>
         <container id="T">
           <vertex>
             <attributes>
-              <bounds x="428" y="252" w="32" h="32"/>
+              <bounds x="488" y="144" w="32" h="32"/>
             </attributes>
           </vertex>
           <decorator type="AND_join">
             <position>12</position>
             <attributes>
-              <bounds x="418" y="252" w="11" h="32"/>
+              <bounds x="478" y="144" w="11" h="32"/>
             </attributes>
           </decorator>
         </container>
         <container id="Set_priorities">
           <vertex>
             <attributes>
-              <bounds x="132" y="252" w="32" h="32"/>
+              <bounds x="104" y="144" w="32" h="32"/>
             </attributes>
           </vertex>
           <label>
             <attributes>
-              <bounds x="104" y="284" w="96" h="14"/>
+              <bounds x="76" y="176" w="96" h="14"/>
             </attributes>
           </label>
           <decorator type="AND_split">
             <position>13</position>
             <attributes>
-              <bounds x="163" y="252" w="11" h="32"/>
+              <bounds x="135" y="144" w="11" h="32"/>
             </attributes>
           </decorator>
         </container>
         <container id="Prepare_defence">
           <vertex>
             <attributes>
-              <bounds x="268" y="120" w="32" h="32"/>
+              <bounds x="340" y="64" w="32" h="32"/>
             </attributes>
           </vertex>
           <label>
             <attributes>
-              <bounds x="236" y="152" w="96" h="14"/>
+              <bounds x="308" y="96" w="96" h="14"/>
             </attributes>
           </label>
         </container>
         <container id="Submit_review">
           <vertex>
             <attributes>
-              <bounds x="268" y="376" w="32" h="32"/>
+              <bounds x="340" y="228" w="32" h="32"/>
             </attributes>
           </vertex>
           <label>
             <attributes>
-              <bounds x="236" y="408" w="96" h="14"/>
+              <bounds x="308" y="260" w="96" h="14"/>
             </attributes>
           </label>
         </container>
         <container id="Gather_evidence">
           <vertex>
             <attributes>
-              <bounds x="268" y="252" w="32" h="32"/>
+              <bounds x="340" y="144" w="32" h="32"/>
             </attributes>
           </vertex>
           <label>
             <attributes>
-              <bounds x="236" y="284" w="96" h="14"/>
+              <bounds x="308" y="176" w="96" h="14"/>
             </attributes>
           </label>
         </container>
         <flow source="Submit_review" target="T">
           <ports in="13" out="2"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="371" y="239.5"/>
+              <value x="478" y="155.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Set_priorities" target="A2">
+          <ports in="3" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="A2" target="Submit_review">
+          <ports in="13" out="12"/>
           <attributes>
             <lineStyle>11</lineStyle>
           </attributes>
@@ -366,8 +504,8 @@
           <attributes>
             <lineStyle>11</lineStyle>
             <points>
-              <value x="67" y="258.5"/>
-              <value x="132" y="258.5"/>
+              <value x="39" y="155.5"/>
+              <value x="104" y="155.5"/>
             </points>
           </attributes>
         </flow>
@@ -376,8 +514,8 @@
           <attributes>
             <lineStyle>11</lineStyle>
             <points>
-              <value x="173" y="258.5"/>
-              <value x="268" y="258.5"/>
+              <value x="145" y="155.5"/>
+              <value x="340" y="155.5"/>
             </points>
           </attributes>
         </flow>
@@ -386,18 +524,12 @@
           <attributes>
             <lineStyle>11</lineStyle>
             <points>
-              <value x="299" y="258.5"/>
-              <value x="418" y="258.5"/>
+              <value x="371" y="155.5"/>
+              <value x="478" y="155.5"/>
             </points>
           </attributes>
         </flow>
-        <flow source="Set_priorities" target="Submit_review">
-          <ports in="2" out="12"/>
-          <attributes>
-            <lineStyle>11</lineStyle>
-          </attributes>
-        </flow>
-        <flow source="Set_priorities" target="Prepare_defence">
+        <flow source="Set_priorities" target="A1">
           <ports in="2" out="12"/>
           <attributes>
             <lineStyle>11</lineStyle>
@@ -407,6 +539,16 @@
           <ports in="13" out="2"/>
           <attributes>
             <lineStyle>11</lineStyle>
+            <points>
+              <value x="371" y="75.5"/>
+              <value x="478" y="155.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="A1" target="Prepare_defence">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
           </attributes>
         </flow>
         <flow source="T" target="OutputCondition">
@@ -414,8 +556,8 @@
           <attributes>
             <lineStyle>11</lineStyle>
             <points>
-              <value x="459" y="258.5"/>
-              <value x="580" y="258.5"/>
+              <value x="519" y="155.5"/>
+              <value x="584" y="155.5"/>
             </points>
           </attributes>
         </flow>

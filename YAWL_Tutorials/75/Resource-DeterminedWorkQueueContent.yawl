@@ -52,13 +52,13 @@
         <task id="Set_priorities">
           <name>Set priorities</name>
           <flowsInto>
-            <nextElementRef id="T2" />
+            <nextElementRef id="A2" />
+          </flowsInto>
+          <flowsInto>
+            <nextElementRef id="A1" />
           </flowsInto>
           <flowsInto>
             <nextElementRef id="Gather_evidence" />
-          </flowsInto>
-          <flowsInto>
-            <nextElementRef id="T1" />
           </flowsInto>
           <join code="xor" />
           <split code="and" />
@@ -103,6 +103,78 @@
           </resourcing>
           <decomposesTo id="Set_priorities" />
         </task>
+        <task id="A1">
+          <name>A1</name>
+          <flowsInto>
+            <nextElementRef id="Prepare_defence" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Priority_Prepare_Defence&gt;{/Net/Priority_Prepare_Defence/text()}&lt;/Priority_Prepare_Defence&gt;" />
+              <mapsTo>Priority_Prepare_Defence</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;Priority_Prepare_Defence&gt;{/A1/Priority_Prepare_Defence/text()}&lt;/Priority_Prepare_Defence&gt;" />
+              <mapsTo>Priority_Prepare_Defence</mapsTo>
+            </mapping>
+          </completedMappings>
+          <timer>
+            <trigger>OnEnabled</trigger>
+            <duration>PT10S</duration>
+          </timer>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-7ab9f546-1471-4067-874c-0b60db9eb563</role>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="A1" />
+        </task>
+        <task id="A2">
+          <name>A2</name>
+          <flowsInto>
+            <nextElementRef id="Submit_review" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Priority_Submit_Review&gt;{/Net/Priority_Submit_Review/text()}&lt;/Priority_Submit_Review&gt;" />
+              <mapsTo>Priority_Submit_Review</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;Priority_Submit_Review&gt;{/A2/Priority_Submit_Review/text()}&lt;/Priority_Submit_Review&gt;" />
+              <mapsTo>Priority_Submit_Review</mapsTo>
+            </mapping>
+          </completedMappings>
+          <timer>
+            <trigger>OnEnabled</trigger>
+            <duration>PT20S</duration>
+          </timer>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-7ab9f546-1471-4067-874c-0b60db9eb563</role>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="A2" />
+        </task>
         <task id="Gather_evidence">
           <name>Gather evidence</name>
           <documentation>Priority: ${/Net/Priority_Gather_Evidence/text()}</documentation>
@@ -130,66 +202,6 @@
           </resourcing>
           <decomposesTo id="Gather_evidence" />
         </task>
-        <task id="T1">
-          <name>T1</name>
-          <flowsInto>
-            <nextElementRef id="Prepare_defence" />
-          </flowsInto>
-          <join code="xor" />
-          <split code="and" />
-          <startingMappings>
-            <mapping>
-              <expression query="&lt;Priority_Prepare_Defence&gt;{/Net/Priority_Prepare_Defence/text()}&lt;/Priority_Prepare_Defence&gt;" />
-              <mapsTo>Priority_Prepare_Defence</mapsTo>
-            </mapping>
-          </startingMappings>
-          <completedMappings>
-            <mapping>
-              <expression query="&lt;Priority_Prepare_Defence&gt;{/T1/Priority_Prepare_Defence/text()}&lt;/Priority_Prepare_Defence&gt;" />
-              <mapsTo>Priority_Prepare_Defence</mapsTo>
-            </mapping>
-          </completedMappings>
-          <timer>
-            <trigger>OnEnabled</trigger>
-            <duration>PT1M5S</duration>
-          </timer>
-          <resourcing>
-            <offer initiator="user" />
-            <allocate initiator="user" />
-            <start initiator="user" />
-          </resourcing>
-          <decomposesTo id="T1" />
-        </task>
-        <task id="T2">
-          <name>T2</name>
-          <flowsInto>
-            <nextElementRef id="Submit_review" />
-          </flowsInto>
-          <join code="xor" />
-          <split code="and" />
-          <startingMappings>
-            <mapping>
-              <expression query="&lt;Priority_Submit_Review&gt;{/Net/Priority_Submit_Review/text()}&lt;/Priority_Submit_Review&gt;" />
-              <mapsTo>Priority_Submit_Review</mapsTo>
-            </mapping>
-          </startingMappings>
-          <completedMappings>
-            <mapping>
-              <expression query="&lt;Priority_Submit_Review&gt;{/T2/Priority_Submit_Review/text()}&lt;/Priority_Submit_Review&gt;" />
-              <mapsTo>Priority_Submit_Review</mapsTo>
-            </mapping>
-          </completedMappings>
-          <timer>
-            <trigger>OnEnabled</trigger>
-            <duration>PT2M10S</duration>
-          </timer>
-          <resourcing>
-            <offer initiator="user" />
-            <allocate initiator="user" />
-            <start initiator="user" />
-          </resourcing>
-          <decomposesTo id="T2" />
-        </task>
         <task id="Prepare_defence">
           <name>Prepare defence</name>
           <documentation>Priority: ${/Net/Priority_Prepare_Defence/text()}</documentation>
@@ -212,7 +224,11 @@
                 </initialSet>
               </distributionSet>
             </offer>
-            <allocate initiator="user" />
+            <allocate initiator="system">
+              <allocator>
+                <name>RandomChoice</name>
+              </allocator>
+            </allocate>
             <start initiator="user" />
           </resourcing>
           <decomposesTo id="Prepare_defence" />
@@ -239,7 +255,11 @@
                 </initialSet>
               </distributionSet>
             </offer>
-            <allocate initiator="user" />
+            <allocate initiator="system">
+              <allocator>
+                <name>ShortestQueue</name>
+              </allocator>
+            </allocate>
             <start initiator="user" />
           </resourcing>
           <decomposesTo id="Submit_review" />
@@ -258,6 +278,36 @@
         </task>
         <outputCondition id="OutputCondition" />
       </processControlElements>
+    </decomposition>
+    <decomposition id="A1" xsi:type="WebServiceGatewayFactsType">
+      <inputParam>
+        <index>0</index>
+        <name>Priority_Prepare_Defence</name>
+        <type>PriorityType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>0</index>
+        <name>Priority_Prepare_Defence</name>
+        <type>PriorityType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="A2" xsi:type="WebServiceGatewayFactsType">
+      <inputParam>
+        <index>0</index>
+        <name>Priority_Submit_Review</name>
+        <type>PriorityType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>0</index>
+        <name>Priority_Submit_Review</name>
+        <type>PriorityType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
     </decomposition>
     <decomposition id="Gather_evidence" xsi:type="WebServiceGatewayFactsType">
       <name>Gather evidence</name>
@@ -329,143 +379,113 @@
       </inputParam>
       <externalInteraction>manual</externalInteraction>
     </decomposition>
-    <decomposition id="T1" xsi:type="WebServiceGatewayFactsType">
-      <inputParam>
-        <index>0</index>
-        <name>Priority_Prepare_Defence</name>
-        <type>PriorityType</type>
-        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
-      </inputParam>
-      <outputParam>
-        <index>0</index>
-        <name>Priority_Prepare_Defence</name>
-        <type>PriorityType</type>
-        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
-      </outputParam>
-      <externalInteraction>manual</externalInteraction>
-    </decomposition>
-    <decomposition id="T2" xsi:type="WebServiceGatewayFactsType">
-      <inputParam>
-        <index>0</index>
-        <name>Priority_Submit_Review</name>
-        <type>PriorityType</type>
-        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
-      </inputParam>
-      <outputParam>
-        <index>0</index>
-        <name>Priority_Submit_Review</name>
-        <type>PriorityType</type>
-        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
-      </outputParam>
-      <externalInteraction>manual</externalInteraction>
-    </decomposition>
   </specification>
   <layout>
     <locale language="en" country="GB"/>
     <specification id="Resource-DeterminedWorkQueueContent" defaultBgColor="-526351">
       <size w="58" h="28"/>
       <net id="Net">
-        <bounds x="-52" y="0" w="768" h="442"/>
-        <frame x="0" y="0" w="719" h="459"/>
-        <viewport x="0" y="0" w="719" h="459"/>
+        <bounds x="0" y="0" w="830" h="683"/>
+        <frame x="0" y="0" w="833" h="686"/>
+        <viewport x="0" y="0" w="833" h="686"/>
         <vertex id="OutputCondition">
           <attributes>
-            <bounds x="716" y="252" w="32" h="32"/>
+            <bounds x="584" y="144" w="32" h="32"/>
           </attributes>
         </vertex>
         <vertex id="InputCondition">
           <attributes>
-            <bounds x="36" y="252" w="32" h="32"/>
+            <bounds x="8" y="144" w="32" h="32"/>
           </attributes>
         </vertex>
+        <container id="A1">
+          <vertex>
+            <attributes>
+              <bounds x="224" y="64" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="192" y="96" w="96" h="14"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="A2">
+          <vertex>
+            <attributes>
+              <bounds x="224" y="228" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="192" y="260" w="96" h="14"/>
+            </attributes>
+          </label>
+        </container>
         <container id="T">
           <vertex>
             <attributes>
-              <bounds x="564" y="252" w="32" h="32"/>
+              <bounds x="488" y="144" w="32" h="32"/>
             </attributes>
           </vertex>
           <decorator type="AND_join">
             <position>12</position>
             <attributes>
-              <bounds x="554" y="252" w="11" h="32"/>
+              <bounds x="478" y="144" w="11" h="32"/>
             </attributes>
           </decorator>
         </container>
         <container id="Set_priorities">
           <vertex>
             <attributes>
-              <bounds x="132" y="252" w="32" h="32"/>
+              <bounds x="104" y="144" w="32" h="32"/>
             </attributes>
           </vertex>
           <label>
             <attributes>
-              <bounds x="104" y="284" w="96" h="14"/>
+              <bounds x="76" y="176" w="96" h="14"/>
             </attributes>
           </label>
           <decorator type="AND_split">
             <position>13</position>
             <attributes>
-              <bounds x="163" y="252" w="11" h="32"/>
+              <bounds x="135" y="144" w="11" h="32"/>
             </attributes>
           </decorator>
         </container>
         <container id="Prepare_defence">
           <vertex>
             <attributes>
-              <bounds x="404" y="120" w="32" h="32"/>
+              <bounds x="340" y="64" w="32" h="32"/>
             </attributes>
           </vertex>
           <label>
             <attributes>
-              <bounds x="372" y="152" w="96" h="14"/>
+              <bounds x="308" y="96" w="96" h="14"/>
             </attributes>
           </label>
         </container>
         <container id="Submit_review">
           <vertex>
             <attributes>
-              <bounds x="404" y="376" w="32" h="32"/>
+              <bounds x="340" y="228" w="32" h="32"/>
             </attributes>
           </vertex>
           <label>
             <attributes>
-              <bounds x="372" y="408" w="96" h="14"/>
-            </attributes>
-          </label>
-        </container>
-        <container id="T1">
-          <vertex>
-            <attributes>
-              <bounds x="284" y="120" w="32" h="32"/>
-            </attributes>
-          </vertex>
-          <label>
-            <attributes>
-              <bounds x="252" y="152" w="96" h="14"/>
+              <bounds x="308" y="260" w="96" h="14"/>
             </attributes>
           </label>
         </container>
         <container id="Gather_evidence">
           <vertex>
             <attributes>
-              <bounds x="404" y="252" w="32" h="32"/>
+              <bounds x="340" y="144" w="32" h="32"/>
             </attributes>
           </vertex>
           <label>
             <attributes>
-              <bounds x="372" y="284" w="96" h="14"/>
-            </attributes>
-          </label>
-        </container>
-        <container id="T2">
-          <vertex>
-            <attributes>
-              <bounds x="284" y="376" w="32" h="32"/>
-            </attributes>
-          </vertex>
-          <label>
-            <attributes>
-              <bounds x="252" y="408" w="96" h="14"/>
+              <bounds x="308" y="176" w="96" h="14"/>
             </attributes>
           </label>
         </container>
@@ -474,9 +494,21 @@
           <attributes>
             <lineStyle>11</lineStyle>
             <points>
-              <value x="439" y="391.5"/>
-              <value x="558" y="267.5"/>
+              <value x="371" y="239.5"/>
+              <value x="478" y="155.5"/>
             </points>
+          </attributes>
+        </flow>
+        <flow source="Set_priorities" target="A2">
+          <ports in="3" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="A2" target="Submit_review">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
           </attributes>
         </flow>
         <flow source="InputCondition" target="Set_priorities">
@@ -484,8 +516,8 @@
           <attributes>
             <lineStyle>11</lineStyle>
             <points>
-              <value x="67" y="258.5"/>
-              <value x="132" y="258.5"/>
+              <value x="39" y="155.5"/>
+              <value x="104" y="155.5"/>
             </points>
           </attributes>
         </flow>
@@ -493,6 +525,10 @@
           <ports in="2" out="12"/>
           <attributes>
             <lineStyle>11</lineStyle>
+            <points>
+              <value x="145" y="155.5"/>
+              <value x="340" y="155.5"/>
+            </points>
           </attributes>
         </flow>
         <flow source="Gather_evidence" target="T">
@@ -500,29 +536,15 @@
           <attributes>
             <lineStyle>11</lineStyle>
             <points>
-              <value x="439" y="267.5"/>
-              <value x="558" y="267.5"/>
+              <value x="371" y="155.5"/>
+              <value x="478" y="155.5"/>
             </points>
           </attributes>
         </flow>
-        <flow source="T1" target="Prepare_defence">
-          <ports in="13" out="12"/>
+        <flow source="Set_priorities" target="A1">
+          <ports in="2" out="12"/>
           <attributes>
             <lineStyle>11</lineStyle>
-            <points>
-              <value x="299" y="126.5"/>
-              <value x="404" y="126.5"/>
-            </points>
-          </attributes>
-        </flow>
-        <flow source="T2" target="Submit_review">
-          <ports in="13" out="12"/>
-          <attributes>
-            <lineStyle>11</lineStyle>
-            <points>
-              <value x="315" y="382.5"/>
-              <value x="404" y="382.5"/>
-            </points>
           </attributes>
         </flow>
         <flow source="Prepare_defence" target="T">
@@ -530,13 +552,13 @@
           <attributes>
             <lineStyle>11</lineStyle>
             <points>
-              <value x="439" y="135.5"/>
-              <value x="558" y="267.5"/>
+              <value x="371" y="75.5"/>
+              <value x="478" y="155.5"/>
             </points>
           </attributes>
         </flow>
-        <flow source="Set_priorities" target="T2">
-          <ports in="2" out="12"/>
+        <flow source="A1" target="Prepare_defence">
+          <ports in="13" out="12"/>
           <attributes>
             <lineStyle>11</lineStyle>
           </attributes>
@@ -546,15 +568,9 @@
           <attributes>
             <lineStyle>11</lineStyle>
             <points>
-              <value x="599" y="267.5"/>
-              <value x="720" y="267.5"/>
+              <value x="519" y="155.5"/>
+              <value x="584" y="155.5"/>
             </points>
-          </attributes>
-        </flow>
-        <flow source="Set_priorities" target="T1">
-          <ports in="2" out="12"/>
-          <attributes>
-            <lineStyle>11</lineStyle>
           </attributes>
         </flow>
       </net>

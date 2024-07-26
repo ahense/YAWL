@@ -146,9 +146,9 @@
     <specification id="Resource-InitiatedAllocation" defaultBgColor="-526351">
       <size w="58" h="28"/>
       <net id="Net">
-        <bounds x="0" y="0" w="652" h="520"/>
-        <frame x="0" y="0" w="655" h="523"/>
-        <viewport x="0" y="0" w="655" h="523"/>
+        <bounds x="0" y="0" w="652" h="409"/>
+        <frame x="0" y="0" w="655" h="412"/>
+        <viewport x="0" y="0" w="655" h="412"/>
         <vertex id="OutputCondition">
           <attributes>
             <bounds x="464" y="120" w="32" h="32"/>

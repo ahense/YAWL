@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<orgdata>
+  <participants>
+    <participant id="PA-9d158fbe-d8d5-481e-ae0c-5d8507654cb4">
+      <userid>john</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>John</firstname>
+      <lastname>Bohi</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-de7a5352-c303-49c1-8efd-93265fc48fe8</role>
+      </roles>
+      <positions/>
+      <capabilities/>
+      <privileges>11100100</privileges>
+    </participant>
+    <participant id="PA-81fc8312-78ef-4e4d-98a2-6554ba3e9aca">
+      <userid>hanna</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Hanna</firstname>
+      <lastname>Schygulla</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-de7a5352-c303-49c1-8efd-93265fc48fe8</role>
+      </roles>
+      <positions/>
+      <capabilities/>
+      <privileges>11100100</privileges>
+    </participant>
+  </participants>
+  <roles>
+    <role id="RO-b9ff9dfc-18cf-41c7-9a38-704ffd1e17a2">
+      <name>Customer</name>
+      <description/>
+      <notes/>
+    </role>
+    <role id="RO-de7a5352-c303-49c1-8efd-93265fc48fe8">
+      <name>Documents</name>
+      <description>Staff specialised in checking personal documents.</description>
+      <notes/>
+    </role>
+    <role id="RO-37515eee-d391-4a7b-89d9-8a4ba2ba6424">
+      <name>Tickets</name>
+      <description>Staff that prints and hands out tickets.</description>
+      <notes/>
+    </role>
+  </roles>
+  <positions/>
+  <capabilities/>
+  <orggroups/>
+  <nonhumanresources/>
+  <nonhumancategories/>
+</orgdata>
+

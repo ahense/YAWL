@@ -1,40 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <specificationSet xmlns="http://www.yawlfoundation.org/yawlschema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4.0" xsi:schemaLocation="http://www.yawlfoundation.org/yawlschema http://www.yawlfoundation.org/yawlschema/YAWL_Schema4.0.xsd">
-  <specification uri="Resource-InitiatedExecution">
-    <documentation>Resource-Initiated Execution - Allocated Work Item</documentation>
+  <specification uri="AdditionalResources">
+    <documentation>Additional Resources</documentation>
     <metaData>
-      <title>Resource-Initiated Execution</title>
+      <title>Additional Resources</title>
       <creator>AVH</creator>
-      <description>Resource-Initiated Execution - Allocated Work Item</description>
-      <coverage>5.0.805</coverage>
+      <description>Additional Resources</description>
+      <coverage>5.1.810</coverage>
       <version>0.1</version>
       <persistent>false</persistent>
-      <identifier>UID_78bfff57-eb8d-4345-a78f-0ffd481393ca</identifier>
+      <identifier>UID_64bcca7a-e8f6-4acb-9766-dd27bdae0162</identifier>
     </metaData>
     <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" />
     <decomposition id="Net" isRootNet="true" xsi:type="NetFactsType">
       <localVariable>
         <index>0</index>
-        <name>Case_Number</name>
-        <type>positiveInteger</type>
+        <name>Audit_name</name>
+        <type>string</type>
         <namespace>http://www.w3.org/2001/XMLSchema</namespace>
-        <initialValue>123</initialValue>
+        <initialValue>Security audit</initialValue>
       </localVariable>
       <localVariable>
         <index>1</index>
-        <name>Evidence</name>
+        <name>Audit_number</name>
+        <type>positiveInteger</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>1</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>2</index>
+        <name>Audit_findings</name>
         <type>string</type>
         <namespace>http://www.w3.org/2001/XMLSchema</namespace>
-        <initialValue>an axe</initialValue>
+        <initialValue />
       </localVariable>
       <processControlElements>
         <inputCondition id="InputCondition">
           <flowsInto>
-            <nextElementRef id="Gather_evidence" />
+            <nextElementRef id="Conduct_audit" />
           </flowsInto>
         </inputCondition>
-        <task id="Gather_evidence">
-          <name>Gather evidence</name>
+        <task id="Conduct_audit">
+          <name>Conduct audit</name>
           <flowsInto>
             <nextElementRef id="OutputCondition" />
           </flowsInto>
@@ -42,111 +49,114 @@
           <split code="and" />
           <startingMappings>
             <mapping>
-              <expression query="&lt;Case_Number&gt;{/Net/Case_Number/text()}&lt;/Case_Number&gt;" />
-              <mapsTo>Case_Number</mapsTo>
-            </mapping>
-            <mapping>
-              <expression query="&lt;Evidence&gt;{/Net/Evidence/text()}&lt;/Evidence&gt;" />
-              <mapsTo>Evidence</mapsTo>
+              <expression query="&lt;Audit_name&gt;{/Net/Audit_name/text()}&lt;/Audit_name&gt;" />
+              <mapsTo>Audit_name</mapsTo>
             </mapping>
           </startingMappings>
           <completedMappings>
             <mapping>
-              <expression query="&lt;Evidence&gt;{/Gather_evidence/Evidence/text()}&lt;/Evidence&gt;" />
-              <mapsTo>Evidence</mapsTo>
+              <expression query="&lt;Audit_findings&gt;{/Conduct_audit/Audit_findings/text()}&lt;/Audit_findings&gt;" />
+              <mapsTo>Audit_findings</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Audit_name&gt;{/Conduct_audit/Audit_name/text()}&lt;/Audit_name&gt;" />
+              <mapsTo>Audit_name</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Audit_number&gt;{/Conduct_audit/Audit_number/text()}&lt;/Audit_number&gt;" />
+              <mapsTo>Audit_number</mapsTo>
             </mapping>
           </completedMappings>
           <resourcing>
             <offer initiator="system">
               <distributionSet>
                 <initialSet>
-                  <participant>PA-2409b31d-aab5-4628-ad77-f5786221eb39</participant>
+                  <role>RO-dd26180a-91a1-413d-9883-52e4977366f2</role>
                 </initialSet>
               </distributionSet>
             </offer>
-            <allocate initiator="system">
-              <allocator>
-                <name>RandomChoice</name>
-              </allocator>
-            </allocate>
+            <allocate initiator="user" />
             <start initiator="user" />
+            <secondary>
+              <nonHumanResource>NH-aef95239-8d63-4d33-8bbb-bd3105830d1c</nonHumanResource>
+            </secondary>
           </resourcing>
-          <decomposesTo id="Gather_evidence" />
+          <decomposesTo id="Conduct_audit" />
         </task>
         <outputCondition id="OutputCondition" />
       </processControlElements>
     </decomposition>
-    <decomposition id="Gather_evidence" xsi:type="WebServiceGatewayFactsType">
-      <name>Gather evidence</name>
+    <decomposition id="Conduct_audit" xsi:type="WebServiceGatewayFactsType">
+      <name>Conduct audit</name>
       <inputParam>
         <index>0</index>
-        <name>Case_Number</name>
-        <type>positiveInteger</type>
-        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
-      </inputParam>
-      <inputParam>
-        <index>1</index>
-        <name>Evidence</name>
+        <name>Audit_name</name>
         <type>string</type>
         <namespace>http://www.w3.org/2001/XMLSchema</namespace>
       </inputParam>
       <outputParam>
-        <index>1</index>
-        <name>Evidence</name>
+        <index>0</index>
+        <name>Audit_name</name>
         <type>string</type>
         <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <outputParam>
+        <index>1</index>
+        <name>Audit_number</name>
+        <type>positiveInteger</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <outputParam textarea="true">
+        <index>2</index>
+        <name>Audit_findings</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
       </outputParam>
       <externalInteraction>manual</externalInteraction>
     </decomposition>
   </specification>
   <layout>
     <locale language="en" country="GB"/>
-    <specification id="Resource-InitiatedExecution" defaultBgColor="-526351">
+    <specification id="AdditionalResources" defaultBgColor="-526351">
       <size w="58" h="28"/>
       <net id="Net">
-        <bounds x="0" y="0" w="652" h="520"/>
-        <frame x="0" y="0" w="655" h="523"/>
-        <viewport x="0" y="0" w="655" h="523"/>
+        <bounds x="0" y="0" w="730" h="379"/>
+        <frame x="0" y="0" w="733" h="382"/>
+        <viewport x="0" y="0" w="733" h="382"/>
         <vertex id="OutputCondition">
           <attributes>
-            <bounds x="328" y="104" w="32" h="32"/>
+            <bounds x="384" y="232" w="32" h="32"/>
           </attributes>
         </vertex>
         <vertex id="InputCondition">
           <attributes>
-            <bounds x="36" y="104" w="32" h="32"/>
+            <bounds x="36" y="232" w="32" h="32"/>
           </attributes>
         </vertex>
-        <container id="Gather_evidence">
+        <container id="Conduct_audit">
           <vertex>
             <attributes>
-              <bounds x="180" y="104" w="32" h="32"/>
+              <bounds x="192" y="232" w="32" h="32"/>
             </attributes>
           </vertex>
           <label>
             <attributes>
-              <bounds x="148" y="136" w="96" h="14"/>
+              <bounds x="160" y="264" w="96" h="14"/>
             </attributes>
           </label>
         </container>
-        <flow source="InputCondition" target="Gather_evidence">
+        <flow source="InputCondition" target="Conduct_audit">
           <ports in="13" out="12"/>
           <attributes>
             <lineStyle>11</lineStyle>
-            <points>
-              <value x="67" y="115.5"/>
-              <value x="180" y="115.5"/>
-            </points>
           </attributes>
         </flow>
-        <flow source="Gather_evidence" target="OutputCondition">
+        <flow source="Conduct_audit" target="OutputCondition">
           <ports in="13" out="12"/>
           <attributes>
             <lineStyle>11</lineStyle>
-            <points>
-              <value x="211" y="115.5"/>
-              <value x="328" y="115.5"/>
-            </points>
           </attributes>
         </flow>
       </net>

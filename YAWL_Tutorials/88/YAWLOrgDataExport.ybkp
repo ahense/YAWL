@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<orgdata>
+  <participants>
+    <participant id="PA-1947335f-d708-4fd9-b895-6d92af9a3a27">
+      <userid>max</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Max</firstname>
+      <lastname>Lamenace</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-527c8c73-8322-443c-bf24-7cfab80570f8</role>
+      </roles>
+      <positions/>
+      <capabilities/>
+      <privileges>11100100</privileges>
+    </participant>
+    <participant id="PA-047dffdf-c535-49a9-a074-9160ec89d80f">
+      <userid>bill</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Bill</firstname>
+      <lastname>Wyman</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-527c8c73-8322-443c-bf24-7cfab80570f8</role>
+      </roles>
+      <positions/>
+      <capabilities/>
+      <privileges>11100100</privileges>
+    </participant>
+    <participant id="PA-30d891fa-c429-47cd-8f2f-cb4a1d2150a0">
+      <userid>rose</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Rose</firstname>
+      <lastname>Leslie</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-d6f11c6c-338d-4c3d-9b2f-f1efd7f91ee1</role>
+        <role>RO-527c8c73-8322-443c-bf24-7cfab80570f8</role>
+      </roles>
+      <positions/>
+      <capabilities/>
+      <privileges>00000000</privileges>
+    </participant>
+    <participant id="PA-c28acf0a-95db-4bbc-91e9-b285a19a8e3e">
+      <userid>jill</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Jill</firstname>
+      <lastname>De Lajungle</lastname>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <roles>
+        <role>RO-527c8c73-8322-443c-bf24-7cfab80570f8</role>
+      </roles>
+      <positions/>
+      <capabilities/>
+      <privileges>11100100</privileges>
+    </participant>
+  </participants>
+  <roles>
+    <role id="RO-527c8c73-8322-443c-bf24-7cfab80570f8">
+      <name>Cleaner</name>
+      <description/>
+      <notes/>
+    </role>
+    <role id="RO-d6f11c6c-338d-4c3d-9b2f-f1efd7f91ee1">
+      <name>Supervisor</name>
+      <description/>
+      <notes/>
+    </role>
+  </roles>
+  <positions/>
+  <capabilities/>
+  <orggroups/>
+  <nonhumanresources/>
+  <nonhumancategories/>
+</orgdata>
+
