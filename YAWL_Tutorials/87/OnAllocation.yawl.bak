@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <specificationSet xmlns="http://www.yawlfoundation.org/yawlschema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4.0" xsi:schemaLocation="http://www.yawlfoundation.org/yawlschema http://www.yawlfoundation.org/yawlschema/YAWL_Schema4.0.xsd">
   <specification uri="OnAllocation">
+    <name>Allocation</name>
     <documentation>Commencement on Allocation</documentation>
     <metaData>
       <title>Allocation</title>
@@ -99,7 +100,7 @@
   </specification>
   <layout>
     <locale language="en" country="GB"/>
-    <specification id="OnCreation" defaultBgColor="-526351">
+    <specification id="OnAllocation" defaultBgColor="-526351">
       <size w="58" h="28"/>
       <net id="Net">
         <bounds x="0" y="0" w="730" h="482"/>

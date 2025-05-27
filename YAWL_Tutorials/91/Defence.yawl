@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <specificationSet xmlns="http://www.yawlfoundation.org/yawlschema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4.0" xsi:schemaLocation="http://www.yawlfoundation.org/yawlschema http://www.yawlfoundation.org/yawlschema/YAWL_Schema4.0.xsd">
   <specification uri="Defence">
+    <name>Defence</name>
     <documentation>Defence</documentation>
     <metaData>
       <title>Defence</title>
@@ -79,13 +80,7 @@
             </mapping>
           </completedMappings>
           <resourcing>
-            <offer initiator="system">
-              <distributionSet>
-                <initialSet>
-                  <role>RO-bbe7eae2-b0f7-484f-b80c-f90da7a1607a</role>
-                </initialSet>
-              </distributionSet>
-            </offer>
+            <offer initiator="user" />
             <allocate initiator="user" />
             <start initiator="user" />
           </resourcing>
@@ -100,22 +95,16 @@
           <split code="and" />
           <startingMappings>
             <mapping>
-              <expression query="&lt;Statement&gt;{/Net/Statement/text()}&lt;/Statement&gt;" />
-              <mapsTo>Statement</mapsTo>
-            </mapping>
-            <mapping>
               <expression query="&lt;Evidence&gt;{/Net/Evidence/text()}&lt;/Evidence&gt;" />
               <mapsTo>Evidence</mapsTo>
             </mapping>
+            <mapping>
+              <expression query="&lt;Statement&gt;{/Net/Statement/text()}&lt;/Statement&gt;" />
+              <mapsTo>Statement</mapsTo>
+            </mapping>
           </startingMappings>
           <resourcing>
-            <offer initiator="system">
-              <distributionSet>
-                <initialSet>
-                  <role>RO-bbe7eae2-b0f7-484f-b80c-f90da7a1607a</role>
-                </initialSet>
-              </distributionSet>
-            </offer>
+            <offer initiator="user" />
             <allocate initiator="user" />
             <start initiator="user" />
           </resourcing>
@@ -181,9 +170,9 @@
     <specification id="Defence" defaultBgColor="-526351">
       <size w="58" h="28"/>
       <net id="Net">
-        <bounds x="0" y="0" w="730" h="482"/>
-        <frame x="0" y="0" w="733" h="485"/>
-        <viewport x="0" y="0" w="733" h="485"/>
+        <bounds x="0" y="0" w="708" h="318"/>
+        <frame x="0" y="0" w="664" h="336"/>
+        <viewport x="0" y="0" w="664" h="336"/>
         <vertex id="OutputCondition">
           <attributes>
             <bounds x="656" y="232" w="32" h="32"/>

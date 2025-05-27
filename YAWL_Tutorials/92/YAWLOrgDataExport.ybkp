@@ -6,9 +6,12 @@
       <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
       <firstname>Laura</firstname>
       <lastname>Nyro</lastname>
+      <email/>
       <description/>
       <notes/>
       <isAdministrator>false</isAdministrator>
+      <isEmailOnAllocation>false</isEmailOnAllocation>
+      <isEmailOnOffer>false</isEmailOnOffer>
       <roles>
         <role>RO-861f1e88-7078-469f-b09f-1dae05da0e2a</role>
       </roles>
@@ -23,9 +26,12 @@
       <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
       <firstname>Josh</firstname>
       <lastname>White</lastname>
+      <email/>
       <description/>
       <notes/>
       <isAdministrator>false</isAdministrator>
+      <isEmailOnAllocation>false</isEmailOnAllocation>
+      <isEmailOnOffer>false</isEmailOnOffer>
       <roles>
         <role>RO-bbe7eae2-b0f7-484f-b80c-f90da7a1607a</role>
       </roles>
@@ -40,10 +46,15 @@
       <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
       <firstname>Cody</firstname>
       <lastname>Johnson</lastname>
+      <email/>
       <description/>
       <notes/>
       <isAdministrator>false</isAdministrator>
-      <roles/>
+      <isEmailOnAllocation>false</isEmailOnAllocation>
+      <isEmailOnOffer>false</isEmailOnOffer>
+      <roles>
+        <role>RO-bbe7eae2-b0f7-484f-b80c-f90da7a1607a</role>
+      </roles>
       <positions>
         <position>PO-b8f092e0-af9b-4c5b-ba89-12d2c5a08cd1</position>
       </positions>

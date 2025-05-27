@@ -79,7 +79,7 @@
             <allocate initiator="user" />
             <start initiator="user" />
             <secondary>
-              <nonHumanResource>NH-298cae23-5b3f-4bcf-ae2f-1ce42679fc08</nonHumanResource>
+              <nonHumanResource>NH-a37f5b5f-19fb-41e0-8d2b-ded7b50070f4</nonHumanResource>
             </secondary>
           </resourcing>
           <decomposesTo id="Conduct_audit" />
@@ -123,9 +123,9 @@
     <specification id="AdditionalResources" defaultBgColor="-526351">
       <size w="58" h="28"/>
       <net id="Net">
-        <bounds x="0" y="0" w="730" h="482"/>
-        <frame x="0" y="0" w="733" h="485"/>
-        <viewport x="0" y="0" w="733" h="485"/>
+        <bounds x="0" y="0" w="667" h="339"/>
+        <frame x="0" y="0" w="670" h="342"/>
+        <viewport x="0" y="0" w="670" h="342"/>
         <vertex id="OutputCondition">
           <attributes>
             <bounds x="384" y="232" w="32" h="32"/>

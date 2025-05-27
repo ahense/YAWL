@@ -1,0 +1,607 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<specificationSet xmlns="http://www.yawlfoundation.org/yawlschema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4.0" xsi:schemaLocation="http://www.yawlfoundation.org/yawlschema http://www.yawlfoundation.org/yawlschema/YAWL_Schema4.0.xsd">
+  <specification uri="ParticipantInfo">
+    <name>UsersWithRoles</name>
+    <documentation>used to test the participantinfo codelet</documentation>
+    <metaData>
+      <title>ParticipantInfo</title>
+      <creator>AVH</creator>
+      <description>used to test the participantinfo codelet</description>
+      <coverage>5.2.821</coverage>
+      <version>0.1</version>
+      <persistent>false</persistent>
+      <identifier>UID_b301d1a5-9311-4d9e-99f1-cfa255ae3ae9</identifier>
+    </metaData>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" />
+    <decomposition id="Net" isRootNet="true" xsi:type="NetFactsType">
+      <localVariable>
+        <index>0</index>
+        <name>userid</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue />
+      </localVariable>
+      <localVariable>
+        <index>1</index>
+        <name>delimiter</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue />
+      </localVariable>
+      <localVariable>
+        <index>2</index>
+        <name>firstname</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue />
+      </localVariable>
+      <localVariable>
+        <index>3</index>
+        <name>lastname</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue />
+      </localVariable>
+      <localVariable>
+        <index>4</index>
+        <name>fullname</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue />
+      </localVariable>
+      <localVariable>
+        <index>5</index>
+        <name>email</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue />
+      </localVariable>
+      <localVariable>
+        <index>6</index>
+        <name>emailOnAllocation</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>false</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>7</index>
+        <name>emailOnOffer</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>false</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>8</index>
+        <name>isAdministrator</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue>false</initialValue>
+      </localVariable>
+      <localVariable>
+        <index>9</index>
+        <name>description</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue />
+      </localVariable>
+      <localVariable>
+        <index>10</index>
+        <name>notes</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue />
+      </localVariable>
+      <localVariable>
+        <index>11</index>
+        <name>positions</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue />
+      </localVariable>
+      <localVariable>
+        <index>12</index>
+        <name>roles</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue />
+      </localVariable>
+      <localVariable>
+        <index>13</index>
+        <name>capabilities</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue />
+      </localVariable>
+      <processControlElements>
+        <inputCondition id="InputCondition">
+          <flowsInto>
+            <nextElementRef id="Input_position_name" />
+          </flowsInto>
+        </inputCondition>
+        <task id="Input_position_name">
+          <name>Input position name</name>
+          <flowsInto>
+            <nextElementRef id="ParticipantInfo_codelet" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;userid&gt;{/Input_position_name/userid/text()}&lt;/userid&gt;" />
+              <mapsTo>userid</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;delimiter&gt;{/Input_position_name/delimiter/text()}&lt;/delimiter&gt;" />
+              <mapsTo>delimiter</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="user" />
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Input_position_name" />
+        </task>
+        <task id="ParticipantInfo_codelet">
+          <name>ParticipantInfo codelet</name>
+          <flowsInto>
+            <nextElementRef id="Show_info" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;userid&gt;{/Net/userid/text()}&lt;/userid&gt;" />
+              <mapsTo>userid</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;delimiter&gt;{/Net/delimiter/text()}&lt;/delimiter&gt;" />
+              <mapsTo>delimiter</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;fullname&gt;{/Participantinfo_codelet/fullname/text()}&lt;/fullname&gt;" />
+              <mapsTo>fullname</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;isAdministrator&gt;{/Participantinfo_codelet/isAdministrator/text()}&lt;/isAdministrator&gt;" />
+              <mapsTo>isAdministrator</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;notes&gt;{/Participantinfo_codelet/notes/text()}&lt;/notes&gt;" />
+              <mapsTo>notes</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;firstname&gt;{/Participantinfo_codelet/firstname/text()}&lt;/firstname&gt;" />
+              <mapsTo>firstname</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;capabilities&gt;{/Participantinfo_codelet/capabilities/text()}&lt;/capabilities&gt;" />
+              <mapsTo>capabilities</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;positions&gt;{/Participantinfo_codelet/positions/text()}&lt;/positions&gt;" />
+              <mapsTo>positions</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;emailOnOffer&gt;{/Participantinfo_codelet/emailOnOffer/text()}&lt;/emailOnOffer&gt;" />
+              <mapsTo>emailOnOffer</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;email&gt;{/Participantinfo_codelet/email/text()}&lt;/email&gt;" />
+              <mapsTo>email</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;userid&gt;{/Participantinfo_codelet/userid/text()}&lt;/userid&gt;" />
+              <mapsTo>userid</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;description&gt;{/Participantinfo_codelet/description/text()}&lt;/description&gt;" />
+              <mapsTo>description</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;roles&gt;{/Participantinfo_codelet/roles/text()}&lt;/roles&gt;" />
+              <mapsTo>roles</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;emailOnAllocation&gt;{/Participantinfo_codelet/emailOnAllocation/text()}&lt;/emailOnAllocation&gt;" />
+              <mapsTo>emailOnAllocation</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;lastname&gt;{/Participantinfo_codelet/lastname/text()}&lt;/lastname&gt;" />
+              <mapsTo>lastname</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="user" />
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Participantinfo_codelet" />
+        </task>
+        <task id="Show_info">
+          <name>Show info</name>
+          <flowsInto>
+            <nextElementRef id="OutputCondition" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;firstname&gt;{/Net/firstname/text()}&lt;/firstname&gt;" />
+              <mapsTo>firstname</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;capabilities&gt;{/Net/capabilities/text()}&lt;/capabilities&gt;" />
+              <mapsTo>capabilities</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;notes&gt;{/Net/notes/text()}&lt;/notes&gt;" />
+              <mapsTo>notes</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;emailOnOffer&gt;{/Net/emailOnOffer/text()}&lt;/emailOnOffer&gt;" />
+              <mapsTo>emailOnOffer</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;roles&gt;{/Net/roles/text()}&lt;/roles&gt;" />
+              <mapsTo>roles</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;description&gt;{/Net/description/text()}&lt;/description&gt;" />
+              <mapsTo>description</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;positions&gt;{/Net/positions/text()}&lt;/positions&gt;" />
+              <mapsTo>positions</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;userid&gt;{/Net/userid/text()}&lt;/userid&gt;" />
+              <mapsTo>userid</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;lastname&gt;{/Net/lastname/text()}&lt;/lastname&gt;" />
+              <mapsTo>lastname</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;delimiter&gt;{/Net/delimiter/text()}&lt;/delimiter&gt;" />
+              <mapsTo>delimiter</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;emailOnAllocation&gt;{/Net/emailOnAllocation/text()}&lt;/emailOnAllocation&gt;" />
+              <mapsTo>emailOnAllocation</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;fullname&gt;{/Net/fullname/text()}&lt;/fullname&gt;" />
+              <mapsTo>fullname</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;isAdministrator&gt;{/Net/isAdministrator/text()}&lt;/isAdministrator&gt;" />
+              <mapsTo>isAdministrator</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;email&gt;{/Net/email/text()}&lt;/email&gt;" />
+              <mapsTo>email</mapsTo>
+            </mapping>
+          </startingMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet />
+              </distributionSet>
+              <familiarParticipant taskID="Input_position_name" />
+            </offer>
+            <allocate initiator="system">
+              <allocator>
+                <name>RandomChoice</name>
+              </allocator>
+            </allocate>
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Show_info" />
+        </task>
+        <outputCondition id="OutputCondition" />
+      </processControlElements>
+    </decomposition>
+    <decomposition id="Input_position_name" xsi:type="WebServiceGatewayFactsType">
+      <name>Input position name</name>
+      <outputParam>
+        <index>0</index>
+        <name>userid</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <outputParam>
+        <index>1</index>
+        <name>delimiter</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Participantinfo_codelet" xsi:type="WebServiceGatewayFactsType">
+      <name>Participantinfo codelet</name>
+      <inputParam>
+        <index>0</index>
+        <name>userid</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>1</index>
+        <name>delimiter</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>0</index>
+        <name>userid</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <outputParam>
+        <index>2</index>
+        <name>firstname</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <outputParam>
+        <index>3</index>
+        <name>lastname</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <outputParam>
+        <index>4</index>
+        <name>fullname</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <outputParam>
+        <index>5</index>
+        <name>email</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <outputParam>
+        <index>6</index>
+        <name>emailOnAllocation</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <outputParam>
+        <index>7</index>
+        <name>emailOnOffer</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <outputParam>
+        <index>8</index>
+        <name>isAdministrator</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <outputParam>
+        <index>9</index>
+        <name>description</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <outputParam>
+        <index>10</index>
+        <name>notes</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <outputParam>
+        <index>11</index>
+        <name>positions</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <outputParam>
+        <index>12</index>
+        <name>roles</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <outputParam>
+        <index>13</index>
+        <name>capabilities</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <codelet>org.yawlfoundation.yawl.resourcing.codelets.ParticipantInfo</codelet>
+      <externalInteraction>automated</externalInteraction>
+    </decomposition>
+    <decomposition id="Show_info" xsi:type="WebServiceGatewayFactsType">
+      <name>Show info</name>
+      <inputParam>
+        <index>0</index>
+        <name>userid</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>1</index>
+        <name>delimiter</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>2</index>
+        <name>firstname</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>3</index>
+        <name>lastname</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>4</index>
+        <name>fullname</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>5</index>
+        <name>email</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>6</index>
+        <name>emailOnAllocation</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>7</index>
+        <name>emailOnOffer</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>8</index>
+        <name>isAdministrator</name>
+        <type>boolean</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam textarea="true">
+        <index>9</index>
+        <name>description</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam textarea="true">
+        <index>10</index>
+        <name>notes</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam textarea="true">
+        <index>11</index>
+        <name>positions</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam textarea="true">
+        <index>12</index>
+        <name>roles</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam textarea="true">
+        <index>13</index>
+        <name>capabilities</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+  </specification>
+  <layout>
+    <locale language="en" country="GB"/>
+    <specification id="ParticipantInfo" defaultBgColor="-526351">
+      <size w="58" h="28"/>
+      <net id="Net">
+        <bounds x="0" y="0" w="1685" h="656"/>
+        <frame x="0" y="0" w="1688" h="659"/>
+        <viewport x="0" y="0" w="1688" h="659"/>
+        <vertex id="OutputCondition">
+          <attributes>
+            <bounds x="552" y="136" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <vertex id="InputCondition">
+          <attributes>
+            <bounds x="36" y="136" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <container id="ParticipantInfo_codelet">
+          <vertex>
+            <attributes>
+              <bounds x="284" y="136" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="252" y="168" w="96" h="28"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="Input_position_name">
+          <vertex>
+            <attributes>
+              <bounds x="144" y="136" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="112" y="168" w="96" h="28"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="Show_info">
+          <vertex>
+            <attributes>
+              <bounds x="428" y="136" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="396" y="168" w="96" h="14"/>
+            </attributes>
+          </label>
+        </container>
+        <flow source="Input_position_name" target="ParticipantInfo_codelet">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="175" y="147.5"/>
+              <value x="284" y="147.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Show_info" target="OutputCondition">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="459" y="147.5"/>
+              <value x="552" y="147.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="InputCondition" target="Input_position_name">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="67" y="147.5"/>
+              <value x="144" y="147.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="ParticipantInfo_codelet" target="Show_info">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="315" y="147.5"/>
+              <value x="428" y="147.5"/>
+            </points>
+          </attributes>
+        </flow>
+      </net>
+      <labelFontSize>12</labelFontSize>
+    </specification>
+  </layout>
+</specificationSet>

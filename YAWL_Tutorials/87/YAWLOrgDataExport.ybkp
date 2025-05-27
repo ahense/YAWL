@@ -6,12 +6,13 @@
       <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
       <firstname>Max</firstname>
       <lastname>Lamenace</lastname>
+      <email/>
       <description/>
       <notes/>
       <isAdministrator>false</isAdministrator>
-      <roles>
-        <role>RO-527c8c73-8322-443c-bf24-7cfab80570f8</role>
-      </roles>
+      <isEmailOnAllocation>false</isEmailOnAllocation>
+      <isEmailOnOffer>false</isEmailOnOffer>
+      <roles/>
       <positions/>
       <capabilities/>
       <privileges>11100100</privileges>
@@ -21,9 +22,12 @@
       <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
       <firstname>Bill</firstname>
       <lastname>Wyman</lastname>
+      <email/>
       <description/>
       <notes/>
       <isAdministrator>false</isAdministrator>
+      <isEmailOnAllocation>false</isEmailOnAllocation>
+      <isEmailOnOffer>false</isEmailOnOffer>
       <roles>
         <role>RO-527c8c73-8322-443c-bf24-7cfab80570f8</role>
       </roles>
@@ -36,9 +40,12 @@
       <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
       <firstname>Jill</firstname>
       <lastname>De Lajungle</lastname>
+      <email/>
       <description/>
       <notes/>
       <isAdministrator>false</isAdministrator>
+      <isEmailOnAllocation>false</isEmailOnAllocation>
+      <isEmailOnOffer>false</isEmailOnOffer>
       <roles>
         <role>RO-527c8c73-8322-443c-bf24-7cfab80570f8</role>
       </roles>

@@ -1,99 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <specificationSet xmlns="http://www.yawlfoundation.org/yawlschema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4.0" xsi:schemaLocation="http://www.yawlfoundation.org/yawlschema http://www.yawlfoundation.org/yawlschema/YAWL_Schema4.0.xsd">
-  <specification uri="ChainedExecution">
-    <name>Chained Execution</name>
-    <documentation>Chained Execution</documentation>
+  <specification uri="Defence">
+    <name>Defence</name>
+    <documentation>Defence</documentation>
     <metaData>
-      <title>Chained Execution</title>
+      <title>Defence</title>
       <creator>AVH</creator>
-      <description>Chained Execution</description>
+      <description>Defence</description>
       <coverage>5.1.810</coverage>
       <version>0.1</version>
       <persistent>false</persistent>
-      <identifier>UID_36334113-e082-42f0-9afb-6e871064b045</identifier>
+      <identifier>UID_71c1c74c-f758-4663-aab9-2dac163cdf68</identifier>
     </metaData>
     <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" />
     <decomposition id="Net" isRootNet="true" xsi:type="NetFactsType">
       <localVariable>
         <index>0</index>
-        <name>Amount</name>
-        <type>positiveInteger</type>
+        <name>Evidence</name>
+        <type>string</type>
         <namespace>http://www.w3.org/2001/XMLSchema</namespace>
-        <initialValue>1</initialValue>
+        <initialValue />
       </localVariable>
       <localVariable>
         <index>1</index>
-        <name>Banking_done</name>
-        <type>boolean</type>
+        <name>Statement</name>
+        <type>string</type>
         <namespace>http://www.w3.org/2001/XMLSchema</namespace>
-        <initialValue>false</initialValue>
+        <initialValue />
       </localVariable>
       <processControlElements>
         <inputCondition id="InputCondition">
           <flowsInto>
-            <nextElementRef id="Count_registers" />
+            <nextElementRef id="Gather_evidence" />
           </flowsInto>
         </inputCondition>
-        <task id="Count_registers">
-          <name>Count registers</name>
+        <task id="Gather_evidence">
+          <name>Gather evidence</name>
           <flowsInto>
-            <nextElementRef id="Do_banking" />
+            <nextElementRef id="Conduct_interview" />
           </flowsInto>
           <join code="xor" />
           <split code="and" />
           <completedMappings>
             <mapping>
-              <expression query="&lt;Amount&gt;{/Count_registers/Amount/text()}&lt;/Amount&gt;" />
-              <mapsTo>Amount</mapsTo>
+              <expression query="&lt;Evidence&gt;{/Gather_evidence/Evidence/text()}&lt;/Evidence&gt;" />
+              <mapsTo>Evidence</mapsTo>
             </mapping>
           </completedMappings>
           <resourcing>
             <offer initiator="system">
               <distributionSet>
                 <initialSet>
-                  <role>RO-b9c59956-652c-4fb3-8046-562aa653ad04</role>
+                  <role>RO-bbe7eae2-b0f7-484f-b80c-f90da7a1607a</role>
                 </initialSet>
               </distributionSet>
             </offer>
             <allocate initiator="user" />
             <start initiator="user" />
           </resourcing>
-          <decomposesTo id="Count_registers" />
+          <decomposesTo id="Gather_evidence" />
         </task>
-        <task id="Do_banking">
-          <name>Do banking</name>
+        <task id="Conduct_interview">
+          <name>Conduct interview</name>
           <flowsInto>
-            <nextElementRef id="Close_counter" />
+            <nextElementRef id="Prepare_defence" />
           </flowsInto>
           <join code="xor" />
           <split code="and" />
           <startingMappings>
             <mapping>
-              <expression query="&lt;Amount&gt;{/Net/Amount/text()}&lt;/Amount&gt;" />
-              <mapsTo>Amount</mapsTo>
+              <expression query="&lt;Evidence&gt;{/Net/Evidence/text()}&lt;/Evidence&gt;" />
+              <mapsTo>Evidence</mapsTo>
             </mapping>
           </startingMappings>
           <completedMappings>
             <mapping>
-              <expression query="&lt;Banking_done&gt;{/Do_banking/Banking_done/text()}&lt;/Banking_done&gt;" />
-              <mapsTo>Banking_done</mapsTo>
+              <expression query="&lt;Statement&gt;{/Conduct_interview/Statement/text()}&lt;/Statement&gt;" />
+              <mapsTo>Statement</mapsTo>
             </mapping>
           </completedMappings>
           <resourcing>
-            <offer initiator="system">
-              <distributionSet>
-                <initialSet>
-                  <role>RO-b9c59956-652c-4fb3-8046-562aa653ad04</role>
-                </initialSet>
-              </distributionSet>
-            </offer>
+            <offer initiator="user" />
             <allocate initiator="user" />
             <start initiator="user" />
           </resourcing>
-          <decomposesTo id="Do_banking" />
+          <decomposesTo id="Conduct_interview" />
         </task>
-        <task id="Close_counter">
-          <name>Close counter</name>
+        <task id="Prepare_defence">
+          <name>Prepare defence</name>
           <flowsInto>
             <nextElementRef id="OutputCondition" />
           </flowsInto>
@@ -101,69 +95,70 @@
           <split code="and" />
           <startingMappings>
             <mapping>
-              <expression query="&lt;Banking_done&gt;{/Net/Banking_done/text()}&lt;/Banking_done&gt;" />
-              <mapsTo>Banking_done</mapsTo>
+              <expression query="&lt;Evidence&gt;{/Net/Evidence/text()}&lt;/Evidence&gt;" />
+              <mapsTo>Evidence</mapsTo>
             </mapping>
             <mapping>
-              <expression query="&lt;Amount&gt;{/Net/Amount/text()}&lt;/Amount&gt;" />
-              <mapsTo>Amount</mapsTo>
+              <expression query="&lt;Statement&gt;{/Net/Statement/text()}&lt;/Statement&gt;" />
+              <mapsTo>Statement</mapsTo>
             </mapping>
           </startingMappings>
           <resourcing>
-            <offer initiator="system">
-              <distributionSet>
-                <initialSet>
-                  <role>RO-b9c59956-652c-4fb3-8046-562aa653ad04</role>
-                </initialSet>
-              </distributionSet>
-            </offer>
+            <offer initiator="user" />
             <allocate initiator="user" />
             <start initiator="user" />
           </resourcing>
-          <decomposesTo id="Close_counter" />
+          <decomposesTo id="Prepare_defence" />
         </task>
         <outputCondition id="OutputCondition" />
       </processControlElements>
     </decomposition>
-    <decomposition id="Close_counter" xsi:type="WebServiceGatewayFactsType">
-      <name>Close counter</name>
+    <decomposition id="Conduct_interview" xsi:type="WebServiceGatewayFactsType">
+      <name>Conduct interview</name>
       <inputParam>
         <index>0</index>
-        <name>Amount</name>
-        <type>positiveInteger</type>
+        <name>Evidence</name>
+        <type>string</type>
         <namespace>http://www.w3.org/2001/XMLSchema</namespace>
       </inputParam>
-      <inputParam>
+      <outputParam textarea="true">
         <index>1</index>
-        <name>Banking_done</name>
-        <type>boolean</type>
-        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
-      </inputParam>
-      <externalInteraction>manual</externalInteraction>
-    </decomposition>
-    <decomposition id="Count_registers" xsi:type="WebServiceGatewayFactsType">
-      <name>Count registers</name>
-      <outputParam>
-        <index>0</index>
-        <name>Amount</name>
-        <type>positiveInteger</type>
+        <name>Statement</name>
+        <type>string</type>
         <namespace>http://www.w3.org/2001/XMLSchema</namespace>
         <defaultValue />
       </outputParam>
       <externalInteraction>manual</externalInteraction>
     </decomposition>
-    <decomposition id="Do_banking" xsi:type="WebServiceGatewayFactsType">
-      <name>Do banking</name>
+    <decomposition id="Gather_evidence" xsi:type="WebServiceGatewayFactsType">
+      <name>Gather evidence</name>
+      <outputParam>
+        <index>0</index>
+        <name>Evidence</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Prepare_defence" xsi:type="WebServiceGatewayFactsType">
+      <name>Prepare defence</name>
       <inputParam>
         <index>0</index>
-        <name>Amount</name>
-        <type>positiveInteger</type>
+        <name>Evidence</name>
+        <type>string</type>
         <namespace>http://www.w3.org/2001/XMLSchema</namespace>
       </inputParam>
-      <outputParam>
+      <inputParam>
         <index>1</index>
-        <name>Banking_done</name>
-        <type>boolean</type>
+        <name>Statement</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam textarea="true">
+        <index>2</index>
+        <name>Defence</name>
+        <type>string</type>
         <namespace>http://www.w3.org/2001/XMLSchema</namespace>
         <defaultValue />
       </outputParam>
@@ -172,87 +167,95 @@
   </specification>
   <layout>
     <locale language="en" country="GB"/>
-    <specification id="ChainedExecution" defaultBgColor="-526351">
+    <specification id="Defence" defaultBgColor="-526351">
       <size w="58" h="28"/>
       <net id="Net">
-        <bounds x="0" y="0" w="661" h="536"/>
-        <frame x="0" y="0" w="664" h="539"/>
-        <viewport x="0" y="0" w="664" h="539"/>
+        <bounds x="0" y="0" w="708" h="410"/>
+        <frame x="0" y="0" w="664" h="428"/>
+        <viewport x="0" y="0" w="664" h="428"/>
         <vertex id="OutputCondition">
           <attributes>
-            <bounds x="604" y="88" w="32" h="32"/>
+            <bounds x="656" y="232" w="32" h="32"/>
           </attributes>
         </vertex>
         <vertex id="InputCondition">
           <attributes>
-            <bounds x="36" y="88" w="32" h="32"/>
+            <bounds x="36" y="232" w="32" h="32"/>
           </attributes>
         </vertex>
-        <container id="Do_banking">
+        <container id="Conduct_interview">
           <vertex>
             <attributes>
-              <bounds x="316" y="88" w="32" h="32"/>
+              <bounds x="340" y="232" w="32" h="32"/>
             </attributes>
           </vertex>
           <label>
             <attributes>
-              <bounds x="284" y="120" w="96" h="14"/>
+              <bounds x="308" y="264" w="96" h="28"/>
             </attributes>
           </label>
         </container>
-        <container id="Count_registers">
+        <container id="Prepare_defence">
           <vertex>
             <attributes>
-              <bounds x="156" y="88" w="32" h="32"/>
+              <bounds x="508" y="232" w="32" h="32"/>
             </attributes>
           </vertex>
           <label>
             <attributes>
-              <bounds x="124" y="120" w="96" h="14"/>
+              <bounds x="476" y="264" w="96" h="14"/>
             </attributes>
           </label>
         </container>
-        <container id="Close_counter">
+        <container id="Gather_evidence">
           <vertex>
             <attributes>
-              <bounds x="464" y="88" w="32" h="32"/>
+              <bounds x="172" y="232" w="32" h="32"/>
             </attributes>
           </vertex>
           <label>
             <attributes>
-              <bounds x="432" y="120" w="96" h="14"/>
+              <bounds x="140" y="264" w="96" h="14"/>
             </attributes>
           </label>
         </container>
-        <flow source="Count_registers" target="Do_banking">
+        <flow source="InputCondition" target="Gather_evidence">
           <ports in="13" out="12"/>
           <attributes>
             <lineStyle>11</lineStyle>
             <points>
-              <value x="223" y="99.5"/>
-              <value x="392" y="99.5"/>
+              <value x="67" y="238.5"/>
+              <value x="172" y="238.5"/>
             </points>
           </attributes>
         </flow>
-        <flow source="Do_banking" target="Close_counter">
-          <ports in="13" out="12"/>
-          <attributes>
-            <lineStyle>11</lineStyle>
-          </attributes>
-        </flow>
-        <flow source="Close_counter" target="OutputCondition">
-          <ports in="13" out="12"/>
-          <attributes>
-            <lineStyle>11</lineStyle>
-          </attributes>
-        </flow>
-        <flow source="InputCondition" target="Count_registers">
+        <flow source="Conduct_interview" target="Prepare_defence">
           <ports in="13" out="12"/>
           <attributes>
             <lineStyle>11</lineStyle>
             <points>
-              <value x="67" y="99.5"/>
-              <value x="192" y="99.5"/>
+              <value x="371" y="238.5"/>
+              <value x="524" y="238.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Prepare_defence" target="OutputCondition">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="555" y="238.5"/>
+              <value x="656" y="238.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Gather_evidence" target="Conduct_interview">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="203" y="238.5"/>
+              <value x="340" y="238.5"/>
             </points>
           </attributes>
         </flow>

@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<specificationSet xmlns="http://www.yawlfoundation.org/yawlschema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4.0" xsi:schemaLocation="http://www.yawlfoundation.org/yawlschema http://www.yawlfoundation.org/yawlschema/YAWL_Schema4.0.xsd">
+  <specification uri="Capabilties">
+    <name>Capabilities</name>
+    <documentation>Workflow for demonstrating Late Binding for capabilities</documentation>
+    <metaData>
+      <title>Capabilities</title>
+      <creator>Andreas Hense</creator>
+      <description>Workflow for demonstrating Late Binding for capabilities</description>
+      <coverage>5.2.821</coverage>
+      <version>0.1</version>
+      <persistent>false</persistent>
+      <identifier>UID_3d7c6257-1872-4fe0-a41a-b6c55feec02f</identifier>
+    </metaData>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:simpleType name="RegionCapabilityType">
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="Africa" />
+          <xs:enumeration value="Americas" />
+          <xs:enumeration value="Asia" />
+          <xs:enumeration value="Europe" />
+          <xs:enumeration value="Oceania" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="DomainCapabilityType">
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="Legal" />
+          <xs:enumeration value="Political" />
+          <xs:enumeration value="Religious" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:schema>
+    <decomposition id="Net" isRootNet="true" xsi:type="NetFactsType">
+      <localVariable>
+        <index>0</index>
+        <name>Advice_request</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue />
+      </localVariable>
+      <localVariable>
+        <index>1</index>
+        <name>Advice</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue />
+      </localVariable>
+      <localVariable>
+        <index>2</index>
+        <name>Required_domain_capability</name>
+        <type>DomainCapabilityType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue />
+      </localVariable>
+      <localVariable>
+        <index>3</index>
+        <name>Required_region_capability</name>
+        <type>RegionCapabilityType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue />
+      </localVariable>
+      <processControlElements>
+        <inputCondition id="InputCondition">
+          <flowsInto>
+            <nextElementRef id="Request_advice" />
+          </flowsInto>
+        </inputCondition>
+        <task id="Request_advice">
+          <name>Request advice</name>
+          <flowsInto>
+            <nextElementRef id="Give_advice" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;Required_domain_capability&gt;{/Request_advice/Required_domain_capability/text()}&lt;/Required_domain_capability&gt;" />
+              <mapsTo>Required_domain_capability</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Advice_request&gt;{/Request_advice/Advice_request/text()}&lt;/Advice_request&gt;" />
+              <mapsTo>Advice_request</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Required_region_capability&gt;{/Request_advice/Required_region_capability/text()}&lt;/Required_region_capability&gt;" />
+              <mapsTo>Required_region_capability</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-14336038-9b6d-4254-8a33-576f5332f0e3</role>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Request_advice" />
+        </task>
+        <task id="Give_advice">
+          <name>Give advice</name>
+          <flowsInto>
+            <nextElementRef id="Receive_advice" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Required_domain_capability&gt;{/Net/Required_domain_capability/text()}&lt;/Required_domain_capability&gt;" />
+              <mapsTo>Required_domain_capability</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Advice_request&gt;{/Net/Advice_request/text()}&lt;/Advice_request&gt;" />
+              <mapsTo>Advice_request</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Required_region_capability&gt;{/Net/Required_region_capability/text()}&lt;/Required_region_capability&gt;" />
+              <mapsTo>Required_region_capability</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;Advice&gt;{/Give_advice/Advice/text()}&lt;/Advice&gt;" />
+              <mapsTo>Advice</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-6c5c33df-364a-47ee-b4fb-ecd85cf3fcfe</role>
+                </initialSet>
+                <filters>
+                  <filter>
+                    <name>CapabilityFilter</name>
+                    <params>
+                      <param>
+                        <key>Capability</key>
+                        <value>${Required_domain_capability} &amp; ${Required_region_capability}</value>
+                      </param>
+                    </params>
+                  </filter>
+                </filters>
+              </distributionSet>
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Give_advice" />
+        </task>
+        <task id="Receive_advice">
+          <name>Receive advice</name>
+          <flowsInto>
+            <nextElementRef id="OutputCondition" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Required_domain_capability&gt;{/Net/Required_domain_capability/text()}&lt;/Required_domain_capability&gt;" />
+              <mapsTo>Required_domain_capability</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Advice&gt;{/Net/Advice/text()}&lt;/Advice&gt;" />
+              <mapsTo>Advice</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Advice_request&gt;{/Net/Advice_request/text()}&lt;/Advice_request&gt;" />
+              <mapsTo>Advice_request</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Required_region_capability&gt;{/Net/Required_region_capability/text()}&lt;/Required_region_capability&gt;" />
+              <mapsTo>Required_region_capability</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;Required_region_capability&gt;{/Receive_advice/Required_region_capability/text()}&lt;/Required_region_capability&gt;" />
+              <mapsTo>Required_region_capability</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Advice&gt;{/Receive_advice/Advice/text()}&lt;/Advice&gt;" />
+              <mapsTo>Advice</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Required_domain_capability&gt;{/Receive_advice/Required_domain_capability/text()}&lt;/Required_domain_capability&gt;" />
+              <mapsTo>Required_domain_capability</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Advice_request&gt;{/Receive_advice/Advice_request/text()}&lt;/Advice_request&gt;" />
+              <mapsTo>Advice_request</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-14336038-9b6d-4254-8a33-576f5332f0e3</role>
+                </initialSet>
+              </distributionSet>
+              <familiarParticipant taskID="Request_advice" />
+            </offer>
+            <allocate initiator="system">
+              <allocator>
+                <name>RandomChoice</name>
+              </allocator>
+            </allocate>
+            <start initiator="system" />
+          </resourcing>
+          <decomposesTo id="Receive_advice" />
+        </task>
+        <outputCondition id="OutputCondition" />
+      </processControlElements>
+    </decomposition>
+    <decomposition id="Give_advice" xsi:type="WebServiceGatewayFactsType">
+      <name>Give advice</name>
+      <inputParam textarea="true">
+        <index>0</index>
+        <name>Advice_request</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>1</index>
+        <name>Required_domain_capability</name>
+        <type>DomainCapabilityType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>2</index>
+        <name>Required_region_capability</name>
+        <type>RegionCapabilityType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam textarea="true">
+        <index>3</index>
+        <name>Advice</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Receive_advice" xsi:type="WebServiceGatewayFactsType">
+      <name>Receive advice</name>
+      <inputParam textarea="true">
+        <index>0</index>
+        <name>Advice_request</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>1</index>
+        <name>Required_domain_capability</name>
+        <type>DomainCapabilityType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>2</index>
+        <name>Required_region_capability</name>
+        <type>RegionCapabilityType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam textarea="true">
+        <index>3</index>
+        <name>Advice</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam textarea="true">
+        <index>0</index>
+        <name>Advice_request</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <outputParam>
+        <index>1</index>
+        <name>Required_domain_capability</name>
+        <type>DomainCapabilityType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <outputParam>
+        <index>2</index>
+        <name>Required_region_capability</name>
+        <type>RegionCapabilityType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <outputParam textarea="true">
+        <index>3</index>
+        <name>Advice</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Request_advice" xsi:type="WebServiceGatewayFactsType">
+      <name>Request advice</name>
+      <outputParam textarea="true">
+        <index>0</index>
+        <name>Advice_request</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <outputParam>
+        <index>1</index>
+        <name>Required_domain_capability</name>
+        <type>DomainCapabilityType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <outputParam>
+        <index>2</index>
+        <name>Required_region_capability</name>
+        <type>RegionCapabilityType</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+  </specification>
+  <layout>
+    <locale language="en" country="GB"/>
+    <specification id="Capabilties" defaultBgColor="-526351">
+      <size w="799" h="642"/>
+      <net id="Net" bgColor="-526351">
+        <bounds x="0" y="0" w="652" h="226"/>
+        <frame x="0" y="0" w="655" h="229"/>
+        <viewport x="0" y="0" w="655" h="229"/>
+        <vertex id="OutputCondition">
+          <attributes>
+            <bounds x="576" y="116" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <vertex id="InputCondition">
+          <attributes>
+            <bounds x="36" y="116" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <container id="Request_advice">
+          <vertex>
+            <attributes>
+              <bounds x="148" y="116" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="116" y="148" w="96" h="14"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="Give_advice">
+          <vertex>
+            <attributes>
+              <bounds x="280" y="116" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="248" y="148" w="96" h="14"/>
+            </attributes>
+          </label>
+        </container>
+        <container id="Receive_advice">
+          <vertex>
+            <attributes>
+              <bounds x="424" y="116" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="392" y="148" w="96" h="14"/>
+            </attributes>
+          </label>
+        </container>
+        <flow source="Give_advice" target="Receive_advice">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="311" y="127.5"/>
+              <value x="424" y="127.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Receive_advice" target="OutputCondition">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="455" y="127.5"/>
+              <value x="576" y="127.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Request_advice" target="Give_advice">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="179" y="127.5"/>
+              <value x="280" y="127.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="InputCondition" target="Request_advice">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="67" y="127.5"/>
+              <value x="148" y="127.5"/>
+            </points>
+          </attributes>
+        </flow>
+      </net>
+      <labelFontSize>12</labelFontSize>
+    </specification>
+  </layout>
+</specificationSet>

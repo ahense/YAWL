@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <specificationSet xmlns="http://www.yawlfoundation.org/yawlschema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4.0" xsi:schemaLocation="http://www.yawlfoundation.org/yawlschema http://www.yawlfoundation.org/yawlschema/YAWL_Schema4.0.xsd">
-  <specification uri="Defence">
-    <name>Defence</name>
-    <documentation>Defence</documentation>
+  <specification uri="UsersWithRole">
+    <name>UsersWithRoles</name>
+    <documentation>used to test the users with role codelet</documentation>
     <metaData>
-      <title>Defence</title>
+      <title>UsersWithRole</title>
       <creator>AVH</creator>
-      <description>Defence</description>
-      <coverage>5.1.810</coverage>
+      <description>used to test the users with role codelet</description>
+      <coverage>5.2.821</coverage>
       <version>0.1</version>
       <persistent>false</persistent>
-      <identifier>UID_71c1c74c-f758-4663-aab9-2dac163cdf68</identifier>
+      <identifier>UID_b301d1a5-9311-4d9e-99f1-cfa255ae3ed8</identifier>
     </metaData>
     <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" />
     <decomposition id="Net" isRootNet="true" xsi:type="NetFactsType">
       <localVariable>
         <index>0</index>
-        <name>Evidence</name>
+        <name>rolename</name>
         <type>string</type>
         <namespace>http://www.w3.org/2001/XMLSchema</namespace>
         <initialValue />
       </localVariable>
       <localVariable>
         <index>1</index>
-        <name>Statement</name>
+        <name>userids</name>
         <type>string</type>
         <namespace>http://www.w3.org/2001/XMLSchema</namespace>
         <initialValue />
@@ -31,52 +31,26 @@
       <processControlElements>
         <inputCondition id="InputCondition">
           <flowsInto>
-            <nextElementRef id="Gather_evidence" />
+            <nextElementRef id="Input_role_name" />
           </flowsInto>
         </inputCondition>
-        <task id="Gather_evidence">
-          <name>Gather evidence</name>
+        <task id="Input_role_name">
+          <name>Input role name</name>
           <flowsInto>
-            <nextElementRef id="Conduct_interview" />
-          </flowsInto>
-          <join code="xor" />
-          <split code="and" />
-          <completedMappings>
-            <mapping>
-              <expression query="&lt;Evidence&gt;{/Gather_evidence/Evidence/text()}&lt;/Evidence&gt;" />
-              <mapsTo>Evidence</mapsTo>
-            </mapping>
-          </completedMappings>
-          <resourcing>
-            <offer initiator="system">
-              <distributionSet>
-                <initialSet>
-                  <role>RO-bbe7eae2-b0f7-484f-b80c-f90da7a1607a</role>
-                </initialSet>
-              </distributionSet>
-            </offer>
-            <allocate initiator="user" />
-            <start initiator="user" />
-          </resourcing>
-          <decomposesTo id="Gather_evidence" />
-        </task>
-        <task id="Conduct_interview">
-          <name>Conduct interview</name>
-          <flowsInto>
-            <nextElementRef id="Prepare_defence" />
+            <nextElementRef id="Users_with_roles_codelet" />
           </flowsInto>
           <join code="xor" />
           <split code="and" />
           <startingMappings>
             <mapping>
-              <expression query="&lt;Evidence&gt;{/Net/Evidence/text()}&lt;/Evidence&gt;" />
-              <mapsTo>Evidence</mapsTo>
+              <expression query="&lt;rolename&gt;{/Net/rolename/text()}&lt;/rolename&gt;" />
+              <mapsTo>rolename</mapsTo>
             </mapping>
           </startingMappings>
           <completedMappings>
             <mapping>
-              <expression query="&lt;Statement&gt;{/Conduct_interview/Statement/text()}&lt;/Statement&gt;" />
-              <mapsTo>Statement</mapsTo>
+              <expression query="&lt;rolename&gt;{/Input_role_name/rolename/text()}&lt;/rolename&gt;" />
+              <mapsTo>rolename</mapsTo>
             </mapping>
           </completedMappings>
           <resourcing>
@@ -84,10 +58,36 @@
             <allocate initiator="user" />
             <start initiator="user" />
           </resourcing>
-          <decomposesTo id="Conduct_interview" />
+          <decomposesTo id="Input_role_name" />
         </task>
-        <task id="Prepare_defence">
-          <name>Prepare defence</name>
+        <task id="Users_with_roles_codelet">
+          <name>Users with roles codelet</name>
+          <flowsInto>
+            <nextElementRef id="Show_userids" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;rolename&gt;{/Net/rolename/text()}&lt;/rolename&gt;" />
+              <mapsTo>rolename</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;userids&gt;{/Users_with_roles_codelet/userids/text()}&lt;/userids&gt;" />
+              <mapsTo>userids</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="user" />
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Users_with_roles_codelet" />
+        </task>
+        <task id="Show_userids">
+          <name>Show userids</name>
           <flowsInto>
             <nextElementRef id="OutputCondition" />
           </flowsInto>
@@ -95,167 +95,174 @@
           <split code="and" />
           <startingMappings>
             <mapping>
-              <expression query="&lt;Evidence&gt;{/Net/Evidence/text()}&lt;/Evidence&gt;" />
-              <mapsTo>Evidence</mapsTo>
+              <expression query="&lt;rolename&gt;{/Net/rolename/text()}&lt;/rolename&gt;" />
+              <mapsTo>rolename</mapsTo>
             </mapping>
             <mapping>
-              <expression query="&lt;Statement&gt;{/Net/Statement/text()}&lt;/Statement&gt;" />
-              <mapsTo>Statement</mapsTo>
+              <expression query="&lt;userids&gt;{/Net/userids/text()}&lt;/userids&gt;" />
+              <mapsTo>userids</mapsTo>
             </mapping>
           </startingMappings>
           <resourcing>
-            <offer initiator="user" />
-            <allocate initiator="user" />
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet />
+              </distributionSet>
+              <familiarParticipant taskID="Input_role_name" />
+            </offer>
+            <allocate initiator="system">
+              <allocator>
+                <name>RandomChoice</name>
+              </allocator>
+            </allocate>
             <start initiator="user" />
           </resourcing>
-          <decomposesTo id="Prepare_defence" />
+          <decomposesTo id="Show_userids" />
         </task>
         <outputCondition id="OutputCondition" />
       </processControlElements>
     </decomposition>
-    <decomposition id="Conduct_interview" xsi:type="WebServiceGatewayFactsType">
-      <name>Conduct interview</name>
-      <inputParam>
+    <decomposition id="Input_role_name" xsi:type="WebServiceGatewayFactsType">
+      <name>Input role name</name>
+      <inputParam text-above="Input Accountant or Manager as correct values or Worker as a wrong value">
         <index>0</index>
-        <name>Evidence</name>
+        <name>rolename</name>
         <type>string</type>
         <namespace>http://www.w3.org/2001/XMLSchema</namespace>
       </inputParam>
-      <outputParam textarea="true">
-        <index>1</index>
-        <name>Statement</name>
+      <outputParam text-above="Input Accountant or Manager as correct values or Worker as a wrong value">
+        <index>0</index>
+        <name>rolename</name>
         <type>string</type>
         <namespace>http://www.w3.org/2001/XMLSchema</namespace>
-        <defaultValue />
       </outputParam>
       <externalInteraction>manual</externalInteraction>
     </decomposition>
-    <decomposition id="Gather_evidence" xsi:type="WebServiceGatewayFactsType">
-      <name>Gather evidence</name>
+    <decomposition id="Show_userids" xsi:type="WebServiceGatewayFactsType">
+      <name>Show userids</name>
+      <inputParam>
+        <index>0</index>
+        <name>rolename</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam textarea="true">
+        <index>1</index>
+        <name>userids</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+    <decomposition id="Users_with_roles_codelet" xsi:type="WebServiceGatewayFactsType">
+      <name>Users with roles codelet</name>
+      <inputParam>
+        <index>0</index>
+        <name>rolename</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
       <outputParam>
         <index>0</index>
-        <name>Evidence</name>
+        <name>userids</name>
         <type>string</type>
         <namespace>http://www.w3.org/2001/XMLSchema</namespace>
-        <defaultValue />
       </outputParam>
-      <externalInteraction>manual</externalInteraction>
-    </decomposition>
-    <decomposition id="Prepare_defence" xsi:type="WebServiceGatewayFactsType">
-      <name>Prepare defence</name>
-      <inputParam>
-        <index>0</index>
-        <name>Evidence</name>
-        <type>string</type>
-        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
-      </inputParam>
-      <inputParam>
-        <index>1</index>
-        <name>Statement</name>
-        <type>string</type>
-        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
-      </inputParam>
-      <outputParam textarea="true">
-        <index>2</index>
-        <name>Defence</name>
-        <type>string</type>
-        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
-        <defaultValue />
-      </outputParam>
-      <externalInteraction>manual</externalInteraction>
+      <codelet>org.yawlfoundation.yawl.resourcing.codelets.UsersWithRole</codelet>
+      <externalInteraction>automated</externalInteraction>
     </decomposition>
   </specification>
   <layout>
     <locale language="en" country="GB"/>
-    <specification id="Defence" defaultBgColor="-526351">
+    <specification id="UsersWithRole" defaultBgColor="-526351">
       <size w="58" h="28"/>
       <net id="Net">
-        <bounds x="0" y="0" w="708" h="318"/>
-        <frame x="0" y="0" w="664" h="336"/>
-        <viewport x="0" y="0" w="664" h="336"/>
+        <bounds x="0" y="0" w="703" h="266"/>
+        <frame x="0" y="0" w="706" h="269"/>
+        <viewport x="0" y="0" w="706" h="269"/>
         <vertex id="OutputCondition">
           <attributes>
-            <bounds x="656" y="232" w="32" h="32"/>
+            <bounds x="576" y="64" w="32" h="32"/>
           </attributes>
         </vertex>
         <vertex id="InputCondition">
           <attributes>
-            <bounds x="36" y="232" w="32" h="32"/>
+            <bounds x="36" y="64" w="32" h="32"/>
           </attributes>
         </vertex>
-        <container id="Conduct_interview">
+        <container id="Input_role_name">
           <vertex>
             <attributes>
-              <bounds x="340" y="232" w="32" h="32"/>
+              <bounds x="152" y="64" w="32" h="32"/>
             </attributes>
           </vertex>
           <label>
             <attributes>
-              <bounds x="308" y="264" w="96" h="28"/>
+              <bounds x="120" y="96" w="96" h="14"/>
             </attributes>
           </label>
         </container>
-        <container id="Prepare_defence">
+        <container id="Show_userids">
           <vertex>
             <attributes>
-              <bounds x="508" y="232" w="32" h="32"/>
+              <bounds x="424" y="64" w="32" h="32"/>
             </attributes>
           </vertex>
           <label>
             <attributes>
-              <bounds x="476" y="264" w="96" h="14"/>
+              <bounds x="392" y="96" w="96" h="14"/>
             </attributes>
           </label>
         </container>
-        <container id="Gather_evidence">
+        <container id="Users_with_roles_codelet">
           <vertex>
             <attributes>
-              <bounds x="172" y="232" w="32" h="32"/>
+              <bounds x="280" y="64" w="32" h="32"/>
             </attributes>
           </vertex>
           <label>
             <attributes>
-              <bounds x="140" y="264" w="96" h="14"/>
+              <bounds x="248" y="96" w="96" h="28"/>
             </attributes>
           </label>
         </container>
-        <flow source="InputCondition" target="Gather_evidence">
+        <flow source="Users_with_roles_codelet" target="Show_userids">
           <ports in="13" out="12"/>
           <attributes>
             <lineStyle>11</lineStyle>
             <points>
-              <value x="67" y="238.5"/>
-              <value x="172" y="238.5"/>
+              <value x="311" y="75.5"/>
+              <value x="424" y="75.5"/>
             </points>
           </attributes>
         </flow>
-        <flow source="Conduct_interview" target="Prepare_defence">
+        <flow source="Input_role_name" target="Users_with_roles_codelet">
           <ports in="13" out="12"/>
           <attributes>
             <lineStyle>11</lineStyle>
             <points>
-              <value x="371" y="238.5"/>
-              <value x="524" y="238.5"/>
+              <value x="183" y="75.5"/>
+              <value x="280" y="75.5"/>
             </points>
           </attributes>
         </flow>
-        <flow source="Prepare_defence" target="OutputCondition">
+        <flow source="Show_userids" target="OutputCondition">
           <ports in="13" out="12"/>
           <attributes>
             <lineStyle>11</lineStyle>
             <points>
-              <value x="555" y="238.5"/>
-              <value x="656" y="238.5"/>
+              <value x="455" y="75.5"/>
+              <value x="576" y="75.5"/>
             </points>
           </attributes>
         </flow>
-        <flow source="Gather_evidence" target="Conduct_interview">
+        <flow source="InputCondition" target="Input_role_name">
           <ports in="13" out="12"/>
           <attributes>
             <lineStyle>11</lineStyle>
             <points>
-              <value x="203" y="238.5"/>
-              <value x="340" y="238.5"/>
+              <value x="67" y="75.5"/>
+              <value x="152" y="75.5"/>
             </points>
           </attributes>
         </flow>

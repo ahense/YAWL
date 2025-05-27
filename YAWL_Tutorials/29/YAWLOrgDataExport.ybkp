@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<orgdata>
+  <participants>
+    <participant id="PA-ef7b4e68-1704-45aa-a480-ec615f60e95e">
+      <userid>eel</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Eugenia</firstname>
+      <lastname>Ellington</lastname>
+      <email/>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <isEmailOnAllocation>false</isEmailOnAllocation>
+      <isEmailOnOffer>false</isEmailOnOffer>
+      <roles/>
+      <positions>
+        <position>PO-1f35494c-bfa1-4184-969d-997d800c9cdb</position>
+      </positions>
+      <capabilities/>
+      <privileges>00000000</privileges>
+    </participant>
+    <participant id="PA-27794975-7665-486a-9084-43d965ceb7c9">
+      <userid>eev</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Esmeralda</firstname>
+      <lastname>Everly</lastname>
+      <email/>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <isEmailOnAllocation>false</isEmailOnAllocation>
+      <isEmailOnOffer>false</isEmailOnOffer>
+      <roles/>
+      <positions>
+        <position>PO-832e86c3-34a7-4da7-bfe6-f19c4897ffdb</position>
+      </positions>
+      <capabilities/>
+      <privileges>00000000</privileges>
+    </participant>
+    <participant id="PA-dc41b929-69f6-453d-b67a-b29bdb413e58">
+      <userid>eed</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Ethelwynne</firstname>
+      <lastname>Edgecombe</lastname>
+      <email/>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <isEmailOnAllocation>false</isEmailOnAllocation>
+      <isEmailOnOffer>false</isEmailOnOffer>
+      <roles/>
+      <positions>
+        <position>PO-f3b023a3-468e-40f0-a45b-c08a71dad32d</position>
+      </positions>
+      <capabilities/>
+      <privileges>00000000</privileges>
+    </participant>
+    <participant id="PA-3b8be496-f666-4046-9268-2b3cb10d1806">
+      <userid>bbl</userid>
+      <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
+      <firstname>Basil</firstname>
+      <lastname>Blackwood</lastname>
+      <email/>
+      <description/>
+      <notes/>
+      <isAdministrator>false</isAdministrator>
+      <isEmailOnAllocation>false</isEmailOnAllocation>
+      <isEmailOnOffer>false</isEmailOnOffer>
+      <roles>
+        <role>RO-3e16f06c-5e99-4ac8-ad68-c238e615bc5c</role>
+      </roles>
+      <positions>
+        <position>PO-66b1b679-77b6-4669-82c1-f36bd60487e5</position>
+      </positions>
+      <capabilities/>
+      <privileges>00000010</privileges>
+    </participant>
+  </participants>
+  <roles>
+    <role id="RO-3e16f06c-5e99-4ac8-ad68-c238e615bc5c">
+      <name>Manager</name>
+      <description/>
+      <notes/>
+    </role>
+  </roles>
+  <positions>
+    <position id="PO-f3b023a3-468e-40f0-a45b-c08a71dad32d">
+      <title>Investment Analyst</title>
+      <positionid/>
+      <description/>
+      <notes/>
+      <orggroupid>OG-0b57f44a-8b1a-4ecc-948a-c7beac8ad112</orggroupid>
+      <reportstoid>PO-66b1b679-77b6-4669-82c1-f36bd60487e5</reportstoid>
+    </position>
+    <position id="PO-1f35494c-bfa1-4184-969d-997d800c9cdb">
+      <title>Risk Officer</title>
+      <positionid/>
+      <description/>
+      <notes/>
+      <orggroupid>OG-0b57f44a-8b1a-4ecc-948a-c7beac8ad112</orggroupid>
+      <reportstoid>PO-66b1b679-77b6-4669-82c1-f36bd60487e5</reportstoid>
+    </position>
+    <position id="PO-832e86c3-34a7-4da7-bfe6-f19c4897ffdb">
+      <title>System Specialist</title>
+      <positionid/>
+      <description/>
+      <notes/>
+      <orggroupid>OG-0b57f44a-8b1a-4ecc-948a-c7beac8ad112</orggroupid>
+      <reportstoid>PO-66b1b679-77b6-4669-82c1-f36bd60487e5</reportstoid>
+    </position>
+    <position id="PO-66b1b679-77b6-4669-82c1-f36bd60487e5">
+      <title>Team Lead Finance Division</title>
+      <positionid/>
+      <description/>
+      <notes/>
+      <orggroupid>OG-0b57f44a-8b1a-4ecc-948a-c7beac8ad112</orggroupid>
+    </position>
+  </positions>
+  <capabilities/>
+  <orggroups>
+    <orggroup id="OG-0b57f44a-8b1a-4ecc-948a-c7beac8ad112">
+      <groupName>Finance Division</groupName>
+      <groupType>TEAM</groupType>
+      <description>The finance division has one team leader and three positions.</description>
+      <notes/>
+    </orggroup>
+  </orggroups>
+  <nonhumanresources/>
+  <nonhumancategories/>
+</orgdata>
+

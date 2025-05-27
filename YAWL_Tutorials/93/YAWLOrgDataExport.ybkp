@@ -6,9 +6,12 @@
       <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
       <firstname>Josh</firstname>
       <lastname>White</lastname>
+      <email/>
       <description/>
       <notes/>
       <isAdministrator>false</isAdministrator>
+      <isEmailOnAllocation>false</isEmailOnAllocation>
+      <isEmailOnOffer>false</isEmailOnOffer>
       <roles>
         <role>RO-dd26180a-91a1-413d-9883-52e4977366f2</role>
       </roles>
@@ -21,9 +24,12 @@
       <password>nU4eI71bcnBGqeO0t9tXvY1u5oQ=</password>
       <firstname>Jessica</firstname>
       <lastname>Lange</lastname>
+      <email/>
       <description/>
       <notes/>
       <isAdministrator>false</isAdministrator>
+      <isEmailOnAllocation>false</isEmailOnAllocation>
+      <isEmailOnOffer>false</isEmailOnOffer>
       <roles>
         <role>RO-dd26180a-91a1-413d-9883-52e4977366f2</role>
       </roles>
@@ -42,7 +48,13 @@
   <positions/>
   <capabilities/>
   <orggroups/>
-  <nonhumanresources/>
+  <nonhumanresources>
+    <nonhumanresource id="NH-a37f5b5f-19fb-41e0-8d2b-ded7b50070f4">
+      <name>Laptop</name>
+      <description>special laptop with audit software</description>
+      <notes/>
+    </nonhumanresource>
+  </nonhumanresources>
   <nonhumancategories/>
 </orgdata>
 

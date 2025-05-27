@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<specificationSet xmlns="http://www.yawlfoundation.org/yawlschema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4.0" xsi:schemaLocation="http://www.yawlfoundation.org/yawlschema http://www.yawlfoundation.org/yawlschema/YAWL_Schema4.0.xsd">
+  <specification uri="Tutorial29">
+    <name>Input parameters</name>
+    <documentation>Input parameters for starting cases. YAWL Tutorial 29</documentation>
+    <metaData>
+      <title>Input parameters</title>
+      <creator>AVH</creator>
+      <description>Input parameters for starting cases. YAWL Tutorial 29</description>
+      <coverage>5.2.820</coverage>
+      <version>0.1</version>
+      <persistent>false</persistent>
+      <identifier>UID_40baa80b-0847-4384-9c16-cb1edad1fba6</identifier>
+    </metaData>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:simpleType name="EmailAddressType">
+        <xs:restriction base="xs:token">
+          <xs:pattern value="\s*|([\.a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(([a-zA-Z0-9_-])*\.([a-zA-Z0-9_-])+)+" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:schema>
+    <decomposition id="Net" isRootNet="true" xsi:type="NetFactsType">
+      <inputParam>
+        <index>0</index>
+        <name>Client_name</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>1</index>
+        <name>Client_email</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>2</index>
+        <name>Invoice_numer</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>3</index>
+        <name>Employee_name</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <processControlElements>
+        <inputCondition id="InputCondition">
+          <flowsInto>
+            <nextElementRef id="Send_payment_slip_to_client" />
+          </flowsInto>
+        </inputCondition>
+        <task id="Send_payment_slip_to_client">
+          <name>Send payment slip to client</name>
+          <flowsInto>
+            <nextElementRef id="OutputCondition" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <startingMappings>
+            <mapping>
+              <expression query="&lt;Employee_name&gt;{/Net/Employee_name/text()}&lt;/Employee_name&gt;" />
+              <mapsTo>Employee_name</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Invoice_numer&gt;{/Net/Invoice_numer/text()}&lt;/Invoice_numer&gt;" />
+              <mapsTo>Invoice_numer</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Client_email&gt;{/Net/Client_email/text()}&lt;/Client_email&gt;" />
+              <mapsTo>Client_email</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Client_name&gt;{/Net/Client_name/text()}&lt;/Client_name&gt;" />
+              <mapsTo>Client_name</mapsTo>
+            </mapping>
+          </startingMappings>
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;Client_email&gt;{/Send_payment_slip_to_client/Client_email/text()}&lt;/Client_email&gt;" />
+              <mapsTo>Client_email</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Invoice_numer&gt;{/Send_payment_slip_to_client/Invoice_numer/text()}&lt;/Invoice_numer&gt;" />
+              <mapsTo>Invoice_numer</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Client_name&gt;{/Send_payment_slip_to_client/Client_name/text()}&lt;/Client_name&gt;" />
+              <mapsTo>Client_name</mapsTo>
+            </mapping>
+            <mapping>
+              <expression query="&lt;Employee_name&gt;{/Send_payment_slip_to_client/Employee_name/text()}&lt;/Employee_name&gt;" />
+              <mapsTo>Employee_name</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-3e16f06c-5e99-4ac8-ad68-c238e615bc5c</role>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="user" />
+            <start initiator="user" />
+            <privileges>
+              <privilege>
+                <name>canDelegate</name>
+                <set>
+                  <role>RO-3e16f06c-5e99-4ac8-ad68-c238e615bc5c</role>
+                </set>
+              </privilege>
+            </privileges>
+          </resourcing>
+          <decomposesTo id="Send_payment_slip_to_client" />
+        </task>
+        <outputCondition id="OutputCondition" />
+      </processControlElements>
+    </decomposition>
+    <decomposition id="Send_payment_slip_to_client" xsi:type="WebServiceGatewayFactsType">
+      <name>Send payment slip to client</name>
+      <inputParam>
+        <index>0</index>
+        <name>Client_name</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>1</index>
+        <name>Client_email</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>2</index>
+        <name>Invoice_numer</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <inputParam>
+        <index>3</index>
+        <name>Employee_name</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </inputParam>
+      <outputParam>
+        <index>0</index>
+        <name>Client_name</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <outputParam>
+        <index>1</index>
+        <name>Client_email</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <outputParam>
+        <index>2</index>
+        <name>Invoice_numer</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <outputParam>
+        <index>3</index>
+        <name>Employee_name</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
+    </decomposition>
+  </specification>
+  <layout>
+    <locale language="en" country="GB"/>
+    <specification id="Tutorial29" defaultBgColor="-526351">
+      <size w="58" h="28"/>
+      <net id="Net">
+        <bounds x="0" y="0" w="1685" h="829"/>
+        <frame x="0" y="0" w="1688" h="832"/>
+        <viewport x="0" y="0" w="1688" h="832"/>
+        <vertex id="OutputCondition">
+          <attributes>
+            <bounds x="376" y="136" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <vertex id="InputCondition">
+          <attributes>
+            <bounds x="36" y="136" w="32" h="32"/>
+          </attributes>
+        </vertex>
+        <container id="Send_payment_slip_to_client">
+          <vertex>
+            <attributes>
+              <bounds x="192" y="136" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="160" y="168" w="96" h="28"/>
+            </attributes>
+          </label>
+        </container>
+        <flow source="Send_payment_slip_to_client" target="OutputCondition">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="InputCondition" target="Send_payment_slip_to_client">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+      </net>
+      <labelFontSize>12</labelFontSize>
+    </specification>
+  </layout>
+</specificationSet>

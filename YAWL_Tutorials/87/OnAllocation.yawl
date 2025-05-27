@@ -65,7 +65,13 @@
             </mapping>
           </completedMappings>
           <resourcing>
-            <offer initiator="user" />
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-527c8c73-8322-443c-bf24-7cfab80570f8</role>
+                </initialSet>
+              </distributionSet>
+            </offer>
             <allocate initiator="user" />
             <start initiator="user" />
           </resourcing>
@@ -103,9 +109,9 @@
     <specification id="OnAllocation" defaultBgColor="-526351">
       <size w="58" h="28"/>
       <net id="Net">
-        <bounds x="0" y="0" w="730" h="482"/>
-        <frame x="0" y="0" w="733" h="485"/>
-        <viewport x="0" y="0" w="733" h="485"/>
+        <bounds x="0" y="0" w="763" h="280"/>
+        <frame x="0" y="0" w="766" h="283"/>
+        <viewport x="0" y="0" w="766" h="283"/>
         <vertex id="OutputCondition">
           <attributes>
             <bounds x="316" y="140" w="32" h="32"/>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <specificationSet xmlns="http://www.yawlfoundation.org/yawlschema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4.0" xsi:schemaLocation="http://www.yawlfoundation.org/yawlschema http://www.yawlfoundation.org/yawlschema/YAWL_Schema4.0.xsd">
   <specification uri="Hotel">
+    <name>Hotel</name>
     <documentation>Hotel</documentation>
     <metaData>
       <title>Hotel</title>
@@ -102,9 +103,9 @@
     <specification id="Hotel" defaultBgColor="-526351">
       <size w="58" h="28"/>
       <net id="Net">
-        <bounds x="0" y="0" w="730" h="482"/>
-        <frame x="0" y="0" w="733" h="485"/>
-        <viewport x="0" y="0" w="733" h="485"/>
+        <bounds x="0" y="0" w="661" h="425"/>
+        <frame x="0" y="0" w="664" h="428"/>
+        <viewport x="0" y="0" w="664" h="428"/>
         <vertex id="OutputCondition">
           <attributes>
             <bounds x="532" y="232" w="32" h="32"/>
