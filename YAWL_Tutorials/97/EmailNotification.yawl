@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <specificationSet xmlns="http://www.yawlfoundation.org/yawlschema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4.0" xsi:schemaLocation="http://www.yawlfoundation.org/yawlschema http://www.yawlfoundation.org/yawlschema/YAWL_Schema4.0.xsd">
   <specification uri="EmailNotification">
+    <name>Email notification</name>
     <documentation>Email notification demo</documentation>
     <metaData>
       <title>Email notification</title>
       <creator>User</creator>
       <description>Email notification demo</description>
-      <coverage>5.2.821</coverage>
-      <version>0.1</version>
+      <coverage>5.2.824</coverage>
+      <version>0.3</version>
       <persistent>false</persistent>
       <identifier>UID_4347cb0f-b374-4e1e-809c-6e2557a4d9cc</identifier>
     </metaData>
@@ -20,16 +21,68 @@
         <namespace>http://www.w3.org/2001/XMLSchema</namespace>
         <initialValue />
       </localVariable>
+      <localVariable>
+        <index>1</index>
+        <name>Evaluation</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <initialValue />
+      </localVariable>
       <processControlElements>
         <inputCondition id="InputCondition">
           <flowsInto>
-            <nextElementRef id="Give_advice" />
+            <nextElementRef id="T" />
           </flowsInto>
         </inputCondition>
+        <task id="T">
+          <flowsInto>
+            <nextElementRef id="Evaluate_case" />
+          </flowsInto>
+          <flowsInto>
+            <nextElementRef id="Give_advice" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <resourcing>
+            <offer initiator="user" />
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+        </task>
+        <task id="Evaluate_case">
+          <name>Evaluate case</name>
+          <flowsInto>
+            <nextElementRef id="T_1" />
+          </flowsInto>
+          <join code="xor" />
+          <split code="and" />
+          <completedMappings>
+            <mapping>
+              <expression query="&lt;Evaluation&gt;{/Evaluate_case/Evaluation/text()}&lt;/Evaluation&gt;" />
+              <mapsTo>Evaluation</mapsTo>
+            </mapping>
+          </completedMappings>
+          <resourcing>
+            <offer initiator="system">
+              <distributionSet>
+                <initialSet>
+                  <role>RO-6c5c33df-364a-47ee-b4fb-ecd85cf3fcfe</role>
+                </initialSet>
+              </distributionSet>
+            </offer>
+            <allocate initiator="system">
+              <allocator>
+                <name>RoundRobinByTime</name>
+              </allocator>
+            </allocate>
+            <start initiator="user" />
+          </resourcing>
+          <decomposesTo id="Evaluate_case" />
+        </task>
         <task id="Give_advice">
           <name>Give advice</name>
           <flowsInto>
-            <nextElementRef id="OutputCondition" />
+            <nextElementRef id="T_1" />
           </flowsInto>
           <join code="xor" />
           <split code="and" />
@@ -52,8 +105,31 @@
           </resourcing>
           <decomposesTo id="Give_advice" />
         </task>
+        <task id="T_1">
+          <flowsInto>
+            <nextElementRef id="OutputCondition" />
+          </flowsInto>
+          <join code="and" />
+          <split code="and" />
+          <resourcing>
+            <offer initiator="user" />
+            <allocate initiator="user" />
+            <start initiator="user" />
+          </resourcing>
+        </task>
         <outputCondition id="OutputCondition" />
       </processControlElements>
+    </decomposition>
+    <decomposition id="Evaluate_case" xsi:type="WebServiceGatewayFactsType">
+      <name>Evaluate case</name>
+      <outputParam>
+        <index>0</index>
+        <name>Evaluation</name>
+        <type>string</type>
+        <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+        <defaultValue />
+      </outputParam>
+      <externalInteraction>manual</externalInteraction>
     </decomposition>
     <decomposition id="Give_advice" xsi:type="WebServiceGatewayFactsType">
       <name>Give advice</name>
@@ -77,7 +153,7 @@
         <viewport x="0" y="0" w="1688" h="659"/>
         <vertex id="OutputCondition">
           <attributes>
-            <bounds x="380" y="112" w="32" h="32"/>
+            <bounds x="520" y="112" w="32" h="32"/>
           </attributes>
         </vertex>
         <vertex id="InputCondition">
@@ -85,36 +161,102 @@
             <bounds x="36" y="112" w="32" h="32"/>
           </attributes>
         </vertex>
-        <container id="Give_advice">
+        <container id="Evaluate_case">
           <vertex>
             <attributes>
-              <bounds x="188" y="112" w="32" h="32"/>
+              <bounds x="256" y="196" w="32" h="32"/>
             </attributes>
           </vertex>
           <label>
             <attributes>
-              <bounds x="156" y="144" w="96" h="14"/>
+              <bounds x="224" y="228" w="96" h="14"/>
             </attributes>
           </label>
         </container>
-        <flow source="Give_advice" target="OutputCondition">
-          <ports in="13" out="12"/>
+        <container id="T">
+          <vertex>
+            <attributes>
+              <bounds x="140" y="112" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <decorator type="AND_split">
+            <position>13</position>
+            <attributes>
+              <bounds x="171" y="112" w="11" h="32"/>
+            </attributes>
+          </decorator>
+        </container>
+        <container id="T_1">
+          <vertex>
+            <attributes>
+              <bounds x="392" y="112" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <decorator type="AND_join">
+            <position>12</position>
+            <attributes>
+              <bounds x="382" y="112" w="11" h="32"/>
+            </attributes>
+          </decorator>
+        </container>
+        <container id="Give_advice">
+          <vertex>
+            <attributes>
+              <bounds x="264" y="40" w="32" h="32"/>
+            </attributes>
+          </vertex>
+          <label>
+            <attributes>
+              <bounds x="232" y="72" w="96" h="14"/>
+            </attributes>
+          </label>
+        </container>
+        <flow source="T" target="Give_advice">
+          <ports in="2" out="12"/>
           <attributes>
             <lineStyle>11</lineStyle>
             <points>
-              <value x="243" y="127.5"/>
-              <value x="444" y="123.5"/>
+              <value x="181" y="118.5"/>
+              <value x="264" y="118.5"/>
             </points>
           </attributes>
         </flow>
-        <flow source="InputCondition" target="Give_advice">
+        <flow source="T" target="Evaluate_case">
+          <ports in="2" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="InputCondition" target="T">
           <ports in="13" out="12"/>
           <attributes>
             <lineStyle>11</lineStyle>
             <points>
-              <value x="67" y="123.5"/>
-              <value x="212" y="127.5"/>
+              <value x="67" y="118.5"/>
+              <value x="140" y="118.5"/>
             </points>
+          </attributes>
+        </flow>
+        <flow source="T_1" target="OutputCondition">
+          <ports in="13" out="12"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+            <points>
+              <value x="423" y="122.5"/>
+              <value x="520" y="118.5"/>
+            </points>
+          </attributes>
+        </flow>
+        <flow source="Give_advice" target="T_1">
+          <ports in="13" out="2"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
+          </attributes>
+        </flow>
+        <flow source="Evaluate_case" target="T_1">
+          <ports in="13" out="2"/>
+          <attributes>
+            <lineStyle>11</lineStyle>
           </attributes>
         </flow>
       </net>
